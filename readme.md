@@ -19,6 +19,7 @@ The 'bugs' resulting from rapid coding are often more interesting than what I in
 This decision is also partly inspired by evolutionary biology. Scientists hypothesize that the genomes of complex organisms evolved largely through gene duplication and subsequent independent mutation.
 By duplicating code and mutating it, I feel like I get unique and surprising results very rapidly.  Additionally, mimicking life is an important part of making art for me.
 But mostly, it's the result of a conscious decision to spend more time making art and less time engineering.
+
 I hope this made sense.
 
 ♡ 
