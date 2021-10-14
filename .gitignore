@@ -3,4 +3,5 @@
 # except directories, tidalcycles files and python
 !*/
 !*.tidal
+!*.md
 !*.py
