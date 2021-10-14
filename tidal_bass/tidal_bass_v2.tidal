@@ -1,0 +1,71 @@
+d1 $ s "hh(3,8)"
+
+hush
+
+
+setcps(1.1)
+
+let mc = midichan
+
+let m p = s "midi" # mc p
+
+d1 $ plyWith 2 (# amp 0.9) $ n "0 2 <4 3> 7*2" # s "midi" # mc 0-- (choose [0, 1, 2])
+
+p "midiclock" $ midicmd "midiClock*48" # s "midi"
+
+once $ midicmd "stop" # s "midi"
+
+p "midictl" $ midicmd "start/4" # s "midi"
+
+p "midictl" $ silence
+
+sock <- carabiner tidal 4 (-0.14)
+
+sendMsg sock "bpm 155"
+
+sendMsg sock "bpm 137"
+
+hush
+
+d1 $ (sound "cp bd bd bd")
+
+resetCycles
+
+d1 -- $ every "<9>" (struct "t(3,8,<6 7>)")
+   $ every "<3>" (plyWith 4 (|* amp "<0.5 0.55>" ))
+   $ every "<11>" (plyWith 3 (|* amp "<0.4 0.45>" ))
+    $ stack [
+    every 4 ( plyWith 2 (# amp 0.9)) $ (|+ n "<0 5 0>") $ n "0 2 4 7*2" # m 0 , -- # up "<0 0 0 0 5>",
+    every 5 (plyWith 2 (# n 3)) $ fast 4 $ (|+ n "<0 0 0 0 3 3 3 3 7 7 7 10 10 12 12 >") $ stack [
+      n "[0, 3, 7, 10, 14]" # m 1,
+      n "[0, 3, 7, 10, 14]" # m 2,
+      (|- n 12) $ n "[0]" # m 3
+    ]
+]
+
+d1 -- $ every "<9>" (struct "t(3,8,<6 7>)")
+   $ every "<3>" (plyWith 4 (|* amp "<0.5 0.55>" ))
+   $ every "<11>" (plyWith 3 (|* amp "<0.4 0.45>" ))
+    $ stack [
+    every 4 ( plyWith 2 (# amp 0.9)) $ (|+ n "<0 5 0>") $ n "0 2 4 7*2" # m 9 , -- # up "<0 0 0 0 5>",
+    every 5 (plyWith 2 (# n 3)) $ fast 4 $ (|+ n "<0 0 0 0 5 5 5 5 11 11 11 16 16 19 19 >") $ stack [
+      n "[0, 5, 11, 16, 22]" # m 1,
+      n "[ 5, 11, 16, 22]" # m 2,
+      (|- n 12) $ n "[0]" # m 3
+    ]
+]
+
+hush
+
+
+d2 $ slow 2 $ n "-24 -23 -22 -23 -17 -23 -22 -23" # m 4
+
+d2 $ s "bd hh cp hh"
+d2 silence
+
+hush
+
+d4 $ every 5 (plyWith 2 (# n 2)) $ fast 4 $ (|+ n "<0 0 0 0 3 3 3 3 7 7 7 10 10 12 12 >") $ n "[0, 3, 7, 10, 14]" # m 2
+
+
+d1 $ plyWith 2 (# amp 0.9) $ n "0 2 4 7*2" # s "midi" # mc 1

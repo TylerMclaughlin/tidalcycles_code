@@ -1,0 +1,86 @@
+let qwer = (abs ( fast 10 $ range (0.35) (-0.35) $  cosine) ) +  (fast 10 $ range (-0.25) (0.25) $  sine)                          
+    scaleSeg scaleX segAmt func = toScale scaleX (fromIntegral <$> round <$> segment segAmt (func))                                
+                                   
+d1 $ (|+ n "5 7")  $ n (scaleSeg [-3, 0, 2, 4, 7] ("20 12") ( slow 8 $  range "4 8" 12 $ qwer))  # m 1                             
+ ```
+
+
+d1 $ n (scaleSeg [-5, 0, 3, 7, 10] ("16 12") (slow 2 $ range 1 19 $  sine)  )  # m 1
+
+d1 $ (|+ n "[0, [5 7]*2]") $ n (scaleSeg [-5, 0, 3, 7, 10] ("16 12 19") (slow "2 1" $ range 1 "21" $  sine)  )  # m 1
+
+d1 $ (|+ n 2) $ n (scaleSeg [-2, 0, 2, 5, 8, 12] ("16 32") (slow "4" $ range 1 16 $  sine)  )  # m 1
+
+d1 $ n (toScale [-12, 3, 10, 17] (fromIntegral <$> round <$> segment "12" ( range 6 2 $ sine))) # m 1 
+
+d1  $  n ( toScale [-12, 3, 10, 17]  ( fromIntegral <$> round <$> "[-12, 6]" |+| segment "12" ( range 6 2 $ (sine * sine ) ))) # m 1 
+
+
+d1  $  (|+ n (slow 8 $ "2 2 2 2 0 0 -2 5")) $  n ( toScale [0, 2, 5, 7, 9, 16]  ( fromIntegral <$> round <$>  "2" |+| "[0, <4, 8>]" |+| segment (slow 16 $ range 6 32 $ sine) ( range "18" 3 $ (sine * cosine/9 + 2*abs ( sine*0.5) ) ))) # m 1 
+
+
+d1 $ struct "t(3,8)" $ nTake "naa" (toScale [0, 2, 5] (fromIntegral <$> round <$> segment 12 (range 1 14 $ abs (sine * (fast 2 $ sine))))  )  # m 1
+
+d1 $ struct "t(3,8)" $ nTake "naa" [0, 2, 4, 6] # m 1
+
+d1 $ struct "t(3,8)" $ ntake "0,2" # m 1
+
+
+ fromIntegral <$> round <$> segment 16 (range 1 14 $ sine) 
+
+:t fromIntegral
+
+n "2 3 4"
+
+d1 $ (# nTake "c" [0, 2, 4]) $ amp "1 1*4" # m 1
+
+d1 $ (# nTake "c" [0, 2, 7, 4]) $ amp (segment 19 $ range (-1) 1 $ sine) # m 1
+
+d1 $ (# nTake "c" [0, 2, 7, 4]) $ amp (segment 19 $ range (-1) 1 $ sine) # m 1
+
+d1 $ (# nTake "c" (fromIntegral <$> round <$> segment 12 $ sine )) $ amp (segment 19 $ range (-1) 1 $ sine) # m 1
+
+d1 $ amp "1 1*4" # nTake "a" [0, 2, 4] # m 1
+
+d1 $ struct "t(3,8) t(5, 9)" $ nTake "asf" [0, 2, 4] # m 1 
+
+let p x = (n x) + 1
+
+k
+
+let ppp = toScale [0, 2, 5] (fromIntegral <$> round <$> segment 12 (range 1 14 $ abs (sine * (fast 2 $ sine)))) 
+
+patternToList :: Pattern a -> [a] 
+patternToList pat = (map value (queryArc pat (Arc 0 1)))
+
+toScale [0, 2, 5] (fromIntegral <$> round <$> segment 12 (range 1 14 $ abs (sine * (fast 2 $ sine))))  
+
+ppp :: [Double]
+
+let zxcv = patternToList $ toScale [0, 2, 5] (fromIntegral <$> round <$> segment 12 (range 1 14 $ abs (sine * (fast 2 $ sine))))  
+
+zxcv
+
+-- oohh laatiiny!!
+do
+ let zxcv = patternToList $ toScale [0, 2, 5] (fromIntegral <$> round <$> segment (fast 8 $ "2 4 8 16") (range (fast 16 $ "1 8") 14 $ abs (sine * (fast 2 $ sine))))  
+ d1 $ slow 2 $ struct "t(5,8,2) t(<8>,16, [0]) t(5,8,2) t(8, 4)"  $ stack [
+     nTake "dr" [-18,22, -14] # m 3,
+    nTake "dr2" [-24, 22, -22, 22] # m 3,
+      (|- n ((0.5 <~) $ slow 8 $ "0 0 2 2 0 0 -5 -5")) $ nTake "ch" zxcv # m 1
+  ]
+
+
+  let zxcv = patternToList $ toScale [0, 2, 5] (fromIntegral <$> round <$> segment 12 (range 1 14 $ abs (sine * (fast 2 $ sine))))  
+
+  d1 $ slow 2 $ struct "t(5,8,2) t(<8 >,16, [0]) t(5,8,2) t(8, 4)"  $ stack [
+     nTake "dr" [-18,22, -14] # m 3,
+    nTake "dr2" [-24, 22, -22, 22] # m 3,
+      nTake "ch" zxcv # m 1
+  ]
+
+
+
+sock <- carabiner tidal 4 (0.51)
+
+d1 $ (n (-24) ) # m 3

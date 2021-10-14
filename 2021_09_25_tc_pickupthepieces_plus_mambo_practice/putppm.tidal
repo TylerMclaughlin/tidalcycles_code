@@ -1,0 +1,34 @@
+
+
+-- SAX 
+d1 $ groove 8 "0 0.017" $ slow 2 $ 
+   cat [ n "[<[-4 0 7 5]!2  [8 5 7 5]>]@4 ~ ~ 3 0 2 0 ~ ~ \
+   \  10 5 3  8 ~ ~ 5 ~ 3 5 ~   8 ~ ~ 5 ~ 3 5 ~  ~ ", n "~"] # m 1
+
+-- BASS 
+d2 $ groove 4 "0 0.017" $ (|- n 12) $
+   n "5 7 8 [10 <8!15 12>] ~ <5 7 > <~ 5 > [3 4]"
+   # legato "1!2 0.75!4 1 <2 2.75>!2 0.6!7" # m 2
+
+-- CHORDS 
+d3 $ struct "1011 0010 1100 010 <0011>" $ 
+   n "[5, 8, 12, <15 15 15 15 14 14>/2, 19]" # m 3
+
+do 
+  -- DROP 
+  d4 $ drumz $ n "0 0 0 0"  # m 4
+  d5 $ groove 8 "0 0.017" $ drumz $ fast 4 $ n "8 8 10 8 "  # m 4
+
+do -- NO DRUMS
+  d4 silence
+  d5 silence
+
+do 
+  -- SNARE 
+  d4 $ drumz $ n "0 [0,3] 0 [0,3]"  # m 4
+  d5 $ groove 8 "0 0.017" $ drumz $ fast 4 $ n "8 8 10 8 "  # m 4
+
+solo 1
+
+unsolo 1
+

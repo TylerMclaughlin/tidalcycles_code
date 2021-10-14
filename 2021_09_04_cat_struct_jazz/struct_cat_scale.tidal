@@ -1,0 +1,44 @@
+
+
+let ns pscale pnotes = n (toScale (patternToList pscale) pnotes )
+
+
+ns
+
+d1 $ (|+ n "[0@5 3@3 -2@5 5@3]/2") $ ns "0 3 6 10"  ("[0,1, 2, 4 ]" +| "[-2]" +| "[0(3,8) 4*2 [1 1 ~ 1] 5*2 7]" ) # m 1 
+
+d1 $ (|+ n "[0@5 3@3 -2@5 5@3]/2") $ ns "0 3 6 10"  ("[0,1, 2, 4 ]" +| "[-2]" +| "[0(3,8) 4*2 [1 1 ~ 1] 5*2 7]" ) # m 1 
+
+d1 $ struct "<t(3, 8,1) t(5, 9)> t(9, 16) t(3,8,1) t(3, 9)" $ stack[
+     cat [n "[0, 3, 7, 10] ", n "[2, 5, 9, 12]"] # m 1,
+     n "0 -5 -2 " |+ nTake "a" [0, 12, 0] # m 2
+    ]
+
+
+-- ALL BENEATH IS GOOD
+d1 $ n "0 7 0 [12 7] <7 2 7 12>*4" |+ nTake "l" [0, 3, 7, 10] # nudge (fast 4 "0 0.03") # m 2
+
+d1 $ n "0 <7 7 7 7(4,8)> 0 [12 7] <7 2 7 12>*4" |+ nTake "i" [0, 3, 7, 10] # nudge (fast 4 "0 0.03") # m "[<4 2 [2] 4>]/2" 
+
+d1 silence
+
+do 
+  d2 $ (0.125 <~)  $ (|- n 12) $  n "0 7 [12 7] <7 2 7 12>*4" |+ nTake "h" [0, 3, 7, 10] # nudge (fast 4 "0 0.03") # m "[2 4]/2"
+  d3 $ drumz $ fast 2 $ n "0 8 15 8 [0, 4] 8 15 8" # nudge (fast 4 "0 0.03") # m 3
+
+d3 $ drumz $ fast 2 $ n "0 8 10 8 [0, 4] 8 10 8" # nudge (fast 4 "0 0.03") # m 3
+
+d4 $ drumz $ fast 2 $ struct "t(<3 3 3 5>,8)" $ nTake "b" [10, 0, 10, -1] # nudge (fast 4 "0 0.03") # m 3
+
+-- alt
+d4 $ drumz $ fast 2 $ struct "t(<3 3 3 5>,8)" $ nTake "b" [10, -1] # nudge (fast 4 "0 0.03") # m 3
+
+d3 $ drumz $ fast 2 $ n "0 8 15 8 [0, 4] 8 15 8" # nudge (fast 4 "0 0.03") # m 3
+
+d3 $ drumz $ fast 2 $ n "0 8 8 8 [0, 4] 8 8 8" # nudge (fast 4 "0 0.03") # m 3
+
+d5 $ struct "t t*2 t  t*2" $ slow 2 $ cat [n "[4, 7, 10, 12]", n "[3, 7, 10, 12]" , n "[-2, 2, 5, 9]", n "[-2, 1, 5, 9]"] # ampTake "la" [0.9, 0.7, 0.4, 0.8] # m 5
+
+d2 $ (0.125 <~)  $ (|- n 12) $  n "0 7 [12 7] <7 2 7 12>*4" |+ nTake "h" [0, 3, 7, 10] # nudge (fast 4 "0 0.03") # m 1 
+
+d4 silence

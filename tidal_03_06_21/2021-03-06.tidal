@@ -1,0 +1,123 @@
+let m p = s "midi" # midichan (p - 1)
+
+let cc1 p q= ccv q # ccn p # m 1 
+    cc2 p q= ccv q # ccn p # m 2 
+    cc3 p q= ccv q # ccn p # m 3 
+    cc4 p q= ccv q # ccn p # m 4 
+
+d1 $ (|- n 24) $ n "0" # m 1
+
+
+d1 $ cc1 30 40
+
+
+d1 $ cc1 30 (segment 16 $ fast "4 8 2 3" $ range 63 127 $ sine)
+
+d1 $ cc1 30 (seqPLoop [( 0, 2, (segment 16 $ fast "4 8 2 3" $ range 63 127 $ abs ( cosine ) ) ), (2,4, "0 52 25 12")])
+
+--- 1
+d1 $ cc1 30 (seqPLoop [( 0, 2, (segment 16 $ fast "4 8 2 3" $ range 63 127 $ abs ( cosine ) ) ), 
+                        (2,4, (segment 16 $ fast "2 7 3 3" $ range 63 127 $ abs ( cosine ) ) )])
+
+-- 2 
+d1 $ cc1 30 (seqPLoop [( 0, 2, (segment 32 $ fast "2 9 8 5" $ range 63 127  $ abs ( cosine ) ) ), 
+                        (2,4, (segment 16 $ fast "3 7 3 3" $ range 63 127 $ abs ( cosine ) ) )])
+
+-- 3
+d1 $ cc1 30 (seqPLoop [( 0, 2, (segment 8 $ fast "3 3 3 2" $ range (63 + 32) 127  $ abs ( cosine ) ) ), 
+                        (2,4, (segment 8 $ fast "3 5 2 5" $ range 63 127 $ abs ( cosine ) ) )])
+
+
+
+-- range shorthands
+let range' from to p = (p*to - p*from) + from
+    rg' = range'
+    rg = range 
+    rgx = rangex
+
+let sinf  f = fast f $ sine -- sine at freq
+    cosf  f = fast f $ cosine -- cosine at freq
+    trif  f = fast f $ tri -- triangle at freq
+    sawf  f = fast f $ saw -- saw at freq
+    isawf f = fast f $ isaw -- inverted saw at freq
+    sqf   f = fast f $ square -- square at freq
+
+-- ranged continuous
+let rsin i o = rg' i o sine -- ranged' sine
+    rcos i o = rg' i o cosine -- ranged' cosine
+    rtri i o = rg' i o tri -- ranged' triangle
+    rsaw i o = rg' i o saw -- ranged' saw
+    risaw i o = rg' i o isaw -- ranged' inverted saw
+    rsq i o = rg' i o square -- ranged' square
+    rrand i o = rg' i o rand -- ranged' rand
+
+let rxsin i o = rgx i o sine -- ranged' exponential sine
+    rxcos i o = rgx i o cosine -- ranged' exponential cosine
+    rxtri i o = rgx i o tri -- ranged' exponential triangle
+    rxsaw i o = rgx i o saw -- ranged' exponential saw
+    rxisaw i o = rgx i o isaw -- ranged' exponential inverted saw
+    rxsq  i o = rgx i o square -- ranged' exponential sqaure
+    
+let rsinf i o f = fast f $ rsin i o -- ranged' sine at freq
+    rcosf i o f = fast f $ rcos i o -- ranged' cosine at freq
+    rtrif i o f = fast f $ rtri i o -- ranged' triangle at freq
+    rsawf i o f = fast f $ rsaw i o -- ranged' saw at freq
+    risawf i o f = fast f $ risaw i o  -- ranged' inverted saw at freq
+    rsqf i o f = fast f $ rsq i o  -- ranged' square at freq
+        
+
+sock <- carabiner tidal 4 (-0.20)
+
+
+
+
+d1 $ n  (segment rsinf )  # m 2
+
+
+
+d1 $ n  (segment 32 (rsinf 12 24 "17") ) # m 2 
+
+d2 $ n  (segment 32 (rsinf 12 24 "2") ) # m 3 
+
+d2 $ n (segment "[16, 17]" $ rsinf 6 (6 + 17) 2) # m 2
+
+d2 $ n (segment "64 54 32 23 18" $ rsinf 6 (6 + 17) 2) # m 2
+
+d2 $ n (segment "64" $ rsinf 6 (6 + 17) 2) # m 2
+
+d2 $ n (toScale [0, 5] (segment "23" $ rsinf 6 (6 + 17) 2) ) # m 2
+
+d2 $ n (toScale [0, 5, 19, 23]  ("0 4  3 5 2")  ) # m 2
+
+once $ n (toScale [0, 5, 19, 23]  ("0 4  3 5 2")  ) # m 2
+
+once $ n (toScale [0, 5, 19, 23]  ("0 4  3 5 2")  ) # m 2
+
+once $ n (  (segment 8 $ sine)  ) # m 2
+
+once $ n (toScale [0, 5, 19, 23]  ((segment 8 ( sine)) :: Pattern)  ) # m 2
+
+d1 $ struct "t(7, 9, 16)" $ nTake "alex" [2, 3, 5, 3, 2] # m 2
+
+
+let m p = s "midi" # midichan (p - 1)
+
+d1 $ fast 2 $ every 11 (0.125 <~) $ every 13 (0.25 ~>)  $ struct "t(5, 8, < 2 5>)" $ stack [
+     -- hats 
+     nTake "will" [-16, -16, -16, -14 ] # m 1,
+     -- melody 
+      (|+ n (toScale [0, 2, 5, 7, 9] "2 5 8")) $ nTake "alex" [0, 3, -2, 10] # m 2
+]
+-- kick
+
+d2 $ fast 2 $ n "-24 -24" # m 1
+
+
+d2 $ n (-20) # m 1
+
+
+
+d2 $ (|+ n "[0, 5, 19]") $ n (toScale [-2, 0, 3, 5, 7, 10] (segment "8 16 32 16 19" (rsinf 12 (12 + 17) "2") ) ) # m "2 3 2 2 3 2 3 3" 
+
+d1 $ n  (segment 32 (rsinf 12 24 "24") ) # m 2 
+

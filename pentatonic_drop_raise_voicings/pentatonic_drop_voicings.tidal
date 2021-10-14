@@ -1,0 +1,28 @@
+
+let pentatonic = toScale [-5, -2, 0, 2, 5]
+
+d1 $ fast 4 $ n (pentatonic ("[3 5 8 7]/4" |+| "0 1 2 3 4 5")) # m 1
+
+--so what inverted
+
+resetCycles
+
+d2 $ slow 1.5 $ stack [
+    slow "{0.3333 1 2 0.25}%5" $ stack [
+        n (pentatonic ("[0 1 2 3 4 0 -1 -2 -3 -4]" |+ "[-1, 2, 5, 8, 11]")) # m 1 # amp 0.01 # legato "0.02",
+        (|- n 24) $ n "0 1 0 1" # m (choose [2, 3]),
+    (|- n 24) $ (0.25 <~) $ n "{0 2 1 4 5 6}%6" # m 4
+    ],
+    (|- n 24) $ fast 1.5 $  n "0 0 0 0" # m 5
+]
+
+d2 $ slow 1.5 $ stack [
+    slow "{0.3333 0.75 1.5 0.25}%5" $ stack [
+        (|+ n 5) $ n (pentatonic ("[0 1 2 3 4 0 -1 -2 -3 -4]" |+ "[-1, 2, 5, 8, 11]") |- "2") # m 1 # amp 0.015 # legato "0.05",
+        (|- n 24) $ n "0 1 0 1" # m (choose [2, 3]),
+    (|- n 24) $ n "{0 2 1 4 5 6}%6" # m 4
+    ],
+    (|- n 24) $ fast 1.5 $ slow 5 $ fast 4 $ n "{0 0 0 [0 0] 0}" # m 5
+]
+
+tidal_version

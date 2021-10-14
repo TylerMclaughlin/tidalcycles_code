@@ -1,0 +1,98 @@
+
+d1 $ piano 4 major "[0, 7, 9, 11, 13]" "2 5 6 7 6" # m 2
+
+d2 $ piano 4 major "[0, 7, 9, 11, 13]" "2 5 6 7 6" # m 1
+
+
+
+
+
+d3 $ groove 8 "0 0.026" $ (|+ n "0 7 2 5" ) $ stack [ 
+       struct "[[t(<9 >, < 16 8>)], [~ <~t> t ~ ~ t t <~ ~ ~ t> ]]" $ 
+       n "[0, 9, 10, 14, 17, 21]" # m 1,
+       fast 2 $ struct "[t(7,8), [~ ~ ~ <~ ~>]]" $ nT "q" 7 "2 5 10 12 7 2 12 5 " # m 2,
+       fast 2 $ struct "t*4" $ nT "qa" 3 "2 12" # m 3
+       ] 
+
+d5 $ groove 4 "0 0.02" $  (|- n 12 ) $ (|+ n "0 7 2 5") $ (|- n 4) $ groove 4 "0 0.025" $ struct "t(<9>, 16)" $ nT "gh" 9 "-3 4 11 -3 4 4" # legato "[1 0.7 0.9 0.7]!4" # m 5
+
+d1 $ groove 8 "0 0.026" $ drumz $ fast 1 $  n "0 0 0 [0 ~ ~ <~ ~ ~ 0 ~ ~ 0 0> ] "  # m 4
+
+
+
+d7 $ n (tScale major ("5 8 9 13 9 8 5 13" |- "0")) # m 7
+
+
+let degInv transp scalePat degrees inv = scaleT transp scalePat (inv7 degrees inv ) 
+
+let degInv scalePat degrees inv = tScale scalePat (inv7 degrees inv ) 
+
+
+d7 $ fast "2 3 4" $ n (degInv major "5 9 8 13" "0 1 2 3 4 5 6 7 8 9") # m 7 
+
+d7 $  (|+ n 12) $ fast "2" $ struct "[t(7, 8), t(6,15)]" $ ncat [
+     (2, nT "angel" 13  (degInv major "5 9 8 13" "-10..-1")),
+     (2, nT "angela" 13  (degInv major "0 7 5 10" "-9..2")),
+     (2, nT "angelb" 13  (degInv major "2 8 6 11" "-10..-1")), 
+     (2, nT "angelc" 13  (degInv major "4 9 8 13" "-11..0"))] # m 7 
+
+d7 $  (|+ n 12) $ fast "2" $ struct "[t(7, 8), t(6,15)]" $ ncat [
+     (2, nT "angel" 13  (degInv major "5 9 8 15" "-9..0")),
+     (2, nT "angela" 13  (degInv major "0 7 5 10" "-9..2")),
+     (2, nT "angelb" 13  (degInv major "2 8 6 11" "-10..-1")), 
+     (2, nT "angelc" 13  (degInv major "4 9 8 15" "-11..0"))] # m 7 
+
+d7 $  (|+ n 12) $ fast "2" $ struct "[t(7, 8), t(6,15)]" $ ncat [
+     (2, nT "angel" 13  (degInv major "5 9 8 15" "-9..0")),
+     (2, nT "angela" 13  (degInv major "0 7 5 10" "-7..4")),
+     (2, nT "angelb" 13  (degInv major "2 8 6 11" "-10..-1")), 
+     (2, nT "angelc" 13  (degInv major "4 9 8 15" "-9..2"))] # m 7 
+
+
+-- duller
+d7 $  (|+ n 12) $ fast "2" $ struct "[t(7, 8), t(6,15)]" $ ncat [
+     (2, nT "angel" 13  (degInv major "5 9 8 7" "-9..0")),
+     (2, nT "angela" 13  (degInv major "0 7 5 4" "-7..4")),
+     (2, nT "angelb" 13  (degInv major "2 8 6 5" "-10..-1")), 
+     (2, nT "angelc" 13  (degInv major "4 9 8 7" "-9..2"))] # m 7 
+
+d8 $ mask "1 0 1 <10>" $ drumz $ n "[0(7,8)]" # m 4
+
+d9 $ drumz $ n "[10(9, 15) ]" # m 4 # ampTake "hh" [0.7, 0.3, 0.6, 0.4]
+
+d9 $ drumz $ n "[~ 10 ]*4" # m 4 # ampTake "hh" [0.7, 0.3, 0.6, 0.4]
+
+d10 $  (|+ (nTake "sb" [0, 12])) $ (|- n 12) $ (|+ n "[5 0 2 4]/4") $ struct "[1011 0111 1011 0101 1011 0111 101<01> 1<01>11]/4" $ n "0" # m 8 # ampTake "ab" [0.6, 1.0, 0.5, 0.95]
+
+
+d10 $ fix (# silence ) (n "[7, <2 5>, 8]") $ n "7 2 5 7 5 2 0 2" # m 8 
+
+
+
+d10 $ fix (# silence) (n "[2, 5]") $  n "7 2 5 7 5 2 0 2" # s "bd" 
+
+d10 $ s "bd"
+
+d6 # m 8 
+
+unsolo 7 
+
+
+d7 $ fast "2" $ struct "[t(7, 8) t(6,7)]" $ nT "angelb" 32  (degInv major "2 6 8 11" "-15..0") # m 7 
+
+d7 $ fast "2 3 4 3" $ nT "asdf" 24 ( degInv 3 major "5 9 8 13" "-5 .. 5") # m 7 
+
+degInv 3 major "5 9 8 13" "0 1 2 3 4 5 6 7 8 9"
+
+
+
+d5 silence
+
+d2 $ groove 8 "0 0.026" $ drumz $ fast 1 $  n "~ 10 ~ 10 ~ 10 ~ 10" # ampTake "aa" [0.4, 0.5, 0.3, 0.6] # m 4
+
+d3 $ struct "[[t(3,8)], [~ t]]" $  n "[0]" # m 1
+
+d3 $ n "[0]"# m 1
+
+d5 $ groove 4 "0 0.025" $ (|- n 12) $ (|- n 3) $ 
+                  n "~ <0 0 0 0> ~ 0 <[~ ~ ~ 0]> ~ <~ [~ 0]> 0 " # m 5

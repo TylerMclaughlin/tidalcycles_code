@@ -1,0 +1,18 @@
+jazzSolo nStructFit structPat takeName nToTake scalePat notesPat
+
+d1 $ groove 8 "0 0.02" $ jazzSolo 16 "0 1 1 0 1 0 1 1 " "na" 15 harmmin "0 2 1 2 1 5 4 3 2 5 2 3" # m 2
+
+d2 $ groove 8 "0 0.02" $  (|+ n 12) $ (0.25 <~)  $ jazzSolo 16 "1 0 1 0 0 1 1 1 " "nan" 15 harmmin "0 2 1 2 1 5 4 3 2 5 2 3" # m 2
+
+do
+  let p1 = "1 1 1 1 0 1 1 1 0"
+      s1 = "-1 0 -4 -3 1 1 4 3 1 2"
+      p2 = "{1 1 1 1 0 1 1 1 1}%16"
+  d1 $ n "0" # m 7
+  d3 $ jazzSolo 16 p1 "ac" 6 harmmaj s1 # m 3
+  d4 $ jazzSolo 16 p1 "ad" 6 harmmaj (s1 |+ "7 5 4 3") # m 3
+  d5 $ struct p2 $ nTake "da" [0, 2, 4, 2, 7, 9, 10] # m 1
+  d6 $ drumz $ struct p2 $ nTake "da" [0, 2, 4, 5, 7, 9, 10] # m 4
+  d7 $ struct "{1 1 1 0 0 1 0 1 0}%16" $
+       n (tScale "4 7 11 14 " ("[<0 0 3 3>, 7, 9, <2 5 1 4> ]" |- 1 )) # m 5
+

@@ -1,0 +1,85 @@
+import Data.List
+
+let drumz = (|- n 24)
+    groove r p = (# nudge (fast r p))
+    cc9 p q = ccv q # ccn p # m 9
+    cc10 p q = ccv q # ccn p # m 10
+    cc11 p q = ccv q # ccn p # m 11
+    cc12 p q = ccv q # ccn p # m 12 
+    cc13 p q = ccv q # ccn p # m 13
+    cc14 p q = ccv q # ccn p # m 14
+    cc15 p q = ccv q # ccn p # m 15
+    -- use ccn 52 for HPF autofilters
+    hpf1 p = cc1 52 p
+    hpf2 p = cc2 52 p
+    hpf3 p = cc3 52 p
+    hpf4 p = cc4 52 p
+    hpf5 p = cc5 52 p
+    hpf6 p = cc6 52 p
+    hpf7 p = cc7 52 p
+    hpf8 p = cc8 52 p
+    hpf9 p = cc9 52 p
+    hpf10 p = cc10 52 p
+    hpf11 p = cc11 52 p
+    hpf12 p = cc12 52 p
+    hpf13 p = cc13 52 p
+    hpf14 p = cc14 52 p
+    hpf15 p = cc15 52 p
+    -- and ccn 53 for HPF autofilters
+    lpf1 p = cc1 53 p
+    lpf2 p = cc2 53 p
+    lpf3 p = cc3 53 p
+    lpf4 p = cc4 53 p
+    lpf5 p = cc5 53 p
+    lpf6 p = cc6 53 p
+    lpf7 p = cc7 53 p
+    lpf8 p = cc8 53 p
+    lpf9 p = cc9 53 p
+    lpf10 p = cc10 53 p
+    lpf11 p = cc11 53 p
+    lpf12 p = cc12 53 p
+    lpf13 p = cc13 53 p
+    lpf14 p = cc14 53 p
+    lpf15 p = cc15 53 p
+    -- swing fxns
+    nfast a p = nudge (fast a $ p)
+    swing4 p = nudge (fast 4 $ p)
+    -- crazy pattern to list stuff for nTake
+    patternToList pat = map value $ sortOn whole $ queryArc pat (Arc 0 1)
+    scaleSeg s n func = toScale s $ fromIntegral <$> round <$> segment n (func)
+    -- arp list from a segmented continuous fxn mapped to a scale
+    arpCL s n func = patternToList $ scaleSeg s n func 
+    takeArp name s n func = nTake name (arpCL s n func)
+    -- microtonal supporting functions
+    scaleSeg' edo s n func = toScale' edo s $ fromIntegral <$> round <$> segment n (func)
+    arpCL' edo s n func = patternToList $ scaleSeg' edo s n func 
+    takeArp' name edo s n func = nTake name (arpCL' edo s n func)
+    lpfAll amt = stack [ lpf1 amt, lpf2 amt, lpf3 amt, lpf4 amt, lpf5 amt, lpf6 amt,
+                         lpf7 amt, lpf8 amt, lpf9 amt, lpf10 amt, lpf11 amt, lpf12 amt,
+                         lpf13 amt, lpf14 amt, lpf15 amt]  
+    hpfAll amt = stack [ hpf1 amt, hpf2 amt, hpf3 amt, hpf4 amt, hpf5 amt, hpf6 amt,
+                         hpf7 amt, hpf8 amt, hpf9 amt, hpf10 amt, hpf11 amt, hpf12 amt,
+                         hpf13 amt, hpf14 amt, hpf15 amt]  
+    ns pscale pnotes = n (toScale (patternToList pscale) pnotes )   
+    scaleT transp s realpat = n ( toScale (fmap (+ transp) $ patternToList s) realpat )
+    piano transp scalePat lhPat rhPat  = scaleT transp scalePat (stack [lhPat, rhPat] )
+    inv7 chordScalePat pat = toScale' 7 (patternToList chordScalePat) pat
+    iPiano transp scalePat degreesL invL degreesR invR  = scaleT transp scalePat (stack [inv7 degreesL invL, inv7 degreesR invR] )
+    harmmaj = "0 2 4 5 7 8 11"
+    harmmin = "0 2 3 5 7 8 11"
+    melomin = "0 2 3 5 7 9 11"
+    major = "0 2 4 5 7 9 11"
+    nT name amt p = nTake name (take amt (cycle (patternToList p)))  
+    tScale scalePat pat = toScale (patternToList scalePat) pat 
+    -- for edo
+    tScale' nEDO scalePat pat = toScale' nEDO (patternToList scalePat) pat 
+    fitN n pat = parseBP_E ("{" ++ pat ++ "}%" ++ (show n )) 
+    jazzSolo nStructFit structPat takeName nToTake scalePat notesPat =  struct (fitN nStructFit structPat) (nT takeName nToTake (tScale scalePat notesPat ))
+    timeline p = parseBP_E (map (\c -> if c==',' then ' '; else c) $ show $ concatMap (\d -> 1 : replicate (d-1) 0) p)
+    ncat = seqPLoop . go 0
+      where
+        go _     []          = []
+        go t_acc ((t, p):ps) = (t_acc, t', p) : go t' ps
+          where
+            t' = t_acc + t
+    

@@ -1,0 +1,48 @@
+
+setcps(1/120*128)
+
+d1 $ (|+ n 1) $ (|+ n (slow 8 $ "0 0 0 0 0 0 2 7")) $ (|+ n "12 19") $ n "[0(3,8), 4(4,8), 7(5,8), 11(6,8)]" # m "4 5"
+
+d2 $ (|+ n 1)$  every 4 (bite "<4 8>" "2 4 9 6") $ fast "4 1 12 1" $ takeArp "erick" [0, 4, 7, 11, 15] 16 (range 1 12 (abs sine*sine)) # m 7
+
+d3 $ (|+ n "1 2") $ drumz $ n "1*<3 3 3 3 3 4 5 6> 10" # m (fast 10 $ choose [1, 2] )
+
+d3 $ (|+ n (slow 1 $ "0 0 4 0")) $ drumz $ n "<0 [0 ~ <~ 0> <0>]> 8*2 <1 3 4 1 > [0 10] 8*2 <8 <1 8>>" # m "[ 2]" # nudge (fast 2"0 0.03")
+
+d4 $ n (toScale [0, 9 , 14, 19] "0 1 2 3 4 5 [6 [7 [8 9]]*0.66]" |+| "<5 5 5 5 0 0 0 0>"  ) # m 5
+
+d4 $ n (toScale [0, 10 , 15, 19] "0 1 2 3 4 5 [6 [7 [8 9]]*0.66]" |+| "<2 2 7 7>"  ) # m 5
+
+toScale [0,2, 4] "0 1 2 3"
+
+d5 $ hpf5 20
+
+d6 $ hpfAll 00
+
+
+
+setcps(1/120*110)
+
+d1 $ (|+ n "1 8 13 8" ) $ fast "3 6" $ struct "t(<1 1 1 3>, <8 4 8 4 8>)"  $ stack[
+    takeArp "drummm" [0,  7, 12, 19, 15 ] "< [5 3 4 3] >"   (range 3 "6 5 7 9" (fast "<1 2 4 2>"  cosine)) # m 3 # legato "0.08 0.09",
+      n "0 0 0 0(3,8)" |+| nTake "omg" [0, 12]   # legato "1 " # m 4 
+ ]
+
+d3 $ 
+
+
+d1 $ every 3 (within (0.75, 1) (bite 4 "0 4 3 4")) $ every 5 ( 0.25 <~)  $ every 7 (plyWith 2 (|+ n 0)) $ stack [
+    drumz $ n "0 8  [0, 3] 8 " # m 1 # nudge (fast 8 "0.0 0.2"),
+    (|+ n 5) $ (|+  (nTake "darude" (patternToList "0@5 3 0@5 3 0@5 3 5 5 3 3"))) $  slow 2 $ struct "1001001010010010" $ stack [
+    n "0 0 0 7" #  m 4 # nudge (fast 8 "0.0 0.2"),
+    n "[0, 7, 12]" # m 7
+   ]
+] 
+
+d7 $ hpfAll 120
+
+
+
+d2 $ drumz $ n "<0 [0 ~ 0 0]> [<8 10 8 8>, 3] " # m 2
+
+once $ drumz $ n "15 15 15*3 15*5" # m 2

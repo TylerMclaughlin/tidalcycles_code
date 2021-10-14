@@ -1,0 +1,11 @@
+
+d1 $ cc1 54 32
+
+
+d1 $ ccn 1 # ccvTake 
+:t ccvTake
+
+
+
+
+

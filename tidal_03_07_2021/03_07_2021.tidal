@@ -1,0 +1,90 @@
+
+d1 $ n (segment 16 (rsinf 3 25 10)) # m 1
+
+d1 $ n (segment 36 (rsinf 12 24 72)) # m 1
+
+d1 $ n (segment 36 (range 10 22 sine)) # m 1
+
+d1 $ n (segment 8 (range 2 12 sine) ) # m 1
+
+segment 8 (range 12 1 sine) :: Pattern Int
+
+segment 8 (range 12 1 sine)
+
+:t sine
+
+ round <$> segment 15 ( range 12 1 sine)
+
+d1 $ n ( fromIntegral <$> round <$> segment 15 ( range 12 1 sine)  ) # m 1
+
+:t round <$> segment 15 ( range 12 1 sine) 
+
+d1 $ n (toScale [0,2,4] (fromIntegral <$> round <$> segment 15 ( range 12 1 sine))  ) # m 1
+
+
+--  :D
+let scaleSeg scaleX segAmt func = toScale scaleX (fromIntegral <$> round <$> segment segAmt (func))
+
+d1 $ n (scaleSeg (nTake "alex" [[0,2,5,7, 10 ], [1,3,6]]) "15 12 8" ( range 12 1 sine))  # m 1
+
+
+d1 $ (# n (scaleSeg [0, 1, 5, 6, 10] "15 12 8" ( range 12 1 sine)))  $ fast 4 $ amp "1 ~ 1 ~ ~ "  # m 1
+
+
+:t n (fromIntegral <$> round <$> segment 15 ( range 12 1 sine) )
+
+:t n (fromIntegral <$> round <$> segment 15 ( range 12 1 sine) )
+
+ segment 15 ( range 12 1 sine)
+
+let asdf = abs ( fast 10 $ range (0.35) (-0.35) $  cosine) +
+
+abs ( fast 10 $ range (0.35) (-0.35) $  cosine)
+
+ fast 10 $ range (-0.25) (0.25) $  sine
+
+
+let qwer = (abs ( fast 10 $ range (0.35) (-0.35) $  cosine) ) +  (fast 10 $ range (-0.25) (0.25) $  sine)
+
+d1 $ n (round <$> (segment 32 (range 12 24 $ qwer))) # m 1
+
+
+
+
+abs(cos(x*.1))*-.35 + sin(x*.1)*.25
+
+:t sine
+
+
+fromIntegral <$> round <$> n ( segment 8 (range 12 1 sine) )
+
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] " 32 28 12" ( range 12 1 sine))  # m 1
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] " 12" ( range 0 12 qwer))  # m 1
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] " 128" ( range 0 12 (abs ( sine) * cosine)))  # m 1
+
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] " 32 " (  range 12 24 sine))  # m 1
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] (slow 4 $ "20 28 26 27 ") ( fast 32 $  range 2 (slow 4 $ "20 5 4 16") sine))  # m 1
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] (slow 4 $ "20 28 26 27 ") ( fast 32 $  range 2 (slow 4 $ "20 5 4 16") sine))  # m 1
+
+-- ooooh veery nice.
+let qwer = (abs ( fast 10 $ range (0.35) (-0.35) $  cosine) ) +  (fast 10 $ range (-0.25) (0.25) $  sine)
+    scaleSeg scaleX segAmt func = toScale scaleX (fromIntegral <$> round <$> segment segAmt (func))
+d1 $ (|+ n "5 7")  $ n (scaleSeg [-3, 0, 2, 4, 7] ("20 12") ( slow 8 $  range "4 8" 12 $ qwer))  # m 1
+
+
+
+
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] " 32" ( fast 4 $ range 12 64 qwer))  # m 1
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] " 12" ( range 0 12 (cosine * sine)))  # m 1
+
+d1 $  n (scaleSeg [-3, 0, 2, 4, 7] " 32 28 12" ( range 12 1 qwer))  # m 1
+
+

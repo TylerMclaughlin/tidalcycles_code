@@ -1,0 +1,5 @@
+sock <- carabiner tidal 4 (0.14)
+
+d1 $ n "1 2 3 4" # m 1
+
+d1 silence

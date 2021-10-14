@@ -1,0 +1,73 @@
+
+d1 $ n "0" # m 1
+
+d1 $ drumz $ n "0  [0,3]" # m 1
+
+d1 $ groove 4 "0 0.02" $ drumz $ fast 2 $ struct "~ t*2 t <t*2 t>  " $ nT "h" 5 "7 8 10 9 10" # m 1
+
+d2 $ drumz $ n "0 0 0 0" # m 2
+
+d4 $ groove 4 "0.0 0.02" $  (|+ n "0 7") $ struct "t(5, 8) t(3,8)" $ n  "[2, 5, 9, 14]" # m 5 
+
+
+d1 $ groove 4 "0 0.02"  $ drumz $ struct "{[t(5, 8), t(5,8)]}%2" $ nT  "ad" 7 "0 8 [10,4] 8 8" # m 1
+
+
+
+d4 $ fast 2 $ (|+ n "0!7 1" ) $ struct "[[t ~  ~ t ~ ~ t ~ <~ t>] [~ t]]/2" $ n "[0, 3, 7, 14, 17, 22 ]"# m 5
+
+
+d5 $ takeArp "" # m 6
+
+
+d7 $ fast "<1 1 1 1 1 2 2 2>" $ struct "t(5,8) t" $ fast 2 $ takeArp "kris" [0, 3, 10, 12] 12 (range 1 12 sine) # m 7
+
+d7 silence
+
+d8 $ struct "t(7, 16)" $  # m 8
+
+d9 $  # m 9
+
+d2 $ #  m 2
+
+d2 $ groove 4 "0 0.02"  $ drumz $ struct "{[t(5, 8), t(5,8)]}%2" $ n "0  [8 8] 10 8 [0,3] 8 10 8" # m 2
+
+d1 silence
+
+
+d9 $ groove 4 "0 0.022" $  cat [n "4@5 <4~>  4@9 -3 ", n "2@15 -5 "] # m 9
+
+d2 $ drumz $  n "0 0 10 0" # m 2
+
+d3 $ groove 4 "0 0.03" $ fast 4 $  drumz $ n "~ 8  ~ 8 " # m 2
+
+d4 $ drumz $ n "0 0 0 < 0 [0 0]>" # m 1
+
+d3 $ groove 8 "0 0.022" $ fast 2 $  drumz $ n "~ 8  8 8 ~  8 10 8 " # m 2
+
+d4 $ drumz $ groove 8 "0  0.02" $ fast 2 $ struct "t(3,8)" $ nT "sg" 5 "8 10 8 " # m 1
+
+d5 $ groove 8 "0 0.02" $ struct "1011011011010101" $  n " 7 14" # m 6
+
+-- phrygian
+d5 $ groove 8 "0 0.02" $ struct "1011011011010101" $  n " [1, 3, 6, 11]" # m 6
+
+d9 $ groove 4 "0 0.022" $  n "1 < ~ ~ 6~> ~ 8 <~8> ~ <11 14 11 14>  ~" # m 9
+
+d5 $ drumz $ n "0  ~ ~ ~  ~  [0, 3] ~ ~  ~ ~  " # m 2
+
+d2 $ drumz $  n "0  8 8 ~  ~  [0, 3] <~  ~ ~8>  <~8>  ~ ~  " # m 2
+
+d1 $ drumz $  n "<[0, 15] 0 0 0  0 0 0 0>  ~ 8 ~  ~  [~, 3] <~  ~ ~8>  <~8>  ~ <10 ~>  " # m 1
+
+
+-- tempo increase for last 10 minutes.
+do 
+  hush
+  d3 $ n  "[0, 7, 10, 14, 19, 17]"  # m "7" 
+
+
+
+
+
+sock <- carabiner tidal 4 (0.82)

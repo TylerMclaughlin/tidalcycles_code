@@ -1,0 +1,196 @@
+
+setcps(1/120*160)
+
+let jbswingp = "0 0.028 -0.003 0.028"
+    jbswing = nudge (fast 2 jbswingp)
+
+let jbswingp = "0 0.028 0.000 0.028"
+    jbswing = nudge (fast 2 jbswingp)
+
+
+let jbswingp = "0 0.021" 
+    jbswing = nudge (fast 4 jbswingp)
+
+
+do
+  once $ drumz $ n "13" # m 1 
+  d5 $  (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(3,8) t(3,8) t(3,8, 2) t*2 ") $ stack [
+       slow 8 $ (|- n 12) $ n "[2, 5, 7, 9, 12] [4, 7, 9, 11, 14] [7, 10, 12, 14, 17] [5, 9, 12, 14, 16 ]" # m 5,
+      fast 2 $ drumz $ cat [n "<15>" # m 1, (|+ n "18") $ nTake "conga" [0, 7, 12, 0, 7, 19, 0,  7, 12]  # m 2, n "15" # m 1, n "15" # m 1 ] # ampTake "aa" [1.9, 0.8, 0.8, 1.9, 0.8, 0.8, 1.9, 0.8, 0.8, 1.9, 0.8, 0.8, 0.8] 
+      ]
+ 
+-- lead
+do
+ once $ drumz $ n "13" # m 1 
+ d6 $ (# jbswing) $ (|+ n (slow 8 "0 2 5 7") ) $   cat [n "{~ 2 5 7 9  }%8"]  # m 4
+
+
+d3 silence
+
+d2 silence
+
+d6 silence
+
+-- conga
+-- goes good with bass 
+d6 $ (# jbswing ) $ n "~ ~ ~ <~ 12 7 ~ > ~ ~ ~ <12 0>" # m 2
+
+d6 silence
+
+  
+do
+  d5 $ (|- n 12) $ (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(3,8) t(5,8) t(3,8, 2) t*2 ") $ stack [
+       slow 8 $ n "[2, 5, 7, 9, 12] [4, 7, 9, 11, 14] [7, 10, 12, 14, 17] [5, 9, 12, 14, 16 ]" # m 5,
+      fast 2 $ cat [n "~" # m 1, (|+ n "6") $ nTake "conga" [0, 7, 19, 12, 7, 19, 7,  12 ]  # m 2, n "~" # m 1, n "~" # m 1 ] # ampTake "aa" [0.9, 0.8, 0.8] 
+      ]
+  d1 $ (# jbswing) $  drumz $ (# n "0") $ amp "1 ~ <~ ~ 0.2 ~ > 1 ~ ~ 1 <~ 0.2>" # m 1 
+
+-- CYMBALLY PART, maybe skip?
+do
+  d1 $ (# jbswing) $  drumz $ (# n "0") $ amp "1 ~ <~ ~ 0.2 ~ > 1 ~ ~ 1 <~ ~ ~ 0.2 >" # m 1 
+  d5 $ (|- n 12) $ (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(3,8) t(3,8) t(3,8, 2) t*2 ") $ stack [
+       slow 8 $ n "[2, 5, 7, 9, 12] [4, 7, 9, 11, 14] [7, 10, 12, 14, 17] [5, 9, 12, 14, 16 ]" # m 5,
+      fast 2 $ cat [n "-11" # m 1, (|+ n "6") $ nTake "conga" [0, 7, 12, 0, 7, 19, 0,  7, 12]  # m 2, n "1" # m 1, n "1" # m 1 ] # ampTake "aa" [0.9, 0.8, 0.8] 
+      ]
+
+
+d6 silence
+
+-- clap
+do 
+  d6 silence
+  d3 $ (# jbswing) $ n "~ <0!3 [0 0] 0!3 [~ 0] 0!3 [0 0 ~ ~ ] 0!3 [~ 0]>" # m 3
+  -- scale chords
+  d5 $ (|- n 12) $ (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(<3 5>,8) t(5,8) t(<3 3 3 7>,8, 2) t*2 ") $ stack [
+       slow 8 $ fast 2 $ cat [ns "2 5 7 9 12" ("[0, 1, 2, 3, 4]" |+ "[8 2 3]*4"),
+                              ns "4 7 9 11 14" ( "[0,1,2,3,4,5]" |+ "[0 1 7 5]*4 ") ,  
+                              ns "7 10 12 14 17" ("[0, 1, 2, 3, 4]" |+ "[2 3 2]*4"),  
+                              ns "5 9 12 14 16" "[0,1,2,3,4,5]"] # m 5,
+      fast 2 $ cat [n "3" # m 1, (|+ n "6") $ nTake "conga" [0, 7, 12, 0, 7, 19, 0,  7]  # m 16, n "3" # m 1, n "3" # m 1 ] # ampTake "aa" [0.9, 0.8, 0.8] 
+      ]
+
+--d6 $ (# jbswing) $ (|+ n (slow 16 "0 2 5 7") ) $   cat [n "{~ 14 5 7 9  }%8"]  # m 4
+
+-- fx lead
+do 
+ d8 silence
+ -- kick alt
+ d1 $ (# jbswing) $ drumz $ (# n "0") $ amp "1 ~ <~!7 1> 1 ~ ~ 1 <~ ~ 1 ~>" # m 1  # jbswing
+ d6 $ (# jbswing) $ (|+ n (slow 16 "0 2 5 7") ) $  struct (slow 1 "t(7,8)") $ 
+            ns "14 5 7 9" (fast "0.25" $ "{0 ~ 5 6 ~ <11 8> ~}%16")  # m 4
+
+d6 silence
+
+
+d1 silence
+
+
+-- pad melody 1 
+do
+ d6 silence
+ d1 silence
+ -- hats
+ d2 $ (# jbswing ) $ drumz $ (# n "6") $ (|- ampTake "h" [0.85, 0.7]) $ amp "1 1 1 ~ 1 1 ~ <1 [ 1]>" # m 1
+ d7 $ (0.25 <~) $ slow 16 $ n "<12 14> <14 16>  < 19 [19 16]> < <16 21> [12 9]> " # m 6 
+
+do
+ d8 silence
+ d1 $ (# jbswing) $ drumz $ (# n "0") $ amp "1 ~ <~!7 1> 1 ~ ~ 1 <~ ~ 1 ~>" # m 1  # jbswing
+ d7 $ (0.25 <~) $ slow 16 $ n "19 21 <[28 24] [<28 28*2> 24 26 21]> <[26 <21 31>] [ 19 14 21 14]>" # m "[6, 7]" 
+
+d7 silence
+
+d8 silence
+
+-- sax and bass
+do 
+ d7 silence
+  -- sax
+ d8 $ (# jbswing) $ n "<2!2 2@2> ~ 4 ~ ~ 7!2 ~ ~ 5 ~ ~ ~" # m 8
+-- yay good bass
+ d10 $ (# nudge (fast 8 jbswingp )) $ slow 4 $ cat [ n "2 ~@15 ~@16",
+                   n "4 ~@15 ~@12 [<[<0 0 0 7> 2 4 5] [~ 12 10 9 ]>]@4",
+                   n "7 ~@15 ~@16",
+                   n "2 ~@15 ~@8 [<[~] [ ~ -3 ~ -3] [~] [ ~ -3 0 -3] >]@8"]  # m 10
+
+
+d9 silence
+
+
+do 
+  d1 silence
+  d10 silence
+  d5 $ (|- n 12) $ (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(<3 5>,8) t(5,8) t(<3 3 3 7>,8, 2) t*2 ") $ stack [ (|- n 24) $ n " 0 0 0 0 " # m 1,
+       slow 8 $ n "[2, 5, 7, 9, 12] [4, 7, 9, 11, 14] [7, 10, 12, 14, 17] [5, 9, 12, 14, 16 ]" # m 5,
+      fast 2 $ cat [n "3" # m 1, (|+ n "6") $ nTake "conga" [0, 7, 12, 0, 7, 19, 0,  7]  # m 16, n "3" # m 1, n "3" # m 1 ] # ampTake "aa" [0.9, 0.8, 0.8] 
+      ]
+
+-- do half!
+do
+  d8 silence
+  d1 $ (# jbswing) $  drumz $ (# n "0") $ amp "1 ~ <~ ~ 0.2 ~ > 1 ~ ~ 1 <~ 0.7>" # m 1 
+  d5 $ (|- n 12) $ (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(<3 5>,8) t(5,8) t(<3 3 3 7>,8, 2) t*2 ") $ stack [ (|- n 24) $ n " 0 0 0 0 " # m 1,
+       slow 8 $ n "[2, 5, 7, 9, 12] [4, 7, 9, 11, 14] [7, 10, 12, 14, 17] [5, 9, 12, 14, 16 ]" # m 5,
+      fast 2 $ cat [n "3" # m 1, (|+ n "6") $ nTake "conga" [0, 7, 12, 0, 7, 19, 0,  7, 12]  # m 16, n "3" # m 1, n "3" # m 1 ] # ampTake "aa" [0.9, 0.8, 0.8] 
+      ]
+
+
+do
+  d5 $ (|- n 12) $ (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(3,8) t(5,8) t(3,8, 2) t*2 ") $ stack [
+       slow 8 $ n "[2, 5, 7, 9, 12] [4, 7, 9, 11, 14] [7, 10, 12, 14, 17] [5, 9, 12, 14, 16 ]" # m 5,
+      fast 2 $ cat [n "~" # m 1, (|+ n "6") $ nTake "conga" [0, 7, 19, 12, 7, 19, 7,  12 ]  # m 2, n "~" # m 1, n "~" # m 1 ] # ampTake "aa" [0.9, 0.8, 0.8] 
+      ]
+  d1 $ (# jbswing) $  drumz $ (# n "0") $ amp "1 ~ <~ ~ 0.2 ~ > 1 ~ ~ 1 <~ 0.7>" # m 1 
+--d6 $ (# jbswing) $ (|+ n (slow 8 "0 2 5 7") ) $   cat [n "{~ 14 5 7 9  }%8"]  # m 4
+
+do 
+  d6 silence
+  --d7 $ drumz $ n "~ 10 ~ 10" # m 1
+  d2 $ (# jbswing ) $ drumz $ (# n "6") $ (|- ampTake "h" [0.85, 0.7]) $ amp "1 1 1 ~ 1 <1~> ~ <1 [ 1]>" # m 1
+  d3 $ (# jbswing) $ n "~ <0!3 [0 0] 0!3 [~ 0] 0!3 [0 0 ~ ~ ] 0!3 [~ 0]>" # m 3
+  -- scale chords
+  d5 $ (|- n 12) $ (# jbswing) $ (0.25 <~) $ struct (slow 4 "t(<3 5>,8) t(5,8) t(<3 3 3 7>,8, 2) t*2 ") $ stack [
+       slow 8 $ fast 2 $ cat [ns "2 5 7 9 12" ("[0, 1, 2, 3, 4]" |+ "[8 2 3]*4"),
+                              ns "4 7 9 11 14" ( "[0,1,2,3,4,5]" |+ "[0 1 7 5]*4 ") ,  
+                              ns "7 10 12 14 17" ("[0, 1, 2, 3, 4]" |+ "[2 3 2]*4"),  
+                              ns "5 9 12 14 16" "[0,1,2,3,4,5]"] # m 5,
+      fast 2 $ cat [n "3" # m 1, (|+ n "6") $ nTake "conga" [0, 7, 12, 0, 7, 19, 0,  7]  # m 16, n "3" # m 1, n "3" # m 1 ] # ampTake "aa" [0.9, 0.8, 0.8] 
+      ]
+
+do
+ d6 silence
+ --d1 silence
+ -- hats
+ d1 $ (# jbswing) $ drumz $ (# n "0") $ slow 4 $ amp "1 ~@15 " # m 1  # jbswing
+ d2 $ (# jbswing ) $ drumz $ (# n "6!7 8") $ (|- ampTake "h" [0.85, 0.7]) $ amp "1 1 1 ~ 1 1 ~ <1 [ 1]>" # m 1
+ d7 $ (0.25 <~) $ slow 16 $ n "<12 14> <14 16>  < 19 [19 16]> < <16 21> [12 9]> " # m 6 
+
+do
+ d8 silence
+ d1 $ (# jbswing) $ drumz $ (# n "0") $ amp "1 ~ <~!7 1> 1 ~ ~ 1 <~ ~ 1 ~>" # m 1  # jbswing
+ d2 $ (# jbswing ) $ drumz $ (# n "6") $ (|- ampTake "h" [0.85, 0.7]) $ amp "1 1 1 ~ 1 1 ~ <1 [ 1]>" # m 1
+ d7 $ (0.25 <~) $ slow 16 $ n "19 21 <[28 24] [<28 28*2> 24 26 21]> <[26 <21 31>] [ 19 14 21 14]>" # m "[6, 7]" 
+
+do 
+  -- sax
+ d8 $ (# jbswing) $ n "<2!2 2@2> ~ 4 ~ ~ 7!2 ~ ~ 5 ~ ~ ~" # m 8
+-- yay good bass
+ d10 $ (# nudge (fast 8 jbswingp )) $ slow 4 $ cat [ n "2 ~@15 ~@16",
+                   n "4 ~@15 ~@12 [<[<0 0 0 7> 2 4 5] [~ 12 10 9 ]>]@4",
+                   n "7 ~@15 ~@16",
+                   n "2 ~@15 ~@8 [<[~] [ ~ -3 ~ -3] [~] [ ~ -3 0 -3] >]@8"]  # m 10
+
+d6 silence
+
+d8 silence
+
+solo 10
+
+-- snare alt
+
+d3 $ (# jbswing) $ n "~ 12 " # m 3
+
+d2 $ drumz $ (# jbswing) $ (0.125 <~) $   struct "1 ~ <~ ~ ~ t> ~   ~ ~ 1 ~   t ~ ~ <t ~>    1 ~ ~ <~ t>" $ n "9" # m 1  
+
+d2 silence
+

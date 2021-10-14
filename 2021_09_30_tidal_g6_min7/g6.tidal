@@ -1,0 +1,10 @@
+
+setcps(1/120*125)
+
+d1 $ bite 4 "0 2 4 2" $ n "0 .. 4" # m 4
+
+d1 $ slow 8 $ (|- n "24") $ n "0 .. 4 5 6" # m 4
+
+d1 $ drumz $ n "10 10 10 10" # m 1
+
+sock <- carabiner tidal 4 (1.25)

@@ -1,0 +1,209 @@
+
+
+ncat :: [(Time, Pattern a)] -> Pattern a
+ncat = seqPLoop . go 0
+  where
+    go _     []          = []
+    go t_acc ((t, p):ps) = (t_acc, t', p) : go t' ps
+      where
+        t' = t_acc + t
+
+
+
+
+d1 $ (# nudge (fast 4 "0 0.02")) $ fast 2 $ (|+ nTake "joe" [0, 3, 7, 3]) $ n (toScale [0, 2, 3, 5, 7, 8, 11] ("[0, 2, 4, 6]" +| "2 ~ ~  0 ~ ~ 3 ~ ") ) # m 1
+
+d1 $ (# nudge (fast 2 "0 0.02") )  $
+          --n (selectF "0.5 0.5" [(toScale [0, 2, 4, 5, 7, 8, 11]), (toScale [0, 2, 4, 5, 7, 9, 11])] (
+          n (toScale [0, 2, 4, 5, 7, 9, 11] (
+          n (  (
+            cat ["[0, 2, 4, 6]" +| "0 1 2 3 4",
+                 "[0, 2, 3, 5]" +| "3 5 4 2 1",
+                 "[-1, 1, 3, 5]" +| "2 1 1 2 1",
+                 "[-1, 1, 2, 4]" +| "3 2 1 3 2",
+                 "[-2, 0, 2, 4]" +| "1 2 2 2 1",
+                 "[-2, 0, 1, 3 ]" +| "2 1 1 2 2",
+                 "[-1, 1, 3, 5]" +| "1 3 2 1 3",
+                 "[-1, 1, 2, 4]" +| "3 1 3 1 2" ] |+ "[0 2 4 6]/8 ")) # m 1
+
+:t toScale [0, 2, 4, 5]
+
+d1 $ selectF "0.5 0.2 0.5 0.5 0.2 0.5 0.3" [(fast 2), (fast 5)] $ n "0 2 4 8" # m 1
+
+
+d1 $ slow 2 $ n (toScale [0, 2, 4, 7, 12, 14, 16, 19, 5, 11 ] ( "<0 -1 -2 -2 > 2 4 2 5 5 4 2 " )) # m 1
+
+d1 $ slow 2 $ n ( overlay "<<0!2 -3 > <-1!2 -5 > -7 -7> @7" (toScale [0, 2, 4, 7]  "~ 2 4 2 5 5 4 2 " )) # m 1
+
+listToPat [[0,4,7],[(-12),(-8),(-5)]]
+
+parseBP_E "[0,4,7][-12, -8, -5]"
+
+d1 $ n (flatpat "[0 2 4 5 ] [3 5 6 8]") # m 1
+
+selec
+
+let hmin = "0 2 3 5 7 8 11"
+
+
+let maj7 = ns "0 4 7 11"
+    min7 = ns "0 3 7 10"
+    dom7 = ns "0  4  7  10"
+    min7b5 = ns "0 3 6 10"
+    fabe = ns "0 4 6 11"
+    augMaj7 = ns "0 4 8 11"
+    minMaj7 = ns "0 3 7 11"
+    dimMaj7 = ns "0 3 6 11"
+    dim7 = ns "0 3 6 9"
+    rp = "[0,1,2,3]"
+    np x =  (|+ n 1)
+    nm x =  (|- n x)
+    tr4 x = parseBP_E "[0,1,2,3]" |+ x
+
+
+
+
+
+
+
+d1 $ ncat [(4, ns hmin "1 .. 12" # m 1), (1, ns hmin "0 4 2 2 3 5" # m 1) ]
+
+d2 $ (|+ n (slow 4 (choose [0, -1, -2, 1, 2])) ) $ (|+ n (slow 1 "0 <5!6 6>")) $ maj7 "[0,1,2,4] [-2, -1, 0, 2]" # m 1
+
+d2 $ (|+ n (slow 2 "0 <5!6 6>")) $ spread ($) [maj7, min7, dim7, dimMaj7] "[[0,1,2,4] [-2, -1, 0, 1]]/2" # m 1
+
+d2 $ (|+ n ( "0 <5>")) $ fastspread ($) [min7, dom7] "[[0,1,2,4] [-2, -1, 0, 1]]" # m 1
+
+d2 $  fastspread ($) [min7, min7, dom7, dom7] "[[0,1,2,4] [-2, -1, 0, 1]]" # m 1
+
+d2 $  fast 1 $ (|+ n "<0 -2 -4 -5 -7>") $  (|+ n "0 5") $  spread ($) [min7, dom7, maj7, min7b5] "[2,4, 5, 6] [0,1,2,4]" # m 1
+
+
+d1 $ (# nudge (fast 2 "0 0.02" ))$  struct "[t(3,8,2) t(5,8) t(3, 5) t(4,8)]/4" $ ns "0 2 3 5 7 9 11" ( "<[0,2,4,6] [0, 2, 3, 5]> " |+ "[0 2 4 3 5 2]/12"  ) # m 1
+
+d1 $ (# nudge (fast 2 "0 0.02" ))$  struct "[t(3,8,2) t(5,8) t(3, 5) t(4,8)]/4" $ ns "0 2 3 5 7 9 11" ( "<[0,2,4,6] [0, 2, 3, 5]> " |+ "[0 2 4 3 5 2]/12" |+ (cat ["2", "4", "8", "6"])  ) # m 1
+
+d1 $ (|+ n "[0 0 0 7!5]/32 ") $  struct "[t(7, 11) t(5,11)]/2" $ slow 2 $  cat [ 
+                 ns "0 2 4 5 7 9 11" ("[0, 2, 4, 6, 8]" |+ "[ 0 1 2 3]*4" |+  "<2 3 3>" ) ,
+                 ns "0 2 3 5 7 9 11" ("[0, 2, 4 , 6, 8]"  |+ "[4 3 2 1]*4" |+ "<2 1 3>")]  # m 1
+
+d1 $ (|+ n "[0 0 0 7!5]/32 ") $  struct "[t(7, 11) t(5,11)]/2" $ slow 2 $  cat [ 
+                 ns "0 2 4 5 7 9 11" ("[0, 2, 4, 6, 8]" |+ "[ 0 1 2 3]*4" |+  "<2 3 3>" ) ,
+                 ns "0 2 3 5 7 9 11" ("[0, 2, 4 , 6, 8]"  |+ "[4 3 2 1]*4" |+ "<2 1 3>")]  # m 1
+
+k
+
+
+
+
+d2 $ (# nudge (fast 4 "0.0 0.02") ) $ every 3 (rev) $   struct "[t(<8  8 7 8 5>,8) ]" $ cat [
+                np 1 $ augMaj7 "[0 .. < 10>]",
+                min7 "[0 .. <6 9>]",
+                np 2 $ dom7 "0 .. 8",
+                rev $ nm 2 $ maj7 "1 .. 9",
+                np 1 $ maj7 "[0 .. <5 8>]",
+                np "<5 2>" $  min7 "[0 .. <6 8>]",
+                np 2 $ dom7 "-1 .. 10",
+                nm 2 $ maj7 "2 .. 9"
+                ] # m 2
+
+
+do
+  let gtp = 4 
+  d3 $  (# nudge (fast 4 "0.0 0.02") ) $ struct "<t ~> <~t>  ~ ~  " $ cat [
+                np 1 $ augMaj7 $ (tr4 (-1) ) |+ gtp,
+                min7 $ tr4  0 |+ gtp,
+                np 2 $ dom7 $ tr (-1) |+ gtp,
+                rev $ nm 2 $ rootpos |+ gtp,
+                np 1 $ maj7 rootpos |+ gtp,
+                np "<5 2>" $  min7 rootpos |+ gtp,
+                np 2 $ dom7 rootpos |+ gtp,
+                nm 2 $ maj7 rootpos |+ gtp 
+                ] # m 3
+
+
+d4 $ # m 2
+
+d1 $ drumz  $ n "0 8 10 8 [0, 3] 8 10 8"# m 1 
+
+
+d1 $ cat [] # m 2
+
+
+
+ "1 2 3 4" |+ valTake "asdf" [2, 3] 
+
+parseBP_E "1 2 3 4" |+ 3 
+
+:t valTake
+
+:t nTake 
+
+(|- n 24) $ n " 0 0 0 0 " # m 10
+
+ns "2 4 5 6 7" "[0, 2, 4, 5]"
+
+
+d1 $ struct "t(5,8)" $ cat [augMaj7 "[0 .. <5 8>]"] # m 3
+
+
+d1 $ nTake "j" (patternToList  (augMaj7 $ tr4 4)) # 3
+
+d1 $ nTake "j" (patternToList  ("[0, 5, 7, 11]" $ tr4 4)) # 3
+
+patternToList  ("[0, 5, 7, 11]" $ tr4 4)
+
+"[0, 5, 7, 11]" $ tr4 4
+
+patternToList  ("[0, 5, 7, 11]" $ tr4 4
+
+patternToList  (augMaj7 $ tr4 4)
+
+patternToList (parseBP_E "1 5 5 4 3 2")
+
+d1 $ takeArp "a" [0, 4, 8, 11] 12 (sine) # m 3
+
+
+d1 $ n ( toScale (take 5 (cycle [0, 3, 7, 10]))  "0 1 2 3 4 5 6 7")  # m 3
+
+
+-- end!
+do
+  let fxn = (range (parseBP_E "15 15 15") 15 $  tri)
+  d1 $  fast "[4 2 3 2]/4" $ struct "t(5,8)" $ slow  4 $ cat [  
+        (|- n 2) $ takeArp "jahnny" (take 7 (cycle [0, 3, 7, 10])) 32 fxn,
+                   takeArp "jimmy" (take 6 (cycle [0, 3, 7, 10]))  16  fxn,
+        (|+ n 1) $ takeArp "johnny" (take 7 (cycle [0, 4, 7, 11])) 32 fxn,
+        (|+ n 3) $ takeArp "jihnny" (take 7 (cycle [0, 4, 7, 10])) 32 fxn
+        ]  # sound "midi" #  midichanTake "g" [1, 1,  1] 
+
+
+do
+  let fxn = (range (parseBP_E "7  2 4") 13 $  tri)
+  d1 $  fast "[4 2 3 2]/4" $ struct "t(5,8)" $ slow  4 $ cat [  
+        (|- n 2) $ takeArp "jahnny" (take 7 (cycle [0, 3, 7, 10])) 32 fxn,
+                   takeArp "jimmy" (take 6 (cycle [0, 3, 7, 10]))  16  fxn,
+        (|+ n 1) $ takeArp "johnny" (take 7 (cycle [0, 4, 7, 11])) 32 fxn,
+        (|+ n 3) $ takeArp "jihnny" (take 7 (cycle [0, 4, 7, 10])) 32 fxn ]  # sound "midi" #  midichanTake "g" [3, 2, 1, 2] 
+
+
+do
+  let fxn = (range (parseBP_E "0 7 4") 13 $  sine)
+  d1 $  fast "1.0" $ struct "t(<7 7 8 9 8!12>,13)" $ slow  4 $ cat [  
+        (|- n 4) $ takeArp "jihnny" (take 8 (cycle [7, 0, 4, 11])) 56 fxn,
+        (|- n 2) $ takeArp "jahnny" (take 9 (cycle [-5, 0, 3,  10])) 24 fxn,
+                   takeArp "jimmy" (take 6 (cycle [-5, 0, 3, 10]))  36  fxn,
+        (|+ n 1) $ takeArp "johnny" (take 7 (cycle [-5, 0, 4, 11])) 48 fxn
+        ]  # sound "midi" #  midichanTake "g" [3, 2,  1, 3] 
+
+d2 $ drumz $ n "0(3, 8)" # m 1
+
+
+d2 silence
+
+take 10 (cycle [0, 3, 7, 10])
+
+
+patternToList $ ( toScale [0, 4, 8, 11] "[0k]"
+
+augMaj7 $ tr 4

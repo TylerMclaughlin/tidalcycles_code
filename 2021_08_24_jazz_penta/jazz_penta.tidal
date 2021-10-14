@@ -1,0 +1,66 @@
+-- warm up
+d1 $ n  (toScale [0, 3, 7] ("[0 1 2 3 4 5 6]" +| "<2 3 5> -6 -9 6 -10 2 3 4" )) # m 2
+
+d1 $ n (toScale [0, 3, 7, 10] ("[0 2 5 3 2 4]")) # m 2
+
+d1 $ n (toScale )
+
+d1 $ n ( toScale (patternToList "<0 1 2> 2 5 <  8>") "0 1 2 3 4 5 6 7 8") # m 2
+
+d1 $ stack [
+    n ( toScale (patternToList "0 3 5 7") "0 1 2 3 4 5 6 7 8") # m 2,
+
+d2 $ (|+ n (slow 4 " 0@8 3@3 5@5") ) $ n "0 5 [{0 10 7 10}%<3 4 3>]@2" # m 1 
+
+-- nice
+
+d1 $ (|- n 5) $ (|- n "0 7") $ fast "8 12 4 3" $ takeArp "ya" [ 0, 4, 7, 11, 16] 64 (fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 ))) # m 4
+
+
+d1 $ (|- n 5) $ (|- n "0 7") $ fast "8 12 4 3" $ stack [
+    takeArp "ya" [ 0, 4, 7, 11] 64 (fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 ))) # m 4,
+    takeArp "yas" [ 0, 4, 7] 64 (fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 ))) # m "[ 2]/3", 
+    takeArp "yass" [ 0, 4, 7, 9] 64 (fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 ))) # m "[ 3]" 
+]  
+
+
+let sineFxn = fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 )) 
+
+d1 $ (|- n 5) $ (|- n "0 7") $ fast "8 12 4 3" $ stack [
+    takeArp "ya" [ 0, 4, 7, 11] 64 (fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 ))) # m 4,
+    takeArp "yas" [ 0, 4, 7] 64 (fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 ))) # m "[ 2]/3", 
+    takeArp "yass" [ 0, 4, 7, 9] 64 (fast 4 ( range 1 "[4 5]*2" (fast "2 4" sine + (range "6 3" 5  sine)/3 ))) # m "[ 3]" 
+]  
+
+d7 $ slow 4 $  cat [
+               n "-3(3,8) [ [-3 -3] ~] [2 ~ ~ 2*2] [ [2 2] [~ ~ 2 2]] " # nudge (fast 4 "0.0 0.02"),
+               n "-5(3,8) [ [-3 <-5 2>] ~] [0 ~ 0 [0 0]] [ [~ <0 <0 7>>] [~ ~ -1 2]] " # nudge (fast 4 "0.0 0.02")] # m 6 
+
+d8 $  slow 4 $ n "[0,4, 7] [0, 4, 7] [-2, 4, 5] [-2, 5, 7]" # m 7
+
+d8 silence
+
+d7 silence
+
+
+
+d2 $ drumz $ n "5 [1]" # m 5
+
+d2 silence
+
+d3 $ drumz $ n "0 8 0 <[0,8] 8 >" # m 5
+
+d3 $ drumz $ n "0 8 [0,3] <[0,8] 8 >" # m 5
+
+d3 $ drumz $  (# nTake "asdf" [4, 8, 4, 8, 4]) $ amp "~ 0.7 ~ 0.85 ~ 0.7 ~ ~  "  # m 5 # nudge (fast 4 "0 0.02")
+
+d3 silence
+
+patternToList (parseBP_E "0 2 <3 4> 2")
+
+d3 $ n "[0 7 12](3,8)" # m 1
+
+
+d1 $ every 4 (+| n "0 0 0 0") $  n "0 5 8 5" # m 1
+
+d1 $ # m 2

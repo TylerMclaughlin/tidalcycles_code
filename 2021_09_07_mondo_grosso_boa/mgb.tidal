@@ -1,0 +1,29 @@
+let toL p = patternToList (parseBP_E (p))
+
+do
+  let a = "18 16 18   6 4 6"
+      b = "6 8 9  11 13 16"
+      c = "10 11 13  11 9 6"
+      d = " 18 16 21  16 13 18 16 13 11 9 6 4 6 "
+      e = " 23 21 23  16 13 18 16 13 11 9 6 4 6 "
+  d1 $ struct "<[~ ~ t!3 ~ l!3 ~ t!6]!3  [~ ~ t!3 ~ t!10]>" $ nTake "boa" ( toL (intercalate " " [a, b, a, c, a, b, d,     a, b, a, c, a, b, e])    ]    )# m 1
+
+
+patternToList (parseBP_E  (  "1 2 3 4" ++ "5"))
+
+"1 2 3" ++ " 5"
+
+let xyz = "1 2 3 "
+    blt = "5 6 7"
+
+toL (xyz ++ blt)
+
+toL "<2 3 > 4 5"
+
+let x =  patternToList $ (0.55 <~) $ n "<2 3 > 4 5"
+
+intercalate " "  ["a 2 3 4" , "qwer asdf zxcv", "a s gw"]
+
+
+
+fmap (+ 2)  [2, 3]
