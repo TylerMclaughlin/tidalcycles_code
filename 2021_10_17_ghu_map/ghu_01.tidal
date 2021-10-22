@@ -1,7 +1,6 @@
 
 setcps(1/120*124/2)
 
-
 d1 $ drumz $ n "0 0 0 0" # m 1
 
 d7 $ ((1/17) <~) $ cat [ n "[2,5, 10 ]"] # mm 17
@@ -112,7 +111,7 @@ do
 do
    d5 silence
    d4 silence
-   d7 $ (|- n "[9 ]/16") $ stack [
+   d7 $ (|- n "[0 ]/16") $ stack [
         f1716 $  n "12" # m "21 "  # mm 23,
         f1716 $ slow 2 $ (|+ n 12) $ cat [ n "[0, 4, 7, 11, 14]"] # mm 22, 
         groove 4 "0 0.02" $ f1716 $ 
@@ -124,10 +123,12 @@ do
 
 d7 $ f1716 $ n "[2, 5, 14, 19]" # mm 22 
 
+d2 silence
+
 d1 $ drumz $ n "~ 8 10 8 " # m 2
 
 -- 0 to 70
-d9 $ hpfAll 0
+d9 $ hpfAll 60 
 
 
 do 
@@ -163,7 +164,7 @@ do
 -- 80 90 100 120+
 -- add 9 (the eleventh) to emin9
 do
- d9 $ lpf26 120 
+ d9 $ lpf26 127 
  d7 $ groove 4 "0 0.02" $ (|+ n ("0 7")) $ struct "t*4 t*8 t*8 ~" $ takeArp "emin7" [4,  7, 11, 14] 16 (range 0 8 sine) # mm 26
 
 
@@ -177,7 +178,7 @@ d6 $ groove 4 "0 0.02" $ struct "t(<7 8 7 9>, 16, <0 1 0 4>)" $ cat [n "[2, 5, 9
 
 
 do
-  let hpff = 90 
+  let hpff = 100 
   d9 $ stack [hpf1 hpff, hpf2 hpff]
 
 d5 $  groove 4 "0 0.02" $ cat [fast 2 $ n "2@3 -5 ~ ~ -3 ~ ",
@@ -190,11 +191,15 @@ d5 $  groove 4 "0 0.02" $ cat [fast 2 $ n "2@3 -5 ~ ~ -3 ~ ",
                                fast 2 $ n "4@3 -5 ~ ~ -2 <~1> "
                                ] # m 7
 
+-- 70 60 50 20 
+do
+ d9 $ hpf26 20
  d7 $ groove 4 "0 0.02" $ (|+ n ("0 7")) $ struct "t*4 t*8 t*8 ~" $ takeArp "emin7" [4,  7,9,  11, 14] 12 (range 0 10 sine) # mm 26
 
+-- hpf 0 40 
 do
-  let hpff = 00 
-  d9 $ stack [hpf1 hpff, hpf2 hpff]
+  let hpff = 40 
+  d9 $ stack [hpf1 hpff, hpf2 hpff, lpf26 100]
   d1 $ groove 8 "0 0.02" $ drumz $ fast 2 $ n "0 8 10 8 [0, 3] 8 10 8" # m 1
 
 
@@ -216,9 +221,12 @@ do
            (2, n "7 2 4 5   7 ~ 7 [~ 4] 2 9  2 9    7 2 7 1")] #  m 8
 
 
-d2 $ groove 4 "0 0.021" $ drumz $ fast 2 $ n "0 ~ 0 0 0 ~ 0 0" # m 1
+do
+ d9 $ hpfAll 30
+ d2 $ groove 4 "0 0.021" $ drumz $ fast 2 $ n "0 ~ 0 0 0 ~ 0 0" # m 1
 
 do
+  d9 $ hpfAll 0
   d1 $ groove 4 "0 0.021" $ drumz $ struct "~ t t t*2" $ nTake "dna" [8, 8, 11] # m 2
   d4 $ ncat [(2, struct "t ~ ~ ~   ~ t*2 t t*2" $ nT "m" 17 (tScale "5 9 12" "0 1 2 3 4 5 6")),
              (2, struct "t ~ ~ ~   ~ t t*2 ~" $ nT "m" 15 (tScale "4 7 11" "1 2 3 4 5 6"))] # mm 28 
@@ -257,24 +265,30 @@ do
 d5 $ n "0  ~ ~ 7 14" # m 9
 
 -- transition
+do
+ let hpff = 70
+ d9 $ stack [hpf29 hpff, hpf28 hpff, hpf1 hpff, hpf2 hpff ] 
+
 
 do
  hush
+ d9 $ hpfAll 0 
+
+do
  d5 $ ncat [ (6, n "0  ~ ~ <7 > 14"), (2, n "-2 ~ ~ 5 14") ] # m 9
  d6 $ ncat [( 6, n "[2, 4, 7, 11, 14 ]"), (2, n "[2, 5, 9, 12, 14]")] # mm 30 
 
 d7 $ ncat [ (1, n "14 14 12 12 [11 ~ ~ ~] "), (1, n "9"), (3, n "~"), (1, n "~ [~ ~ 7 9]" ), 
             (1, n "12 12 10 10 [9 ~ ]"), (1, n "7 <0~> ~ ~")] # mm 31
 
-
 do
  d1 $ drumz $ n "0 0 0 0 <3 [[3, 0] 0]>" # m 1
  d2 $ drumz $ groove 5 "0 0.0192" $  struct "[~ t]*5" $ nT "hhh" 6 "8 8 8 10 8 " # m 1
 
-
 d1 silence
 
 do
+  mute 7
   d1 $ drumz $ slow 2 $ n "0 [0,3] 0 [0,3] 0   [0, 3] 0 [0,3] 0 [0,3]" # m 1
   d3 $ drumz $ groove 5 "0 0.0192" $  struct "[t t t t ]*5" $ nT "hhh2" 6 "8 8 8 ~ 8 " # amp "[0.6 0.3 0.2 0.3]*5" # m 2
   d8 $ groove 5 "0 0.0192" $ fast 1 $ nT "g" 8 (tScale "2 4 7 9 12 9 7 4" "0 .. 8 ") # mm 32  
@@ -288,14 +302,21 @@ do
  d8 silence
  d6 $ groove 5 "0 0.0192" $  struct "[t t t t t ~ ~ ~]*<2 2 2 2 2 5> " $ ncat [( 6, n "[2, 4, 7, 11, 14 ]"), (2, n "[2, 5, 9, 12, 14]")] # mm 19 
 
+unmute 7
+
 do
   d5 silence
   d3 silence
   d7 silence
-  d8 $ groove 5 "0 0.0192" $ fast 2 $ nT "g" 8 (tScale "2 4 7 9 12 9 7 4" "0 .. 8 ") # mm 32  
+  d8 $ groove 5 "0 0.0192" $ fast "<1 2 1 1>" $ nT "g" 8 (tScale "2 4 7 9 12 9 7 4" "0 .. 8 ") # mm 32  
 
 --- transition hhpf
+-- 30 60
+d9 $ hpfAll 180 
+
+
 do
+  d9 $ hpfAll 0 
   d2 silence
   d6 silence
   d1 silence
@@ -323,7 +344,7 @@ do
    d5 silence
    d8 $ groove 4 "0 0.02" $ struct "0010 1010 1011 0110" $ takeArp "avril"  [-7, -5, 0, -2] 16 (range 1 4 $ sine) # m 15
 
-d8 $ groove 4 "0 0.02" $ fast "1 1 1 1"  $ struct "0010 1010 1011 0110" $ takeArp "avril2"  [-7, -5, 0, -2] 16 (range 0 8 $ sine) # m 15
+d8 $ groove 4 "0 0.02" $ fast "1 1 1 1" $ struct "0010 1010 1011 0110" $ takeArp "avril2"  [-7, -5, 0, -2] 16 (range 0 8 $ sine) # m 15
 
 do
   hush
@@ -342,7 +363,7 @@ d6 $ groove 4 " 0  0.015" $  slow 2 $ cat [
 do
  d8 silence 
  d7 $ groove 4 "0  0.015" $  
-   ncat [ (1,n "8 8 13 13 6 ~ 6 ~" ),  (1, n "8"),  (2, n "11 11 9 9  8 8 8 6  ")] #
+   ncat [ (1,n "8 8 13 13 6 ~ 6 ~" ), (1, n "8"), (2, n "11 11 9 9  8 8 8 6  ")] #
     mm "[19, 25]" #
     ampTake "melodii1" (patternToList "[0.6 0.5]!3 0.4 [0.6 0.48]!4")
 
@@ -355,9 +376,15 @@ do
       #  mm "[19, 25]" 
   d8 $ n (tScale "-9 -8 -4 -1 3" ("[~!5 [[4 3 2 1 0 1 2 3 4]*2]@3 ]/2" |+ "[[ 5] 3 4 2]/4 ") ) # mm 31 
 
-d1 $ groove 8 "0 0.015" $ drumz $ ncat [ (3,  n "0 0 10 ~ 3 4 10 ~   0 0 <10 8>  8 4 4 10 ~"),
-                                         (1, n "0 0 10 ~ 3 4 10 ~   0 0 8 8 3 4 10 ~")] 
-                   # amp "[0.6 0.4 0.5 0.4 0.6 0.2 0.5 0.4]*2" # m 1
+d9 $ hpf1 30
+
+d1 $ groove 8 "0 0.015" $ drumz $ 
+     ncat [ (3,
+     n "0 <~ 0> 10 ~ 3 4 10 ~   0 <0 ~ ~ 0> <10 8>  8 4 4 10 ~"),
+     (1, n "0 0 10 ~ 3 4 10 ~   0 0 8 8 3 4 10 ~")] 
+     # amp "[0.6 0.4 0.5 0.4 0.6 0.2 0.5 0.4]*2" # m 1
+
+d9 $ hpf1 0
 
 -- sub
 d3 $ (|- n 12) $ groove 4 " 0  0.015" $  slow 2 $ cat [
@@ -375,21 +402,29 @@ d2 $ groove4 $ drumz $ n "<8 10> 8 8 8  8  <10>  8  8" # amp "[<0.3 0.7> 0.2 0.4
 
 d2 $ groove4 $ drumz $ n "<8 > 8 8 8  8  < 11 14>  8  8" # amp "[<0.3 0.7> 0.2 0.4 0.17]*2" # m 2
 
+-- minor key
 
 do
   d3 silence
   d6 silence
   d5 $ groove4 $ n "0 ~ ~0 ~ ~ 0    ~ ~ ~ ~  ~ 2 0 -7" # amp "[0.6 0.45 0.55 0.5]*2" # legato "[1 0.8]!4"  # m 8
 
+d9 $ lpf21 60 
+
+-- lpf 60 up to 110 
 do
  d7 silence
  d8 silence
+ d9 $ lpf21 60 
  d6 $ (|+ n "0 [7 12] 0 7") $ groove4 $ n "[17 ~] 10 <14 17> <10 14> [17 ~] [10 14] ~ 10" # amp "[0.6 0.45 0.3 0.45]"  # mm 21
 
-d9 $ (|- n 2) $ groove 4 "0 0.02" $ struct "0010 1010 1011 0110" $ takeArp "avril"  [-7, -5, 0, -2] 16 (range 1 4 $ sine) # m 15
-
 do
- d9 silence
+ d8 $ lpf21 60 
+ d9 $ (|- n 2) $ groove 4 "0 0.02" $ struct "0010 1010 1011 0110" $ takeArp "avril"  [-7, -5, 0, -2] 16 (range 1 4 $ sine) # m 15
+
+-- 80
+do
+ d9 $ lpf21 100 
  d4 $ groove4 $ drumz $ n "[~ 10 ~ 10]*2" # amp "[0.6 0.55]*2" # m 1 
  d5 $ groove4 $ ncat [ (2, n "0 ~ ~0 ~ ~ 0 ~   ~!4  ~ 2 0 -7"),
                      (1, n " -2 ~ ~ -2 ~ ~ -2 ~   ~!5 0 2 -3"), 
@@ -400,9 +435,10 @@ do
           # amp "[0.6 0.45 0.55 0.5]*2" # legato "[1 0.8]!4"  # m 8
 
 
+-- change legato 0.1 -> 1.0 
 do
  d4 silence
- d6 $ groove4 $ cat [ n "12 10  12 10  <12 12*2> 10 12 10", n "[[15 ~ ~ 14 ~ ~ 17 ~]@2 14 12]"] # amp "[0.6 0.45 0.3 0.45]"  # mm 21
+ d6 $ groove4 $ cat [ n "12 10  12 10  <12 12*2> 10 12 10", n "[[15 ~ ~ 14 ~ ~ 17 ~]@2 14 12]"] # legato "[1.0 0.2 0.6 0.5]*4" # amp "[0.6 0.25 0.3 0.45]*4"  # mm 21
 
 -- change |+ to |-
 
@@ -421,18 +457,22 @@ setcps(1/120*132/2)
 
 d1 $ drumz $ ncat [(3,n "0 ~ 3 0 ~ 0 3 ~"), (1, n "0 ~ 3 0 ~ 0 [3,0] ~")]  # m 1
 
--- transition hpf
+
+d9 $ hpfAll 100
+
+-- bring hpf down 100 -> 0
 do
   hush
+  d9 $ hpfAll 00
   d1 $ drumz $ ncat [(3,n "0 ~ 3 0 ~ 0 3 ~"), (1, n "0 ~ 3 0 ~ 0 [3,0] ~")]  # m 1
   d2 $ groove 4 "0 0.0215" $ drumz $ n "8 ~ 8 8  8 ~ 8 8  8 ~ 8 8" # m 2
 
 
 d5 $ stack [
-      ncat [(1, n "[3, 10]"),                                                                                 
-           (1, n "[2,  9]"),                                                                                  
-           (1, n "[7,  14]"),                                                                                 
-           (0.5, n "[8,  15]"),                                                                               
+      ncat [(1, n "[3, 10]"),
+           (1, n "[2,  9]"),
+           (1, n "[7,  14]"),
+           (0.5, n "[8,  15]"),
            (0.5, n "[8,  14]*2")] # mm 17,
       ncat [(1, n "[ 7,  14]"),
            (1, n "[ 6,  12]"),
@@ -468,7 +508,6 @@ d4 $ cat [n "[[3 ~ 10@2 ] [2~  9@2 ] [7 14] [5 ~ ~ 12~  -2@3  ]]/4"] # m 12
 
 d6 $ groove 4 "0 0.0215" $ drumz $ n "~ 10 8 8  8 ~ 8 8  8 ~ 8 8" # m 1
 
-
 d8 $ (|+ n "{12 0 12 0}%5") $ groove 8 "0 0.0215" $  struct "[~ t t t t ~ t t   t*2 ~ ~ t*2 ~ ~]*2 " $ ncat [
          (1, takeArp "mmmm" [7, 10, 12 ] 16 (range (-4) 12 (abs sine * tri)) # mm "30 22"),
          (1, takeArp "mmmm2" [6, 12, 18] 16 (range 0 18 (sine * tri)) # mm "29 27"),
@@ -487,7 +526,7 @@ d8 $ groove 4 "0 0.0215" $ (0.125 <~) $ (|+ n "{0 12 0 12}%5") $
  d6 $ groove 4 "0 0.0215" $ drumz $ n "~ ~ 8 8  8 ~ 8 8  8 ~ 8 8  8 ~ 8 8" # m 1
 
 -- keep only chords
-solo 5
+unsolo 5
 
 let gr = groove 8 "0 0.0195"
 
@@ -517,6 +556,7 @@ d6 $ cat [n "9 0 5 0", n "7 0 3 0", n "7 -2 3 -2", n "7 -2 2 -2"] # mm 24
 
 d1 $ drumz $ n "0 ~ 5  ~ ~ 0 5 ~" # m 1 
 
+-- breaks
 do
  d2 $ groove 16 "0 0.02" $ drumz $ cat [
              n " 0 0 2 [0 2] [~ 2] [0 0] 2 ~",
@@ -539,7 +579,9 @@ do
            ] # amp "0.9" # m 10 
 
 
-d9 $ ncat [ (1, n "[10 8  5 3 1 -2 ~ ~ ]"), (3, n "~")] # amp "[0.4 0.1 0.2 0.18]*2" # m 15 
+do 
+ d8 $ lpfAll 127
+ d9 $ ncat [ (1, n "[10 8  5 3 1 -2 ~ ~ ]"), (3, n "~")] # amp "[0.4 0.1 0.2 0.18]*2" # m 15 
 
 d9 $ ncat [ (1, n "[10 8  5 3 1 -2 ~ ~ ]"), (1, n "~"), (1, n "~ ~ 1 ~  1 -2  ~  < ~ 3>   "), (1, n "~")] # amp "[0.4 0.1 0.2 0.18]*2" # m 15 
 
@@ -549,7 +591,8 @@ d9 $ slow 4 $ (|+ n 12) $ n "[0@3 9] [[10@3 <9 9 12 9> ]@2 [<7 7 10 7>]@6]@2 [<2
 
 d8 silence
 
-unmute 1
+-- mute then unmute
+mute 1
 
 
 do
@@ -562,7 +605,7 @@ d3 $ (|- amp "0.2") $ groove 8 "0 0.018" $ (|+ n "[0 12 0 12]*4") $
        cat [n "[4 9 11 12]",n "4 ", n "2 ", n "0" , n "0 [9 -3]" ] 
       # legato "[0.8 0.7 0.9 0.7]*4" # amp "[0.6 0.4 0.5 0.4]*4" # m 5 
 
-d5 $ slow 4 $ n "[11@4 12 9]/6" # mm 30
+d5 $ slow 4 $ n "[11@4 12 9]/6" -- glitchy # mm 30
 
 d6 $ (|- amp "0.2") $  groove 8 "0 0.018" $ ncat [ (1,n "[11 ~ ~ 9 [7 ~ 9 ~ ~ <11 9> ~ ~]@2 ~@2]"),
              (4,n "~")
@@ -689,7 +732,7 @@ do
            n "~", n "~", n "2 5 7 9 12 14 " # amp "0.55 ", n "17 14 [8 7 5 2]@2"] # m 15
 
 do
- d3 $ drumz $ struct "[t(9, 16) t(8, 16) t(3, 4)  t(9,12)]/4" $ nT "conga2" 5  "4 5 6 8" # amp "[0.5 0.4 0.3 0.2]*4"# m 3
+ d3 $ drumz $ struct "[t(9, 16) t(8, 16) t(3, 4)  t(9,12)]/4" $ nT "conga2" 5  "4 5 6 8" # amp "[0.5 0.4 0.3 0.2]*4" # m 3
  d2 $ (|- n "12 0 7 12 0 7 12") $ slow 2 $ struct "10000010100101011000101010010110" $ 
       cat [ nT "penta" 10 (tScale "11 14 16 18 21" "0 4 2 3 4 6 7 2 3 4") ] # mm 27 
 
@@ -761,14 +804,6 @@ do
  d2 $ drumz $ ncat [(4, n "~"), (4, n "15 15 15 15" # amp 0.3)] # m 1
  d4 $ ncat [(4, n "~@7 1"), (4, n "~")] # m 14
 
+d9 $ hpfAll 0
 
 d9 silence
-
-d5 $ n "" 
-
-
-d1 $ seqPLoop [(0, 6, drumz $ n "0(3,8)"), 
-               (4, 8, drumz $ n "8(5,16)")] # m 1 # hpf1 "00"
-
-d1 $ seqPLoop [(0, 6, drumz $ n "0(3,8)"), 
-               (4, 8, drumz $ n "8(5,16)")] # m 1 # hpf1 "00"
