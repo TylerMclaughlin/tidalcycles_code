@@ -1,0 +1,196 @@
+sock <- carabiner tidal 4 (0.58)
+
+
+let groov = groove 8 "0 0.02"
+
+d1 $ groov $ drumz $ struct "t(5,16)" $ nT "stochastic" 4  "0 8 10 8"  # m 13 
+
+
+d2 $ groov $ drumz $ struct "t(4,16)" $ nT "scholastic" 4  "0 8 10 8"  # m  1 
+
+d3 $ groov $ drumz $ struct "t(8,16)" $ nT "hats" 4  "8 10 8"  # m  4 
+
+unsolo 2
+
+d2 $ (|- n "0") $ drumz $ (0.0025 ~>) $  n "[0 0 3 ~   2.5 3 ~ ~]" # m 2
+
+-- start in D DORIAN
+
+d1 $ drumz $ n "0 8 8 10 ~  0 8 8 10 ~ 0 0" # m 4
+
+d1 $ drumz $ n "0 2 2 10 ~  0 2 8 10 ~ 0 0" # m 4
+
+d1 $ drumz $ n "0 11 8 10 ~  0 8 8 10 ~ 0 0" # m 2
+
+-- continue to C# phrygian 
+
+d1 $ drumz $ n "3 4 2 4" # m 2
+
+d1 $ drumz $ n " 1 3 4 2 4" # m 3
+
+
+d8 $ drumz $ (|+ n 8) $ n "1 3 4 2 4" # m 3
+
+d8 $ drumz $ (|+ n 8) $ n "1 3 4 2 4" # m 3
+
+do
+ hush
+ -- 7
+ d1 $ drumz $ n "1 1 1 3 4 2 4" # m 3
+
+d2 $ drumz $ n "{1 1 1 3 4 2 4}%7" # m 1
+
+let groov = groove 8 "0 0.02"
+
+
+
+d3 $ groov $  drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m 4
+
+--  yum woody garage
+d3 $ groov $  drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m "2 4"
+
+-- advanced garage
+d3 $ groov $  drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m "2 [4 <5  5  5 4 3>]"
+
+d3 $ groov $  drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m "2 [<5  5  5 4 3> 2]"
+
+d3 $ groov $  drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m "2 [<5  5  5 4 3> 2]"
+
+d3 $ groov $  drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m "2 4"
+
+
+d3 $ groov $  drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m "2 4"
+
+
+let groov = groove 8 "0 0.02"
+
+d3 $ groov $ drumz $ fast "2 4 4 2 4" $  n "[0 <8 10 8!2> 10 8]" # m 2
+
+
+
+do 
+ hush
+ d1 $ groov $ drumz $ n " [0 <8 [~]> <10 ~ 10> <10 8 2>]*4 " # m 8
+
+d1 $ groov $ drumz $ n " [0 <8 [~]> <10 ~ 10> <10 8 2>]*4 " # m 8
+
+let sg2 = groove 8 "0 0.019"
+
+d1 $ sg2 $ drumz $ n " [0 <8 [~]> <10 ~ 10> <10 8 2>]*4 " # m 2
+
+
+d1 $ sg2 $ drumz $ n " [0 <8 [~]> <10 ~ 10> <10 8 2>]*4 " # m 2
+
+-- fits over in C dorian, D phrygian.
+
+d2 $ drumz $ n "0 10 8" # m 14 
+
+d2 $ sg2 $ struct "[t t*t t t]*4" $ nT "chromo" 5  "0 5 2 3 5" # m 13
+
+do
+ d1 $ sg2 $ drumz $ n " [0 <8 [~]> <10 ~ 10> <10 8 2>]*4 " # m 2
+ d2 $ drumz $ n "0 10 8" # m 14 
+
+
+-- crazy kicks, crazy FM sounds
+
+d2 $ drumz $ n "0(7, 20) " # m "2 2  4 4 4 3"
+
+-- end in C DORIAN / C PHRYGIAN
+d1 $ drumz $ n "0"  # m 3
+
+--- war zone
+d1 $ drumz $ struct "t(3,8)" $ nT "mech" 5 "0 8 10 8 4 12 10" # m 3
+
+d1 $ drumz $ struct "t(3,8)" $ nT "mech" 5 "0 8 10 8 4 12 10 14 16" # m 3
+
+d1 $ drumz $ struct "t(3,8)" $ nT "mech" 5 "0 .. 16" # m 3
+
+d1 $ drumz $ struct "t(5, 17)" $ nT "mech" 5 "0 .. 16" # m 3
+
+d3 $ drumz $ n "[0,3] 0 0 0" # m 1
+
+-- desert $ m 4
+d2 $ drumz $ struct "t(9, 17)" $ nT "mech" 16 "0 .. 16" # m 4
+
+-- lots of tritones 
+d3 $ drumz $ struct "t(9, 17)" $ nT "mech" 16 "0 .. 32" # m 3
+
+d3 $ drumz $ fast 1 $ n "0 8 10 8  4 8 10 8"  # m 1
+
+d1 silence
+
+-- thirsty 
+
+d2 $ drumz $ struct "t(9, 17)" $ nT "mech" 16 "0 .. 16" # m 4
+
+d2 $ drumz $ struct "t(9, 17)" $ nT "mech" 16 "0 .. 16" # m 4
+
+d2 $ drumz $ struct "t(9, 17)" $ nT "mecha" 16 "0 .. 14" # m 4
+
+d2 $ drumz $ struct "t(9, 17)" $ nT "mecha" 16 "2 .. 16" # m 4
+
+d2 $ drumz $ struct "t(9, 17)" $ nT "mecha" 16 "2 .. 16" # m 5
+
+d2 $ drumz $ struct "t(9, 17)" $ nT "mecha" 16 "2 .. 16" # m 5
+
+d2 $ drumz $ struct "t(9, 17)" $ nT "edo" 16 "2 .. 16" # m 15 
+
+d2 silence
+
+d2 $ drumz $ struct "t(10, 15)" $ nT "edo" 16 "2 .. 16" # m 4 
+
+hush
+
+-- cyberpunk!
+d1 $ drumz $ struct "t(<10>, 15)" $ nT "edo" 16 "2 .. 16" # m 5 
+
+d2 silence
+
+-- cyberpunk!
+d2 $ drumz $ struct "t*15" $ nT "edo2" 16 "10 8 8" # m 1 
+
+d2 $ drumz $ struct "t*15" $ nT "edo2" 16 "10 8 8" # m 1 
+
+d3 $ drumz $ struct "t*15" $ nT "edo2" 16 "10 8 8" # m 1 
+
+d4 $ drumz $ struct "t*15" $ nT "edo2" 16 "10 8 8" # m 2 
+
+
+do
+ let p = "0 8 8 0 3"
+ d1 $ drumz $ stack [n p, (0.25 <~) $ fast 4 $ n p # amp 0.1, fast 3 $  n p # amp 0] # amp 0.2 # m 2
+
+-- C dorian 
+
+do
+ d1 $ drumz $ n "0 12 0" # amp "0" # m 5
+
+d1 $ drumz $ n "" # amp "0.5" # m 5
+
+d4 $ drumz $ n "0 8 12 8" # m 5
+
+let groof = groove 4 "0.0 0.02 0.004 0.02"
+
+-- dope af
+d4 $ groof $ drumz $ n "0 8 12 8" # m 5
+
+d6 silence
+
+-- totally danceable 
+d6 $ groof $ (|+ n 2) $ groof $  drumz $
+ n " ~ 8 8 ~    8 8 ~ 8   8 ~ 8 8  10 0 10 10" # m 4
+
+d4 $ groof $ drumz $ n "0 8 12 8" # m 5
+
+d4 $ groof $ drumz $ n "0 0 0 0" # m 2
+
+d6 $ groof $ (|+ n 2) $ groof $  drumz $
+
+-- idk about this.
+d4 $ drumz $ n "1 1 3 1 1 0 " # m 3
+
+d2 $ n "0 12 14" # amp "0.2" # m 2
+
+d2 $ n "0 12 14" # amp "0.2" # m 15 
+
