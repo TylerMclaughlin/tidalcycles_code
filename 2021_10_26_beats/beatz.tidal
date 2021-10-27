@@ -1,0 +1,187 @@
+
+setcps(132/120/2)
+
+ 
+do
+   d9 $ lpf9 127
+   unmute 9
+   unmute 8
+   unmute 7
+   unmute 6
+   unmute 5
+   unmute 4
+   unmute 3
+   unmute 2
+   unmute 1
+
+let groov = groove 2 "0 0.023 0.00 0.023  0 0.023 0.005 0.023"
+
+d1 $ groov $ drumz $ n "[<0 [0,3]> 10 8 10]*4" # m 5
+
+
+-- humanized hat groove
+d5 $ groov $  struct "~ t t ~  t t ~ t   t  ~ t ~  <~ t> <~ ~ ~ t> ~ t " $
+      nT "hh" 7 "8 8  9 8 9 8" # mm "17 18  " # amp "[0.5 0.3 0.4 0.1]*4"
+
+--  bass in 7/8
+do
+ d3 $ groov $ n "{ 0 ~ 6 ~ 0 ~ <~!7 ~> -3 ~ 3 ~ -3 ~ <~ ~ ~ ~ 0> }%16" # m 9
+ d2 $ groov $ drumz $ n "[<~ [~,3]> ~ 8 ~]*4" # m "3 7 3 7"
+
+
+-- main riff
+-- lpf the bass
+do
+ d9 $ lpf9 40
+ mute 1
+ d4 $ groov $ struct "{t ~ t t  ~ t t   t ~  t ~ ~ t ~ }%16" $
+      (|+ n  "{ 0 6 0 ~ ~ }%16") $ n "[0, 7, 11, 16, 19]" # m 12 
+
+
+do
+ mute 5
+ mute 2
+
+do
+   unmute 5
+   unmute 3
+   d9 $ lpf9 40
+   unmute 2
+   unmute 1
+
+
+d4 silence
+
+-- main chord riff!
+do
+ d4 $ groov $ struct "{t ~ <~ t> t  ~ t t   t ~  t ~ ~ t <~ ~ ~ t>}%16" $
+  (|+ n  "{ 0 6 0 ~ ~ }%16") $ n "[0, 7, 11, 16, 19]" # m 12 
+ d7 $ groov $ struct "{t ~ t t  ~ t t   t ~  t ~ ~ t ~ }%16" $
+     (|+ n  "{ 0 6 0 ~ ~ }%16") $ n "[ < 19>] " # m 14 
+
+mute 1
+
+unmute 1
+
+unmute 7
+
+d8 silence
+
+-- bass rhythm mallet
+do
+  mute 4
+  d8 $ groov $ struct "{t ~ t t  ~ t t   t ~  t ~ ~ t ~ }%16" $
+     (|+ n  "{ 6 0 6 ~ ~ }%16") $ n "[ <7 11>] " # m 15 
+  d9 $ groov $ (|+ n 28) $
+       n "{ ~ ~ 6 ~ 0 <~6> <~!7 ~>  ~ ~ 3 ~ -3 <3 ~> <~ ~ ~ ~ 6>  }%16" # m 16 
+
+
+solo 8
+
+unsolo 8
+
+--drumz
+d7 $ groov $ struct "{t ~ t t  ~ t t   t ~  t ~ ~ t ~ }%16" $
+     (|+ n  "{ 0 6 0 ~ ~ }%16") $ n "[ 19]" # m 15 
+
+
+do
+ mute 1
+ d4 $ groov $ struct "t(9, 16)" $ nT "riff" 8 "-3 0 3 6 8 10 11 12 " # mm 19
+ unmute 4
+
+do
+ solo 3
+ solo 4
+
+do
+ unmute 1
+ unsolo 3
+ unsolo 4
+
+
+
+
+
+-- main chord riff with clap variant
+do
+ mute 5
+ d2 $ groov $ drumz $ n "[<~ [~,3]> ~ 8 ~]*4" # m "7 7 7 "
+ d4 $ groov $ struct "{t ~ <~ t> t  ~ t t   t ~  t ~ ~ t <~ ~ ~ t>}%16" $
+  (|+ n  "{ 0 6 0 <~ ~ ~ 6> ~ }%16") $ n "[0, 7, 11, 16, 19]" # m 12 
+
+ 
+do
+ mute 5
+ mute 3  
+ -- less clap
+ d1 $ groov $ drumz $ n "[<0 [0,~]> 10 8 10]*4" # m 5
+
+do
+ unmute 5
+ d5 $ groov $ struct "t(9, 16)" $ nT "riff" 8 "-3 0 3 6 8 10 11 12 " # mm 19
+
+unmute 5
+
+do
+ d1 $ groov $ drumz $ n "[<0 [0,3]> 10 8 10]*4" # m 5
+ --d4 silence
+
+do
+ d1 $ groov $ drumz $ n "[<0 ~ ~ ~> 10 8 10]*4" # m 5
+ unmute 3
+ d4 $ groov $ struct "t(9, 16)" $ nT "riff" 8 "-3 0 3 6 8 10 11 12 " # mm 19
+ d5 $ groov $  struct "~ t t ~  t t ~ t   t  ~ t ~  <~ t> <~ ~ ~ t> ~ t " $
+      nT "hh" 7 "8 8  9 8 9 8" # mm "17 18  " # amp "[0.5 0.3 0.4 0.1]*4"
+
+
+hush
+
+do
+ d1 $ groov $ drumz $ n "[<0 [0,3]> 10 8 10]*4" # m 5
+ d3 $ groov $ n "{ 0 ~ 6 ~ 0 ~ <~!7 ~> -3 ~ 3 ~ -3 ~ <~ ~ ~ ~ 0> }%16" # m 9
+ d5 $ groov $ struct "t(9, 16)" $ nT "riff" 8 "-3 0 3 6 8 10 11 12 " # mm 19
+ d4 $ groov $ struct "t(9, 16)" $ nT "riff" 8 "-3 0 3 6 8 10 11 12 " # mm 19
+ d6 $ groov $  struct "~ t t ~  t t ~ t   t  ~ t ~  <~ t> <~ ~ ~ t> ~ t " $
+      nT "hh" 7 "8 8  9 8 9 8" # mm "17 18  " # amp "[0.5 0.3 0.4 0.1]*4"
+ d8 $ groov $ struct "{t ~ t t  ~ t t   t ~  t ~ ~ t ~ }%16" $
+    (|+ n  "{ 6 0 6 ~ ~ }%16") $ n "[ <7 11>] " # m 15 
+ d9 $ groov $ (|+ n 28) $
+       n "{ ~ ~ 6 ~ 0 <~6> <~!7 ~>  ~ ~ 3 ~ -3 <3 ~> <~ ~ ~ ~ 6>  }%16" # m 16 
+
+solo 3
+
+do
+ unsolo 3
+ d1 $ groov $ drumz $ n "[<0 [0,3]> 10 8 10]*4" # m 5
+ d2 $ groov $ drumz $ n "[<~ [~,3]> <~!4 ~ ~ 8  8> 8 ~]*4" # m "3 7 3 7"
+
+
+unsolo 8
+
+unmute 8
+unmute 8
+
+unmute 9
+
+
+solo 3
+
+do
+ unsolo 3
+ d1 $ groov $ drumz $ n "[<0 [0,3]> 10 8 10]*4" # m 5
+ d2 $ groov $ drumz $ n "[<~ [~,3]> <~!4 ~ ~ 8  8> 8 ~]*4" # m "3 7 3 7"
+
+do
+ solo 4  
+ solo 8  
+ solo 7  
+
+unmute 3 
+
+unmute 1
+
+
+do
+ hush
+ unsolo 4
