@@ -1,9 +1,5 @@
 
-
 setcps(1/120*132/2)  
-
-d9 $ hpfAll 0
-
 
 d8 $ (|- n "12") $ fast 4 $ struct "t(<5 3 7 3>,8)" $ nT "love you" 16 (tScale "0 2 4 7 9 11 " (tScale  "-8 -2 0 4 3"  (tScale (segtp "14 15 19" (range 0 9 sine*tri)) "1 4 1 3 2  5 6" ))) # mm  "22" 
 
@@ -17,29 +13,29 @@ do
      (tScale  "-8 -3 0 3 2"  (tScale (segtp "14 15 19" (range 0 9 sine*tri)) "1 4 2 3 4  5 6" ))) ),
      (1, fast 4 $ struct "t(<5 3 7 3>,8)" $
      nT "love you" 16 (tScale "0 2 4 7 9 11 "
-     (tScale  "-7 -3 -1 3 2"  (tScale (segtp "14 15 19" (range 0 9 sine*tri)) "1 4 1 3 2  5 6" ))) ),
+     (tScale  "-7 -3 -1 3 2"  (tScale (segtp "14 15 29" (range 0 9 sine*tri)) "1 4 1 3 2  5 6" ))) ),
      (1, fast 4 $ struct "t(<5 3 7 3>,8)" $
      nT "love you too" 16 (tScale "0 2 4 7 9 11 "
-     (tScale  "-7 -4 -1 3 1"  (tScale (segtp "14 15 19" (range 0 9 sine*tri)) "1 4 2 3 4  5 6" ))) ) 
+     (tScale  "-7 -4 -1 3 1"  (tScale (segtp "14 12 29" (range 0 9 sine*tri)) "1 4 2 3 4  5 6" ))) ) 
      ] # mm  "22" 
 
 do
- d1 $ drumz $ n "0 0 0 [0 <0*1 0 0 0 0*3>]" # m 2
+ d1 $ drumz $ n "0 0 0 [0 0]" # m 2
  d3 $ n (tScale "0 2 4 7 9 11" " 0 <2 2 2 [2 9]> 2 5 2 <5 6>") # m 9
 
-d4 $ drumz $ cat [n "~ 3 " # m 2,  n "~ ~ ~ ~ 6 6 7 6" # m 5]
+d4 $ drumz $ cat [n "~ <3 3*2 3*1 3>" # m 2,  n "~ ~ ~ ~ 6 6 7 6" # m 5]
 
 d4 silence
 
 do
-  d9 $ lpf21 115 
+  d9 $ lpf21 80 
   d7 $ n (tScale "0 2 4 7 9 11" (" 0 <2 2 2 [2 9]> 2 5 2 <5 6>" |+ "2 <5 5 4 5>"))  # mm 21  
 
 d7 silence
 
 hush
 
-d9 $ hpfAll 98 
+d9 $ hpfAll 90 
 
 do 
  hush
@@ -58,12 +54,13 @@ do
  d3 $ drumz $ struct "~ ~ t ~ ~  t ~ ~ t ~ " $ n "2" # amp "[0.4 0.2]*5" # m 2
 
 do
- d5 $ (|- n 12) $ struct "{t t t t ~ }%10" $ n (tScale "0 1 3 5 7 8 10" $ "<[ 4] [ 6] [4] [2]>" |+ "-2 5 3" |+ 5) # m 6 
+ d5 $ (|- n 12) $ struct "{t t t t t }%10" $ n (tScale "0 1 3 5 7 8 10" $ "<[ 4] [ 6] [4] [2]>" |+ "-2 5 3" |+ 5) # m 6 
  d8 $ struct "t(7, 10)" $ n (tScale "0 1 3 5 7 8 10" $ "<[ 4] [ 6]>" |+ "0 5 3" |+ 5) # m 12 
 
-d9 $ hpfAll 00
+d9 $ hpfAll  47
 
-d9 $ lpfAll 90 
+
+d9 $ lpfAll  100 
 
 -- 6
 do
@@ -88,33 +85,34 @@ do
 
 -- 7
 do
- d9 $ lpf14 80
+ d9 $ lpf14 90
  d5 $ hpfAll 0
  d3 silence
  d1 silence
  d2 $ drumz $ n "[~ <10 ~ ~>]*7" # m 2
  d8 $ struct "t(6, 14)" $ n (tScale "0 1 3 5 7 8 10" $ "<[-1 ] [ 2] [-1] [4] >" |+ "0 5 3 4" |+ 5) # m 14 
- d7 $ struct "t(5, 14)" $ n (tScale "0 1 3 5 7 8 10" $ "<[-2, 2, 5] [0, 2, 5]>" |+ "0 5 4") # m 13 
+ --d7 $ struct "t(5, 14)" $ n (tScale "0 1 3 5 7 8 10" $ "<[-2, 2, 5] [0, 2, 5]>" |+ "0 5 4") # m 13 
 
 do
-  d3 $ drumz $ struct "~ ~ t ~ ~ t ~  ~ ~ ~ t ~ ~ ~" $ n "2" # amp "[0.4 0.2]*5" # m 2
-  d1 $ drumz $ n "0 8 ~  8 ~ ~ ~  [0, 3] 8 ~ 8 ~ ~ ~ " # m 2
+  d3 $ drumz $ struct "~ ~ t ~ ~ ~ ~  ~ ~ ~ t ~ ~ ~" $ n "2" # amp "[0.4 0.2]*5" # m 2
+  d1 $ drumz $ n "0 8 ~  0 ~ ~ ~  [0, 3] 8 ~ 8 ~ ~ ~ " # m 2
   d5 $ (|- n 12) $ struct "{t ~ t ~ ~ }%14" $ n (tScale "0 1 3 5 7 8 10" $ "<[ 4] [ 6] [4] [2]>" |+ "-2 5 3" |+ 5) # m 7 
 
 let gr = groove 4 "0 0.02"
 
+
+d9 $ hpfAll 50 
+
 do
  d5 silence
- d1 silence
- d2 silence
  d3 silence
  d8 $ gr $ struct "t(9, 16)" $ n (tScale "0 1 3 5 7 8 10" $ "<[ 3] [1] [4] >" |+ "6 4 5 3" |+ 5) # legato "0.9" # m 14 
  d7 $ gr $ struct "t(5, 16)" $ n (tScale "0 1 3 5 7 8 10" $ "<[5, 2, 5] [0, 2, 5]>" |+ "6 2 5 5") # legato "0.8" # m 12 
 
 do
-  d2 $ gr $ drumz $ n "[~ <10 ~ ~>]*8" # m 1
-  d3 $ gr $ drumz $ struct "~ ~ t ~ ~ t t ~  ~ ~ ~ t ~ ~ t ~" $ n "2" # amp "[0.4 0.2]*5" # m 2
-  d8 $ gr $ struct "t(9, 17)" $ n (tScale "0 1 3 5 7 8 12" $ "<[ <3 5>] [<1 3>] [4] >" |+ "6 4 5 3" |+ 5) # legato "0.9" # m 14 
+  d2 $ gr $ drumz $ n "[~ <10 ~ ~>]*8" # m 2
+  d3 $ gr $ drumz $ struct "~ ~ t ~ ~ t t ~  ~ ~ ~ t ~ ~ t ~" $ n "6" # amp "[0.4 0.2]*5" # m 2
+  d8 $ gr $ struct "t(9, 16)" $ n (tScale "0 1 3 5 7 8 10" $ "<[ <3 5>] [<1 3>] [4] >" |+ "6 4 5 3" |+ 5) # legato "0.9" # m 14 
   d1 $ gr $ drumz $ n "0 8 ~  8 ~ ~ ~ 8  [0, 3] 8 ~ 8 ~ ~ ~ ~ " # m 2
   d5 $ gr $ (|- n 12) $ struct "{t ~ t ~ t }%16" $ n (tScale "0 1 3 5 7 8 10" $ "<[ 6] 3 6 3 8 5 6 3>" |+ "5 3 1" |+ 3) # m 7 
 
@@ -127,6 +125,8 @@ do
 do
   d5 $ n "[[1, 5, 8, 12]@3 [3, 7, 10, 3]]/4" # m 13
 
+d9 $ lpfAll 127 
+
 d7 $ gr $ struct "t(5, 16)" $ n (tScale "0 1 3 5 7 8 10" $ "<[5, 2, 5] [0, 2, 5]>" |+ "6 2 5 5") # legato "0.8" # m 14 
 
 d6 $ gr $ struct "<t(5, 16) t(5, 16, 4)>" $  n "1 <3@3 5>"  # m 7 
@@ -136,19 +136,24 @@ do
 
 do
  d6 $ gr $ struct "<t(5, 16) >" $  n "1 <3@3 5>"  # m 7 
- d2 $ gr $ drumz $ struct "t(<5 7>,16)" $ nT "conga" 12 "8 2 6 1" # m 3
+ d2 $ gr $ drumz $ struct "t(<5 7>,16)" $ nT "thanks again github universe 2021" 12 "8 2 6 1" # m 3
  d7 $ gr $ struct "<t(5, 16) t(5, 16, 4)>" $  n "[5, 8, 12, 15, 17]"  # m 16 
  d8 $ n "0" # mm 25 
 
 
-d1 $ gr $ drumz $ n "0 0 <0 [0 0]> 0" # m 1
+d1 $ gr $ drumz $ n "0 0 0 0" # m 1
 
 let groov = groove 8 "0 0.02" 
 
-d2 $ groov $ drumz $ struct "t(<5 7>,16)" $ nT "707" 12 "2 3 4 5" # m 3
+solo 7
+
+do
+ unsolo 7
+ d2 $ groov $ drumz $ struct "t(<5 7>,16)" $ nT "707" 12 "2 3 4 5" # m 3
 
 d3 $ groov $ drumz $ n "8*8" # amp "[0.7 0.2 0.5 0.2]*2" # m 2
 
+d9 $ lpf3 120
 
 d7 $ groov $ struct "<t(5, 16) t(5, 16, 4)>" $ 
  n (tScale "0 2 3 5 7 8 10" "[5, 7, 9, 11] <[4, 6, 8, 10]!7 [9, 11, 13, 15]>")
@@ -183,11 +188,15 @@ do
  d8 $ groov  $ n (tScale "0 2 3 5 7 8 10 " ("[-3, 1, 3, 7] " |- "1")) # legato "2" # mm 17 
 
 -- drum solo
-d7 $ groov $ nT "conga" # m 5
+d7 $ groov $ struct "t(9,8)"$ drumz $ nT "conga" 5 "0 1 5 2 8" # m "1 3 4 5" 
+
+d7 silence
 
 -- new bass, wait a bit
 d6 $ groov  $ struct "t ~~ t ~~ t ~ ~~ t ~ t ~~~" $ nT "basss" 2 (tScale "0 2 3 5 7 8 10 " ("[1 5 1 5] " |- "1")) # legato "2" # m 6 
-d6 $ groov  $ struct "t ~~ t ~<~t> t ~ <t~>~ t ~ t ~~~" $ nT "basss" 4 (tScale "0 2 3 5 7 8 10 " ("[1 5 1 3] " |- "1")) # legato "2" # m 6 
+
+d6 $ groov  $ struct "t ~~ t ~<~t> t ~ <t~>~ t ~ t ~~~" $ nT "basss" 4 (tScale "0 2 3 5 7 8 10 " ("[1 5 1 3] " |- "1")) # legato "2" 
+# amp 0.8 # m 6 
 
 do
  d8 $ groov  $ n (tScale "0 2 3 5 7 8 10 " ("[-3, 1, 3, 7] " |- "1" |-  "[0 1 2 3]/8")) # legato "2" # m 14 
@@ -204,8 +213,11 @@ do
   
 let cdorian = "0 2 3 5 7 9 11" 
 
+d9 $ hpfAll 90
+
 do
  setcps(1/120*158/2)  
+ d9 $ hpfAll 0
  d2 $ gr $ drumz $ struct "t(<5 7>,8)" $ nT "606" 12 "8 2 6 1" # m 2
  d8 $ gr $ n (tScale cdorian "-3 -1 1 3") # m 12  
  d6 $ gr $ struct "t(3, 8)" $ n "-5 -10 -6 <~ ~ > " # m 8
@@ -238,8 +250,10 @@ do
 do
  d6 $ gr $ struct "t(3, 8)" $ n "2 4 4 <~ ~ > " # m 8
 
+d9 $ hpfAll 75 
+
 do
-  hush
+  d9 $ hpfAll 00 
   d5 $ n "[2, 4, 6, 9, 13]" # mm 21 
   d6 $ slow 2 $ struct "0010101011010010101011010010" $ nT "blip" 12 "13 14 13  11 13 11  9 11 9  6 9 6" # mm 21 
 
@@ -258,11 +272,11 @@ d3 $ n "4 2 9 11 6 4 13 14" # m 5
 d4 $ fix (|+ n "[0]") (n "9 13") $ n "4 2 9 11 6 4 13 14" # m 6
 
 -- play with fix
-d4 $ fix (|+ n 12) (n "9 13") $ n "4 2 9 11 6 4 13 14" # m 6
+d4 $ fix (|- n "12 7") (n "9 4 13 6") $ n "4 2 9 11 6 4 13 14" # m 6
 
 -- bring 909 reggaeton beat in
 do
- d9 $ hpfAll 0
+ d9 $ hpfAll 00
  d1 $ groov $ drumz $ n "[0, 8] 8 8 3 0 ~ 3 ~" # m "[1 2]"
 
 -- add new bass
@@ -283,7 +297,7 @@ do
             (1, n "[-5, -3, -1, 2, 6]"), (1, n "[-5, -3, -1, 2, [6 4 2 ]]") ] # legato "0.7" #  m "12 14"
 
 
-d7 $ slow (140/4) $ stack [
+d7 $ fast 4 $ (|+ n 12) $ slow (140/4) $ stack [
     n "~!48 d5 ~!27 d5 ~!27 e5 ~!213 e5 ~!23 e5 ~!61 d5 ~!9 e5 ~!25 e5 ~!21 e5 ~!95 e5 ~!25 e5 ~!7 fs5 ~!7 g5 ~!215 fs5 ~!15 a5 ~!39 a5 ~!27 b5 ~!43 e5 ~!7 fs5 ~!27 cs5 ~!11 e5 ~!11 d5 ~!115 e5 ~!19 a4 ~!47 a4 ~!5 b4 ~!25 fs5 ~!67 a4 ~!3 b4 ~!15 e5 ~!11 fs5 ~!31 fs5 ~!131 fs5 ~!11 e5 ~!31 d6 ~!13 e6 ~!69 cs6 ~!15 d6 ~!11 e6 ~!15 fs5 ~!77 e5 ~!25 b5 ~!57 a5 ~!17 b5 ~!11 cs6 ~!15 d5 ~!61 cs5 ~!65 d5 ~!17 a4 ~!9 b4 ~!13 a5 ~!61 b5 ~!63 a5 ~!23 fs5 ~!11 cs6 ~!11 fs5 ~!7 e5 ~!15 cs5 ~!23 e5 ~!19 cs5 ~!9 a4 ~!11 fs5 ~!17 a5 ~!19 fs5 ~!51 a5 ~!15 e5 ~!13 e5 ~!41 e6 ~!15 b5 ~!27 cs6 ~!27 a5 ~!11 b5 ~!7 cs6 ~!3 b5 ~!15 e5 ~!83 fs5 ~!11 fs5 ~!11 e5 ~!35 g5 ~!13 fs5 ~!9 g5 ~!11 e5 ~!13 fs5 ~!45 fs5 ~!11 fs5 ~!7 e5 ~!15 g5 ~!7 b5 ~!7 g5 ~!9 fs5 ~!9 e5 ~!7 fs5 ~!17 g5 ~!21 g5 ~!11 e5 ~!7 fs5 ~!43 e5 ~!7 fs5 ~!15 fs5 ~!7 e5 ~!13 g5 ~!9 b5 ~!13 fs5 ~!5 e5 ~!3 fs5 ~!3 g5 ~!7 a5 ~!7 g5 ~!11 e5 ~!7 d5 ~!11 e5 ~!135 e5 ~!95",
     n "~!90 e5 ~!239 d5 ~!121 d5 ~!119 d5 ~!35 a5 ~!237 fs5 ~!117 e5 ~!163 cs5 ~!43 b4 ~!35 e5 ~!123 a5 ~!179 cs6 ~!41 b5 ~!445 b4 ~!55 fs5 ~!115 e5 ~!71 b4 ~!71 b5 ~!91 fs5 ~!19 cs5 ~!131 fs5 ~!27 fs5 ~!71 g5 ~!35 fs5 ~!45 fs5 ~!47 g5 ~!25 g5 ~!23 fs5 ~!83 fs5 ~!11 fs5 ~!75 e5 ~!19 fs5 ~!27 g5 ~!39 fs5 ~!259",
     n "~!1128 d5 ~!2231"
@@ -332,9 +346,9 @@ do
       tScale "3 5 7 9" " 0 .. 7",
       tScale "2 4 6 8" " 0 .. 7" ])) # m "14 13" 
 
--- add 5 
+d9 $ lpf24 110
 
-d5 $ (|+ n "{ 12 0 12}%8") $ n "3 [1 3 1 0] 1 0 10 0" # mm 24 
+d5 $ (|+ n "{ 12  5 0 12}%8") $ n "3 [1 3 1 0] 1 0 10 0" # mm 24 
 
 d1 silence
 
@@ -352,17 +366,22 @@ do
  d4 silence
  d5 $ groov $ struct "~ t t  ~ t t ~ ~" $ n "[3 5 6 8 10 8 6 13]/8" # amp 0.7 # mm 23 
 
-d7 $ n "[15 13 5 3  8 8 6 13]/8" # mm 21 
+do
+ d7 $ n "[15 13 5 3  8 8 6 13]/8" # mm 21 
+ d8 silence
 
-d8 $ n "[15 13 5 3  8 8 6 13]" # mm 20 
+do
+ d7 silence
+ d8 $ n "[15 13 5 3  8 8 6 13]" # mm 20 
 
 
 do
- d6 $ stack [hpf9 40, lpf8 80 ]
+ d7 silence
+ d6 $ stack [hpf9 40, lpf8 100 ]
  d1 $ drumz $  n "0 0 0 [0 0]" # m "3"
  d4 $ drumz $ struct "[t t t t*2]*2" $ n "3 5 6 8 10 8 6 5" # m 8
  d9 $ n (tScale "1 3 5 6 8 10 12" "[[2, 4, 6, 8] [3, 5, 7, 9][4, 6, 8, 10] [3, 5, 7, 9] [3, 5, 6, 8] [2, 4, 5, 7] [1, 3, 4, 6 ] [1, 3, 5, 7]]/8") # m 14
 
 d8 silence
 
-d6 $ hpfAll 0 
+d6 $ hpfAll 95 

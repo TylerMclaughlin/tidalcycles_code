@@ -100,6 +100,7 @@ let drumz = (|- n 24)
     -- crazy pattern to list stuff for nTake
     patternToList pat = map value $ sortOn whole $ queryArc pat (Arc 0 1)
     scaleSeg s n func = toScale s $ fromIntegral <$> round <$> segment n (func)
+    segtp n func = fromIntegral <$> round <$> segment n (func)
     -- arp list from a segmented continuous fxn mapped to a scale
     arpCL s n func = patternToList $ scaleSeg s n func 
     takeArp name s n func = nTake name (arpCL s n func)
