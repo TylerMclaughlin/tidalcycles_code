@@ -1,4 +1,9 @@
--- evaluate custom functions in ../toolz.tidal
+-- code for "Live Code Volume 1"
+
+-- first evaluate custom functions in ../toolz.tidal
+
+-- this code creates every note and beat in the album, sending MIDI to Ableton Live
+
 setcps(125/120/2)
 
 let sub = m 3
