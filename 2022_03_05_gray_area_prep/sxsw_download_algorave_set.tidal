@@ -1,4 +1,4 @@
-
+-- evaluate custom functions in ../toolz.tidal
 setcps(125/120/2)
 
 let sub = m 3
