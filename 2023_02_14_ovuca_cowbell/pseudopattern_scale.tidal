@@ -1,0 +1,18 @@
+do
+  let p = "0 1 2 3"
+  d1 $ cat [ n (toScale [-3,1,4] p), n (toScale [-6,-3,2] p), n (toScale [-6,-3, 2] p), n (toScale [-5,-1,2] p)]  # m 1
+
+
+do
+  let p = "0 1 2 3"
+  d1 $ n (cat [ toScale [-3,1,4] p, toScale [-6,-3,2] p, toScale [-6,-3, 2] p, toScale [-5,-1,2] p])  # m 1
+
+do
+  let p = "0 1 2 3"
+      q ch0rd = toScale ch0rd p
+  d1 $ cat [ n q [-3,1,4] p, n q [-6,-3,2] p, n q [-6,-3, 2] p, n q [-5,-1,2] p]  # m 1
+
+d1 $ n (cat [toScale [0,2,3] "0", toScale [-4, 3, 13] "23", "13"]) # m 1
+
+
+:t n "3 2 4 3"
