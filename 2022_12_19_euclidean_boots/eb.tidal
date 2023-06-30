@@ -1,0 +1,26 @@
+setcps(65/120/2)
+
+d1 $ drumz $ fast 2 $
+     stack[ struct "t(2,4)" $ n "0",
+            struct "t(1,4)"$ n "3",
+            struct "t(5,8)" $ n "10",
+            struct (inv "t(5,8)") $ n "9",
+            struct "t(9,16)" $ n "13",
+            struct (inv "t(9,16)") $ n "14"
+                               ] # m 1
+
+-- drumz
+d1 $ drumz $ groove 4 "0 0.001 0.02 0.001" $ fast 2 $ 
+     stack[ struct "t(2,4)" $ n "0" # m 1,
+            struct "t(1,4)"$ n "2" # m 1,
+            struct "t(3,8)" $ n "4" # m 1,
+            struct (inv "t(3,8)") $ nT "hh" 4 "5 4" # m 2,
+            struct "t(9,16)" $ nT "rim" 4 "6 7" # m 1 #
+            amp (fast "17 19 33 21" $ range 0.2 0.5 $ sine),
+            struct (inv "t(9,16)") $ n "7" # m 2 
+            ] # amp (fast "32 43 41 19" $ range 0.3 0.55 $ sine)
+
+-- bass 
+d2 $ (|- n 0) $ fast 4 $ struct "t(3, 4, 1)" $ nT "bass" 4 "2 ~ 12 2 " # m 3
+
+d3 $ fast 4 $ slow 3 $  n "[-2, 0, 2, 5, 9]@4 << ~ [-2, 0, 2, 5, 9]> ~> ~!3" # amp "0.5 0.3!2" # legato "0.1" # m 4

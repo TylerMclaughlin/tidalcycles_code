@@ -1,0 +1,107 @@
+setcps(130/120/2)
+
+d1 $ drumz $ n "0 0 0 0" # m 1 
+
+let gp = groove 4 (segment 4 (fast 8 $ range 0 0.01 $ sine ))
+
+let gp = groove 1 $ segment 16 (fast 8 $ range 0 1 $ sine )
+
+
+do
+  --let gp16 = groove 1 $ segment 16 ((0.25 <~) . fast "7 4 2 1" $ range 0 0.04 $ sine )
+  let gp16 = groove 1 $ segment 16 ((0.25 <~) . fast "1" $ range 0 0.04 $ sine )
+      gp2 = groove 1 $ segment 16 (((1/4) <~) . fast "<4 8> " $ range 0 0.04 $ sine )
+      upp = "<{8 16 7}%4  24> "
+      upp2 = "<{8 26 7}%4  24> "
+      upp3 = "<{2 16 17}%4  24> "
+  d1 $ drumz $ ncat [              (2.5, (|+ n upp ) $ stack [
+       gp16 $ n "0 0 0 < 0 0 [0 ~ ~0]>", 
+       (|+ n 8) $ gp16 $ n "1 2 3 4  5 6 3 4  1 2 3 4 5 6 4 4",
+       (|+ n 8) $ gp16 $ n "3 ~ 3 4  5 6 3 4  3 ~ 3 4 ~ 6 3 4" ]),
+                                   (0.5, (|+ n  "[ 16 17  24 -4 4 3]/4"  ) $ stack [ 
+       gp16 $ n "0!8 ", 
+       --(|+ n "[8 2 ]/6") $ gp2 $ fast (3 / 3) $ n "<1 14 1> 2 <3 15 15> 4 2 3 4 2   3  5 2 3 6 2 3 5" ,
+       (|+ n upp3) $ gp2 $ n "3 ~ 3 3 ~ 3  4 ~ 4   3 ~ 4 4 ~ 4 4 ~ 4  5 ~ 4 2 ~ 2 ~ 2" ]),
+                                   (1.5, (|+ n upp ) $ stack [
+       gp16 $ n "0 0 0 < 0 0 [0 ~ ~0]>", 
+       (|+ n 8) $ gp16 $ n "1 2 3 4  5 6 3 4  1 2 3 4 5 6 4 4",
+       (|+ n 8) $ gp16 $ n "3 ~ 3 4  5 6 3 4  3 ~ 3 4 ~ 6 3 4" ]),
+                                   (0.5, (|+ n ( "[ 16 17  24 -4 4 3]/17" ) ) $ stack [ 
+       gp16 $ n "0!8 ", 
+       (|+ n upp2) $ gp2 $ fast (3 / 3) $ n "1 2 3 4 2 3 4 2   3  5 2 3 6 2 3 5" ,
+       (|+ n upp3) $ gp2 $ n "3 ~ 3 3 ~ 3  4 ~ 4   3 ~ 4 4 ~ 4 4 ~ 4  5 ~ 4 2 ~ 2 ~ 2" ])
+       ] # amp (segment 16 (fast "<14 16> 2 8 4" $ range 0.3 0.7 $ sine )) # m 1 
+
+
+
+do
+ let gp = groove 1 (segment "8" (fast 8 $ range 0 0.06 sine)) 
+     ap = amp (segment 16 (("0  " <~) $ fast "8 12 18 4" $ range 0.3 "<0.2 0.8>" sine)) 
+ d1 $ gp $ drumz $ n "{0 [0 8] [0 16] [8 0] [0 <1 5 >]}%4"  # m 1 # ap
+ d2 $ (|+ n 12) $ gp $ drumz $ n "1 2 3 4  5 6 3 4    1 2 3 2  8 9 3 5"  # m 1 # ap
+
+
+
+let edo53chrom = "0 5 9 14 17 22 26 31 36 39 44 48"
+
+let edo53alt = "0 5 8 0 10 12 14 17 19 22 26 31 34 36 39 41 43 44 45 48"
+
+d2 $ struct "t(<33 21 37 19>, 53)" $ n (tScale' 53 edo53chrom "0 2 5 2 4 7 9 11 ") # m 2
+
+
+ap = amp (segment 16 (("0  " <~) $ fast " 18" $ range 0.4 "<0.7 0.8>" sine)) 
+
+d3 $ (|+ n "-7 8 14 -14") $ struct "t(<33 21 37 19>, 16)" $ n (tScale' 53 edo53alt "0 .. 28 ") # m 2 # ap 
+
+d3 $ struct "t(<33 21 37 19>, 16)" $ n (tScale' 53 edo53alt "28 .. 2 ") # m 2 # ap 
+
+
+do
+ d1 $ (|+ n "12 4") $ struct "t(15, 16) t(15, 16)" $ takeArp' "asdf" 25 53  edo53alt "18 " (range 0 28 $ fast "2 0.5" sine) # m 2 # aT "ampz" 25 "0.8 0.3 0.4 0.5 0.6" 
+ d2  $ struct "t(6, 16) t*3" $ n (tScale' 53 edo53alt ("[0, 4, 8, 13] [0, 4, 7, 11] [-1, 2, 7, 11] [-1, 2, 4, 8]" |- "[0 4 ]/4" ) ) # m 2
+
+
+do
+ d1 $ (|+ n "12 4") $ struct "t(5, 16) t(10, 16)" $ takeArp' "asdf2" 10 53  edo53alt "18 " (range 0 28 $ fast "2 0.5" sine) # m 2 # aT "ampz2" 25 "0.8 0.3 0.4 0.5 0.6" 
+ d2 $ struct "t(6, 16) t*3" $ n (tScale' 53 edo53alt ("[0, 4, 8, 13] [0, 4, 7, 11] [-1, 2, 7, 11] [-1, 2, 4, 8]" |- "[11 15  11 ]/4" ) ) # m 2
+
+
+d1 $ (|+ n 2) $ struct "[t*7 ~!4 t*12 ]/4" $ takeArp' "asdf3" 19 53 edo53alt "14" (range 0 14 $ fast "2" sine) # m 2
+
+d2 $ struct "[~!2 t*9 ~!2 t*8]/4" $ takeArp' "lh3" 14 53 edo53alt "17" (range 0 14 $ fast "3 18"  cosine)  # m 2
+
+-- nice and easy. :)
+d3 $ struct "t*8" $ takeArp' "arpfun" 16 53 edo53chrom 18 (range 0 14 $ fast "3 18" sine ) # m 2 
+
+d1 $ slow 2 $ fast "3 8 4 8" $ struct "t*8" $ takeArp' "arpfun2" 25 53 edo53alt 18 (range 0 19 $ fast "4 " sine ) # m 2 
+
+d1 $ slow (18/8) $ fast "2 1 2 3" $ struct "t*8 t*3" $ takeArp' "arpfun3" 18 53 edo53chrom 18 (range 0 4 $ fast "3 8 2 " cosine |- "1 0.25" ) # m 2 
+
+d1 $ struct "t*8" $ takeArp' "arpfun3" 16 53 edo53chrom 18 (range 0 10 $ fast "3 18" sine ) # m 2 
+
+d1 $ struct "t*8" $ takeArp' "arpfun" 16 53 edo53chrom 18 (range 0 14 $ fast "3 18" sine ) # m 2 
+
+d1 $ struct "t*8" $ takeArp' "arpfun" 16 53 edo53chrom 18 (range 0 14 $ fast "3 18" sine ) # m 2 
+
+d2 $ (|- n 31) $ n (tScale' 53 edo53alt "[[-2, 2, 7, 10] [-2, 2,  5,  9] [-6, 0, 5, 9] [-6, 0, 2, 7]]/8") # m 3
+
+
+
+do
+ let gp = groove 1 (segment "8" (fast 8 $ range 0 0.06 sine)) 
+     ap = amp (segment 16 (("0  " <~) $ fast "8 12 18 4" $ range 0.3 "<0.2 0.8>" sine)) 
+ d1 $ gp $ drumz $ n "{0 [0 8] [0 16] [8 0] [0 <1 5 >]}%4"  # m 1 # ap
+ d2 $ (|+ n 12) $ gp $ drumz $ n "1 2 3 4  5 6 3 4    1 2 3 2  8 9 3 5"  # m 1 # ap
+ d3 $ gp $  (|+ n "12 4") $ struct "t(15, 16) t(15, 16)" $ takeArp' "asdf" 25 53  edo53alt "18 " (range 0 28 $ fast "2 0.5" sine) # m 2 # aT "ampz" 25 "0.8 0.3 0.4 0.5 0.6" # ((0.25 <~) $ ap) 
+ d4  $ gp $  struct "t(6, 16) t*3" $ n (tScale' 53 edo53alt ("[0, 4, 8, 13] [0, 4, 7, 11] [-1, 2, 7, 11] [-1, 2, 4, 8]" |- "[0 4 ]/4" ) ) # m 2 # ((0.125 <~) $ ap)
+
+
+do
+ d1 silence
+ d2 silence
+
+do
+ hush
+ d3 $ (|+ n "12 4") $ struct "t(5, 16) t(10, 16)" $ takeArp' "asdf2" 10 53  edo53alt "18 " (range 0 28 $ fast "2 0.5" sine) # m 2 # aT "ampz2" 25 "0.8 0.3 0.4 0.5 0.6" 
+ d4 $ struct "t(6, 16) t*3" $ n (tScale' 53 edo53alt ("[0, 4, 8, 13] [0, 4, 7, 11] [-1, 2, 7, 11] [-1, 2, 4, 8]" |- "[11 15  11 ]/4" ) ) # m 2
+

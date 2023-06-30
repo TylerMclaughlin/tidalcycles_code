@@ -1,0 +1,102 @@
+
+setcps(160/120/2)
+
+let groov = groove 4 "0.02 0.005 0.002 0.01"
+    ampz =  amp (fast 4 "0.95 0.65 0.95 0.85")
+
+do
+ d6 silence
+ d2 $ groov $ drumz $ n (segment "4 4 8 16" (fast "0.25 2 0.25 0.125" $ range 0 4  sine)) # m 1 # ampz
+
+d2 $ groov $ drumz $ n (segment "5 4 8 16" (fast "0.5 4 0.25 2" $ range 7 0  sine)) # m 1 # ampz
+
+
+d1 silence
+
+--- mellow
+d2 $ groov $  drumz $ fix (|- n 2)  (n "3") $ n (segment "9" (fast "0.5 4 0.25 2" $ range 7 3  sine)) # m 1 # ampz
+
+-- nice
+d5 $ fast 4 $ struct "t" $ drumz $  n "[6, 2, 1]" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $  n "[3, 4, 5]" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $  n "[1, 5]" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $  n "[6, 7]" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $  n "[6 7]" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $  n "[6, 5]" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $  n "[6, 1]" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $  n "[0 1]/2" # m 1 # ampz
+
+d5 $ fast 4 $ struct "t" $ drumz $ slow 32 $ n "0 1 0 1 0 2 0 2" # m 1 # ampz
+
+d5 silence
+
+-- good
+d3 $ groov $  mask "t(9,16, 3)" $ (|- n 24) $ slow 4 $ every 3 (0.25 <~ ) $  n "0 .. 63" # m 2 # ampz
+
+-- better
+d3 $ groov $  mask (inv "t(3,8) t(3,8)") $  (|- n 24) $ slow 4 $ every 3 (0.25 <~ ) $  n "0 .. 63" # m 2 # ampz
+
+d3 $ groov $  mask (((3/8) ~>) $ inv "t(3,8) t(3,8)") $  (|- n 24) $ slow 4 $ (0.25 <~ ) $  n "0 .. 63" # m 2 # ampz
+
+
+d4 $ groov $  mask (inv "t(9,16, 3)") $  (|+ n "0 8 16 8") $  every 5 (fast (3/2)) $ every 9  (fast (4/3)) $ every 7 (fast (2/3)) $ (|- n 24) $ slow 4 $ struct "t*64" $ nT  "br" 4 "0 .. 63" # m 2 # ampz
+
+d4 silence
+
+d3 silence
+
+d5 silence
+
+d6 $ drumz $ fast 2 $ n "0 0 0 0" # m 3
+
+d6 $ groov $ ((3/8) ~>) $ (0.0 <~) $ struct "t(3,8) t(3,8)" $ drumz $ n "0"  # m 3
+
+d6 $ groov $ struct "t(3,8) t(3,8)" $ n "-2 -2"  # m 4
+
+d6 $ groov $ (0.125 <~) $ struct "t(3,8) t(3,8)" $ n "-2 -2"  # m 4
+
+d6 $ groov $ (0.5 <~) $ struct "t(3,8) t(3,8)" $ n "-2 -2"  # m 4
+
+-- nice in the pocket
+d6 $ struct "~ ~ ~ t ~ ~ t ~" $ n "-2" # m 4
+
+d6 $ groov $ ((3/8) ~>) $ struct "t(3, 8) t(3,8)" $ n "-2" # m 4
+
+d6 $ groov $ struct " ~  t t t  ~ t ~ t " $ n "-2 -2"  # m 4
+
+d6 silence
+
+d7 $ slow 8 $ n "[5, 10, 14, 17] [5, 10, 13, 17] [5, 8, 12, 15] [5, 8, 10, 15 ]" # m 7
+
+-- llegato 0.75. .25 is ghost notes
+d8 $ (# legato "[0.75 0.65 0.75 0.75]*4") $ groov $ (0.0 <~) $ mask (inv "t(3,8) t(3,8)") $
+     struct "t*16" $ slow 8 $
+     n  "[-2 2 2 -2 -2 2 2] [-2 1 -2 1 1 -2 1] [0 -7 -7 0 0 -7 -7] [-2 3 3 -2 3 3 -2 3]" # m 8
+
+
+d2 silence
+
+d8 silence
+
+d1
+
+
+d9 $ drumz $ fast 2 $ n "~ 10 ~ 10" # m 3 # amp ("0.8 0.7" |* (rand |* 0.2))
+
+d9 $ groov $ drumz $ fast 2 $ (0.75 ~>) $ n "6*2 10 6*2 10" # m 3 # amp ("0.8 0.7" |* (rand |* 0.2))
+
+d10 $ drumz $ n "~ ~ ~ < ~ [~ 9]>" # m 3 # amp ("[0.8 0.75]/2" |* (range 0.95 1.05 $ rand ) ) # legato (range 0.75 1.5 $ rand )
+
+d10 silence
+
+^^
+
+
+

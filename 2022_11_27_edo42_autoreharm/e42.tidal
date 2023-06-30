@@ -1,0 +1,109 @@
+let phrase42_7 sca cho notes = n (tScale' 7 cho (tScale' 42 s $ notes |- "1") |- "1")
+
+phrase42_7 
+
+d1 $ phrase42_7 "0 7 14 18 25 31 39" "1 3 5 7" "0 2 3 4 5 6 7"  # m 1
+
+
+d1 $ n(tScale "0 2 5 7 9 11" "0 2 3 4 5 6") # m 1 
+
+d1 $ n (tScale' 7 "0 2 3 4" $ ( tScale "0 2 5 7 9 11" "0 2 3 4 5 6" |- 1) |- 1 ) # m 1 
+
+d1 $ n (tScale' 7 ("1 2 3 4" |- 1) $ ( tScale "0 2 4 5 7 9 11" ("1 2 3 4 5 6" |- 1)  )) # m 1 
+
+-- ok, good
+d1 $ n  ( tScale "0 2 4 5 7 9 11" ("1 2 3" |- 1)) # m 1 
+
+d1 $ n  ( tScale "0 2 4 5 7 9 11" ((tScale' 7 "1 3 5 7" ( "1 2 3 4 5 6 7 8" |- 1)))) # m 1 
+
+d1 $ n  ( tScale "0 2 4 5 7 9 11" ((tScale' 7 ("1 3 5 7" |- 1) ( "1 2 3 4 5 6 7 8" |- 1)))) # m 1 
+
+let phrase_chord scal3 ch0rd pat = n  ( tScale scal3 ((tScale' 7 (ch0rd |- 1) ( pat |- 1)))) # m 1 
+
+d1 $ phrase_chord "0 2 4 5 7 9 11" "1 3 5 7" "-4 -3 -2 -1 0 1 2 3 4" # m 1
+
+d1 $ (|- n 5) $ phrase_chord "0 2 4 5 7 9 11" "1 3 5 7" (round <$> segment 16 (fast "0.5 1 1.5 2 2.5" $ range 1 16 $ sine)) # m 1
+
+
+
+
+d1 $ (|- n 12) $ (|+ n "[0 3 -2 5]/8") $ 
+    phrase_chord "0 2 4 5 7 9 11" "1 3 6 7" (round <$>
+    segment "16" (fast 2 $ fast (range 1.5 4 $ sine) $
+    range 1 "12 11 10 9" $ sine)) # m 1
+
+
+d1 $ (|- n 12) $ (|+ n "[0 3 -2 5]/8") $ struct "t(15, 16)" $
+    phrase_chord "0 2 4 5 7 9 11" "1 3 6 7" (round <$>
+    segment "16" (fast 2 $ fast (range 1.5 4 $ sine) $
+    range 1 "12 11 10 9" $ sine)) # m 1 # legato "4"
+
+
+do
+ let p1 = phrase_chord "0 2 4 5 7 9 11" "1 2 3 5 7" $
+          round <$> segment "16" (fast "1 2" $ range 1 10 sine) 
+     p2 = phrase_chord "0 2 4 5 7 9 11" ("1 3 5 6 7" |+ "<0 -7>*2") $
+          round <$> segment "16" (fast "1 2" $ range 1 10 sine) 
+ d1 $ ncat [ (2, p1), (2, p2)] # m 1
+
+do 
+ let gmaj = "7 9 11 12 14 16 18"
+     --fmaj = ("7 9 11 12 14 16 18" |- 2)
+     seg16 func = round <$> segment "16" (func) 
+     rsinf lo hi speed = fast speed $ range lo hi sine 
+     rcosf lo hi speed = fast speed $ range lo hi cosine 
+     p1 = phrase_chord gmaj "2 4 6 8 10" $ seg16 $ fast "1 2" $ rsinf 0 5 3 
+     p2 = phrase_chord gmaj ("2 4 6 8 10" |+ 3) $ seg16 $ rsinf 0 5 1 
+     p3 = phrase_chord (gmaj |+ 0) "2 3 4 7" $ seg16 $ rsinf 2 4 1 
+     p4 = phrase_chord (gmaj)  ("2 4 6 8" ) $ seg16 $ slow "1 2 3 4" $ rcosf 1 8 10 
+     p5 = phrase_chord ("0 2 4 5 7 9 11") "1 3  7  10" $ seg16 $ rsinf 2 5 1 
+     p6 = phrase_chord ("0 2 4 5 7 9 11")  ("1 3 5 4 " ) $ seg16 $ rcosf 1 3 2 
+     vel = (# amp (fast 4 $ "<0.6 0.4> 0.5 0.4 0.3"))
+     groov = groove 4 "0 0.006 0 0.006"
+ d1 $ groov $ vel $ ncat[(1, p1), (1, p2), (0.5, p3), (0.5, p4), (0.5, p5), (0.5, p6)] # m 1
+ d2 $ struct "<[t t t t ~ t t t] [t(5,16), [~!7 t]] >" $ ncat[(1, n "[0, 4, 7, 11]"), (1, n "[-1, 2, 6, 9]"), 
+      (0.5, n "[0,4,7,11]"), (0.5, n "[1,5,8,12]"),
+      (0.5,n "[2,5,9,12]"), (0.5, n "[4,5,9,12]" ) ] # m 2 --, (0.5, p3), (0.5, p4), (0.5, p5), (0.5, p6)] # m 2
+
+
+
+d3 $ slow (8 / 8) $ groov $ (# amp "0.6 [0.5 0.4] [0.5 0.3] 0.6") $ drumz $ n "0 <[0,3] [0 ~ ~ 0, 3]> [0 0] [0, 3]" # m 3
+
+d4 $ slow (8/8) $  groov $ drumz $ (|+ n "0!3 0 0 1 0 1") $ (# amp (fast "<1.12 3> 0.25 0.35 2.5" $ range 0.25 0.7 sine)) $ n "[<[4!8] [4!7 ~]>]@8 4 ~ 4  ~ 4 ~ 4 ~" # m 3
+
+d4 $ slow (8/8) $  groov $ drumz $ (|+ n "0 1 0 1  0 1 0 1") $ (# amp (fast "<1.12 3> 0.25 0.35 2.5" $ range 0.25 0.7 sine)) $ n "[<[4!8] [4!7 ~]>]@8 4 ~ 4  ~ 4 ~ 4 ~" # m 3
+
+
+segment 16 (range 1 16 $ sine)
+
+do
+ d1 $ n  ( tScale "0 2 4 5 7 9 11" ((tScale' 7 ("1 3 5 7" |- 1) ( "1 2 3 4 5 6 7 8" |- 1)))) # m 1 
+ d2 $ struct "<[t t t t ~ t t t] [t(5,16), [~!7 t]] >" $ ncat[(1, n "[0, 4, 7, 11]"), (1, n "[-1, 2, 6, 9]") ] # m 2 --, (0.5, p3), (0.5, p4), (0.5, p5), (0.5, p6)] # m 2
+ d4 $ slow (8/8) $  groov $ drumz $ (|+ n "0!3 0 0 0 0 0") $ (# amp (fast "<1.12 3> 0.25 0.35 2.5" $ range 0.25 0.7 sine)) $ n "[<[4!8] [4!7 ~]>]@8 4 ~ 4  ~ 4 ~ 4 ~" # m 3
+
+d1 $  phrase_chord "0 2 4 5 7 9 11" ("2 4 5 6 8" |+ "1" ) (seg16 $ slow 9 $ fast "<1 2 3 4 5 4 3 2>" $ range "2" "6" $ sine) # m 1
+
+d2 $ fast (3/2/2) $ phrase_chord "0 2 4 5 7 9 11" ("2 4 5 6 8" |+ "1" ) (seg16 $ slow 9 $ fast "<4 5 4 3 2>" $ range "0" "9" $ sine) # m 1
+
+
+let groov = groove 8 "0 0.01"
+
+d1 $ groov $ mask "t t t t" $ (|- n 12) $ struct "<t(9,16) <t(9,16,3) t(9,16,5)> >" $
+     phrase_chord ("0 2 4 5 7 9 11" |+ 0 ) ("2 4 6 8 10 12" |+
+     "[  7 ]") ("[1,2, 3, 4, 5]" |+
+     seg16 (fast "4 5 6" $ range "-3" 7 $ sine)) #
+      legato "[2 1 2 0.7]*4" # m "1 2 1 1  2 1 2 2 1 2 2 2 2 1 1 1" 
+
+d2 $ groov $ struct ( "<t(9,16) <t(9,16,3) t(9,16,5)> >") $ nT "b" 9 "2 5 16 9  2 5 14" # m 3
+
+d3 $ groov $ (|+ n 12) $ struct (inv "<t(9,16) <t(9,16,3) t(9,16,5)> >") $ nT "b" 7 "2 5 16 9  2 5 14 9 16" # m 4
+
+d5 $  drumz $ struct ( "<t(9,16) <t(9,16,3) t(9,16,5)> >") $ nT "hh" 9 "4 4 4 5 4 4 4 5 4" # m 5
+
+d6 $ drumz $ (0.125 <~) $ n "0 <0 [0,4,3]> 0 0 "  # m 5
+
+d6 silence
+
+let seg16 func = round <$> segment "16" (func) 
+
+let phrase_chord scal3 ch0rd pat = n  ( tScale scal3 ((tScale' 7 (ch0rd |- 1) ( pat |- 1)))) # m 1 

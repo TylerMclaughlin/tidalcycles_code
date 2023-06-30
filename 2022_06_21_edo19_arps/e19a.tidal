@@ -1,0 +1,25 @@
+setcps(128/120/2)
+
+do
+  let edo19maj = "0 3 6 8 11 14 17"
+      rhythm = "t(<5>/2, 16, <0 1>)"
+      groov = groove 4 "0 0.01 0.001 0.012" 
+      shift = ((1/16) <~)
+      transp = ((|+ n "[0 11]/8") . (|+ n 3))
+      quant = "[11 14 18 16]/4"
+      takeN = 16 
+      trigonometry = (fast "2 1" $ range 0 12  sine)
+  -- arp
+  d1 $ groov $ struct (inv rhythm) $ transp $
+      takeArp' "1" takeN 19 edo19maj quant ( trigonometry ) # m 1
+  -- bass 
+  d2 $ groov $ struct ("t(9,16)") $ (|- n 19) $ transp $
+      takeArp' "2" 9 19 edo19maj 7 trigonometry
+      # m "[2,3]" # legato "3 2 3 2"
+  -- snare
+  d5 $ groov $  struct ("[t t]") $ drumz $ 0  # m 6
+  -- hats 
+  d4 $ groov $ (|* amp 0.25) $ (# amp "[0.5 0.35 0.4 0.45  0.3 0.5 0.4 0.35]*2") $ ("[1/16 1/16]/4" <~) $ struct (inv rhythm) $ drumz $ nT "h" 4 "1 0 0 1" # m 7
+  -- kicc
+  d3 $ groov $ struct "t t t t" $ drumz $ n "0" # m 5
+

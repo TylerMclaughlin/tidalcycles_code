@@ -1,0 +1,138 @@
+-- fairly simple PLER(3, 4, 3, 8) example.
+do
+  let p1 = stack $ [struct "t(3,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         (|+ n 12) $ struct (inv "t(3,8)") $ nT "right" 4 (tScale "3 7 10 14" "0 1 2 3") # m 2]
+  d1 $ (|- n 7) $ p1 
+
+let p = stack $ [struct "t(2,7)" $ nT "left" 5 (tScale _ "0 1 2 3 4"),
+         struct (inv "t(2,7)") $ nT "right" 4 (tScale "" "0 1 2 3")]
+
+
+-- example-- counters the same
+do
+  let p1 = stack $ [struct "t(3,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         (|+ n 12) $ struct (inv "t(3,8)") $ nT "left" 4 (tScale "3 7 10 14" "0 1 2 3") # m 2]
+  let p2 = stack $ [struct "t(5,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         struct (inv "t(5,8)") $ nT "left" 4 (tScale "3 7 10 14" "0 1 2 3") # m 2] 
+  d1 $ (|- n 7) $ ncat [(3, p1), (1, p2) ]
+
+do
+  let p1 = stack $ [struct "t(3,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         (|+ n 12) $ struct (inv "t(3,8)") $ nT "right" 4 (tScale "3 7 10 14" "0 1 2 3") # m 2]
+  let p2 = stack $ [struct "t(5,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         struct (inv "t(5,8)") $ nT "right" 4 (tScale "3 7 10 14" "0 1 2 3") # m 2] 
+  d1 $ (|- n 7) $ ncat [(3, p1), (1, p2) ]
+
+do
+  let p1 = stack $ [struct "t(3,8)" $ nT "right" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         (|+ n 12) $ struct (inv "t(3,8)") $ nT "right" 4 (tScale "3 7 10 14" "0 1 2 3") # m 2]
+  let p2 = stack $ [struct "t(5,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         struct (inv "t(5,8)") $ nT "left" 4 (tScale "3 7 10 14" "0 1 2 3") # m 2] 
+  d1 $ (|- n 7) $ ncat [(3, p1), (1, p2) ]
+
+-- major key
+do
+  let p1 = stack $ [struct "t(3,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         (|+ n 12) $ struct (inv "t(3,8)") $ nT "left" 4 (tScale "4 7 11 14" "0 1 2 3") # m 2]
+  let p2 = stack $ [struct "t(5,8)" $ nT "left" 3 (tScale "0 7 14" "0 1 2") # m 1,
+         struct (inv "t(5,8)") $ nT "left" 4 (tScale "4 7 11 14" "0 1 2 3") # m 2] 
+  d1 $ (|- n 7) $ ncat [(3, p1), (1, p2) ]
+
+
+-- PLER(2 5 9 16) and PLER(2 5 5 16)
+do
+ let scale1 = "0 12"
+     scale2 = "2 5 9 11 19"
+     groov = groove 8 "0 0.018"
+     --vel = (# amp (fast 4 $ range 0.25 0.45 sine )) 
+     vel = (# amp (fast 4 $ range 0.25 0.45 sine )) 
+     leg = (# legato (fast 1 $ range 0.25 1.5 sine )) 
+     p1 = vel $ groov $ stack $ [ struct "t(9,16)" $ nT "left" 2 (tScale scale1 "0 1") # m 1,
+         struct (inv "t(9,16)") $ nT "right" 5 (tScale scale2 "0 1 2 3 4") # m 2]
+     p2 = stack $ [struct "t(5,16)" $ nT "left" 2 (tScale scale1 "0 1") # m 1,
+         struct (inv "t(5,16)") $ nT "right" 5 (tScale  scale2 "0 1 2 3 4") # m 2]
+     p3 = vel $ groov $ stack $ [  struct "t(9,16)" $ nT "left" 2 (tScale scale1 "0 1") # m 1,
+         struct (inv "t(9,16)") $ nT "right" 5 (tScale scale2 "5 6 7 3 4") # m 2]
+ --d1 $ ncat[(3.5, p1), (0.5, p2)]
+ d1 $ (|- n 5) $ ncat[(3, p1), (1, p2), (3, p3), (1, p2)]
+
+
+
+
+
+-- PLER(4, 4, 9, 17) odd time signature
+do
+ let p2 = stack  [struct "t(9,17)" $
+                  nT "left" 4 (tScale "0 7 14 10" "0 3 2 1") # m 1,
+                  struct (inv "t(9,17)") $
+                  nT "right" 4 (tScale "2 5 7 12" "0 1 2 0") # m 2]
+ d1 $ (|- n 6) $ slow 1.5 $ ncat[(4,p2)]
+
+-- PLER(4 5 5 8) among most complex (longest period, 160 beats) for G = 8
+do
+ let p = stack $ [struct "t(5,8)" $ nT "left" 4 (tScale "0 3 7 10" "-60 1 2 3") # m 1,
+         struct (inv "t(5,8)") $ nT "right" 5 (tScale "2 5 2 7 2" "-60 1 2 3 -60") # m 2]
+ d1 $ fast 1.25 $ (|- n 7) $ p
+
+-- PLER(2,2,2,8) shortest period possible for G == 8.
+do
+ hush
+ let p = stack $ [struct "t(2,8)" $ nT "left" 2 (tScale "0 7" "0 1") # m 1,
+         struct (inv "t(2,8)") $ nT "right" 2 (tScale "-2 5" "0 1") # m 2]
+ d2 $ (|+ n 1) p
+
+do
+ let p = stack $ [struct "t(2,8)" $ nT "left3" 2 (tScale "0 3" "0 1") # m 3,
+         struct (inv "t(2,8)") $ nT "right3" 2 (tScale "4 5" "0 1") # m 3]
+ d1 $ fast 2 $ drumz $ p
+
+-- PLER(2 2 13 16) one of the most complex with L = R = 2 and G = 16
+do
+ let p = stack $ [struct "t(13,16)" $ nT "left" 2 (tScale "0 2" "0 1") # m 3,
+         struct (inv "t(13,16)") $ nT "right" 2 (tScale "4 5" "0 1") # m 3]
+ d1 $ drumz $ p
+
+
+-- 3 4 9 16 is one of the most complex L = 3, R = 4 G = 16
+-- period = 192
+do
+ hush
+ let groov = groove 4 "0 0.02 0.002 0.02" 
+     p = stack $ [struct "t(9,16)" $ nT "left" 3 (tScale "4 5" "0 0 2") # m "3 4",
+         struct (inv "t(9,16)") $ nT "right" 4 (tScale "0 2" "0 1 1 0") # m "3 4"]
+ d1 $ groov $ drumz $ p # amp "[0.5 0.35 0.45 0.35]*4"
+
+
+-- most repetitive O = 12
+do
+ let groov = groove 4 "0 0.01 0.002 0.01" 
+     p = stack $ [struct "t(<12>,16)" $ nT "left2" 3 (tScale "4 5" "0 0 2") # m "3 4",
+         struct (inv "t(12,16)") $ nT "right2" 4 (tScale "0 2" "0 1 1 0") # m "3 4"]
+ d1 $ groov $ drumz $ p # amp "[0.5 0.35 0.45 0.35]*4"
+
+-- skip
+--- 'full song'.
+--- m 6 -> m "[2,6]"
+do
+ hush
+ let groov = groove 4 "0 0.01 0.002 0.01" 
+     e = "t(<6 9 6 9>/2,16)"
+     p = stack $ [struct e $ nT "left" 3 (tScale "4 5" "0 0 2") # m "3 4",
+         struct (inv e) $ nT "right" 4 (tScale "0 2" "0 1 1 0") # m "3 4"]
+     mel = stack $ [struct e $ nT "leftm" 3 (tScale "0 7 10" "0 1 2") # m 1,
+         struct (inv e) $ nT "rightm" 4 (tScale " 3 7 10 5" "0 1 2 3") # m 6]
+ d1 $ groov $ drumz $ p # amp "[0.5 0.35 0.45 0.35]*4"
+ d2 $ (|- n "[5 3]/16") $ groov $ mel # amp "[0.5 0.35 0.45 0.35]*4"
+
+-- dt[order(cycle_length)][is_trivial == 'nontrivial'][L == 3] [R == 4][G == 16]
+do
+ hush
+ let groov = groove 4 "0 0.01 0.002 0.01" 
+     e = "t(<10 9 8 7  6 5 4 3  2 3 4 5  6 7 8 9  >,16)"
+     p = stack $ [struct e $ nT "left" 3 (tScale "4 5" "0 0 2") # m "3 4",
+         struct (inv e) $ nT "right" 4 (tScale "0 2" "0 1 1 0") # m "3 4"]
+     mel = stack $ [struct e $ nT "leftm" 3 (tScale "0 7 10" "0 1 2") # m 1,
+         struct (inv e) $ nT "rightm" 4 (tScale " 3 7 10 5" "0 1 2 3") # m "[6,2]"]
+ d1 $ groov $ drumz $ p # amp "[0.5 0.35 0.45 0.35]*4"
+ d2 $ (|- n "[5 3]/16") $ groov $ mel # amp "[0.5 0.35 0.45 0.35]*4"
+ d3 $ drumz $ n "0 8 0 8 0 8 0 8" # m 8

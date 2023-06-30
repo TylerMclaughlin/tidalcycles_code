@@ -1,0 +1,9 @@
+d1 $ (|+ n tr) $ n "0 4 7 4" # m 1
+
+
+let maj7 = n "[0,4,7,11]"
+    min7 = n "[0,3,7,10]"
+    dom7 = n "[0,4,10]"
+    tr = 5
+
+d2 $ struct (timeline [0,4,5,3]) (|+ n tr ) $ (|+ n 1) $ maj7  # m 2

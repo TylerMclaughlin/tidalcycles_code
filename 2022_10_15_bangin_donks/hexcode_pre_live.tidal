@@ -1,0 +1,612 @@
+
+let groov = groove 4 "0.00 0.02 0.003 0.02"
+
+setcps(138/120/2)
+
+d2 silence
+
+d1 $ (|- n 24) $  groov $ mask "t t ~ t " $
+     (|* amp "0.8 0.7 0.4 0.3") $  slow 1 $
+     struct "1001 0001 1011 1001 0001 1000 1101 0011" $
+     n (tScale "0 1 3 5 7 8 10" ((|+ "[0 12 0 12]/2") $
+     (|+ "[0 5 -2 3]/4" ) $ segtp 16  ( range 1 14 $
+     (sine + (fast 3 $ sine)) ))) #
+     m 1 # sT "ssss" 4 "2 2.25 0.8 0.45" #
+     aT "aa" 4 "0.75 0.65 0.55 0.44" # m "[1 2 3 4]/2"
+
+
+d2 $ (|- n 24) $  groov $ mask "t t ~ t " $
+     (|* amp "0.8 0.7 0.4 0.3") $
+     slow 1 $ struct "1001 0001 1011 1001 0001 1000 1101 0011" $
+     n (tScale "0 1 3 5 7 8 10" ((|+ "[0 12 0 12]/2") $
+     (|+ "[0 5 -2 3]/4" ) $ segtp 16  ( range 3 16 $
+     (sine + (fast 3 $ sine)) ))) #
+     m 1 # sT "ssss2" 4 "2 2.25 0.8 0.45" #
+     aT "aa2" 4 "0.75 0.65 0.55 0.44" # m "[3 2 1 4 1 4 3 2]/4"
+
+d3 $ groov $ mask "t [t t ~ t] t t" $ drumz $ struct "1001001010110101" $  n "0" # m "{5 6 5 5 6 5 6 6}%6" # amp "[0.6 0.3 0.45 0.3]*4"
+
+d3 silence
+
+do
+ d4 $ groov $ mask "t t t t"  $ drumz $   struct (inv "1001001010110101") $  n "5" # m "{5 6 5 5 6 5 6 6}%6" # amp "[0.6 0.3 0.45 0.3]*4" 
+ d5 $ drumz $ n "[4 4 4 4]*4" # m "[5 6]*4" # amp "0.2 0.01 0.15 0.05"
+
+do
+ d4 silence
+ d5 silence
+ d6 $ groov $  struct "1001001010110101" $  n (tScale "0 1 3 5 7 8 10" ((|- "2") $ (|+ "[0 0 -2 -2]/4" ) "[4, 6, 8, 9]")) # m "7 8" # amp "[0.1 0.2 0.25 0.35 0.5 0.6]*2"
+
+d6 silence
+
+
+d7 $ drumz $ n " ~ [3, 2]" # m 6 # amp "[0.8 0.75 0.76 0.79 0.81 0.74 0.46 0.77]/8"
+
+d7 silence
+
+d6 silence 
+-- d8 $ groov $ drumz  $ n "[ ~ 2 ~ 2]*4" # m 6 # amp "[0 <0.2 0.1 0.25 0.12>]*8"
+
+
+--- defs
+
+let sn1 = (|+ amp 0.1) $ drumz $ n " ~ [3, 2]" # m 6 # amp "[0.8 0.75 0.76 0.79 0.81 0.74 0.46 0.77]/8"
+    sn2 = groov $ drumz  $ n "[ ~ 2 ~ 2]*4" # m 6 # amp "[0 <0.2 0.1 0.25 0.12>]*8"
+
+
+let h1 =  groov $ mask "t t t t"  $ drumz $   struct (inv "1001001010110101") $  n "5" # m "{5 6 5 5 6 5 6 6}%6" # amp "[0.6 0.3 0.45 0.3]*4" 
+    h2 = drumz $ n "[4 4 4 4]*4" # m "[5 6]*4" # amp "0.2 0.01 0.15 0.05"
+
+let k = groov $ mask "t [t t ~ t] t t" $ drumz $ struct "1001001010110101" $  n "0" # m "{5 6 5 5 6 5 6 6}%6" # amp "[0.6 0.3 0.45 0.3]*4"
+
+let ng = drumz $ stack [ n "[3 2 1 4 1 4 3 2]/4", n "[1 2 3 4]/2"] # m 9
+    p1 = groov $   struct "1001001010110101" $  n (tScale "0 1 3 5 7 8 10" ((|- "2") $ (|+ "[0 0 -2 -2]/4" ) "[4, 6, 8, 9]")) # m "7 8" # amp "[0.1 0.2 0.25 0.35 0.5 0.6]*2"
+
+
+
+let b1 = groov $ mask "~ t t t" $ (|- n "[0 0 0 0]/4" ) $  struct (inv "1001001010110101") $ n "[0  8 12 <8 [8 12 8 8]>]/2 " # m 11 # aT "bb" 6 "0.6 0.4 0.5 0.4 0.5 0.55" 
+    arp1 = fast "2 1.5 1.5 1" $ struct "t(15,16)" $ fast "3 2 2 1" $ n (tScale "1 3 8 12" "<16 24> .. 0") # m 12
+    arp2 = fast "2 1.5 1.5 1" $ struct "t(15,16)" $ fast "3 2 2 1" $ n (tScale "1 3 8 12" "0 .. 12") # m 12
+
+let s1 = (|- n 24) $  groov $ mask "t t ~ t " $
+     (|* amp "0.8 0.7 0.4 0.3") $  slow 1 $
+     struct "1001 0001 1011 1001 0001 1000 1101 0011" $
+     n (tScale "0 1 3 5 7 8 10" ((|+ "[0 12 0 12]/2") $
+     (|+ "[0 5 -2 3]/4" ) $ segtp 16  ( range 1 14 $
+     (sine + (fast 3 $ sine)) ))) #
+     m 1 # sT "ssss" 4 "2 2.25 0.8 0.45" #
+     aT "aa" 4 "0.75 0.65 0.55 0.44" # m "[1 2 3 4]/2"
+    s2 =  (|- n 24) $  groov $ mask "t t ~ t " $
+     (|* amp "0.8 0.7 0.4 0.3") $
+     slow 1 $ struct "1001 0001 1011 1001 0001 1000 1101 0011" $
+     n (tScale "0 1 3 5 7 8 10" ((|+ "[0 12 0 12]/2") $
+     (|+ "[0 5 -2 3]/4" ) $ segtp 16  ( range 3 16 $
+     (sine + (fast 3 $ sine)) ))) #
+     m 1 # sT "ssss2" 4 "2 2.25 0.8 0.45" #
+     aT "aa2" 4 "0.75 0.65 0.55 0.44" # m "[3 2 1 4 1 4 3 2]/4"
+
+
+d6 $ arp2
+
+d6 silence
+
+d5 silence
+
+
+
+
+do
+  d7 silence 
+  d8 silence 
+
+-- noise gate
+d2 $ ng 
+
+-- veridical
+d1 $ ncat [(1, stack [h1, h2]), (1, stack [h1, h2, s1, s2]),
+           (0.5, stack [p1]), (1, stack [h1, h2, s1, s2]), (0.5, stack [h2]),
+     (1.25, stack [p1, h1, h2]), (0.75, select "[0.1 0.8 0.1 0.8 0.1]/7" [arp2, arp1]), (0.5, stack [h1,s1, s2, p1]),
+     (1, stack[h1, h2]), (1, stack [s1, s2 ]) ] 
+
+d1 $ ncat [(1, stack [h1, h2]), (2, stack [h1, h2, s1, s2]),
+           (0.5, stack [p1]), (1.5, stack [h1, h2, s1, s2]), (0.5, stack [h2]),
+     (0.75, stack [p1, h1, h2]), (0.75, select "[0.1 0.8 0.1 0.8 0.1]/9" [arp2, arp1]), (0.5, stack [h1,p1]),
+     (1, stack[h1, h2]), (1, stack [h1, h2 ]) ] 
+
+d1 $ ncat [(1, stack [h1]), (1, stack [s1, s2]),
+           (1.5, stack [p1]), (1.5, stack [s1, s2]), (0.5, stack [h2]),
+     (1.25, stack [p1]), (0.75, select "[0.1 0.8 0.1 0.8 0.1]/9" [arp2, arp1]), (0.5, stack [p1]),
+     (1, stack[h1, h2]), (1, stack [h1, h2 ]) ] 
+
+-- bass
+do
+  d7 $  groov $ ("[0 0 0 0.0 0 [ 0 0.0626]  0]/4" <~  ) $ (|- n 12) $ struct "{t ~~ t  ~ t ~~  t ~ t t  ~ t ~ t ~ ~ t ~  }%16" $ n "8 7 5 3 0 10 8 ~ ~ ~ ~ " # m "11 13 11 13" # legato "[1.5 <0.75 0.8> 1.0 1.25]*4" # amp "[0.7 0.7 0.5 0.45]*4"
+  -- sub
+  d8 $ groov $ (|- n 12) $ struct "{t ~~ t  ~ t ~~  t ~ t t  ~ t ~ t ~ ~ t ~}%16" $ n "8 7 5 3 0 10 8 ~ ~ ~ ~ " # m "14" # legato "[2.8 1.25 1.5 1.25]*4" # amp "[0.7 0.7 0.5 0.45]*4"
+
+
+d1 silence
+
+d3 silence
+
+
+
+do
+ d2 $ ng 
+ -- perc 
+ d3 $ ncat [ (2, stack [k, sn1]), (1, stack [k, sn1, sn2]),
+            (1, stack [k]), (2, stack [k, sn1, sn2])]
+
+d1 $ drumz $ distrib [3, 5, 8] $ n "0" # m 5
+
+d1 $ groov $ fast 2 $ drumz $ distrib ["[5 6]/2", 7, 8] $ n "0 6" # m 5
+
+
+-- d1 $ groov $ drumz $ distrib ["9 5", "{11 11 13}%4", 16] $ n "7" # m "5 6" # amp "[0.8 0.4 0.7 0.4]*4" 
+
+-- microtonal techno
+--------------------
+
+let groov = groove 2 "0 0.02 0.001 0.02  0.001 0.02 0.001 0.02"
+    maj53edo = "0 9 17 22 31 39 48"
+
+-- melody
+let mel = groov $ (|- n 60) $ struct "t(<9 10 11 12>,16)" $ fast "1 1 2 <3 4>" $ n (tScale' 53 "0 17 48" "0 .. 8") # m 10
+    -- extra melody notes
+    em =  groov $ (|- n 60) $ struct (inv $ "t(<9 10 11 12>,16)") $ fast "1 1 2 <3 4>" $ n (tScale' 53 "0 17 48" "0 .. 8") # m 15 
+
+-- pads
+let pads =  (|- n "[0 7]/8") $ struct "t ~ t ~ t t t t" $ n (tScale' 53 maj53edo "[0, 2, 4, 6, 8, 10]") # m 16 
+
+-- extra drumz
+let edrumz = groov $ drumz $  struct "t(<9 10 11 12>,16)" $ fast "1 1 2 <3 4>" $ n "0 5 4 5 3 5 4 5 [7, 0] 3 4 5 1 4 5 0" # mm 3 # amp "<0.8 0.75> <0.4 0.5 0.4> <0.6 0.6 0.5 0.55> <0.4 0.3>"
+
+let edrumz2 = groov $ drumz $  struct "t(<9 10 11 12>,16)" $ fast "1 1 2 <3 4>" $ n "0 5 5 4 3 5 5 4 [7, 0] 3 4 5 1 4 5 0" # mm 3 # amp "<0.8 0.75> <0.5 0.55 0.4> <0.6 0.6 0.5 0.55> <0.4 0.4>"
+
+
+-- kicc / hat
+let k = (|+ n "[0 2]/8") $ n "[0 [~ 12]] 0 [0 <~ [~ 12 ]>] 0" # mm 4 # amp "[0.4 0.47]/8"
+    hat =  groov $ n "~ 0 <~ 0 [0 0]> 0 ~ 0 ~ 0" # mm 5 # amp "[0.5 <0.2 0.33 0.28> 0.5 <0.33 0.35 0.21 0.26>]*4"
+
+let b =  (|- n 58) $ groov $ (|- n "[0 7]/8") $ struct "~ t t ~  ~ t t t  ~ t t ~  ~ t t t" $ n (tScale' 53 maj53edo "0 4 7 11 4 7 4 11" )  # mm 1  # amp "[0.5 0.35 0.45 0.35]*4" # legato "[1 0.85 1 0.95]*4"
+    sb = (|- n "[0 7]/8") $ groov $ struct "~ t t ~  ~ t t t  ~ t t ~  ~ t t t" $ n (tScale' 53 maj53edo "0 4 7 7 4 7 4 7" )  # mm 2  # legato "1"
+
+d6 $ stack [k, hat]
+
+d6 silence
+
+do
+ d7 silence
+ d8 silence
+
+hush
+
+-- 1
+do
+ d2 $ stack [mel]
+
+
+d1 silence
+
+d3 silence
+
+-- 2
+do
+ d6 $ stack [k, hat]
+ d2 $ stack [mel]
+
+-- 3
+do
+  d1 $ stack [ em]
+  d6 $ stack [(|* amp 0.033) $ k, hat]
+  d2 $ (|* amp 0.1) $ stack [pads] 
+
+d6 silence
+
+-- 4
+do
+  d6 $ stack [k, hat, edrumz]
+  d2 $ stack [pads]
+  d1 $ stack [b, sb]
+
+d2 silence
+
+-- 5
+do
+  d6 $ stack [ k, hat]
+  d1 $ edrumz 
+  d2 $ stack [mel, em]
+
+
+-- 7
+do
+  d2 $ stack [b, sb, em]
+  d6 $ stack [k]
+
+-- 8
+do
+  d2 $ stack [b, sb, (|+ n "0 0 12 0" ) em]
+  d6 $ stack [k, hat, edrumz]
+
+-- 9
+do
+ d6 $ stack [ k  ]
+ d2 $ stack [ (|+ n "53 0 0 53") $ mel, em]
+
+d6 silence
+
+-- 10
+do
+  d6 $ stack [k, hat, edrumz2]
+  d2 $ stack [em]
+  d1 $ stack [b, sb]
+
+-- 11
+do
+ hush
+ d6 $ stack [k]
+ d1 $ stack [b, sb]
+
+
+-- supersonic
+
+let ssdrums = slow (16/4) $ stack [
+     n "as2!2 b2!3 as2 b2!2 as2!2 b2!2 as2!2 b2!2 as2!2 b2!3 as2 b2!2 as2!2 b2!2 as2!2 b2!2 as2!2 b2!3 as2 b2!2 as2!2 b2!2 as2!2 b2!2 as2!2 b2!3 as2 b2!2 as2!2 b2!2 as2!2 b2!2"
+     # amp "0.01 0.54 0.01 1.0 0.01 0.47 0.01 1.0 0.01 0.67 0.01 0.82 0.01 0.67 0.01 1.0 0.01 0.54 0.01 1.0 0.01 0.47 0.01 1.0 0.01 0.67 0.01 0.82 0.01 0.67 0.01 1.0 0.01 0.54 0.01 1.0 0.01 0.47 0.01 1.0 0.01 0.67 0.01 0.82 0.01 0.67 0.01 1.0 0.01 0.54 0.01 1.0 0.01 0.47 0.01 1.0 0.01 0.67 0.01 0.82 0.01 0.67 0.01 1.0"
+     # legato "1.0!63 0.0",
+     n "f2 a2!2 gs2 e2 a2!2 e2 gs2!2 e2 a2 e2 gs2 a2 gs2 e2 a2!2 gs2 e2 a2!2 e2 gs2!2 e2 a2 e2 gs2 a2 gs2 e2 a2!2 gs2 e2 a2!2 e2 gs2!2 e2 a2 e2 gs2 a2 gs2 e2 a2!2 gs2 e2 a2!2 e2!2 gs2 e2 a2 e2 gs2 e2 ~"
+     # amp "1.0 0.35 0.54 0.06 0.54 0.25 0.35 0.76 0.88 0.15 1.0 0.25 0.33 0.25 0.54 0.15 1.0 0.35 0.54 0.06 0.54 0.25 0.35 0.76 0.88 0.15 1.0 0.25 0.33 0.25 0.54 0.15 1.0 0.35 0.54 0.06 0.54 0.25 0.35 0.76 0.88 0.15 1.0 0.25 0.33 0.25 0.54 0.15 1.0 0.35 0.54 0.06 0.54 0.25 0.35!2 1.0 0.15 1.0 0.25 0.33 0.25 1.0 0.01"
+     # legato "0!63 1.0",
+     n "gs2 ~!3 fs2 ~!2 gs2 ~!2 f2 ~ fs2 ~!3 f2 ~!3 fs2 ~!2 gs2 ~!2 f2 ~ fs2 ~!3 f2 ~!3 fs2 ~!2 gs2 ~!2 f2 ~ fs2 ~!3 f2 ~!3 fs2 ~!2 gs2!2 ~ f2 ~ fs2 ~ f2 ~"
+     # amp "0.76 0!3 1.0 0!2 0.35 0!2 1.0 0.0 1.0 0!3 1.0 0!3 1.0 0!2 0.35 0!2 1.0 0.0 1.0 0!3 1.0 0!3 1.0 0!2 0.35 0!2 1.0 0.0 1.0 0!3 1.0 0!3 1.0 0!2 0.35 0.88 0.0 1.0 0.0 1.0 0.0 1.0 0.0"
+     # legato "0!64",
+     n "~!4 gs2 ~!5 a2 ~ gs2 ~!3 gs2 ~!3 gs2 ~!5 a2 ~ gs2 ~!3 gs2 ~!3 gs2 ~!5 a2 ~ gs2 ~!3 gs2 ~!3 gs2 ~!5 a2 ~ g2 ~ g2 ~"
+     # amp "0!4 0.71 0!5 0.54 0.0 0.51 0!3 0.76 0!3 0.71 0!5 0.54 0.0 0.51 0!3 0.76 0!3 0.71 0!5 0.54 0.0 0.51 0!3 0.76 0!3 0.71 0!5 0.54 0.0 1.0 0.0 1.0 0.0"
+     # legato "0!64",
+     n "~!60 gs2 ~ a2 ~"
+     # amp "0!60 0.51 0.0 0.54 0.0"
+     # legato "0!64"
+     ] # drums2 
+
+let fm_bass = mm 6
+    fm_wavy = (|+ n 12) $ (|* amp 1.2) $ struct "0101001010000010" $ n "5" # fm_bass 
+    fm_verse = slow (16/4) $ (|* amp 1.2) $  stack [
+     n "~ f6 ~ f6 ~!2 f6 ~ ds6 ~!5 ds6 ~!2 ds6 ~ ds6 ~!2 ds6 ~ as6 ~!5 as6 ~!2 as6 ~ as6 ~!2 as6 ~ gs6 ~!5 gs6 ~!2 gs6 ~ gs6 ~!2 as6 ~ as6 ~!5 as6 ~"
+     # legato "0.0 1.0 0.0 1.0 0!2 1.0 0.0 1.0 0!5 1.0 0!2 1.0 0.0 1.0 0!2 1.0 0.0 1.0 0!5 1.0 0!2 1.0 0.0 1.0 0!2 1.0 0.0 1.0 0!5 1.0 0!2 1.0 0.0 1.0 0!2 1.0 0.0 1.0 0!5 1.0 0.0",
+     n "~!64"
+     # legato "0!63 1.0"
+     ] # fm_bass
+
+    fm_verse_var =  # fm_bass
+
+
+let squelch = mm 8
+    fm_stab = (|- n 12) $ (|+ n "[8 8 8 15]/4") $ struct "~!6 t ~" $ n "[0,2,4,7, 11]" # squelch
+
+
+let pw1 = mm 9
+    pw2 = mm 10 
+    drums2 = mm 7
+    pw_stab = struct "<[~!10 t ~!5]!3 [~!6 t t t ~ t ~!5]>" $ n "[0, 3, 5, 10]" # pw1 
+    pw_arp = (# stack [pw1,pw2]) $ (|- n 12) $ slow 4 $  n $
+           tScale "5 7 8 10 12 14 15 "  " [8 7 4 2 8 7 2 4]!4 [7 6 3 1 7 6 1 3]!3 [7 6 3 1 76 4 2]"
+
+
+let dp = mm 12
+    dorian_pads = (|- n 7) $ n "[0, 3, 7, <10!15 9>]" # dp 
+    jazz_pads = slow (32/4) $ stack [
+     n "f4 ~!15 ds5 ~!15 d4 ~!15 c5 ~!15 cs4 ~!15 c5 ~!15 c4 ~!15 ds5 ~!15"
+     # legato "16.0 0!15 15.0 0!15 16.0 0!15 15.0 0!15 16.0 0!15 15.0 0!15 16.0 0!15 16.0 0!15",
+     n "gs4 ~!31 f4 ~!31 f4 ~!31 ds4 ~!23 d5 ~!7"
+     # legato "16.0 0!31 16.0 0!31 16.0 0!31 16.0 0!23 8.0 0!7",
+     n "c5 ~!31 a4 ~!31 gs4 ~!31 g4 ~!31"
+     # legato "16.0 0!31 16.0 0!31 16.0 0!31 16.0 0!31",
+     n "ds5 ~!31 c5 ~!31 c5 ~!31 as4 ~!31"
+     # legato "16.0 0!31 16.0 0!31 16.0 0!31 16.0 0!31",
+     n "~!96 ds5 ~!31"
+     # legato "0!96 16.0 0!31"
+     ] # dp 
+
+do
+  setcps(148/120/2)
+  hush
+  d1 $ stack [pw_stab, fm_stab, fm_wavy]
+  d2 $ stack [ssdrums]
+
+-- omg arps
+d1 $ stack [pw_arp, fm_stab,  fm_verse]
+
+do
+  d1 $ stack [pw_stab, fm_stab, fm_wavy]
+  d2 silence
+
+do
+  d1 $ stack [pw_stab, fm_stab, fm_wavy]
+  d2 $ (|- n 8 ) $ ssdrums 
+
+do
+  d1 $ stack [pw_stab, fm_stab, fm_wavy]
+  d2 $ (|- n 16 ) $ ssdrums 
+
+
+
+let stab_arp =slow (16/4) $ stack [
+     n "d6 ds6 f6 g6 ~ ds6 g6 ~ d6 ds6 f6 g6 ~ ds6 g6 ~ d6 ds6 f6 g6 ~ ds6 g6 ~ d6 ds6 f6 g6 ~ ds6 g6 ~ c6 d6 ds6 f6 ~ d6 f6 ~ c6 d6 ds6 f6 ~ d6 f6 ~ c6 d6 ds6 f6 ~ d6 f6 ~ c6 d6 ds6 f6 ~ ds6 g6 ~",
+     n "~!4 d6 ~!2 f6 ~!4 d6 ~!2 f6 ~!4 d6 ~!2 f6 ~!4 d6 ~!2 f6 ~!4 c6 ~!2 ds6 ~!4 c6 ~!2 ds6 ~!4 c6 ~!2 ds6 ~!4 d6 ~!2 f6"
+     ] # squelch  # amp 0.3
+    wt = mm 11
+    wt_mel = slow (16/4) $ stack [
+     n "~ gs6 ~ gs6 ~!2 gs6 ~ g6 ~!2 g6 ~!2 g6 ~!2 c6 ~ c6 ~!2 c6 ~ c6 ~!2 c6 ~!2 c6 ~!2 f6 ~ f6 ~!2 f6 ~ c7 ~!2 c7 ~!2 c7 ~!2 c7 ~ c7 ~!2 as6 ~ as6 ~!2 as6 ~!2 as6 ~" # amp 0.25,
+     n "~!64"
+     ] # wt
+
+d2 silence
+
+do
+ d1 $ stack [pw_arp, fm_stab,  fm_verse, stab_arp, wt_mel ]
+ d2 $ stack [ssdrums]
+
+let bitarp = slow (16/4) $      n "~!8 c4 d4 ds4 g4 c5 ds5 f5 g5 c6 d6 ds6 g6 c7 ds7 f7 g7 c8 d8 ds8 g8 c9 ds9 f9 g9 ~!8 c4 d4 ds4 g4 c5 ds5 f5 g5 c6 d6 ds6 g6 c7 ds7 f7 g7 c8 d8 ds8 g8 c9 ds9 f9 g9 ~!8 c4 d4 ds4 g4 c5 ds5 f5 g5 c6 d6 ds6 g6 c7 ds7 f7 g7 c8 d8 ds8 g8 c9 ds9 f9 g9 ~!32" # mm 13
+
+do
+  d1 $ stack [fm_stab, fm_wavy]
+  d3 $ dorian_pads
+  d4 $ fast 1 $ bitarp
+
+
+do
+  d4 silence
+  d1 $ stack [fm_stab, fm_wavy]
+  d3 $ jazz_pads 
+  d2 $ stack [ssdrums]
+
+-- heartbreak
+
+
+let square = mm 14
+    piano = mm 15
+    terje = mm 16
+
+let e_beat = slow (8/4) $ stack [
+     n "c3 ~ e3 ~ e3 ~ e3 ~ c3 ~ e3 ~ e3 ~ e3 ~ c3 ~ e3 ~ e3 ~ e3 ~ c3 ~ e3 ~ e3 ~ e3 ~ c3 ~ e3 ~ e3 ~ e3 ~ c3 ~ e3 ~ e3 ~ e3 ~ c3 ~ e3 ~ e3 ~ e3 ~ c3 ~ e3 ~ cs3 ~ e3 e10"
+     # amp "1.0 0.0 0.69 0.0 0.91 0.0 0.69 0.0 1.0 0.0 0.65 0.0 0.91 0.0 0.67 0.0 1.0 0.0 0.71 0.0 0.91 0.0 0.67 0.0 1.0 0.0 0.69 0.0 0.9 0.0 0.7 0.0 1.0 0.0 0.69 0.0 0.91 0.0 0.69 0.0 1.0 0.0 0.65 0.0 0.91 0.0 0.67 0.0 1.0 0.0 0.71 0.0 0.91 0.0 0.67 0.0 1.0 0.0 0.69 0.0 0.9 0.0 0.7 0.01"
+     # legato "0!63 1.0",
+     n "cs3 ~!3 f3 ~!3 cs3 ~!3 f3 ~ fs3 ~ cs3 ~!3 f3 ~!3 cs3 ~!3 f3 ~!3 cs3 ~!3 f3 ~!3 cs3 ~!3 f3 ~ fs3 ~ cs3 ~!3 f3 ~!3 cs3 ~!3 e3 ~!3"
+     # amp "0.96 0!3 0.91 0!3 0.96 0!3 0.91 0.0 0.96 0.0 0.96 0!3 0.91 0!3 0.96 0!3 0.91 0!3 0.96 0!3 0.91 0!3 0.96 0!3 0.91 0.0 0.96 0.0 0.96 0!3 0.91 0!3 0.96 0!3 0.9 0!3"
+     # legato "0!64",
+     n "e3 ~!7 d3 ~!7 e3 ~!3 fs3 ~!3 d3 ~!7 e3 ~!7 d3 ~!7 e3 ~!3 fs3 ~!3 d3 ~!3 f3 ~!3"
+     # amp "1.0 0!7 1.0 0!7 1.0 0!3 0.9 0!3 1.0 0!7 1.0 0!7 1.0 0!7 1.0 0!3 0.9 0!3 1.0 0!3 0.91 0!3"
+     # legato "0!64",
+     n "g3 ~!7 e3 ~!15 e3 ~!15 e3 ~!15 e3 ~!7"
+     # amp "1.0 0!7 1.0 0!15 1.0 0!15 1.0 0!15 1.0 0!7"
+     # legato "0!64",
+     n "~!8 ds3 ~!15 ds3 ~!15 ds3 ~!15 ds3 ~!7"
+     # amp "0!8 1.0 0!15 1.0 0!15 1.0 0!15 1.0 0!7"
+     # legato "0!64"
+     ] # drums2
+
+
+do
+ d1 $ e_beat
+ d2 $  dorian_pads
+ d3 $ stack [ fm_stab, pw_stab]
+
+let hblead = slow (64/4) $ stack [
+     n "c4 ~!6 ds4 ~!7 f4 ~!6 f4 ds4 ~!5 f4 ~ g4 ~ as4 ~ g4 ~!28 c4 ~!5 d4 ~ ds4 ~!4 f4 ~ f4 ~!5 f4 ~ ds4 ~!5 f4 ~ g4 ~!2 as4 f4 ~!27 c4 ~!6 d4 ~ ds4 ~!5 f4!2 ~!6 f4 ~ ds4 ~!4 f4 ~ g4 ~ as4 ~ f4 ~!28 c4 ~!5 d4 ~ ds4 ~!4 f4 ~ f4 ~!5 f4 ~ ds4 ~!5 f4 ~ g4 ~ as4 ~ f4 ~!28"
+     # legato "6.0 0!6 7.0 0!7 2.0 0!6 2.0 7.0 0!5 3.0 0.0 3.0 0.0 3.0 0.0 1.0 0!28 6.0 0!5 2.0 0.0 6.0 0!4 1.0 0.0 1.0 0!5 3.0 0.0 7.0 0!5 3.0 0.0 3.0 0!2 2.0 29.0 0!27 7.0 0!6 2.0 0.0 6.0 0!5 1.0 2.0 0!6 2.0 0.0 6.0 0!4 3.0 0.0 3.0 0.0 3.0 0.0 29.0 0!28 6.0 0!5 2.0 0.0 6.0 0!4 1.0 0.0 1.0 0!5 3.0 0.0 7.0 0!5 3.0 0.0 3.0 0.0 3.0 0.0 29.0 0!28",
+     n "~!5 d4 ~!7 f4 ~!2 g4 ~!19 f4 ~!43 g4 ~!63 g4 ~!63 g4 ~!47"
+     # legato "0!5 2.0 0!7 2.0 0!2 6.0 0!19 28.0 0!43 6.0 0!63 6.0 0!63 6.0 0!47"
+     ] # square
+
+d4 $ hblead # amp 0.7
+
+let hbpiano = struct "t t t t" $ slow 4 $ (|+ n 12) $ n "[0,3,7] [2, 5, 10, 14] [3, 7, 12, 15]!2 " # piano
+
+do
+ d2 silence
+ d3 silence
+ d5 $ hbpiano
+
+let tlead = slow (112/4) $ stack [
+     n "ds7 ~!5 d7 ~!7 as6 ~ g6 ~!5 f6 ~!7 f6 ~ f6 ~!3 c6 ~!27 ds7 ~!7 c7 ~!5 as6 ~!7 f6 ~ ds6 ~!5 f6 ~!3 as6 ~ f6 ~!26 c7 ~!6 d7 ~ c7 ~!5 as6 ~ g6 ~!5 f6 ~!7 f6 ~ f6 ~!3 c6 ~!27 ds7 ~!7 c7 ~!5 as6 ~!2 as6 ~!4 f6 ~ ds6 ~!5 f6 ~ f6 ~ g6 ~!28 c7 ~ ds7 ~!4 d7 ~ c7 ~!5 as6 ~!2 as6 g6 ~!6 f6 ~ ds6 ~!4 g6 ~!3 f6 ~!27 c7 ds7 ~!6 c7 ~!4 as6 ~!2 g6 ~!7 ds6 ~!5 f6 ~ g6 ~!3 c6 ~!11 f6 ~!3 as5 ~ g6 ~!3 g5 ~ c6 ~!3 ds7 ~!7 c7 ~!5 as6 ~!7 f6 ~ ds6 ~!5 f6 ~!3 as6 ~ f6 ~!27"
+     # legato "5.0 0!5 2.0 0!7 1.0 0.0 5.0 0!5 2.0 0!7 1.0 0.0 2.0 0!3 23.0 0!27 6.0 0!7 5.0 0!5 2.0 0!7 2.0 0.0 5.0 0!5 2.0 0!3 2.0 0.0 26.0 0!26 1.0 0!6 2.0 0.0 6.0 0!5 1.0 0.0 5.0 0!5 2.0 0!7 1.0 0.0 2.0 0!3 21.0 0!27 6.0 0!7 5.0 0!5 2.0 0!2 1.0 0!4 1.0 0.0 5.0 0!5 1.0 0.0 1.0 0.0 2.0 0!28 1.0 0.0 5.0 0!4 2.0 0.0 5.0 0!5 2.0 0!2 2.0 4.0 0!6 1.0 0.0 2.0 0!4 3.0 0!3 20.0 0!28 5.0 0!6 5.0 0!4 2.0 0!2 6.0 0!7 5.0 0!5 1.0 0.0 2.0 0!3 11.0 0!11 2.0 0!3 1.0 0.0 2.0 0!3 1.0 0.0 2.0 0!3 6.0 0!7 5.0 0!5 2.0 0!7 2.0 0.0 5.0 0!5 2.0 0!3 2.0 0.0 26.0 0!25 2.0 0.0",
+     n "~!8 c7 ~!15 ds6 ~!9 g6 ~!35 d7 ~!9 g6 ~!15 g6 ~!30 d7 ~!24 ds6 ~!9 g6 ~!35 d7 ~!9 g6 ~ g6 ~!17 c6 ~!27 d7 ~!15 g6 ~!12 f6 ~!4 as6 ~!29 d7 ~!5 d7 ~!15 f6 ~!11 ds6 ~!15 d6 ~!5 d6 ~!5 f5 ~!7 d7 ~!9 g6 ~!15 g6 ~!31"
+     # legato "0!8 6.0 0!15 5.0 0!9 2.0 0!35 2.0 0!9 6.0 0!15 2.0 0!30 1.0 0!24 6.0 0!9 1.0 0!35 2.0 0!11 4.0 0!17 22.0 0!27 1.0 0!15 2.0 0!12 2.0 0!4 2.0 0!35 2.0 0!15 2.0 0!11 1.0 0!15 2.0 0!5 1.0 0!5 1.0 0!7 2.0 0!9 6.0 0!15 2.0 0!31",
+     n "~!128 ds7 ~!319"
+     # legato "0!128 6.0 0!319"
+     ] # terje
+
+d6 $ (|+ n " 7 <-12 12> 0 0 12") $  fast "4 2 1 2"  $  tlead # amp 0.6
+
+-- hard bass donk
+
+let eurodonk = slow (4/4) $ stack [
+     n "gs3 ~ c4 ~ cs4 ~ c4 ~ gs3 ~ c4 ~ cs4 ~ c4 ~ gs3 ~ c4 ~ cs4 ~ c4 ~ gs3 ~ c4 ~ cs4 ~ c4 e10"
+     # amp "1.0 0.0 0.28 0.0 0.8 0.0 0.13 0.0 1.0 0.0 0.28 0.0 0.8 0.0 0.07 0.0 1.0 0.0 0.28 0.0 0.8 0.0 0.13 0.0 1.0 0.0 0.28 0.0 0.8 0.0 0.07 0.01"
+     # legato "0!31 1.0",
+     n "a3 ~ d4 ~!3 d4 ~ a3 ~ d4 ~ b3 ~ cs4 ~ a3 ~ d4 ~!3 d4 ~ a3 ~ d4 ~ b3 ~ cs4 ~"
+     # amp "1.0 0.0 0.05 0!3 0.06 0.0 1.0 0.0 0.06 0.0 0.08 0.0 0.01 0.0 1.0 0.0 0.06 0!3 0.06 0.0 1.0 0.0 0.06 0.0 0.08 0.0 0.01 0.0"
+     # legato "0!32",
+     n "c4 ~!7 as3 ~!5 d4 ~ c4 ~ b3 ~!5 as3 ~!5 d4 ~"
+     # amp "1.0 0!7 0.87 0!5 0.06 0.0 1.0 0.0 0.01 0!5 1.0 0!5 0.06 0.0"
+     # legato "0!32",
+     n "~!8 c4 ~!15 c4 ~!7"
+     # amp "0!8 1.0 0!15 1.0 0!7"
+     # legato "0!32",
+     n "~!8 b3 ~!15 b3 ~!7"
+     # amp "0!8 1.0 0!15 1.0 0!7"
+     # legato "0!32"
+     ] # drums2
+
+
+d1 $ eurodonk
+
+do
+ d2 silence
+ d5 silence
+ d6 silence
+ d4 silence
+
+let donq = (|- n 12) $ struct "~ ~  t ~ ~ ~ t ~ ~ ~ t ~ ~ ~ ~ ~" $ n "2" # tdonk1
+
+d2 $ donq
+
+
+let tdonk1 = mmm 1
+    tdonk2 = mmm 7 
+    sine_riser = mmm 4
+    bubble = mmm 3
+    d909 = mmm 2
+
+let donq_mel = slow (32/4) $ stack [
+     n "~!2 d4 ~!3 d4 ~!3 d4 ds4 ~!2 g4 a4 ~!2 d4 ~!3 d4 ~!2 d5 ~ as4 ~!2 g4 a4 ~!2 d4 ~!3 d4 as4 ~!2 d4 ds4 ~!2 g4 a4 ~!2 d4 g4 ~!2 d4 as4 ~ ds5 ~ as4 ~!2 g4 a4 ~!2 d4 ~!2 d5 ~!4 d4 ds4 ~!2 g4 a4 ~!2 d4 ~!3 d4 ~!2 d5 ~ as4 ~!2 g4 a4 ~!2 d4 ~!3 d4 as4 ~!2 d4 ds4 ~!2 g4 a4 ~!2 d4 g4 ~!2 d4 as4 ~ ds5 ~ as4 ~!2 g4 a4",
+     n "~!26 d4 ~!31 ds4 ~!11 d4 ~!19 d4 ~!31 ds4 ~!5"
+     ] 
+    d909beat = slow (16/4) $ stack [
+     n "c3 cs3 e4 ~ c3 ~ e4 ~ c3 ~ e4 ~ c3 ~ e4 ~ c3 cs3 e4 ~ c3 ~ e4 ~ c3 ~ e4 ~ c3 ~ e4 ~ c3 cs3 e4 ~ c3 ~ e4 ~ c3 cs3 e4 ~ c3 ~ e4 ~ c3 cs3 e4 ~ c3 ~ e4 ~ c3 ~ e4 ~ c3 ~ as3 c5",
+     n "~!4 ds3 ~!7 ds3 ~!7 ds3 ~!7 ds3 ~!7 ds3 ~!7 ds3 ~!7 ds3 ~!7 ds3 ~!3"
+     ] # d909
+
+d2 $ donq_mel # tdonk1
+
+
+d1 silence
+
+d1 $ eurodonk
+
+let bubbles = slow (32/4) $ stack [
+     n "~!2 e4 ~!3 e4 ~!3 e4 f4 ~!2 a4 b4 ~!2 e4 ~!3 e4 ~!2 e5 ~ c5 ~!2 a4 b4 ~!2 e4 ~!3 e4 c5 ~!2 e4 f4 ~!2 a4 b4 ~!2 e4 a4 ~!2 e4 c5 ~ f5 ~ c5 ~!2 a4 b4 ~!2 e4 ~!2 e5 ~!4 e4 f4 ~!2 a4 b4 ~!2 e4 ~!3 e4 ~!2 e5 ~ c5 ~!2 a4 b4 ~!2 e4 ~!3 e4 c5 ~!2 e4 f4 ~!2 a4 b4 ~!2 e4 a4 ~!2 e4 c5 ~ f5 ~ c5 ~!2 a4 b4",
+     n "~!26 e4 ~!31 f4 ~!11 e4 ~!19 e4 ~!31 f4 ~!5"
+     ] # bubble
+
+do 
+  d1 $ eurodonk
+  d2 $ donq_mel # tdonk1
+  d4 $ (|- n 2) $ (|+ n 12) $ donq_mel # tdonk2
+  d3 $ bubbles
+
+d4 silence
+
+
+d5 $ d909beat
+
+do 
+ d5 silence
+ d1 silence
+
+
+
+do
+  d1 $ eurodonk
+  d5 $ d909beat
+  d6 $ slow 16 $  n "0" # sine_riser
+
+d6 silence
+
+-- robot tok
+
+let bitcrush_bass = mmm 5
+    fsub = mmm 6 
+    cowbell = mmmm 16 
+    square = mmm 8
+    robot1 = mmm 9
+    robot2 = mmm 10 
+
+
+let robot_beat = slow (4/4) $ stack [
+     n "e4 ~!2 a4 ~!3 gs4 ~!3 a4 ~ gs4 ~ gs4 ~ gs4 ~ a4 ~!3 gs4 ~!3 gs4 ~!3 e10"
+     # amp "1.0 0!2 0.91 0!3 1.0 0!3 0.91 0.0 0.18 0.0 0.87 0.0 0.18 0.0 0.91 0!3 1.0 0!3 0.31 0!3 0.03"
+     # legato "0!3 1.0 0!3 1.0 0!3 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0!3 1.0 0!3 1.0 0!3 1.0",
+     n "~!7 a4 ~!7 a4 ~!7 a4 ~!3 a4 ~!3 gs4"
+     # amp "0!7 0.3 0!7 0.31 0!7 0.31 0!3 0.91 0!3 1.0"
+     # legato "0!7 1.0 0!7 1.0 0!7 1.0 0!3 1.0 0!4",
+     n "~!8 e4 ~!7 e4 ~!7 e4 ~!6 a4"
+     # amp "0!8 1.0 0!7 1.0 0!7 1.0 0!6 0.3"
+     # legato "0!32",
+     n "~!8 fs4 ~!15 fs4 ~!7"
+     # amp "0!8 1.0 0!15 1.0 0!7"
+     # legato "0!32",
+     n "~!8 g4 ~!15 g4 ~!7"
+     # amp "0!8 1.0 0!15 1.0 0!7"
+     # legato "0!32"
+     ] # drums2
+
+let bass = slow 1 $ (|- n 12) $ n "-3@2  ~ ~  ~ ~ -4 ~ ~ ~ -4 ~ ~!4" # legato "1 0.75 0.75"
+
+-- damaged
+do
+ d1 $ stack [bass # bitcrush_bass, bass # fsub]
+ d2 $ slow 2 $ n "7 ~!15 ~!12 6 ~ ~ ~ 7 ~!3 ~!28" # cowbell
+
+
+-- beat drop
+do
+ d3 $ groove 8 "0.0 0.02 " $  robot_beat 
+ d2 $ slow 4 $ n "7 11 12 16  12 11 7 6  7 11 12 16 12  ~ ~ ~" # cowbell
+
+let sq7 = slow (16/4) $ stack [
+     n "cs4!3 ~!11 cs4 ~ cs4!3 ~!13 fs4 ~ fs4 ~!13 a4!3 ~!5 a4!2 b4 ~!5",
+     n "e4!3 ~!11 e4 ~ e4!3 ~!13 a4 ~ a4 ~!13 cs5!3 ~!5 cs5!2 ds5 ~!5",
+     n "b4!3 ~!11 b4 ~ b4!3 ~!13 e5 ~ e5 ~!13 gs5!3 ~!5 gs5!3 ~!5"
+     ] # legato "3" # square
+    guitar = slow (16/4) $ stack [
+     n "~!5 fs4 ~ cs4 b3 e3 cs4 ~!10 fs4 ~ cs4 b4 ~ gs4 ~!3 fs4 ~!6 gs4 ~ e4 cs5 ~ gs4 ~ gs4 ~!8 a4 ~ e4 b4 ~ gs4 ~ gs5 ~!2 a0",
+     n "~!6 e4 ~!15 e4 ~!2 e3 ~!5 e4 ~!6 fs4 ~!2 fs3 ~!12 gs4 ~!2 e3 ~!3 cs5 ~!2"
+     ]
+
+do
+ d1 $ sq7
+ d2 $ guitar # robot1 
+
+d3 silence
+
+do
+ d1 $ stack [bass # bitcrush_bass, bass # fsub]
+ d2 $ struct "t(3,8) t(3,8)" $ slow 4 $ n "7 11 12 16  12 11 7 6  7 11 12 16 12  ~ ~ ~" # cowbell
+
+do
+ d4 $ sq7
+ d2 $ stack [guitar # robot1 , guitar # robot2 ]
+
+
+do
+ d1 $ stack [bass # bitcrush_bass, bass # fsub]
+ d2 $ struct "t(13, 16)" $ slow 4 $ n "7 11 12 16  12 11 7 6  7 11 12 16 12  ~ ~ ~" # cowbell
+
+d3 silence
+
+let bass_groove = slow (16/4) $ stack [
+     n "cs4 ~!5 b3 ~!3 cs4 ~!3 b3 ~ cs4 ~!5 b3 ~!3 gs3 ~!3 cs4 ~ fs3 ~!5 e3 ~!3 fs3 ~!3 e3 ~ a3 ~!5 gs3 ~ a3 ~!2 b3 ~!2 e4 ~",
+     n "~!64"
+     ]
+
+do
+ d3 $ groove 8 "0.0 0.02 " $  robot_beat 
+ d2 $  slow 4 $ n "7 11 12 16  12 11 7 6  7 11 12 16 12  ~ ~ ~" # cowbell
+ d4 $ sq7
+ d2 $ stack [guitar # robot1 , guitar # robot2 ]
+ d1 $ stack [bass_groove # bitcrush_bass, bass_groove # fsub]
+
+solo 2
+
+
+    fsub = mmm 6 
+d1 $ # mm 12
+
+
+--- heartstring
+
+let mchords = mmm 13
+    rchords = mmm 12
+    8bit2 = mmm 14
+    gabber = mmm 15
+    donk = mmm 11
+
+let kick = mmmm 1
+    ohh_ride = mmmm 2
+    chh = mmmm 3
+    clap = mmmm 4
+    cowbells = mmmm 5
+
+
+

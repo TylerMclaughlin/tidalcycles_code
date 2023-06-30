@@ -1,0 +1,104 @@
+d1 $ within' ("0.25 0.33", (7/8)) (fast 3 ) $ struct "t(8,8)" $ nT "name" 5 "0 7 14 16" # m 1
+
+
+let monster posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy) (slow (posR |- posL)) p 
+
+let monster posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy) (slow ( posR ) - ( posL )) p 
+
+let monster posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy) (slow_ ( posR ) - ( posL )) p 
+
+let monsterfail1 posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy) (slow ((fmap pure posR) - (fmap pure posL))) p 
+
+-- thanks alex
+
+sliceDiv :: Time -> Time -> Time -> Time -> Pattern a -> Pattern a
+
+sliceDiv posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy . _slow (posR - posL)) p
+
+d1 $ slow 2 $ sliceDiv 3 6 16 "<4 5 6 7>" $    
+            sliceDiv 12 15 16 9 $ 
+            struct "t!16" $ n "0 3 5 7  10 7 5 3  7 10 12 14  12 10 7 5"   # s "midi"
+
+d1 $ slow 2 $ sliceDiv 3 8 16 "7" $    
+            struct "t!16" $ n "0 3 5 7  10 7 5 3  7 10 12 14  12 10 7 5"   # s "midi"
+
+
+d1 $ drumz $ slow 2 $ sliceDiv 12 16 32 5 $  struct "t!32" $ nT "a" 17 "0 8 10 8 [0,3] 8 10 8 0 8 10 8 [0,3] 8 10 8" # m 2
+
+d2 $ slow 1 $ sliceDiv 0 4 16 5 $ sliceDiv 8 11 16 "<4 2>" $  struct "t!16" $ stack [
+    n ("0 3 5 7 10  7 5 3   5 7 10 12 10 7 5 3" |-  "[0 5]/4")  # m 1,
+     drumz $ n "0 8 1 8   [0,3] 8 10 8  0  8 2 8   [0,3] 8 10 8" # m 2]
+
+d1 $ (|+ n 12) $ struct "[~ t]*2" $
+     n "[[3, 5, 7, 14] [2, 5, 7, 12]]/4" # legato "<0.1 0.2 0.5 3>" # m 3
+
+d2 $ slow 1 $ groove 4 "0 0.005 0.001 0.004" $
+     sliceDiv 0 4 16 5 $ 
+     sliceDiv 8 11 16 4 $
+     struct "t!16" $ stack [
+     n ("0 3 5 7 10  7 5 3   5 7 10 12 10 7 5 3" |-  "[0 5]/4")  # m 1,
+     drumz $ n "0 4 1 4   [0,3] 4 5 4  0  4 2 4   [0,3] 4 5 4" # m 2]
+
+
+
+
+
+d1 $ drumz $ sliceDiv 6 8 16 3 $ struct "t!16" $ n "0 1 2 3 4 5 6 7 8" # m 2
+
+d1 $ drumz $ sliceDiv 6 8 16 3 $ struct "t!16" $ n "0 1 2 3 4 5 6 7 8" # m 2
+
+
+let test m l r p = slow (l + r) . fast (l - r) $ p
+
+let test m l r p = slow (l / r) . fast (l - r) $ p
+
+let monsterfail1 posL posR subdivWhat subdivBy p = asdf (fast subdivBy) (slow ((fmap pure posR) - (fmap pure posL))) p 
+        where
+            asdf = within' ((posL/subdivWhat), posR/subdivWhat) 
+
+
+
+let monster0 posL posR subdivWhat subdivBy p = within' (( posL/subdivWhat), posR/subdivWhat) ((fast subdivBy) . slow (posR |- posL))    p 
+
+let monster1 posL posR subdivWhat subdivBy p = within' (( posL/subdivWhat), posR/subdivWhat) ((fast subdivBy)  . (slow (posR - posL) )) p 
+
+let monster2 posL posR subdivWhat subdivBy p = within' (( posL/subdivWhat), posR/subdivWhat) (slow ((- posL) <$> posR) ) p 
+
+d1 $ monster 2 7 8 3 $ struct "t!8" $ nT "h" 5 "0 2 4 5 6" # m 1 
+
+
+n ((/4 ) <$> "0 2 3 4")
+
+n "0 2 3 4"/3
+
+within'
+
+d1 $ within' ((5/8), (7/8)) ((fast 4 ). (slow (7 - 5))) $ struct "t(8,8)" $ nT "name" 9 "0 7 14 16" # m 1
+
+d1 $ within' ((3/16), (6/16)) ((fast 7 ) . (slow (6 - 3))) $
+     within' ((12/16), (15/16)) ((fast 9) . (slow (15 - 12)))   $
+     struct "t(16,16)" $ nT "name" 9 "0 7 14 16" # m 1
+
+16 -3 - 3 + 7 + 9
+
+d1 $ within' ((3/16), (6/16)) ((fast 7 ) . (slow (6 - 3))) $
+     within' ((12/16), (15/16)) ((fast 9) . (slow (15 - 12)))   $
+     struct "t(16,16)" $ nT "name" 26 "0!13 7!13" # m 1
+
+d1 $ slow 2 $ (within') ((3/16), (6/16)) ((fast 7 ) . (slow (6 - 3))) $
+     within' ((12/16), (15/16)) ((fast 9) . (slow (15 - 12)))   $
+     struct "t(16,16)" $ n "0 3 5 7  10 7 5 3  7 10 12 14  12 10 7 5 " # m 1
+
+d1 $ slow 2 $ (# n "0 3 5 7  10 7 5 3  7 10 12 14  12 10 7 5 ") $ (within') ((3/16), (6/16)) ((fast 7 ) . (slow (6 - 3))) $
+     within' ((12/16), (15/16)) ((fast 9) . (slow (15 - 12)))   $
+     struct "t(16,16)" $ n "0" # m 1
+
+ 16th notes 3-6 by 7, 7-12 by 4, and 12-15 by 9,
+
+let monster posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy) (slow (posR |- posL)) p 
+
+let sliceDiv posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy)  p 
+
+
+d1 # sliceDiv m 1
+

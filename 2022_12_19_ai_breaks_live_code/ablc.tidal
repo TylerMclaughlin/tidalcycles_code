@@ -1,0 +1,88 @@
+setcps(140/120/2)
+
+d1 $ drumz $ slow 4 $ n "0 .. 64" # m 1
+
+d1 $ groove 8 "0 0.02" $ (|- n 24)  $ fast "1 1 2 2.5" $ slow 2 $ n "0 .. 31" # amp "[0.4 0.6 0.2 0.3]*4" # m 9
+
+-- change speed
+d1 $ groove 8 "0 0.02" $ (|- n 24)  $ fast "2 1 1.5 1.5" $ slow 2 $ n "0 .. 31" # amp "[0.4 0.6 0.2 0.3]*4" # m 9
+
+-- sine  the fast
+-- insane
+d1 $ mask "f t!7 f t!7" $  groove 8 "0 0.02" $ (|- n 24)  $ segment "16@3 <32 8 64 8>" $
+    fast (slow "2 4 5 8" $ 
+   range 2 (slow (5/4) $ range 3 4 sine) $  sine) $
+   slow 2 $ n "0 .. 31" # amp "[0.4 0.6 0.2 0.3]*4" # m 9
+
+-- beaautiful!
+d6 $ drumz $ fast 2 $ n "0 [0]" # m 6
+
+d6 $ drumz $ fast 2 $ n "0 [0,1]" # m 6
+
+d6 silence
+
+-- add mask
+d1 $ mask "f t!7 f t!7" $ groove 8 "0 0.02" $  (|- n 24)  $ fast "2 1 1.5 1.5" $ slow 2 $ n "0 .. 31" # amp "[0.4 0.6 0.2 0.3]*4" # m 9
+
+d1 $ mask "f t!7 f t!7" $ mask "t(9, 16)" $ groove 8 "0 0.02" $  (|- n 24)  $ fast "2.5 2 1.0 0.5" $ slow 2 $ n "0 .. 31" # amp "[0.4 0.6 0.2 0.3]*4" # m 9
+
+d2 $ cc9 42 (fast "[4 3 7 8]/2" $ segment 16 $ range "<3 7 54 94>" "<127 6 2 88>" sine)
+
+d2 $ cc9 42 (fast "[4 3 7 8]/2" $ segment 16 $ range "<9 2 53 94>" "<126 6 3 81>" sine)
+
+d2 $ cc9 42 (fast "[4 3 7 8]/2" $ segment 16 $ range "<3 9 73 34>" "<12 8 23 81>" sine)
+
+-- dup
+d2 $ cc9 42 (fast "[5 2 1 9]/1" $ segment 16 $ range "<3 9 73 34>" "<12 8 23 81>" sine)
+
+-- ogre sound 
+d2 $ cc9 42 (fast "[5 2 1 9]/1" $ segment 16 $ range "<3 9>" "<2 17>" sine)
+
+d2 $ cc9 42 (fast "[5 2 1 9]/1" $ segment 16 $ range "<4 6>" "<10 11>" sine)
+
+d2 $ cc9 42 (fast "[5 2 1 9]/1" $ segment 2 $ range "[7 11]/4" "[9 17]/4" sine)
+
+-- change fast pattern rate
+d2 $ cc9 42 (fast "[5 2 1 9]/3" $ segment 2 $ range "[7 11]/4" "[9 17]/4" sine)
+
+-- lovely over the chords
+d2 $ cc9 42 (fast "[5 2 1 9]/5" $ segment 2 $ range "[7 11]/4" "[9 17]/4" sine)
+
+d1 $ groove 8 "0 0.02" $  (|- n 24)  $ fast "1 1 2 2.5" $ slow 2 $ n "0 .. 31" # amp "[0.4 0.6 0.2 0.3]*4" # m 9
+
+-- speed.  60 80;
+-- :)
+d3 $ cc9 43 (fast 2 $ segment 16 $ range 90 65 sine)
+
+d3 $ cc9 43 (fast 2 $ segment 16 $ range 100 70 sine)
+
+-- :)
+d3 $ cc9 43 (fast 2 $ segment 16 $ range 110 75 sine)
+
+d3 $ cc9 43 (128/2)
+
+d3 $ cc9 43 (fast 8 $ range 1 127 sine)
+
+d4 $ struct (inv "t(9,16)") $
+ n (tScale' 53 "0 9 17  31 39 43" ("[0,1,2,3,7]" |- 0 + "[0 2 5 4 1 0 9 8 3]/2") ) # m 4 # legato (fast "[2 3 4 5]*4" $ range 0.3 2 $ sine) #
+       amp (fast "[3 9 17 2]*4" $ range 0.3 0.5 $ sine) 
+
+d4 silence
+
+d5 $  mask (inv "t(9,16)") $ struct "t!27" $
+ nT "iso" 8 (tScale' 53 "0 9 17  31 39 43" ("[0 1 2 3 4 5 6 7 6 5 4 3 2]" |- 3 + "[0 2 5 4 1 0 9 8 3]/2") ) # m 5 # legato (fast "[2 3 4 5]*4" $ range 0.3 2 $ sine) #
+       amp (fast "[3 9 17 2]*4" $ range 0.3 0.5 $ sine) 
+
+-- double melody
+d5 $ groove 8 "0 0.02" $ struct "t!7 ~ t!5 ~!3" $ nT "mel" 7 (tScale' 53 "0 9 17  31 39 43" "  2 3 4 5 6 1 2 3 2 ") # m 5
+
+d5 $ groove 8 "0 0.02" $ struct "t!7 ~ t!5 ~!3" $ nT "mel" 24 (tScale' 53 "0 9 17  31 39 43" "  2 3 4 5 6 1 2  3 4 5 6  1 2 2  3 4 5 6  1 2 3 ") # m 5
+
+-- pads!!
+d4 $ n (tScale' 53 "0 9 17 22 31 39 43"   ("[-2, 0, 2, 4, 6, 8]" |- 1 |- "[0 0]/4" )) # m 4
+
+d7 $ mb (-1) 1 $ slow (slow (slow 4 $ range 4 8 sine)  sine) # m "[5,4]"
+
+d7 $ mb (-1) 1 (slow 16 $ sine)  # m "[5,4]"
+
+d5 silence

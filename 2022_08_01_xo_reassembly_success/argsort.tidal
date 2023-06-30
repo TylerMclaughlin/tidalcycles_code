@@ -1,0 +1,21 @@
+setcps(130/120/2)
+
+let groov = groove 4 ("0 0.0183 0.002 0.01837" |* 0.15 |* (range 0.94 1.06 $ rand) ) 
+
+d1 $ (|* amp (range 0.5 1.5 $ rand)) $  groov $ struct "t(15, 16)" $  drumz $ slow 4 $ n "0 .. 64" # m 1 # amp "[0.6 0.2 0.4 0.2]*4"
+
+let squee amt rc = (slow amt . repeatCycles rc .  fast amt) 
+
+d2 $ mask "f t!15"  $ (1 <~) $ every 15 (squee "0.25 " 4) $ (1 ~>) $ (|* amp (range 0.75 1.25 $ rand)) $  groov $ struct "t(<15 15>, 16, <3 6 3 1>/5)" $  drumz $ slow 4 $ n "0 .. 64" # m 1 # amp "[0.6 0.2 0.4 0.3]*4"
+
+d1 $ drumz $ n "0 0 0 0" # m 2
+
+d3 $ drumz $ n "~ 8 ~ 8 ~  8 ~ 8" # m 2
+
+d3 silence
+
+d2 silence
+
+n "0 .. 63"
+
+n "0 .. 3"

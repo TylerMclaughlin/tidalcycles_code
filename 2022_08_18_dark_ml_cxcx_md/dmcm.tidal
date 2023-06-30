@@ -1,0 +1,32 @@
+
+setcps(132.5/120/2)
+
+
+
+do
+  let p1 = every 13 (fast 4 . slow 3) 
+      p2 = every 15 (fast 5 . slow 4) 
+      groov = groove 4 "-0.001 0.010 0.001 0.010"
+      amp0 = (# amp (fast 4 "0.95"))
+      a_null = "0.95 0.74 0.86 0.95"
+      ampz = (# amp (fast 4 a_null))
+      ampz2 = (# amp (fast 4 (a_null |* (-2) |+ 2)))
+      transp = (|+ n "[-11 [<-2 5> -6] -9 -11]/4" )
+  d1 $  (|- n 60) $  
+      p1 $ p2 $ ampz $ groov $ slow 8 $
+      n "0 .. 127" # m "[1, 2]" # amp 0.9
+  d2 $ transp   $ p1 $ p2 $ groov $ ampz2 $
+    (|+ nT "squidz" 20 "0*5 12*5 24*5 12*5") $
+     segment 16 $ fast (slow "1 1 2 4 6 7" $ "[7 9 8 4 3 2 2] ") $
+     struct " ~ ~ t ~ ~ t ~ ~ t ~" $
+     n ( tScale "0 3 7 10 14" "[0, 1, 2, 3, 4]" ) # legato "0.5 0.25" # m 5
+  d3 $ (|+ n 12) $ transp $ p1 $ p2 $ groov $ segment 16 $ fast ( slow "1 1 2 4 1 6 7"  $ "6 3 1 3 6 1 5") $ n ( tScale "0 3 7 10 14"    "3 <2 7> <4 4 4 7> <5 9>") # m 6 
+  d4 $ p1 $ p2 $ mb (0) (1/8)( slow 8  $ sine ) # m "[ 2,  5,  6]" 
+
+d3 silence
+
+d2 $ (|- n 60) $  slow 8 $ n "0 .. 127" # m 2 # amp 0.9
+
+d3 $ 
+
+tScale "1 2 3 4"

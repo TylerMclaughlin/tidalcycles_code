@@ -1,0 +1,110 @@
+let groov = groove 2 "0 0.02 0.001 0.02  0.001 0.02 0.001 0.02"
+    maj53edo = "0 9 17 22 31 39 48"
+
+-- melody
+let mel = groov $ (|- n 60) $ struct "t(<9 10 11 12>,16)" $ fast "1 1 2 <3 4>" $ n (tScale' 53 "0 17 48" "0 .. 8") # m 1
+    -- extra melody notes
+    em =  groov $ (|- n 60) $ struct (inv $ "t(<9 10 11 12>,16)") $ fast "1 1 2 <3 4>" $ n (tScale' 53 "0 17 48" "0 .. 8") # m 4
+
+-- pads
+let pads =  (|- n "[0 7]/8") $ struct "t ~ t ~ t t t t" $ n (tScale' 53 maj53edo "[0, 2, 4, 6, 8, 10]") # m 2
+
+-- extra drumz
+let edrumz = groov $ drumz $  struct "t(<9 10 11 12>,16)" $ fast "1 1 2 <3 4>" $ n "0 5 4 5 3 5 4 5 [7, 0] 3 4 5 1 4 5 0" # m 3 # amp "<0.8 0.75> <0.4 0.5 0.4> <0.6 0.6 0.5 0.55> <0.4 0.3>"
+
+let edrumz2 = groov $ drumz $  struct "t(<9 10 11 12>,16)" $ fast "1 1 2 <3 4>" $ n "0 5 5 4 3 5 5 4 [7, 0] 3 4 5 1 4 5 0" # m 3 # amp "<0.8 0.75> <0.5 0.55 0.4> <0.6 0.6 0.5 0.55> <0.4 0.4>"
+
+
+-- kicc / hat
+let k = (|+ n "[0 2]/8") $ n "[0 [~ 12]] 0 [0 <~ [~ 12 ]>] 0" # m 5 # amp "[0.4 0.47]/8"
+    hat =  groov $ n "~ 0 <~ 0 [0 0]> 0 ~ 0 ~ 0" # m 8 # amp "[0.5 <0.2 0.33 0.28> 0.5 <0.33 0.35 0.21 0.26>]*4"
+
+d6 $ stack [k, hat]
+
+-- 1
+do
+ hush
+ d2 $ stack [mel]
+
+-- 2
+do
+ d6 $ stack [k, hat]
+ d2 $ stack [mel]
+
+-- 3
+do
+  d1 $ stack [ em]
+  d6 $ stack [(|* amp 0.033) $ k, hat]
+  d2 $ stack [pads]
+
+d6 silence
+
+-- 4
+do
+  d6 $ stack [k, hat, edrumz]
+  d2 $ stack [pads]
+  d1 $ stack [b, sb]
+
+-- 5
+do
+  d6 $ stack [ k, hat]
+  d1 $ edrumz 
+  d2 $ stack [mel, em]
+
+-- 6
+do
+  d1 $ stack [ em]
+  d6 $ stack [(|* amp 0.033) k,  hat]
+  d2 $ stack [pads, edrumz]
+
+-- 7
+do
+  d2 $ stack [b, sb, em]
+  d6 $ stack [k]
+
+-- 8
+do
+  d2 $ stack [b, sb, em]
+  d6 $ stack [k, hat, edrumz]
+
+-- 9
+do
+ d6 $ stack [ k  ]
+ d2 $ stack [mel, em]
+
+d6 silence
+
+-- 10
+do
+  d6 $ stack [k, hat, edrumz2]
+  d2 $ stack [em]
+  d1 $ stack [b, sb]
+
+-- 11
+do
+ hush
+ d6 $ stack [k]
+ d1 $ stack [b, sb]
+
+hush
+
+
+
+
+do
+ d6 silence
+ d2 $ stack [mel]
+
+
+let b =  (|- n 58) $ groov $ (|- n "[0 7]/8") $ struct "~ t t ~  ~ t t t  ~ t t ~  ~ t t t" $ n (tScale' 53 maj53edo "0 4 7 11 4 7 4 11" )  # m 6 # amp "[0.5 0.35 0.45 0.35]*4" # legato "[1 0.85 1 0.95]*4"
+    sb = (|- n "[0 7]/8") $ groov $ struct "~ t t ~  ~ t t t  ~ t t ~  ~ t t t" $ n (tScale' 53 maj53edo "0 4 7 7 4 7 4 7" )  # m 7 # legato "1"
+
+
+
+
+
+
+
+-- old
+let b =  (|- n 58) $  (|- n "[0 7]/8") $ struct "~ t t ~  ~ t t t  ~ t t ~  ~ t t t" $ n (tScale' 53 "0 9 17 22 31 39 48" "0 4 7 4 11 4 7 4" )  # m 6
+    sb = (|- n "[0 7]/8") $ struct "~ t t ~  ~ t t t  ~ t t ~  ~ t t t" $ n (tScale' 53 "0 9 17 22 31 39 48" "0 4 7 4 11 4 7 4" )  # m 7

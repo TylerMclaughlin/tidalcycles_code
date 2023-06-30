@@ -1,0 +1,91 @@
+
+setcps(99/120/2)
+
+d5 $ (|- n 9) $  n "[0, 7, 15, 27] " # m 4
+
+d1 $ (|+ n "[0, 7, 12]" ) $ drumz $ n "12 <0 7 12 7> 12 0"  # m 1
+
+
+let groov = groove 4 "0.022 0.01 0.03 0.01"
+
+-- d1 $ groov $ mask "~ t!15"  $ drumz $ slow "3.5 4" $ n "0 .. 63"  # m 1
+
+ -- d1 $ groov $ mask "~ t!15"  $ drumz $ slow "4.5 2" $ n "63 .. 31"  # m 1
+
+d1 $ groov $ mask "~ t!15"  $ drumz $ slow "5.5 6" $ n "0 .. 63"  # m 1
+
+do
+ d1 silence
+
+
+d2 $ (|* aT "aa" 8 "1.1 1.1 0.7!5 1.2") $ drumz $ slow 2 $ n "~ [7 7 7]*5  7 7"  # m 2 # amp 0.8
+
+do
+ d7 $ drumz $ slow 2 $ n "1   " # m 2 # amp 0.8
+ d1 $ (|+ n "[0, 7, 12]" ) $ drumz $ n "12 <0 7 12 7> 12 0"  # m 1
+
+
+
+
+
+-- super cool!
+do
+ d3 $ drumz $ fast 2 $ groov $ (|- nT "rp" 2 "0 1 ") $   struct "t(5, 16, 4)"  $  n "~ <6!4 3!4> 5 < 6!4 3!4>" # m 2 # amp 0.9
+ d1 $ ncat [(2, (|- nT "a" 5 "0 0 2 3 5") $ drumz $ groov $ slow "4.5 5" $ n "0 .. 63"  # m 1),
+           (1, drumz $ groov $ struct (fast 2 $ "[t t t t t ~!3]*2") $ slow "4.5 4" $ n "0 .. 63"  # m 1)]
+
+
+d1 silence
+
+d3 silence
+
+
+-- nice melody
+d3 $ (|- n 5) $ (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "t t t t ~ t t t t ~" $ nT "j" 8 (tScale' 27 "0 5 11 17 25" "0 1 2  5 2 2 11 5 2 2")  # m 3
+
+let arppp =  (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "t t t t ~ t t t t ~" $ nT "j" 8 (tScale' 27 "0 5 11 17 25" "0 1 2  5 2 2 11 5 2 2")  # m 3
+
+
+let arppp2 =  (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "~ t t t t ~ ~ t t t t ~" $ nT "w" 8 (tScale' 27 "0 5 11 17 25" "0 1 2  5 2 2 11 5 2 2")  # m 3
+
+-- nice
+
+d1 $ ncat [(2, (|- nT "a" 5 "5 4 3 3 5") $ drumz $ groov $ slow 1.5 $  slow "2.5 4" $ n "0 .. 63"  # m 1),
+           (1, drumz $ groov $ struct (fast 2 $ "[t t t t t ~!3]*2") $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+         (1, (|- nT "a" 5 "0 0 2 3 5") $ drumz $ groov $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+         (2, arppp)
+]
+
+let arppp3 =  (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "~ t t t t ~ ~ t t t t ~" $ nT "q" 8 (tScale' 27 ("0 5 11 17 25"|+ "7") "0 1 2  5 2 2 11 5 2 2")  # m 3
+
+
+-- turn off weird melody
+d3 silence
+
+d1 $ ncat [(2, (|- nT "a" 5 "1 1 2 3 2") $ drumz $ groov $ slow "5 4" $ n "0 .. 63"  # m 1),
+           (1, drumz $ slow 2.5 $ groov $ struct (fast 2 $ "[{t t t t t ~ [t t t t t t ]@3 ~ t }%8 ]*2") $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+         (1, (|- nT "a" 5 "0 0 2 3 5") $ drumz $ groov $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+         (1, (|- n 6) $ arppp3)
+]
+
+
+-- d3 $ (|- n 6) $ arppp 
+
+--d3 $ (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "t t t t ~ t t t t ~" $ nT "j" 8 (tScale' 27 ("0 5 11 17 25"|-  "6") ("0 1 2  5 2 2 11 5 2 2" |+ "3 0 0 5 0" ))  # m 3
+
+
+
+do
+ d3 $ (|- n 6) $ arppp3 
+ d5 $ (|- n 0) $  n "[0, 7, 15, 27] " # m 4
+
+
+
+
+d4 $ drumz $ struct "t(5, 12)"  $   nT "fff" 4 "7  6 4 6" # m 3 # amp "{1 0.9 1.2}%5" # m 3
+
+d4 silence
+
+d2 silence
+
+solo 5

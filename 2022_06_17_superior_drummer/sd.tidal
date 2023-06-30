@@ -1,0 +1,80 @@
+let sup_dr_k p = select p [n "-26, -25, -24"]
+
+d1 $ sup_dr_k "1" # m 7
+
+let supdr_k p = select p [n "[-26  -25  -24]"]
+    supdr_c p = select p [n "[-50  -39  -16]"]
+    supdr_rim p = select p [n "[-23  7  11  12  14  16  17  19  21  67]"]
+    supdr_ride p = select p [n "[-31  -30  -9  -7  53  54  55  56  57] "]  -- hold 58]"]
+    supdr_s p = select p [n "[-54  -27  -22  -21  -20  6  8  9  10  65  66]"]
+    supdr_h p = select p [n "[-49  -48  -47  -38  -18  1  2  3  4  5  59  60]"]
+    supdr_o p = select p [n "[-46  -45  -44  -43  -42  -41  -40  -37  -36  -35  -34  -14  0  61  62  63  64]"]
+    supdr_ah p = select p [n "[-49  -48  -47  -38  -18  1  2  3  4  5  -50  -39  -16 59  60 -46  -45  -44  -43  -42  -41  -40  -37  -36  -35  -34  -14  0  61  62  63  64]"]
+
+let g = groove 4 "0 0.016 0.001 0.016"
+
+-- kick
+d1 $ g $ struct ( "t(9,16)") $ supdr_k "1 0.5 0.1 0.4 0.8" # m 7 # amp "0.55 0.4 0.5 0.4"
+
+-- snare
+d3 $ g $ struct "[~ t]*2" $ supdr_s "{1 0.5 0.1 0.4 0.8}%4" # m 7
+
+-- ride 
+d2 $ g $ struct "t(<7 11>,16)" $ supdr_ride "1 0.5 0.1 0.3 0.4" # m 7 # amp "0.4 0.5 0.3 0.5"
+
+-- alt hits 
+d3 $ g $ struct "[~ t]*2" $ supdr_s "{0.2 0.4 0.3 0.35}%4" # m 7
+
+-- closed hats
+d4 $ struct "[t t t t ~ t t t]" $ supdr_h "{1 0.5 0.1 0.4 0.8}%5" # m 7 # amp "{0.5 0.4 0.4 0.5 0.5 0.3 0.3}%12" 
+
+-- open hats
+d4 $ g $ struct "[~ t ~ t  ~ t ~ t]" $ supdr_o "{0.2 0.2 0.2}%5" # m 7 # amp "0.4 0.5 0.6 0.7" 
+
+d3 $ g $ struct "[~ t]*2" $ supdr_s "{0.2 0.4 0.3 0.35}%4" # m 7
+
+let nokicks = mask "f(9, 16)"
+
+-- euclidean kick 
+d9 $ drumz $ struct "t(9, 16)" $ n "0 0 0 0" # m 8
+
+-- kick 
+d9 $ drumz $  n "0 ~ ~ ~" # m 8
+
+-- 909 clap
+d10 $ drumz $ n "~ 3 ~ 3" # m 8
+
+d5 $ (|- n "0") $ g $ struct ("t(9,16)") $ nT "bazz" 18 "0 7 0 7 12 7 0 7" # m 2 # legato "[1.0 0.5]*8" # amp "0.6 0.4 0.5 0.4"
+
+d8 silence
+
+d5 silence
+
+d8 $ g $ (|- n "[0 5 0 5]/4") $ struct ( "t(9,16)") $ n ( tScale "0 2 4 7 9 " ("[ 0, 2, 4, 6, 8]" |+ "[<2 [2 4]> <5 [ 7 5]>]" |- "[5 9]/4"  )) # m 5 # amp "0.55 0.4 0.5 0.4"
+
+-- stripped down chords
+d8 $  g $ mask "f t*7" $ (|- n "[0 5 0 5]/4") $ struct ( "t(9,16)") $ n ( tScale "0 2 4 7 9 " ("[ 0, 2, 4, 6, 8]" |+ "[<2 [2 4]> <5 [ 7 5]>]" |- "[5 9]/4"  )) # m 5 # amp "0.55 0.4 0.5 0.4"
+
+d8 $ (|+ n 12) $ g $ mask "f t*7" $ (|- n "[0 0 0 0]/4") $ struct ( "t(9,16)") $ n ( tScale "0 2 4 7 9 " ("[ 0, 2, 4, 6, 8]" |+ "[ 2@2 4 2 2@2 3 2]/8" |- "[ 9]/4"  )) # m 5 # amp "0.55 0.4 0.5 0.4"
+
+-- bass
+d6 $ g $ (|- n "[0 5 0 5]/4") $  struct "t(<7 11>,16)"  $ n ( tScale "0 2 4 7 9 " ("[ -3]" |+ "[<2 [2 4]> <5 [ 7 5]>]" |- "[5 4]/4"  )) # m 3 # amp "0.55 0.4 0.5 0.4"
+
+-- bassier synth bass
+d6 $ g $ (|- n "[0 5 0 5]/4") $ struct "t(<7 11>,16)"  $ n ( tScale "0 2 4 7 9 " ("[ -3]" |+ "[<2 [2 4]> <5 [ 7 5]>]" |- "[5 4]/4"  )) # m 9 # amp "0.55 0.4 0.5 0.4"
+
+d9 $ g $ drumz $  n "0 ~ ~ ~ ~ [0] ~ ~ " # m 8
+
+d6 silence
+
+setcps(145/120/2)
+
+do
+ mute 1 
+ mute 4
+
+do
+ unmute 4 
+ unmute 1
+
+d5 

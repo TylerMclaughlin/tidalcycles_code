@@ -1,0 +1,201 @@
+setcps(170/120/2)
+
+setcps(160/120/2)
+
+setcps(120/120/2)
+
+let hh16 = drumz $ n "4*16"
+    bap = drumz $ n " ~ 3"
+    k_hip = drumz $ n "<0 [[0 0 [0 0 ]  ~] ~]>" 
+    kbreaks = drumz $ n "<0 [~ 0 ~ ~]>" 
+    fastbap = drumz $ n " ~ 3 ~ 3"
+    fastkbreaks = drumz $ n "0 ~ ~ ~ ~ 0 ~ ~" 
+    feel1 = ((# amp "[0.6 0.5 0.3 0.4]*4") . groove 8 "0 0.01")
+
+d1 $ feel1 $ hh16 # m 1
+
+d1 $ (|+ n "0 1 1 1 0") $  hh16 # m "[1 2 4 1]/4" # amp "0.2"
+
+d3 $ fastbap # m 4
+
+d3 silence
+
+d1 $ fastbap # m 4
+
+d2 $ fastkbreaks # m 1
+
+d4 $ drumz $ struct "t*16" $ nT "hh" 5 "4 5 4 5 5" # m 2
+
+d4 silence
+
+d4 $ drumz $ struct "t*16" $ nT "hh" 3 "4 5 4 5 5" # m "3 3 5 5 5" 
+
+d1 silence
+
+d4 silence
+
+d2 silence
+
+d1 $ (|+ n "[0 7]/8") $ (|+ n "12 12 ") $  (|- n 2 ) $ fast 1 $ synthmel # m 14 #  legato  "0.1 0.3"
+
+
+let synthmel = slow (4/4) $ stack [
+     n "d3 ~!2 f3 g3 a3 d4 ~!2 a4 c5 ~ f5 ~ d4 e3",
+     n "~!11 a4 ~ e4 ~!2"
+     ] 
+
+d1 $ drumz $ slow 2 $ struct "t(5, 8) t(4, 8)" $ nT "h" 4  "5 5 4 5" # m 1 # amp "0.2 0.25 0.2 0.28"
+
+
+d2 silence
+
+
+
+d2 $(|+ n "[0 7]/8") $ (|- n 5) $ n "[0, 3, 7, 10]" # m 10 # amp 0.2
+
+d2 $ (|+ n "[3 ]/4") $ n "[0, 4, 7, 11]" # m 11 # amp "0.3"
+
+
+d4 $ (|+ n "[3 ]/4") $ struct "t ~ ~ t    t t ~ ~ t ~ t ~" $ n "0 2 2 0 4 4 2 4 2 11 9" # m 15
+
+d1 $ drumz $ struct "t(3,8)" $ n "3 <3 3 5 5>" # m 6
+
+d4 $ (|- n "[12 10 8 6]/8") $ struct ( inv "t(3,8)") $ fast "1 1 1 2 2" $  n "3 15 3 15" # m 15 # legato "0.5 0.2 0.4 0.3"
+
+d4 $ (|- n "[12 10 8 6]/16") $ struct ( inv "t(3,8)") $ fast "1 4 1 2 2" $  n "3 15 3 15" # m 15 # legato "0.8 0.3 0.7 0.6"
+
+do
+ hush
+ d1 $ drumz $ n "<4 4*2 4 4*3> 4 4 4 [3 3] 4 4 5" # m "3 4 3 2" # amp 0.7
+ d5 $ struct "t*8" $ (|+ n "[0 24 36 24]/4") $ n "[0 7 5 7 12 19]*2" # m 11 # amp 0.12
+ d4 $ (|- n "[12 10 8 6]/8") $ struct ( inv "t(3,8)") $ fast "1 1 1 2 2" $  n "3 15 3 15" # m 15 # legato "0.5 0.2 0.4 0.3"
+
+d5 $ n "" # m 11
+
+
+d1 $ drumz $ n "<4 4*2 4 4*3> 4 4 4 [3 3] 4 4 5" # m "3 4 3 2" # amp 0.7
+
+d1 $ drumz $ n "<4 4*2 4 4*3> ~ 4 4 3 ~  4 4" # m "5 4 5 4" # amp 0.7
+
+d1 $ drumz $ struct "t(6,8)" $ nT "h" 3 "2 4 6" # m "5 4 5 3" # amp 0.3
+
+d2 $ drumz $ (|+ n "[6,0]") $ slow 2 $ fast "1 1 1 <1.5 1 1.25 1>" $ n "<0 0*2> 1 0 0 0 0 [0 ~ ~ 0] [0 0]" # m "[4  4 4 5]/4"
+
+d2 $ drumz $ (|+ n "[6,0]") $ slow 2 $ fast "1" $ n "<0 0*2> 1 0 0 0 0 [0 ~ ~ 0] [0 0]" # m "[4  4 4 5]/4"
+
+d3 $ fastbap # m 1
+
+all $ (0.20 <~)
+
+do
+ d2 $ (|+ n 5) $ (|+ n 12) $ slow "2 1"  $ n "0 4 7 11  12 11 7 4 " # m 11 # amp "0.05"
+ d3 $ drumz $ (|+ n "[6,0]") $ slow 2 $ fast "1" $ n "<0 0*2> 1 0 0 0 0 [0 ~ ~ 0] [0 0]" # m "[4  4 4 5]/4"
+
+d4 $ fast 2 $ drumz $ n "1 0 0 0" # m 2 # amp 0.11
+
+d5 $ drumz $ n "<~ [4 4 ~ 4]> 5 3 5" # m 3
+
+d6 $ struct "t(7,8)" $ n "[0, 3, 7, 10] [2, 5, 9, 12]" # m 11 # amp 0.01
+
+d7 $ struct "~ t t ~   t t ~ ~" $  n "[0 3 7 10] [2 5 9 12]" # m 12 # amp 0.30
+
+d6 silence
+
+d7 silence
+
+d2 silence 
+
+d7 silence
+
+d6 $ (|- n 5) $ struct "t(5,8)" $ n "[0, 3, 7] [0, 3, <9 10>]" # m "[12 13]/4" # amp 0.01
+
+d6 silence
+
+d1 silence
+
+d5 silence
+
+all (0.33 <~)
+
+d1 $ (|+ n 0) $ drumz $ n "<3 3 3 3*2> ~ 4 ~  0 ~ 4 ~ 0 <4 4*2> 4 0 4 4 0 ~" # m "1 2 1 3" # legato "0.1"
+
+do
+ d1 $ (|+ n 0) $ drumz $ n "<3 3 3 3*2> ~ 4 ~  0 ~ 4 ~ 0 <4 4*2> 4 0 4 4 0 ~" # m "5 2 5 6" # legato "0.1"
+ d3 $ (|- n 12) $ (|+ n 5) $ fast 1 $ n "~ <-5 -5> -5 ~ -2 -2 ~ 0 ~" # m 15 # legato "1.5"
+
+d1 silence
+
+do
+ d1 $ (|+ n 0) $ drumz $ n "~ 4 4 ~  4 4 ~ 4  4 ~ 4 ~  ~ 4 4 ~" # m "8 7 6 7" # legato "0.3"
+ d2 $ drumz $ n "~ 5 ~ [6, 5]" # m 7 
+
+
+
+d3 silence
+
+d4 silence
+
+
+d1 silence
+
+d4 silence
+
+
+
+d5 silence
+
+
+
+d2 $ (|+ n "[3 ]/4") $ n "[0, 4, 7, 11] [3, ]" # m 11 # amp "0.3"
+
+
+do
+  hush
+  d1 $ (|+ n 0) $ drumz $ n "~ 4 4 ~  4 4 ~ 4  4 ~ 4 ~  ~ 4 4 ~" # m "8 7 6 7" # legato "0.3"
+  d2 $ drumz $ n "~ 5 ~ [6, 5]" # m 7 
+  d3 $ n " 0 ~ 12 ~  0 ~ ~ ~    ~ 0 0 2 3 5 0" # m 15 
+
+all ((0.88 - 0.75) ~>)
+
+d1 $ drumz $ n "4" # m 1
+
+d2 $ n (tScale "0 2 4 5 7 9 11"  ("[0 4 9 0 4 9 0 4 9 0 4 9 0 4 10 4]" |+ "[0 1  0 3]/4" )) # m 12 # legato "0.5"
+
+d1 $ fastbap # m 5 
+
+d2 $ fastkbreaks # m 6 
+
+
+d1 $ groove 8 "0 0.17" $ drumz $  n "0 [5 <4 ~ ~>] 3 5 0 5 [3 4] 5" # m 6  # amp 0.7
+
+d1 
+
+
+hush
+
+
+
+setcps(28/120/2)
+
+d1 $ (|+ n "[0 1 1 -3]/3") $  drumz $ fast "[2 3 5 10 20]/5" $ fast 15 $ n "1 5 3 5" # m "5 4 5 6 5" # amp "[0.6 0.4 0.4]"
+
+d2 $ drumz $ fast 15 $ n " ~ 3 " # m 3
+
+d2 $ drumz $ fast 15 $ n "[ ~ 3]/2 " # m "4" 
+
+d3 $ (|- n 6) $ (|+ n "0 12 12 0  9 13 0   7 9  0 13") $ struct "t(9, 15)" $ n "[0, 3, 7, 10, 14, 17]" # m 10 # legato "2" # amp 0.65 # cps 
+
+do
+ hush
+ d4 $  struct "t [t t t ~ ] t [t t t t ~]" $ slow 8 $ n "[5, 9, 12, 16] <[2, 5, 9, 11 ] > <[4, 7, 11, 14]!3 [3, 7, 10, 14]> [-3, <0 0>, 4, 7]" # m "12" 
+
+ d4 $  struct "t [t t t ~ ] t [t t t t ~]" $ slow 8 $ n "[5, 9, 12, 16] <[2, 5, 9, 11 ] > <[4, 7, 11, 14]!3 [3, 7, 10, 14]> [-3, <0 0>, 4, 7]" # m "12" 
+
+d5 $ groove 4 "0 0.02 0 0.02" $ drumz $ fast "1 1 1 <2 3 4>" $  n "0 .. 31" # m "15 16"
+
+setcps(120/120/2)
+
+d1 silence
+
+unsolo 3
+

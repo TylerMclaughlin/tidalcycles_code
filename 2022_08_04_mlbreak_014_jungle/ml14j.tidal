@@ -1,0 +1,170 @@
+
+
+setcps(122/120/2)
+
+let squee amt rc = (slow amt . repeatCycles rc .  fast amt) 
+
+stackRange :: (Read a, Enum a) => Pattern String -> Pattern a
+stackRange pat = innerJoin $ (stack . map pure) <$> patRange pat
+  where
+        patRange :: (Read a, Enum a) => Pattern String -> Pattern [a]
+        patRange pat = rangeToList <$> pat
+        rangeToList :: (Read a, Enum a) => String -> [a]
+        rangeToList str = [read a .. read b]
+          where (a,b) = splt "" str
+        splt as (':':bs) = (as,bs)
+        splt as [] = (as,[])
+        splt as (b:bs) = splt (as ++ [b]) bs
+
+stackRange "4:8 10:12" :: Pattern Int
+
+
+
+let groov = groove 4 ("0.009 0.015 0 0.011") -- |* (range "0.98 0.95 0.97 0.97"  "1.02 1.05 1.03 1.03" rand ))
+    voluum = (# amp "[0.803 0.48 0.49 0.52 ]*4")
+
+d1 $ groov $ (# amp "[0.803 0.48 0.49 0.52 ]*4") $   drumz $ struct "<t(15 , 16, <3 8>) [t ~ t t  ~ ~ t ~  <t ~> t t  ~  <~t> t t  ~]>" $ every 4 (bite 8 " 17 .. 34") $ slow 2 $ every 5 (0.25 <~) $ n "0 .. 64" # m "[1 2 1 2]*4"
+
+d1 $ groov $ (# amp "[0.803 0.48 0.49 0.52 ]*4") $ drumz $ fast 2 $ n "~ < 6 8> 10 [8,1] [~, 3] < 8 6> <11 15 12 15> 8  " # m "4"
+
+do
+d2 $ groov $ (# amp "[0.803 0.48 0.49 0.52 ]*4") $ drumz $  n "0 0 [0 ~ ~0] [0 <~ 0> 0 ~]" # m 4
+
+
+-- ranges from -1 to 1
+-- -1 -> 0
+-- 0 -> 8192 
+-- 1 -> 16383 
+
+let mb lo hi func = (midibend (segment 256 $ range (lo*8192 + 8192) (hi*8192 + 8192 )  func))
+
+
+
+
+n "1 2 3 4" 
+
+
+
+do
+  let blyd = "-1 1 3 5 6 8 10"
+      bbaeo = "-2 0 1 3 5 6 8 "
+      alyd = "-3 -1 1 3 4 6 8 " 
+      abaeo = "-4 -2 -1 1 3 4 6" 
+      eleventhv1 = "[ 0, 2, 4, 6, 8, 10]":: Pattern Int
+      eleventhv11 = "[ 7, 2, 4, 13, 8, 10]":: Pattern Int
+      eleventhv2 = "[ 7, 2, 4, 13, 8, 10]":: Pattern Int
+      eleventhv21 = "[ 7, 9, 4, 13, 8, 10]":: Pattern Int
+      eleventhv3 = "[ 7, 9, 4, 13, 15, 10]":: Pattern Int
+      eleventh = ("0.25 0.125 0.5" <~) $  fastcat [ eleventhv1 , eleventhv2, eleventhv3, eleventhv11]
+      cpat = "0 2"
+      cmpat = "0 0"
+  d4 $ mb (0) 1 ( tri) # m "~ ~ [4, 5, 6]" 
+  d3 $ 
+    (|* amp 0.7) $ (0.001 ~>) $ groov $ voluum $
+    struct "[t(5, 16), [~ <t*4 t*2 t*4 <t*3 t(5,8)>>]] " $ 
+    n (cat [ (tScale blyd (eleventh |+ cpat)),
+      (tScale bbaeo (eleventh |+ cmpat)),
+      (tScale alyd (eleventh |+ cpat)),
+      (tScale abaeo (eleventh |+ cmpat )) ]) # m 5 
+
+
+mute 2
+
+-- saw lead
+do
+   unmute 2
+   d6 $ qtrigger 6 $ drumz $ n "<13 11>" # m 4 # amp "<0.6 0.4>"
+   d5 $ (|+ n 0) $ groov $ voluum $
+    n (cat [(tScale blyd ("0 1 1 2  3 3 4 [5  4 3]")),
+            (tScale bbaeo "3 ~ 3 ~  ~ 3 5 [2 3]" ),
+            (tScale alyd ("0 1 1 2  3 3 4 [5 4 3]")),
+            (tScale abaeo "7 5 3 5  2 4 ~ ~")]) # m 6 
+
+do
+ d2 silence
+ d1 $ drumz $ groov $ voluum $ slow 4 $ n "0 .. 63" # m 1
+
+do
+ d1 $ drumz $  slow 3 $ n "0 .. 63" # m 1
+
+ d2 $ groov $ (# amp "[0.803 0.48 0.49 0.52 ]*4") $ drumz $  n "0 0 [0 ~ ~] [0]" # m 4
+
+do
+ d2 silence
+ mute 3
+ d1 $ drumz $  slow 2 $ n "0 .. 63" # m 1
+
+d1 silence
+
+do
+  mute 5
+  mute 3
+  mute 7 -- cb just in case
+  mute 1
+  d1 $ qtrigger 1 $ n "0" # cps "-1" 
+
+let pause = setcps(-1)
+
+
+unmute 3
+
+
+do
+  setcps(122/120/2)
+  --resetCycles
+  unmute 1
+  unmute 5
+  unmute 3
+  d4 $ mb (0) 1 ( tri) # m "~ ~ [4, 5, 6]" 
+  d6 $ qtrigger 6 $ drumz $ n "<13 11>" # m 4 # amp "<0.6 0.4>"
+  d7 $ groov $ drumz $ struct "t(5,16)" $ n "15"# m 4 
+  d1 $ groov $ (# amp "[0.803 0.48 0.49 0.52 ]*4") $ drumz $ fast 2 $ n "~ < 6 8> 10 [8,1] [~, 3] < 8 6> <11 15 12 15> 8  " # m "4"
+  d2 $ groov $ (|* amp 1.05)$ (# amp "[0.803 0.48 0.49 0.52 ]*4") $ drumz $  n "0 0 [0 <~ <~ 0>> ~0] [0 <~ 0> 0 ~]" # m 4
+
+let mb lo hi func = (midibend (segment 256 $ range (lo*8192 + 8192) (hi*8192 + 8192 )  func))
+
+
+solo 1
+
+unsolo 1
+
+
+
+setcps(160/120/2)
+
+
+let cmix = "0 2 4 5 7 9 10"
+
+
+d2 $ n (tScale cmix  ("[0  4 8 <13 10>](3,8)" |+ "[0 4 2 8]/2")) # m 8
+
+let groov = groove 4 ("0.001 0.01 0.001 0.01" |* (rand |* 0.5))
+    groov1 = groove 4 ("0.001 0.01 0.001 0.01" |* (rand |* 0.5))
+    groov2 = groove 4 ("0.001 0.01 0.001 0.01" |* (rand |* 0.5))
+
+do
+  let p = "t(<9 9 9 11  >, 16  )"
+  --let p = "t(<3 5 7 5>, 16, <4 0 1 2>/4 )"
+  d1 $ groov $ mask ( inv "[t(<5 3>,16) t(<4 3>, 16)]/2"  ) $ drumz $ slow 4 $  n "0 .. 63" # m 7
+  d3 $ groov1 $ (|- n "0 12 12 0 0 12 0 12 12") $ mask "~ t!15" $  struct (p) $ n (tScale cmix ("0 2 4 6 4 2 -1"))  # m 9 # amp "[0.8 0.2 0.5 0.3]*4"
+  d2 $ groov2 $ struct (inv p) $ n (tScale cmix  ("[2, 4, 6, 8, 10, 12]  " |+ "[0 5 5 0]/2")) # m 8 
+
+  d4 $ groov1 $ (|- n "24 12 12 24 0 12 0 12 12") $ mask "~ t!15" $  struct ("t(13,16)") $ n (tScale cmix ("0 2 4 6 4 2 -1"))  # m 9 # amp "[0.8 0.4 0.5 0.8]*4" # legato "0.5"
+
+d1 $ groov $ drumz $  struct "t(13, 16, {0 1 1 2 3}%4)" $ slow 4 $ n "0 .. 63" # m 7
+
+d1 $ groov $ drumz $  struct "t(13, 16, { 2 1 1 2 3 3}%4)" $ slow 4 $ n "0 .. 63" # m 7
+
+struct "t(3,5)" $ n "7"
+
+d1 $ drumz $ struct "t(3,5)" $ n "0 2" # m 4
+
+
+d1 $ 
+
+
+
+
+d3 $ (|- n "0 12 12 0 0 12 0 12 12") $ struct ("t(9,16)") $ n (tScale cmix ("0 2 5 6"))  # m 9
+
+patternToList ("0..5" :: Pattern Int)

@@ -1,0 +1,94 @@
+
+d1 $ (|- n 24) $ n " 0 0 0 0 " # m 10 
+
+d2 $ (|- n 24) $ n " 0 2 0 3 " # m "9 9 9 9"
+
+d1 $ (|- n 24) $ n "[ 8 9]*4" # m 10 
+
+d3 silence
+
+
+d3 $ groove 4 "0 0.025 0.001 0.025" $ drumz $ slow 2 $ n "[0 5 0 4 6 5 6 4 [0, 5] 3 5 3 6 5 6 4][0 5 0 4 6 5 2 4 [0, 5] 3 2 <3 2> 6 2 <6 6 2> 4]" # m 8 
+
+d4 $ groove 1 (segment 16 (((segment 16 (fast 2 $ range 0 4 sine)) ~>) $ fast "4 2" $ range 0 0.02 cosine)) $ drumz $ n "[0 5 0 4 6 5 6 4 [0, 5] 3 5 3 6 5 6 4]" # m 8 
+
+d4 $ groov $ plyWith 2 (|+ n 25)  $ (|- n 1) $ (|- n "[4 3 4 1]/4") $ struct "{~ ~ t}%16" $  n "[1, 3, 4, 7, 11]" # m "5 6 6 5 6 5 5"
+
+d4 $ groov $ plyWith 2 (|+ n 25)  $ (|- n 1) $ (|- n "[4 3 4 1]/4") $ struct "[~ ~ t ~]*2" $  n "[1, 3, 4, 7, 11]" # m "5 6 6 5 6 5 5"
+
+setcps(155/120/2)
+
+let groov = groove 8 "0 0.01" 
+
+d1 $ groov $ drumz $ n "0 5 6 5 [0,4] 5 6 5  0 5 7 5 [0,4] 5 6 5" # m 8
+
+-- snare
+d2 $ groov $ drumz $ slow 2 $  n "[ <~ [~ <  ~ 3> 3 3 3 ~!3]>]@8 ~!4 ~ [3 3] 3 ~" # m 7
+
+d8 $ groov $ drumz $  n "< [3 8] 3  3 [3 [3 3 ~] ]> " # m 7
+
+d2 silence
+
+
+d4 silence
+
+d3 $ groov $ drumz $ n " [~ 4 5 4]*4" # m 7 # amp "[0.5 <0.4 0.42> 0.49 <0.43 0.46>]"
+
+d3 silence
+
+
+do
+ -- sub
+ d5 $ groov $ gtp $  (|- n 24) $ n "0 3 7 3  ~ 3 4 3  0 3 5 3 ~ 3 4 3 " # m 3
+ -- bass 
+ d6 $ groov $ gtp  $ (|- n 24) $ n "0 3 7 3  <25!2 22!2> 3 4 3  ~ 3 5 3 ~ 3 4 3 " # m 4
+ d1 $ groov $ drumz $ n "~ 5 6 5 [4] 5 6 5  ~ 5 7 5 [~,4] 5 6 5" # m 8
+
+--  alt
+d1 $ groov $ drumz $ n "~ 4 5 4 [3] 4 5 4  ~ 4 6 4 [~,3] 4 5 4" # m 8
+
+d1 silence
+
+
+
+do
+ let gtp = (|- n 25)
+ d4 silence
+ -- drumz
+ d8 $ drumz $ n 14 # m 10 # amp "{0.45 0.33 0.35 0.38 0.41}%3"
+ d1 $ groov $ drumz $ n "0 5 6 5 [0,4] 5 6 5  0 5 7 5 [0,4] 5 6 5" # m 8
+ -- sub
+ d5 $ groov $ gtp $  (|- n 24) $ n "~ 3 7 3  ~ 3 4 3  ~ 3 5 3 ~ 3 4 3 " # m 3
+ -- bass 
+ d6 $ groov $ gtp  $ (|- n 24) $ n "~ 3 7 3  ~ 3 4 3  ~ 3 5 3 ~ 3 4 3 " # m 4
+
+
+solo 9
+
+unsolo 9
+
+
+d9 $ struct "t t*2 t*4 t*2" $ takeArp' "arp"  16 25 "0 29 8 11 15 19" 8 (range " 0 " 12 $ sine) # m 9
+
+-- ^^
+d9 $ struct "t t*2 t*4 t*2" $ fast 2 $ takeArp' "arp"  8 25 "0 29 8 11 15 19" 8 (range " 0 " 15 $ sine) # m 9
+
+d9 $ struct "[<~ t> t t t]*4" $ takeArp' "arp"  16 25 "0 29 8 11 15 19" 8 (range " 0 " 12 $ sine) # m 9 # amp "0.2 0.3 0.45 0.3"
+
+d9 silence
+
+takeArp' "1" takeN 19 edo19maj quant ( trigonometry ) # m 1
+
+
+d7 $ (|+ n "5") $ ncat[ (4, n "~ [-3, 3, 7, 11] ~!6" # m 2), (4, n "[-3, 3, 7, 11]" # m "5 6" # amp "0.7 0.5 0.8 0.6")]
+
+d7 silence
+
+unsolo 7
+
+do
+ d5 silence
+ d6 silence
+
+
+unsolo 4

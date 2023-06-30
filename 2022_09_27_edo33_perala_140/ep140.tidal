@@ -1,0 +1,6 @@
+d1 $ n (tScale' 33   "0 5 11 19  25" "0 1 2 3 4 5 6") # m 7
+
+d1 $j
+
+(segment 16 $ range 1 24 $ sine))  
+

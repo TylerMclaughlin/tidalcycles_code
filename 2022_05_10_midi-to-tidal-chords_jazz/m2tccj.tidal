@@ -1,0 +1,52 @@
+d1 $ n "0" # m 1
+
+
+d1 $ p_jazz_chords "0.57 0.17" # m 1
+
+d2 $ groove 2 "0 0.02 0.005 0.02" $ off " 0.5 0.25 0.75 0.25" (|+ n 12) $ (|+ n 4) $ struct "t(9, 16)" $ p_jazz_chords (segment "<4 3> 9" (range 0 4 $ fast 3 $ sine * sine * cosine ) ) # m 1   
+
+
+-- fire
+
+
+
+setcps(121/120/2)
+
+let gp = groove 4 "0 0.022 0.01 0.022"
+    p_jazz_bass p = select p [n "[-14]", n "[-15]", n "[-10]", n "[-16]"]
+    p_jazz_chords p = select p [n "[-3, -2, 2, 9, 5, 14, 21]",
+        n "[-3, 1, 7, 5, 12, 17]",
+        n "[-3, 2, 7, 5, 12, 16]",
+        n "[-5, -2, 1, 4, 5, 9, 16]"]
+
+do
+ let trig_chord = segment "<4 3> 9" (range 0 4 $
+                  fast 3 $ sine * sine * cosine )
+ d2 $ gp 
+      $ off " 0.5 0.25 0.125 0.25" (|+ n "12 [-12 24] 12 0") 
+      $ (|+ n 4) $ struct "t(< 7 <7 11> 7 9>, 16)"
+      $ p_jazz_chords trig_chord # m 1   
+ d3 $ gp 
+      $ off " 0.5 0.25 0.75 0.25" (|+ n "12 0 12 0") 
+      $ (|+ n 4) $ struct "t(< 7 <7 11> 7 5>, 16)"
+      $ p_jazz_bass trig_chord # m 2   
+ d4 $ drumz $ n "0 [0,3] 0 [0,3]" # m 3
+ d5 $ gp $ drumz $ struct "t(< 7 <7 13> 9 <5 9>>, 16)" $ n "1" # m 3
+ d6 $ drumz $ n "8*8" # amp "[0.5 0.2 0.35 0.2]*4" # m 3
+
+
+
+
+
+
+d3 $ groove 4 "0 0.02 0.005 0.02" $ off " 0.5 0.25 0.75 0.25" (|+ n 12) $ (|+ n 4) $ struct "t(9, 16)" $ p_jazz_bass (segment "<4 3> 9" (range 0 4 $ fast 3 $ sine * sine * cosine ) ) # m 2   
+
+     
+ d2 $ groove 4 "0 0.02 0.01 0.02"
+      $ ((1/16) ~>)
+      -- $ mask mp 
+      $ off " 0.5 0.25 0.75 0.25" (|+ n "12 [-12 24] 12 0") 
+      $ (|+ n 4) $ struct "t(< 7 <7 11> 7 9>, 16)"
+      $ p_jazz_chords (segment "<4 3> 9"
+      (range 0 4 $ fast 3 $ sine * sine * cosine ) ) # m 1   
+

@@ -1,0 +1,36 @@
+
+setcps(99/120/2)
+
+d1 $ (|+ n "[0, 7, 12]" ) $ drumz $ n "12 <0 7 12 7> 12 0"  # m 1
+
+
+let groov = groove 4 "0.022 0.01 0.03 0.01"
+
+d1 $ drumz $ slow "2.5 4" $ n "0 .. 63"  # m 1
+
+d2 $ drumz $ slow 2 $ n "1 " # m 2 # amp 0.8
+
+
+-- super cool!
+d1 $ ncat [(2, (|- nT "a" 5 "0 0 2 3 5") $ drumz $ groov $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+           (1, drumz $ groov $ struct (fast 2 $ "[t t t t t ~!3]*2") $ slow "2.5 4" $ n "0 .. 63"  # m 1)]
+
+
+d3 $ (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "t t t t ~ t t t t ~" $ nT "j" 8 (tScale' 27 "0 5 11 17 25" "0 1 2  5 2 2 11 5 2 2")  # m 3
+
+let arppp =  (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "t t t t ~ t t t t ~" $ nT "j" 8 (tScale' 27 "0 5 11 17 25" "0 1 2  5 2 2 11 5 2 2")  # m 3
+
+
+let arppp2 =  (|+ n  "[0 6 0 <6 16>]/4") $ groov $ fast 2 $ struct "~ t t t t ~ ~ t t t t ~" $ nT "w" 8 (tScale' 27 "0 5 11 17 25" "0 1 2  5 2 2 11 5 2 2")  # m 3
+
+
+d1 $ ncat [(2, drumz $ groov $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+
+
+
+d1 $ ncat [(2, (|- nT "a" 5 "0 0 2 3 5") $ drumz $ groov $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+           (1, drumz $ groov $ struct (fast 2 $ "[t t t t t ~!3]*2") $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+         (1, (|- nT "a" 5 "0 0 2 3 5") $ drumz $ groov $ slow "2.5 4" $ n "0 .. 63"  # m 1),
+         (1, arppp)
+]
+

@@ -1,0 +1,64 @@
+d1 $ (|* amp 2.62) $ fast (segment 16 tri) $  slow 1 $ n "0 2 5 7 9 7 5 2" # m 1 # amp "[0.55 0.51 0.40 0.38]*2"
+
+d1 $ struct "t(15, 31)" $ n (tScale "0 2 5 7 " ("0  2 <5 12>" |+ "0 6 13 6")) # m 1
+
+(quantise 1 $ range 0 5 $ trunc 0.5 $ segment 4 tri)
+
+d1 $ struct "t(15, 31)" $ n (tScale "0 2 5 7 " ((quantise 1 $ range 0 5 $ trunc 0.5 $ segment 4 tri))) # m 1
+
+d1 $ n (tScale "0 2 5 7" (fromIntegral <$> round <$> segment 4 $ range 0 2 $ sine)) # m 1
+
+d1 $ n (tScale "0 2 4 5" (segment 4 sine)) # m 1
+
+let groov = groove 4 "0 0.015 0 0.014"
+
+-- oh nice!!
+d1 $ groov $ struct "t*16" $  n (scaleSeg [0, 2, 4, 5] 7  (fast "2" $ range "[0 9 3 12]/4" "3 4 5 6" $ sine)) # m 1 # amp "[0.6 0.5 0.32 0.44]*4"
+
+d2 $ groov $ struct "t*16" $  n (scaleSeg [0, 2, 4, 5] 5  (fast "2" $ range "[0 9 3 12]/4" "3 4 5 6" $ sine) |+ 5) # m 1 # amp "[0.6 0.5 0.32 0.44]*4"
+
+d3 $ groov $ struct "t*16" $  n (scaleSeg [0, 2, 4, 5] 9  (fast "2" $ range "[0 9 3 12]/4" "3 4 5 6" $ sine) |- 7) # m 1 # amp "[0.6 0.5 0.32 0.44]*4"
+
+
+d3 $ fast (f2p  25 (range 1 5 $ trunc 0.5 $ tri)) $ n "0" # m 1
+
+ f2p  8 (range 1 8 $  tri)
+
+d3 $ fast (f2p  25 ( f2p  8 (range 1 8 $  tri))) $ n "0 0 0 0" # m 1
+
+d3 $ fast (f2p  25 ( f2p  8 (range 1 8 $  tri))) $ struct "t*4" $ nT "a" 5 "0 2 9 11" # m 1
+
+once $ fast (f2p  25 ( f2p  8 (range 1 8 $  tri))) $ struct "t*4" $ nT "a" 5 "0 2 9 11" # m 1
+
+d3 $ n "6 18" # m 1
+
+d1 $ slow 2 $ (0.5 <~) $ fast ( slow 4 $ f2p  16 (range 4 16 $  trunc 0.5 $ tri)) $ struct "t*2" $ nT "a" 5 "0 2 9 11" # m 1
+
+d2 $ slow 2 $ (0.5 <~) $ fast (slow 4 $  f2p  14 (range 4 16 $  trunc 0.5 $ tri)) $ struct "t*2" $ nT "a" 5 "0 2 9 11" # m 2
+
+--- whoaaa stereo speed up speed down
+d1 $ slow 2 $ (0.5 <~) $ fast ( slow 4 $ f2p  16 (range 5 16 $  tri)) $ struct "t*2" $ nT "a" 5 "0 2 9 11" # m 1
+
+d2 $ slow 2 $ (0.5 <~) $ fast (slow 4 $  f2p  14 (range 5 16 $  tri)) $ struct "t*2" $ nT "a" 5 "0 2 9 11" # m 2
+--- ^  nice
+
+-- ok, different scales?
+d1 $ slow 2 $ (0.5 <~) $ fast ( slow 4 $ f2p  16 (range 5 16 $  tri)) $ struct "t*2" $ nT "aa" 5 "0 2 9 11" # m 1
+
+d2 $ slow 2 $ (0.5 <~) $ fast (slow 4 $  f2p  14 (range 5 16 $  tri)) $ struct "t*2" $ nT "bb" 3 "4 5 12 14" # m 2
+
+f2p  16 (range 2 16 $  trunc 0.5 $ tri)
+f2p  16 (range 2 16 $  trunc 0.5 $ tri)
+
+
+d3 $ fast ( f2p  8 (range 1 8 $  tri)) $ n "0 0 0 0" # m 1
+
+
+
+segment 8 $ range 0 1 sine
+
+let f2p n func = fromIntegral <$> round <$> segment n (func) 
+
+d1 $ n (tScale "0 4 5 11" "0 " ) # m 1
+
+d1 $ struct "t(15, 31)" $ n (tScale "0 2 5 7 " ("0  2 <5 12>" |+ "0 6 13 6")) # m 1

@@ -1,0 +1,24 @@
+let groov = (groove 4 "0 0.005 0.008 0.009" . (#
+              amp "[0.45 0.3 0.2 0.3]*4"))
+    gmaj = "7 9 11 12 14 16 18"
+    gmaj_mel p = n (tScale gmaj (p |- 1))
+    -- right hand
+    r1a = gmaj_mel "~!4 7 9  7 9 7 9 7 9" 
+    r1b = gmaj_mel "7 10 7 10 7 9  7 8 6 3 2 1 "
+    r2a = groov $ 
+        gmaj_mel "~!5 5 3 4   6 8 10 11 12 11 10 9 "
+    r2b = groov $ gmaj_mel "8 7 6@2 6 3@2 ~!8" 
+    -- left hand
+    l1 = n "[7,11, 13, 18] ~   [~ ~ [9, 12, 15, 19]@4]  [11, 12, 14, 16]" 
+    l2 = n "[~!3 [7,11,12,16]@5] [ ~ [9,15, 19]] [7, 11, 14, 18] ~" 
+
+do
+ d1 $ slow 2 $ cat[p1a # m 1, p1b # m 1, p2a # m 5, p2b # m 5]
+ d2 $ slow 4 $ cat[l1, l2] # m 2
+ d3 $ groov $ struct "t(5,6, <0 3>)" $  (|+ n "[ 12 < -12> <12 > -12]*2") $
+      slow 8 $ n "4 4 [4!2 -1@4] 0 [0!3 -3@5] [-3 -1] 4 -8 " # m 3
+ d4 $ drumz $ (# amp ( fast "4 6" $ range 0.4 0.6  sine))  $  n "4!12" # m 4
+ d5 $ drumz $ n "<0 [0, 5]> ~ < ~ ~ 5> [0,3] ~ ~ " # m 4
+ --d6 $ groov $ drumz $ n "[~ 2 2 2]*4" # m 4
+
+setcps(190/120/2)

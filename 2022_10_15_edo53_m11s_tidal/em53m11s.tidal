@@ -1,0 +1,70 @@
+
+d1 $(|- n 40)$ groov $ (|+ nT "name" 7 "0 6 0 11 14 0 31 0") $ struct "t(9, 16)" $ n ( tScale' 53 "0 14 31 44 62 75" "[0, 1,2,3,4,5]" ) # m 1
+
+let groov = groove 4 "0 0.019 0.000 0.019"
+
+let ch = n ( tScale' 53 "0 14 31 44 62 75" "[0, 1,2,3,4,5]" )# m 1
+    b = n ( tScale' 53 "0 14 31 44 62 75" "[0]" ) # m 2
+
+let transp = (|+ n "0 6 0 11 14 0 31 0") 
+    transp2 = (|+ n "0 6 0 11 14 31 44 62") 
+
+d1 $  (|- n "[0 ]/8") $ (0.25 ~>) $ (|- n 40) $
+     (# amp "[0.6 0.5 0.4 0.3  0.6 0.48 0.43 0.28]*2" ) $
+     ("[0  0  0 < 0 0 0.0625 0>]*4" <~) $
+     cat [ transp $ struct "t(9, 16)" $ stack [ch],
+           transp2 $ struct "t(11,16)" $ stack [ch],
+           transp $ struct "t(9,16)" $ stack [ch],
+           transp2 $ struct "t(13, 17)" $ stack [ch] ] 
+
+d2 $ transp $ distrib [5, 9, 16] $ n "0" # m 2
+
+d2 silence
+
+
+let ech = (|- n "[0 ]/8") $ (0.25 ~>) $ (|- n 40) $
+     (# amp "[0.6 0.5 0.4 0.3  0.6 0.48 0.43 0.28]*2" ) $
+     ("[0  0  0 < 0 0 0.0625 0>]*4" <~) $
+     cat [ transp $ struct "t(9, 16)" $ stack [ch],
+           transp2 $ struct "t(11,16)" $ stack [ch],
+           transp $ struct "t(9,16)" $ stack [ch],
+           transp2 $ struct "t(13, <16 17>)" $ stack [ch] ] 
+
+d2 $ drumz $  n "0 0 0 0" # m 3
+
+d5 $ drumz $  n "[~ [2, 3] ~ [2, 3]]*2" # m 3
+
+d3 $ groov $ drumz $ distrib [9, 14, 16] $ n "5" # m 3 # amp "[0.66 <0.55 0.59 0.57> <0.33 0.28> 0.44]*4"
+
+d4 $ groov $ drumz $ distrib [7, 14, 16] $ n "4"  # m 3 # amp "[0.66 <0.55 0.59 0.57> <0.33 0.28> 0.44]*4"
+
+d5 $  (|- n 40) $ groov $ (0.25 ~>) $  off (0.0625) ((|+ n 53 ). (|* amp 0.1)) $ transp $ struct "[t(9,16) t(11, 16) t(9, 16) t(13, 16)]/4" $ ("[0  0  0 < 0 0 0.0625 0>]*4" <~) $
+
+let mel =  (|- n 40) $ groov $ (0.25 ~>) $  off (0.0625) ((|+ n 53 ). (|* amp 0.1)) $ transp $ struct "[t(9,16) t(11, 16) t(9, 16) t(13, 16)]/4" $ ("[0  0  0 < 0 0 0.0625 0>]*4" <~) $
+
+d2 $ (|- n 40) $ groov $ (0.25 ~>) $  off (0.0625) ((|+ n 53 ). (|* amp 0.1)) $ transp $ struct "[t(9,16) t(11, 16) t(9, 16) t(13, 16)]/4" $ ("[0  0  0 < 0 0 0.0625 0>]*4" <~) $
+           n ( tScale' 53 "0 14 31 44 62 75" "[0 4 8 4 2 3 2 8 1 -4 -3 -2 -1]/4" ) # amp "[0.76 0.66 0.37 0.42]*4" # m "2 2 2 4"
+
+d1 $ ncat [(0.75, stack[ech,mel]), (0.25, stack[ech]), (0.75, stack [ech, mel]), (0.25, stack [ech]) ]
+
+d1 $ ncat [(1, stack[ech,mel])]
+
+d3 $ drumz  $  ncat [(1.5, n "[0!2 ~!6 [3,2] ~!7] "), (0.25, "[0 0 ~!6 [3,2] ~!7 ]"), (0.5, n "[0!8  [3,2] ~!3 0 ~!3]*2"), (0.75, n "[0 ~!7 [3,2] ~!7 ]")] # m 3 # amp "[0.7 0.3 0.5 0.3]*8"
+
+d4 $ drumz $ ncat[ (1, n "4!32") ] # amp "[0.6 0.55 0.44 0.34]*8" # m 3
+
+d5 $ drumz $ ("{0.25 0.125 0.0625 0.375}%5" ~>) $ n "<[[4 4] ~ ~]*4>" # m 3
+
+d5 silence
+
+d3 silence
+
+d1 $ stitch ("[t t ~ t ~ ~ t ]*4")  ech mel
+
+d2 $ stitch ("[t t ~ t ~ ~ t t]*2")   mel ech
+
+d4 silence
+
+d1 $ ncat [ (1, ech) ]
+
+setcps(95/120/2)
