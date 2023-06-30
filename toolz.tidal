@@ -1,9 +1,24 @@
 import Data.List
 
-let drumz = (|- n 24)
+let mb lo hi func = (midibend (segment 256 $ range (lo*8192 + 8192) (hi*8192 + 8192 )  func))
+    noctilucent scale1 p1 r2 p2 r3 p3 = n (tScale scale1 $ 
+     p1 |+ (slow r2  p2) |+ (slow r3 p3))
+    phrase_chord scal3 ch0rd pat = n  ( tScale scal3 ((tScale' 7 (ch0rd |- 1) ( pat |- 1)))) 
+    phrase s notes = n (tScale s $ notes |- "1")
+    sliceDiv posL posR subdivWhat subdivBy p = within' ((posL/subdivWhat), posR/subdivWhat) (fast subdivBy . _slow (posR - posL)) p
+    segfunc segby func = fromIntegral . round <$>  (segment segby $ func)
+    ampRand4 apat randA randPat = (|* amp (fast randPat $ range (1 - randA ) (1 + randA) $ sine )) $ ( amp (fast 4 $ apat) ) 
+    squee amt rc = (slow amt . repeatCycles rc .  fast amt) 
+    drumz = (|- n 24)
     groove r p = (# nudge (fast r p))
+    rizz r p = (# nudge (fast r p)) -- same as groove
+    gas r p = (# amp (fast r p))
+    sus r p = (# legato (fast r p))
+    shh d = fix (|+ n 600) (n d)-- shh "0" to quiet the kick
     -- for a second IAC driver bus named 'midi2'
     mm c = sound "midi2" # midichan (c - 1 - 16)                 
+    mmm c = sound "midi3" # midichan (c - 1 - 32)                 
+    mmmm c = sound "midi4" # midichan (c - 1 - 48)                 
     -- swing fxns
     nfast a p = nudge (fast a $ p)
     swing4 p = nudge (fast 4 $ p)
