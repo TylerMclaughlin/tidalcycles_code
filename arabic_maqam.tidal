@@ -1,0 +1,30 @@
+:{
+-- source:  www.maqamworld.com
+let jins_sikah = "0 3 7"
+    jins_musta'ar = "0 5 7"
+    -- 4 note
+    jins_bayati = "0 3 6 10"
+    jins_hijaz = "0 2 8 10" -- nq
+    jins_hijaz_murassa' = "0 2 8 10 12" -- 5 notes?
+    jins_kurd = "0 2 6 10" -- nq
+    jins_lami = "0 2 6 10 12" -- 5 note?
+    jins_upper_'ajam = "0 4 8 10"
+    jins_upper_rast = "0 4 7 10"
+    -- 5 note
+    jins_'ajam = "" 
+    jins_'ajam_murassa' =  ""
+    jins_athar_kurd = ""
+    jins_jiharkah = ""
+    jins_nahawand = ""
+    jins_nikriz = ""
+    jins_rast = "0 4 7 10 12"
+    jins_sazkar = ""
+    -- undefined size
+    jins_hijazkar = ""
+    jins_mukhalif_sharqi = ""
+    jins_nahawand_murassa' = ""
+    jins_saba = ""
+    jins_saba_dalanshin = ""
+    jins_saba_zamzam = ""
+    jins_sikah_baladi = ""
+:}

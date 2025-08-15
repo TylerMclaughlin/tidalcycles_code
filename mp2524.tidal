@@ -1,0 +1,36 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+let ch dp t = slow 1 $ cat [n (tScale "0 2 4 5 7 9 11" (dp |+ 0) ),
+     n (tScale "0 2 4 5 7 9 10" (dp |+ t) ),
+     n (tScale "0 2 4 5 7 8 10" (dp |+ t) ),
+     n (tScale "0 2 4 5 7 8 11" (dp |+ t) ),
+     n (tScale "0 2 4 5 8 9 11" (dp |+ t) )]
+
+do
+  let p1 = (fast "[1 2 5 3]/2" $ "[0]" |+| "0 2 4 6 7" |+ "<1 2 3 4>") 
+      p2 = (fast "[2 1 1 1]/2" $ "[2]" |+| "2 3 4 2 1" |+ "<1 2 3 4>") 
+      p3 = (fast "1 1 2 1" $ "[4]" |+| slow 2 " 9 8 7 8 6" |+ "<1 2 3 4>") 
+  d1 $ (|- n 14) $ ch p1 4 # m 1
+  d2 $ (|- n 0) $ (|- n 14) $ ch p2 2 # m 2
+  d3 $ (|+ n 0) $ (|- n 14) $ ch p3 3 # m 3
+
+
+-- 2484
+-- 0_M,5_M,5_mm,3_M,0_hm,0_mm,0_M,
+let ch dp t = cat [n (tScale "0 2 4 5 7 9 11" (dp |+ 0) ),
+         n (tScale "0 2 4 5 7 9 10" (dp |+ t) ),
+         n (tScale "0 2 4 5 7 8 10" (dp |+ t) ),
+         n (tScale "0 2 3 5 7 8 10" (dp |+ t) ),
+         n (tScale "0 2 3 5 7 8 11" (dp |+ t) ),
+         n (tScale "0 2 3 5 7 9 11" (dp |+ t) )]
+
+do
+  let p1 = (fast "[1 2 5 3]/2" $ "[0]" |+| "0 2 4 6 7" |+ "<1 2 3 4>") 
+      p2 = (fast "[2 1 1 1]/2" $ "[2]" |+| "2 3 4 2 1" |+ "<1 2 3 4>") 
+      p3 = (fast "1 1 2 1" $ "[4]" |+| slow 2 " 9 8 7 8 6" |+ "<1 2 3 4>" ) 
+      ll vx p = (# legato ("[1.6 1]*4 " |* vx)) $ p
+      aa v p = (# amp ("1.6 1 1.25 1 1.5 1 1.25 1" |* v) ) $ p
+      gtp = (|- n 14)
+  d1 $ aa 0.3 $ ll 0.8 $ struct "t(5,8)" $ gtp $ ch p1 4 # m 1
+  d2 $ aa 0.25 $ ll 0.7 $ struct "t(5,8,1)" $ gtp $ ch p2 2 # m 1
+  d3 $ aa 0.31 $ ll 0.9 $ struct "t(5,8,2)" $ gtp $ ch p3 3 # m 1

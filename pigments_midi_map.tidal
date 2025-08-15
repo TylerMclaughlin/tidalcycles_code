@@ -1,0 +1,22 @@
+:{
+let p_vol p = cc1 7 p 
+    p_m1 p = cc1 18 p 
+    p_m2 p = cc1 19 p 
+    p_m3 p = cc1 16 p 
+    p_m4 p = cc1 17 p 
+    p_f1r p = cc1 71 p 
+    p_r p = cc1 72 p 
+    p_a p = cc1 73 p 
+    p_f1c p = cc1 74 p 
+    p_d p = cc1 75 p 
+    p_f2c p = cc1 76 p 
+    p_f2r p = cc1 77 p 
+    p_s p = cc1 79 p 
+    p_a2 p = cc1 80 p 
+    p_d2 p = cc1 81 p 
+    p_s2 p = cc1 82 p 
+    p_r2 p = cc1 83 p 
+    p_fm p = cc1 85 p
+    p_fx2 p = cc1 91 p
+    p_fx1 p = cc1 93 p
+:}
