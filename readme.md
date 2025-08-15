@@ -10,12 +10,18 @@ If you have any questions about the code, send me an email at rtylermclaughlin@g
 
 ## Activity
 
+
+### By year
+
 ![2025](activity_plots/github_activity_2025.png)
 ![2024](activity_plots/github_activity_2024.png)
 ![2023](activity_plots/github_activity_2023.png)
 ![2022](activity_plots/github_activity_2022.png)
 ![2021](activity_plots/github_activity_2021.png)
-![full](activity_plots/time_series)
+
+### Full
+
+![full](activity_plots/time_series.png)
 
 ## A note on repetitiveness:
 
