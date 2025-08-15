@@ -8,6 +8,15 @@ The file 'toolz.tidal' is the main collection of TC functions i've been writing.
 
 If you have any questions about the code, send me an email at rtylermclaughlin@gmail.com and I will try to get back to you quickly.
 
+## Activity
+
+![2025](activity_plots/github_activity_2025.png)
+![2024](activity_plots/github_activity_2024.png)
+![2023](activity_plots/github_activity_2023.png)
+![2022](activity_plots/github_activity_2022.png)
+![2021](activity_plots/github_activity_2021.png)
+![full](activity_plots/time_series)
+
 ## A note on repetitiveness:
 
 In programmming and software engineering, we're taught to not repeat ourselves. 
