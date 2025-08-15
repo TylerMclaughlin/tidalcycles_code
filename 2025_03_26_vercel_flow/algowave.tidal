@@ -1,0 +1,608 @@
+
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+-- hi, tyler here. @1000instamilligrams 
+-- I put on a mix !
+-- everything so far has been original music
+-- i think people wanna hear chilled out stuff,
+-- so i'm gonna dj for a bit :)
+-- but thanks so much for listening to my original tunes
+-- all made with code.
+-- paris hilton's gonna start live-coding soon
+
+let cc9 p q = ccv q # ccn p # m 9
+    cc10 p q = ccv q # ccn p # m 10
+    cc11 p q = ccv q # ccn p # m 11
+    cc12 p q = ccv q # ccn p # m 12 
+    cc13 p q = ccv q # ccn p # m 13
+    cc14 p q = ccv q # ccn p # m 14
+    cc15 p q = ccv q # ccn p # m 15
+    -- use ccn 52 for HPF autofilters
+    hpf1 p = cc1 52 p
+    hpf2 p = cc2 52 p
+    hpf3 p = cc3 52 p
+    hpf4 p = cc4 52 p
+    hpf5 p = cc5 52 p
+    hpf6 p = cc6 52 p
+    hpf7 p = cc7 52 p
+    hpf8 p = cc8 52 p
+    hpf9 p = cc9 52 p
+    hpf10 p = cc10 52 p
+    hpf11 p = cc11 52 p
+    hpf12 p = cc12 52 p
+    hpf13 p = cc13 52 p
+    hpf14 p = cc14 52 p
+    hpf15 p = cc15 52 p
+    -- and ccn 53 for HPF autofilters
+    lpf1 p = cc1 53 p
+    lpf2 p = cc2 53 p
+    lpf3 p = cc3 53 p
+    lpf4 p = cc4 53 p
+    lpf5 p = cc5 53 p
+    lpf6 p = cc6 53 p
+    lpf7 p = cc7 53 p
+    lpf8 p = cc8 53 p
+    lpf9 p = cc9 53 p
+    lpf10 p = cc10 53 p
+    lpf11 p = cc11 53 p
+    lpf12 p = cc12 53 p
+    lpf13 p = cc13 53 p
+    lpf14 p = cc14 53 p
+    lpf15 p = cc15 53 p
+    -- swing fxns
+    nfast a p = nudge (fast a $ p)
+    swing4 p = nudge (fast 4 $ p)
+    -- crazy pattern to list stuff for nTake
+    patternToList pat = map value $ sortOn whole $ queryArc pat (Arc 0 1)
+    scaleSeg s n func = toScale s $ fromIntegral <$> round <$> segment n (func)
+    -- arp list from a segmented continuous fxn mapped to a scale
+    arpCL s n func = patternToList $ scaleSeg s n func 
+    takeArp name s n func = nTake name (arpCL s n func)
+    lpfAll amt = stack [ lpf1 amt, lpf2 amt, lpf3 amt, lpf4 amt, lpf5 amt, lpf6 amt,
+                         lpf7 amt, lpf8 amt, lpf9 amt, lpf10 amt, lpf11 amt, lpf12 amt,
+                         lpf13 amt, lpf14 amt, lpf15 amt]  
+    hpfAll amt = stack [ hpf1 amt, hpf2 amt, hpf3 amt, hpf4 amt, hpf5 amt, hpf6 amt,
+                         hpf7 amt, hpf8 amt, hpf9 amt, hpf10 amt, hpf11 amt, hpf12 amt,
+                         hpf13 amt, hpf14 amt, hpf15 amt]  
+    abcb' n func1 func2 func3 = every' (n*4) 0 (func1) . every' (n*4) (n) (func2) . every' (n*4) (n*2) (func3) . every' (n*4) (n*3) (func2)                             
+    groove r p = (# nudge (fast r p))  
+    f = 127
+    afon =  cc1 54 0
+    afoff =  cc1 54 127 
+
+
+
+setcps(127/120)
+
+d1 $ hpfAll 0
+
+d1 $ lpfAll 127 
+
+
+-- give it to me baby
+d1 $ drumz $  n "0 [ 4, 8]" # m 1
+
+d4 $ groove 8 "0.0 0.02" $ slow 2 $  
+     cat [ n "[0@2  2@2 3@2  5@2  3@2 ~@2   ~ ~ ~ -2  ]", 
+           n "[0@2 2@2 3@2 2@2 5 ~ ~ 5@2  3 5 -2 ]"] # m 4
+
+d5 $ n "[[0, 3, 7, 10]@7 [3, 7, 10, 14]@1 [2, 5, 9, 12]@8]/8" # m 6
+
+do
+  once $ afon
+  d7 $ slow 2 $ groove 4 "0 0.02" $ cat [ n "7 3 0 ~" # m 8,  n "7 3 0 10" # m 9, 
+                    stack [n "9" # legato "2" # m 9, 
+                           n "~@4 7 7 3 0" # amp 1.2 # m 8],
+                    n "  3 [0 3] [ ~ 3] [~ ~] ~@4" # amp 1.2 # m 8]
+
+do
+  d7 $ n "7!2 5 3 <7 <10 10 12 12>> 5 ~ 7 " # m 7
+  d2 $ drumz $  "15" # m 2
+
+once $ hpf1 0 
+
+
+
+
+
+
+do
+  mapM ($ silence ) [d1, d2, d3]
+  once $ afoff
+  d8 $ hpf4 (0)-- rj bass go up to 60 then f
+  d6 $ hpf2 45 -- drums
+  d7 $ hpf3 70 -- bass
+  d1 $ hpf5 0 -- pads
+  d5 $ (|+ n (slow 8 $ "0@6 2 0")) $ n "[0, 3, 7, 10]"  # m 5
+
+
+d1 $ drumz $ stack [
+  struct "t(3,8)" $ nTake "hah" [8, 2, 7] # m 2,
+  --(0.0625 <~) $ struct "t(3,8) t*4" $ nTake "haha" [1, 2, 4] # m 2,
+  n "0 8 [0, 3] <8 <[8, 0] [[8, 0] [8, 0] ] >>" # m 2,
+  fast 2 $ n "{~ ~ 8 ~ 8}%4" # m 2,
+  lpf2 "125"
+  ] # nudge (fast 4 "0 0.02")
+
+d4 $ hpf4 0
+
+-- bass drums
+d6 $ hpf2 0 
+
+d2 $ (|+ n (slow 8 "0@6 2 0")) $ n "3 ~ ~ 10 ~ 0 ~ ~"  # m 3 # swing4 "0 0.02"
+
+
+do
+  d2 $ (|+ n (slow 8 "0@6 2 0")) $ every 5 (bite 4 "0 1 1 2") $ 
+      n "3 ~ <~ <15 ~>> 10 ~  0 ~ < ~ <~ <17 ~>>>"  # m 3 # swing4 "0 0.02"
+  d7 $ hpf3 35 
+
+
+do 
+  d8 $ hpf5 50   
+  d7 $ hpf3 0 
+  d3 $ (|+ n 12) $  n (toScale [0, 2, 3, 5, 5, 7, 9, 10 ] (slow "[2 4 8 2]" $  "{[~/2 0 <2> 4 ~]}%4") |+ slow 8 "0@6 2 0") # m 7 # swing4 "0 0.02"
+
+d8 $ hpf2 30
+
+-- mmove <~ 
+do
+  d8 $ hpf2 0
+  d4 $ (|+ n "") $  n (toScale [0, 2, 3, 5, 5, 7, 9, 10 ] (slow "[2 4 8 2]" $ (0.125 <~) $ "{[~/2 0 <2> 4 ~]}%4") |+ slow 8 "0@6 2 0") # m 7 # swing4 "0 0.02"
+
+
+do
+  once $ drumz $ n "15 15 15*4" # m 2 # swing4 "0 0.02"
+  d8 $ hpf5 0   
+  d6 $ hpf2 45 -- drums
+  d7 $ hpf3 90 -- bass
+  d5 $ (|+ n (slow 8 $ "0@6 2 0")) $ n "[0, 3, 7, 10]"  # m 5
+
+do
+  once $ drumz $ n 13 # m 2
+  d9 $ every 8 (|- n 24) $ n "15 15 15*2 15" # m 2 # swing4 "0 0.02"
+  d6 $ hpf2 0 -- drums
+  d7 $ hpf3 0 -- bass
+  d8 $ drumz $ slow 4 $ n "<10 < [10 10 10 ~  ~@4] [10 10*2 10 10  ~@4]> >" # m 2 # swing4 "0 0.02"
+  d5 $ (|+ n (slow 8 $ "0@6 2 0")) $ n "[0, 3, 7, 10]"  # m 5
+
+
+d5 $  (|+ n (slow 8 $ "0@6 2 0")) $ struct "t(3,8,2)" $ n "[0, 3, 7, 10]" # legato "0.125" # m 5
+
+d1 $ drumz $ n " 0 0" # m 1
+
+d1 $ drumz $ struct "t(3,18)" $ nTake "ha" [0, 2, 4] # m 2
+
+
+mapM ($ silence) [d2, d3, d4]
+
+d2 $ hpf8 20
+
+d2 $ (|+ n 12) $  n "[0, 3, 5, 7, 12]" # m 8 
+
+d2 $ (|+ n 12) $  n (toScale [0, 2, 4, 7, 9, 10] "[0, 3, 5, 7]" +| "0 5*4 0*2 5*2") # swing4 "0 0.03" # legato "0 0.04 " # m 8 
+
+d2 $ fast "8 <16 12>" $  takeArp "omg" [0, 3, 5, 7, 10] 16 (range 0 12 $ sine) # m 8 # swing4 "0 0.03" # legato "0.3 0.2 0.25 0.18"
+
+d3 $ fast "8 <16 12>" $  takeArp "omg2" [0, 3, 5, 7, 10] 16 (range 0 12 $ sine) # m 3 # swing4 "0 0.03" # legato "0.3 0.2 0.25 0.18"
+
+
+d4 $ fast "8 <16 12>" $  takeArp "omg3" [0, 3, 5, 7, 10] 16 (range 0 12 $ abs (sine * (sine))) # m 4 # swing4 "0 0.03" # legato "0.3 0.2 0.25 0.18"
+
+
+d1 $  drumz $ fast 8 $ takeArp "omg3" [1, 8] 32 (range 0 1 $ abs (sine * (sine))) # m 1 # swing4 "0 0.03"
+
+-- 135 BPM SECTION
+
+do
+ d5 silence
+ setcps(1/120*136)
+ d1 $ drumz $ "0 0" # m 1
+
+
+do
+  mapM  ($ silence) [d2, d3, d4]
+  d3 $ stack [ (|+ n (slow 16 "0 0 2 2 7 7 7 7" )) $ fast "8 <16 12>" $  takeArp "omg2" [0, 3, 5, 5] 16 
+       (range 0 12 $ sine) # m 3 # swing4 "0 0.03" # legato "0.3 0.2 0.25 0.18",
+       hpf4 50, hpf1 0 ]
+
+do
+ d9 $ hpf1 50
+ d4 $  (|+ n (slow 16 "0 0 2 2 7 7 7 7" )) $ n "[0, 3, 5, 8]" # m 5
+ -- bass
+ d6 $ lpf4 127
+ d5 $ slow 4 $ n "~@3  0 7 -2 5 ~@9" # m 4
+
+
+d5 $ slow 4 $ n "{~@3  0 7 -2 <5 5 5 [5 12]>  ~@5 0 <7 [7 10]> <-2 -2 -2 -2 -2 -2 -2 [7 -2]> 5}%16" # m 4 # nudge (fast 4 "0 0.03")
+
+do
+ d9 $ hpf1 50
+ d8 $ hpf4 0 
+ d1 $ stack [
+    drumz $ "0 <0 0 0 0*2>" # swing4 "0 0.03" # m 1,
+    drumz $ n  "[8*2 10 <~ ~ ~ 8*2> <8*2 8*2 8*2 <10 8*2>>]" # amp 0.025 # swing4 "0 0.03" # m 1,
+    hpf1 40,
+    hpf4 10
+   ]
+
+-- add  hpf1 above before crashes
+
+d6 $ drumz $ slow 8 $  n "13 13 13 13*2" # m 1
+
+d2 $ [] # m 6 
+
+
+do
+  d6 silence
+  d9 silence
+  d7 $ stack [ drumz $ n "<~ ~ [~ 4]> <4 4 4 <4*4 4*4 4*2 [4*2 1*2] >> " # m "1 1" # swing4 "0 0.03", hpfAll 0 ]
+
+-- pad melody
+d9 $ slow 16 $ n "12 17 <19 14>" # m 6
+
+-- ml cowbell
+d8 $ (|- n 60) $ fast 2 $ struct "t ~ ~ t*2 ~ ~  ~  ~ " $ nTake "cb" [0, 1, 2, 1]  # m 15 # swing4 "0 0.03"
+
+-- crashes
+d6 $ drumz $ slow 8 $  n "13 13 13 13*2" # m 1
+
+-- add filter
+d9 $ hpfAll 80
+
+  lpf1 ""
+
+-- triplet song
+
+do 
+  hush 
+  d9 $ hpfAll 0
+  d1 $ drumz $  n "0 8 3 8"  # swing4 "0 0.032" # m 2
+  d3 $ fast 2 $ n "<12 12 12 12   11 11 11 11 > 7 4" # amp "0.5 0.4 <0.4 0.5>"# m "[10, 11]"
+
+once $ lpf9 82
+
+d5 $ stack [
+   lpf9 82,
+   fast "8 " $ takeArp "trip" [11, 14, 4,  7] 7 (range 0 8 sine ) # swing4 "0 0.2" # m 9 
+   ]
+
+do
+ hush
+ d1 $ drumz $  n "0 14 3 14"  # swing4 "0 0.032" # m 2
+ d3 $ drumz $  n "~ <~8> 10 ~  ~ <~ ~ ~ 8> 10 ~" # nudge (fast 4 "0 0.03") #  m 1
+ d2 $ (|+ n (slow 16 "5 0")) $ stack [
+      fast 2 $ n "<12 12 12 12   11 11 11 11 > 7 4" # amp "0.5 0.4 <0.4 0.5>" # m "[10, 11]",
+      fast "{8 8  8 12 8 8 8 15}%5" $ takeArp "trip2" [11, 14, 4, 7] 7 (range 0 8 sine ) # swing4 "0 0.2" # m 9,
+      slow 1 $ n " <[[~ -3 -3 -3] <-8 [-8*4]>] <~ ~ ~ [-12*4 -15]>  > " # nudge (fast 8 "0 0.2" ) # m 3
+       ]
+ --d9 $ hpfAll 0
+ -- bring hpf3 bass down to 0!  then hpfAll out!
+ d10 $ hpf3 50
+  
+
+do 
+  hush
+  d9 $ hpfAll 0
+  d3 $ cat [struct "t(3,8)" $ n "[0, 3, 7, 10, 14, 17]", 
+           struct "t(8, 11)" $ n "[]"]  # m 11 
+
+do 
+  hush
+  d1 $ drumz $ n "~ 3" # m 1
+  d3 $ cat [struct "<t(3,8) t(3, 8, 1)>" $ n "[0, 3, 7, 10, 14, 17]", 
+           struct "<t(9, 16) t(5, 8)>" $ n "[-7, 3, 9, 13, 18]" # nudge (fast 8  "0 0.3"),
+           (|- n 2) $ struct "t(3,8)" $ n "[0, 3, 7, 10, 14, 17]",
+           (|+ n 2) $ struct "<t(9, 16) t(11, 16)>" $ n "[-7, 3, 9, 13, 18]" # nudge (fast 8  "0 0.3")
+   ]  # m 11 
+
+d1 $ drumz $ slow 2 $ n "~ 8 [~,3] 8 ~ [8 3] ~ <8 [8,~]>" # nudge (fast 8 "0 0.22") # m 1
+
+d1 $ stack [drumz $ slow 2 $ n "0 8 [~,3] 8 ~ [8 3] ~ <8 [8,~]>" # nudge (fast 8 "0 0.22") # m 1,
+    hpf1 00]
+
+d1 $ drumz $ slow 2 $ n "[0, <13 ~ 13 ~ 13 ~ [13*2 13 ~ ~] ~  >] 8 [0,3] 8 0 [8 3] 0 <8 [8,0]>" # nudge (fast 8 "0 0.22") # m 1
+
+d1 $ stack [
+    drumz $ slow 2 $ n "0  8 [0,3] 8 0 [8 3] 0 <8 [8,0]>" # nudge (fast 8 "0 0.22") # m 1,
+    hpf1 40
+]
+
+d2 $ stack [ slow 4 $ n "0 <2*2 2> 3 5   6 8 9 11  <10*2 10> 5 -2 5   [<[<13 7> <0 1> <8 -5> <13 1*2 13 [1 0] >]  >]@4 " # nudge (fast 16 "0 0.03") # m 4, hpf1 0]
+
+--fill
+[~ 12 11@2 10 9!2 8]
+
+solo 3
+
+do
+  unsolo 3
+  d1 $ drumz $ slow 2 $ n "0  10 [0,3] 10 0 [8 3] 0 <10 [8,0]>" # nudge (fast 8 "0 0.22") # m 1
+
+d4 $ (|+ n 24) $ stack [
+    cat [n "[ 10, 14, 17]", 
+          n "[9, 13, 18]",
+          (|- n 2) $ n "[10, 14, 17]",
+          (|+ n 2) $ n "[ 9, 13, 18]"
+         ] # amp 0.12 # m 10 ,
+    lpf10 80,
+    hpf10 30,
+    cat [struct "<t(3,8) t(3, 8, 1)>" $ n "[0]", 
+           struct "<t(9, 16) t(5, 8)>" $ n "[-7]" # nudge (fast 8  "0 0.3"),
+           (|- n 2) $ struct "t(3,8)" $ n "[0]",
+           (|+ n 2) $ struct "<t(9, 16) t(11, 16)>" $ n "[-7]" # nudge (fast 8  "0 0.3")
+        ] # m 14
+]
+
+solo 2
+
+unsolo 2
+
+mapM ($ silence ) [d1, d3, d5]
+
+
+do
+  hush
+  d1 $  stack [
+        cat [ struct "t(<9 10>,13)" $ n  "[-4, 0, 3, 7]",
+             struct "t(7,13)" $ n "[~]",
+             struct "t(4,13)" $ n  "[~]",
+             struct "t(7,13)" $ (|+ n 2) $  n "[~]",
+             struct "t(5,13)" $ n  "[-5, -2, 1, 5]",
+             struct "t(7,13)" $ n "[~]",
+             struct "t(6,13)" $ n  "[-7, -4, 0, 3]",
+             struct "t(7,13)" $ (|+ n 2) $  n "[-2,  1, 5, 8]"
+            ] # m " 9",
+        lpf9 70 
+        ]
+
+
+d2 $ lpf9 80
+
+d2 $ lpf9 100
+
+d1 $  stack [
+        cat [ struct "t(<9 10>,13)" $ n  "[-4, 0, 3, 7]",
+             struct "t(7,13)" $ n "[-2,  1, 5, 8]",
+             struct "t(4,13)" $ n  "[-4, 0, 3, 7]",
+             struct "t(7,13)" $ (|+ n 2) $  n "[-2,  1, 5, 8]",
+             struct "t(5,13)" $ n  "[-5, -2, 1, 5]",
+             struct "t(7,13)" $ n "[-2, 1, 5, 8]",
+             struct "t(6,13)" $ n  "[-7, -4, 0, 3]",
+             struct "t(7,13)" $ (|+ n 2) $  n "[-2,  1, 5, 8]"
+            ] # m " 9",
+        lpf9 100
+        ]
+
+-- pattern bite
+d2 $ drumz $ bite 8 "0 1 1 1" $ bite 4 "0 1 3 3" $ n "[0, <3 ~ >] 8 8  0 0 8  0 8 0    0 8 12   8 " # m (slow 4 $ "1 2 2 1  2 1 16 2 ") 
+
+d2 $ drumz ""
+
+d5 $ cat [ struct "t(<9 10>,13)" $ (|+ n 12) $ n "<10 12>",--"[-4, 0, 3, 7]",
+             struct "t(7,13)" $ (|+ n 12) $ n "8",  --"[-2,  1, 5, 8]",
+             struct "t(4,13)" $ (|+ n 12) $ n "7",-- "[-4, 0, 3, 7]",
+             struct "t(7,13)" $ (|+ n 12) $ n "10", -- (|+ n 2) $  n "[-2,  1, 5, 8]",
+             struct "t(5,13)" $ (|+ n 12) $ n  "9", -- "[-5, -2, 1, 5]",
+             struct "t(7,13)" $ (|+ n 12) $ n "<12 12 12 15>", -- "[-2, 1, 5, 8]",
+             struct "t(6,13)" $ (|+ n 12) $ n  "<10 12>", -- "[-7, -4, 0, 3]",
+             struct "t(7,13)" $ (|+ n 12) $  n "<13 7>"---(|+ n 2) $  n "[-2,  1, 5, 8]"
+              ] # m 11 # legato "0.1"
+
+d7 $ cat [ struct "t(<9 10>,13)" $ drumz $ n "<~ 15>",--"[-4, 0, 3, 7]",
+             struct "t(7,13)" $ drumz $ n "1",  --"[-2,  1, 5, 8]",
+             struct "t(4,13)" $ drumz $ n "~ 2",-- "[-4, 0, 3, 7]",
+             struct "t(7,13)" $ drumz $ n "1 8", -- (|+ n 2) $  n "[-2,  1, 5, 8]",
+             struct "t(9,13)" $ drumz $ n  "<10 8>", -- "[-5, -2, 1, 5]",
+             struct "t(7,13)" $ drumz $ n "<8 10>", -- "[-2, 1, 5, 8]",
+             struct "t(6,13)" $ drumz $ n  "15 5", -- "[-7, -4, 0, 3]",
+             struct "t(7,13)" $ drumz $  n "5 8"---(|+ n 2) $  n "[-2,  1, 5, 8]"
+              ] # m 2 # legato "0.1"
+
+-- bring in bass 70, 80
+once $ lpf4 40 
+
+d6 $ n "-4 -2 -4 1  -5 -2 -7 -4   -4 -2 -4 1 -5" # amp 1.2 # m 4 
+
+unsolo 6
+
+d2 $ drumz $ n "0 ~ ~ ~  0 ~ ~ ~  0 ~ ~ 0 ~" # m 1
+
+-- finale
+
+do
+  hush
+  d6 $ n "-4 -2 -4 1  -5 -2 -7 -4   -4 -2 -4 1  -5" # m 4 
+  d2 $ drumz $ n "<0 [0, 2]> ~ ~ ~  0 ~ ~ ~  0 ~ ~ 0 ~" # m 1
+
+-- add structs and bites
+
+-- hpf down to 54
+do
+  d3 $  every 9 (struct "t(3, 13)") $ stack [  (|- n 2) $ n "[0, 3, 7, 10, 14, 17] @4  [-5, -2, 2, 5, 9, 12 ]  @7" # legato "0.35 0.1 0.2"  # m 7,
+   hpf7 54
+   ]
+
+-- play with (|+ n "0 12")
+
+do
+  d9 $ lpf4 65
+  d5 $ drumz $ n "8  ~ ~ ~  8 ~ ~ ~  8 ~ ~ 8 ~" # m 2
+  d3 $ plyWith "2 " (|+ n "0 12") $ every 5 (struct "t(3, 13)") $ stack [  (|- n 2) $ n "[0, 3, 7, 10, 14, 17] @4  [-5, -2, 2, 5, 9, 12 ]  @7" # legato "0.35 0.1 0.2"  # m 7,
+   hpf7 54
+   ]
+
+d7 $ hpfAll 0
+
+d7 $ lpfAll f
+
+
+d4 $ 
+
+d7 $ slow 8 $ n "0@6 7 <0*2 0>" # m 14
+
+-- lpf 40 55 70 78 85 90 95 100 110 120
+-- then do d10 $ hpfAll 20 -> 120
+do 
+  d9 $ lpf9 40 
+  d10 $ hpf9 61 
+  --d10 $ hpfAll 0 
+  d8 $ fast 13 $ (|- n 2) $ takeArp "hella av friends" [0, 3, 7, 10, 17] 13 (range 1 24 sine) # m 9
+
+
+
+
+
+
+
+do 
+
+
+
+
+d9 $ hpf9  61 
+
+
+
+d5 $ slow 4 $ n "{~@3  0 7 -2 <5 [5 12]>  ~@5 0 7 -2 5}%16" # m 4 # legato "0" #  nudge "0"
+
+
+
+
+  
+
+d2 $ (|+ n 12) $ struct "t(3, 8)" $  n (toScale [0, 2, 4, 7, 9, 10] "[0, 3, 5, 7]" +| "0 5*4 0*2 5*2") # nudge "0 0.03" # legato "0 0.04 " # m 8 
+
+d5 silence
+
+
+d1 silence
+
+do
+  hush
+  d1 $ drumz $  n "0 0" # m 1
+
+
+d1 $ (|+ n (slow 8 "[0 5 12 7] 10")) $ struct "1010110101001010" $ fast 8 $ nTake "omg" (arpCL [0, 3, 5, 7, 10] 16 (range 0 12 $ sine) ) # m 2
+
+d1 $ (|+ n (slow 8 "[0 5 12 7] 10")) $ struct "1010110101001010" $ fast 8 $ takeArp "omg" [0, 3, 5, 7, 10] 16 (range 0 12 $ sine) # m 2
+
+toScale [0, 2, 5] $ fromIntegral <$> round <$> segment 12 ( range 1 14 $ abs (sine * (fast 2 $ sine ) ))
+
+patternToList (parseBP_E "0 12 12 0")
+
+d3 $ cc2 52 "25 50"
+
+d3 $ cc1 53 "25 50"
+
+
+
+
+
+d1 $ drumz $ n "0 15 <[0, 3] [0 0 , 3]> 15" # nudge (fast 4 $ "0 0.02") # m 1 
+
+d4 $ n "{ ~  5 4 2 [5 4] [~ 2]}%<4>" # m 5
+
+d2 $ n "{0 2*2 5 7 14*2}%4" # swing4 "0 0.01 0.02 0.01" # m 2 
+
+-- melody
+once $ n (slow 4 $ "[10 12 14 17 21]") # m 5
+
+d10 $ af2 ( "25 52 25 52") # swing4 "0 0.04"  
+
+d9 $ af1 ("[10 20 30 40 50 60 70 80 90 100]/20" |+ "25 52"  )
+
+d9 silence
+
+d3 $ cc2 15 12 
+
+d3 $ ccv "25 50" # ccn 52 # m 2
+
+d3 $ cc2 52 "25 50"
+
+d3 $ n "48 "  # m 2 
+
+d2 silence
+
+
+let drumz = (|- n 24)
+
+d1 $ (|- n 24) $ slow 2.8 $ stack [ n "0 [12 12] 0 12 0 12 0 12" 
+      # amp "1.25 1.0 0.9 1.0  1.1 1.0 0.9 1.0" 
+      # legato "0.25 0.5" # nudge (fast 8 $ "0.0 0.02")  ] # m 1
+
+
+do
+  hush
+  let p = "1011010010100111" 
+  d2 $ (|+ n 22) $ (|+ n (slow 8 $ "0 0 0 0 2 2 2 2  -5 -5 -5 -5 "))  $ n "[0, 3, 7, 10, 14, 17]" # m 2
+  d1 $ (|- n 24) $ (|+ n "0 2 0 4 14 ") $ struct  p
+     $ n ( toScale [0, 2, 4] (slow 4 $ " [0 2 3 4]*4 [[0 3 ] 2 3 4] [0 2 3 4 ]*3" )) # m 1 --stack []
+  d3 $ drumz $ n  " ~ 10" # m 1 
+
+
+
+--- MIDI MAPPING FILTERS
+
+d1 $ lpf1 "0 127" 
+
+d1 $ hpf1 "0 127" 
+
+d1 $ lpf2 "0 127" 
+
+d1 $ hpf2 "0 127" 
+
+d1 $ lpf3 "0 127" 
+
+d1 $ hpf3 "0 127" 
+
+d1 $ lpf4 "0 127" 
+
+d1 $ hpf4 "0 127" 
+
+d1 $ lpf5 "0 127" 
+
+d1 $ hpf5 "0 127" 
+
+d1 $ lpf6 "0 127" 
+
+d1 $ hpf6 "0 127" 
+
+d1 $ lpf7 "0 127" 
+
+d1 $ hpf7 "0 127" 
+
+d1 $ lpf8 "0 127" 
+
+d1 $ hpf8 "0 127" 
+
+d1 $ lpf9 "0 127" 
+
+d1 $ hpf9 "0 127" 
+
+d1 $ lpf10 "0 127" 
+
+d1 $ hpf10 "0 127" 
+
+d1 $ lpf11 "0 127" 
+
+d1 $ hpf11 "0 127" 
+
+d1 $ lpf12 "0 127" 
+
+d1 $ hpf12 "0 127" 
+
+d1 $ lpf13 "0 127" 
+
+d1 $ hpf13 "0 127" 
+
+d1 $ lpf14 "0 127" 
+
+d1 $ hpf14 "0 127" 
+
+d1 $ lpf15 "0 127" 
+
+d1 $ hpf15 "0 127" 
+
+d1 $ afon 

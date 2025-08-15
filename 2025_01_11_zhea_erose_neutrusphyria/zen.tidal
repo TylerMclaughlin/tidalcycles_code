@@ -1,0 +1,29 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+-- C  D  E  F  G  A  B  C  D  E  F  G  A  B  C  D  E  F  G  A  B  C 
+-- 0  5 10 13 18 23 28 31 36 41 44 49 54 59 62 67 72 75 80 85 90 93  
+
+-- c et ft gt bt cp   et ft   bt c et at 
+let rh1 = "[0 11 14 19 29 30  41 44  59 62 72 85 ~ ~ ~] " ) 
+
+-- nice basic arp despite missing octaves
+let rh1 = n "0 11 14 19 29 1 11 14 29 0 11 24"
+
+-- Ftlydianb5
+let rh1a = n (rev "~!36 0 11 14 19 29 30 42 45 60 62 73 86") # m 1
+    rh1b = n "[-8, 5, 19, 24, 42, 47]" # m 1
+    lh1b = n "[10, 28, 46, 50]" # m 2
+    rh2a = n "[71 52] ~ " # m 1
+    lh2a =  n "[-23 14 48 52 65 76 53]*3" # m 2
+    rh2b = n "~ [9 34 14 24 40 55 58] [86 55 26 14 40]" # m 1
+    rlh2ab =  n "[-23 14 48 52 65 76 53] [9 34 14 24 40 55 58] [86 55 26 14 40]" # m "2 1 1"
+
+setbpm 135 
+
+d1 $ ()
+
+do
+ resetCycles
+ d1 $ (|- n 31) $ ncat [((2/3), rh1a), ((2/3), stack[rh1b, lh1b]),
+                        ((1,rlh2ab))] 

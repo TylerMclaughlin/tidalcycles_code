@@ -1,0 +1,53 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+
+--Ussak
+d1 $ struct "t(15,18)" $  n "0 8 13 22" # m 1
+
+d1 $ (|- n 53) $ struct "[t(15,18) t(13,18)]/4" $ n (tScale' 53 "0 8 13 22" "0 .. 10") # m 1
+
+-- Hicaz 12
+d1 $ struct "t(15,18)" $  n "0 4 16 20" # m 1
+
+-- melody arp
+d1 $ (|- n 53) $ r 0.001 $ rizz 9 "0 0.0019" $ fast 2 $ sus 3 "1 1.75 1.25" $ struct "[t(15,18) t(13,18)]/4" $
+     n (tScale' 53 "0 4 16 20" "0 .. 10") # m 1
+
+-- trilly
+d8 $ (|+ n "[0 ]/2") $ 
+      fastsoft' 0.8 "[1 1 3  1 1 ~  3 1 [1 3]]" $
+       mask "<f t> t!8" $ struct "[t(15,18) t(13,18)]/4" $
+        (# amp 0.5) $ n "0" # m 8
+
+-- melody
+
+d9 $ (|- n 53) $ slow 2 $ n (tScale' 53 "0 9 18 22 31 40 49" "4 5 7 8 [<9 [9 8] 9 7 7  [9 8] 7 [9 8] 6>]@4  ~!9  ") # m 9
+
+-- drum pattern
+d2 $ drumz $ n "0 ~ 3  ~ [0 1] ~  3 ~ ~ " # m 2
+
+-- hats
+d3 $ drumz $ r 0.001 $ (|* amp (range 0.8 1.2 $ fast 2 $ cosine)) $ (|+ n "0 2") $ rizz 9 "0 0.005" $
+    (# amp 0.4) $ struct "t(15,18)" $ nT "hh" 3 "5 4 4" # m 2
+
+
+d3 $ drumz $ r 0.001 $ (|* amp (range 0.8 1.2 $ fast 2 $ cosine)) $ (|+ n "2 2 0") $ 
+   rizz 9 "0 0.005" $
+   (# amp 0.4) $ struct "t(17,18)" $ n "[5 4 4]*6" # m 2
+
+
+d4 $ n (tScale' 53 "0 9 18 22 31 40 49" ("[-2,0,1,2,4,5]" +| "[0@2 3@2 4 0@2 2@1 ]/9")) # m 3
+
+-- Hicaz 13
+d1 $ struct "t(15,18)" $  n "0 4 17 21" # m 1
+
+d1 $ (|- n 53) $ struct "[t(15,18) t(13,18)]/4" $ n (tScale' 53 "0 4 17 21" "0 .. 10") # m 1
+
+-- Rast
+d1 $ struct "t(15,18)" $  n "0 9 17 22" # m 1
+
+
+d7 $ mask "[f t] t t  t [f f] t  t t t " $ n "[0@2 3@2 4 0@2 2@1 ]/9"  # m 7
+
+getbpm

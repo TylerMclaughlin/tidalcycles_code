@@ -1,0 +1,11 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+let sc = tScale "0 2 4 7 9 11"
+
+d1 $ (|- n 12) $ n (sc ((stack [
+        ((fast 5 $ "0 2 4 7 5 3 1") |+ "<0 1 -3 4>/2" |+ 7),
+        ((fast 4 $ "0 2 4 7 5 3 1") |+ "<1 0 -2 3>/2" |+ 4),
+        ((fast 3 $ "0 2 4 7 5 3 1") |+ "<1 1 -1 -2>")])
+        |+ "<1 0 3 4>/2")) # m 1
+
+setbpm 135

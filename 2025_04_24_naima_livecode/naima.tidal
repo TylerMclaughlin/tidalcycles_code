@@ -1,0 +1,12 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+setbpm 126
+
+
+d1 $ drumz $ r "[0 0.002]*8" $ fast 2 $ n "0 5 [0] 5 " # m 1
+
+d2 $ drumz $ l 0.001 $ fast 2 $ n "~ ~ 8 ~ " # m 1
+
+
+d3 $ (|- n 36) $ slow 2 $  n "[23, 37, 54, 68] [6, 23, 37, 54] [24, :] []" # m 2

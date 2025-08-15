@@ -1,0 +1,77 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+
+let e42d p = (tScale' 42 "0 7 14 18 25 32 39" p)
+
+-- melody.  do 1/12 -> 3/12 
+d1 $ r 0.001 $
+    (l ("<1 1>" |/ 12)) $
+    -- (l (0/12)) $ 
+    rizz 1 (segfunc 24 $ range 0 0.01 $ egg 1 4) $ 
+    (|+ n 2) $ mask "t f t!10" $ (|+ n "<0 7 14 21 28 35>/2") $
+    n (e42d ("{0 7 5 [4 3] 2 [-2 5]}%12" |+
+    "<0 2>" |- "4" |+ 2 |- "<0 1 3 3 5 5 >/2")) # m 1
+
+-- chords
+d3 $ (|+ n 2) $ (|- n 42) $
+    (|+ n "<0 7 14 21 28 35>/2") $
+    n (e42d ("~ [0,2,4,6,8]@2 ~!5 ~!4" |+
+    "<0>" |- "4" )) # m "<2 6>"
+
+-- drumz
+do
+  let amt = ("<9!3 11 9!2 7 4>" |/12)
+  d4 $ drumz $ l amt $ n "<~ [~ 0 0]> <2!3 [2 0 0]> [0 ~ 0 ] 2" # m 3
+  d5 $ drumz $
+      l amt $
+      rizz 1 (fast 2 $ range 0 0.01 $ egg 1 4) $ 
+      (|* amp (segfunc 24 $ fast 4 $ range 0.9 1.01 (sine ))) $
+      (|* amp (segfunc 24 $ range 0.8 1.05 (sine ))) $
+       (# amp 0.5) $ n "1 4 4 ~ 4 5 ~ 4 5 ~ 4 5" # m 3
+  d7 $ drumz $
+      l amt $
+      rizz 1 (fast 2 $ range 0 0.01 $ egg 1 4) $ 
+      (|* amp (segfunc 24 $ fast 4 $ range 0.9 1.01 (sine ))) $
+      (|* amp (segfunc 24 $ range 0.8 1.05 (sine ))) $
+       (# amp 0.3) $ n "4 ~ ~ 4 ~ ~ 4 ~ ~ 4 ~ ~" # m 3
+  
+
+-- faster drumz
+do
+ d7 silence
+ d4 $ drumz $ n " [0, 2] [1, [~ ~]] [0,2] 0 [0,2] 0" # m 3 
+ d5 $ drumz $ n "[ ~ 4]*6" # m 3 
+ d8 $ drumz $ (# amp 0.2) $ n " [~, [~ [<4 2> 4]]] [~, [~ <~ 2>]] [~] ~ [~] ~" # m 3 
+ d7 $ drumz $ (# amp 0.1) $ (|+ n "0 1 1 0") $ n "[ [~ <4 ~ ~ 4 [4 4]>] [~ 4 ]]*6" # m 3 
+
+
+unsolo 6
+
+-- bass
+d6 $ r 0.001 $ 
+    (|+ n 2) $ mask "f  f t!10" $ (|+ n "<0 7 14 21 28 35>/2") $
+    --n (e42d ("{0 7 5 [4 3] 2 [-2 5]}%12" |+
+    n (e42d ("{0 <7!3 8 7!3 [8 7]> 5 [4 3] 2 [-2 5]}%12" |+
+    "<0 2>" |- "4" |- "<0 1 3 3 5 5 >/2")) # m 4
+
+-- weird pad scream
+d9 $ drumz $ (|+ n 0) $ n "<~ [0,1,2,3,4,5,6]>/2" # m 7
+
+-- debug harmony
+d9 $ drumz $ n "<~ ~ [0,1,2,3,4,5,6]  ~  [9,8,7,6] ~ >/2" # m 7
+
+
+-- zaaag robot
+d10 $ (|- n "2 5 2 -3") $  fastsoft' 0.8 "1 2 1 3" $ l (1/9) $ n " 0 0 0 0 0 0 0 0 0" # m 10
+
+-- zagg
+d10 $ fastsoft' 0.9 "1 1.5 1 1" $ (|- n "2 5 2 3") $   l ("<1 2 1>" |/12) $ n "0(9,12)" # m 10
+
+all $ (fastsoft' 0.9 "1")
+
+getbpm
+
+-- perfect
+setbpm 110
+
+setbpm 105

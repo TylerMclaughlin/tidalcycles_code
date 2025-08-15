@@ -1,0 +1,38 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+
+getbpm
+
+let p = 2 
+
+do
+ let p = ("<10!3 8 7!3 6>" |- "<0 2 -2 -4>") 
+     sc p = tScale' 31 "0 5 10 13 18 23 28" p
+ d1 $ (|+ n 0) $ (# legato 0.133) $ stack [
+      (|- n "<0 3 8 1 3 8 13>") $ fast (2 |+ p) $ n (sc 0),
+      fast (3 |+ p) $ n (sc "<2!3 6!4>"),
+      fast (4 |+ p) $ n (sc 4),
+      fast (5 |+ p) $ n (sc 6),
+      (|+ n "<0!3 5!3 0>" ) $ fast (6 |+ p) $ n (sc "<8!3 >")] # m 1
+ -- kicc
+ d2 $ l 0.01 $ (r (segfunc 16 $ range 0.01 0.02 $ egg 1 4)) $ drumz $
+     (|* amp (segfunc 16 $ range 0.9 1.05 $ egg 1 4)) $ 
+     (# amp "<0.5!3 0.4 0.5!3 0.35>") $
+     mask "t t [f f] [f <t f f>]" $
+      (|+ n "[1 0 0 0]*2") $ 
+      n "0(<9!3 11 9!2 13>,16)" # m 3
+ d3 $ l 0.01 $ (r (segfunc 16 $ range 0.01 0.02 $ egg 1 4)) $ stack[
+      r "0.002" $ drumz $ (rizz 2 "0 0.01") $ mask "[t t f f]*4" $ (# amp 0.3) $
+      struct (inv "t(<9!3 11 9!2 13>,16)") $ nT "hh" 4 "6 5 6 4" # m 3,
+      drumz $ (rizz 2 "0 0.015") $ (# amp 0.5) $ struct "[~ ~ t t]*4" $
+      nT "hh2" 2 "6 5" # m 3]
+ d6 $ drumz $ n "~ [3,2]" # m 3
+ d5 $ struct "[t t  t [t t t t]]" $
+      n (sc ("[0 ] " |+ "<[-1@3 [0 -1 -2 -3]] [-2 -5] 2 [-1@3  [-2 -1 0 1 ]] -3 -4 1>")) # m 2
+ d8 $
+  l 0.01 $ (r (segfunc 16 $ range 0.01 0.02 $ egg 1 4)) $ 
+  n (sc ("~ [12 ~ 5 ~ ] [4 3 2 1]" |+ "0 0 0 [<0 -2 4 0 -2 4 5>]")) # m 8 
+
+d4 silence
+
+d3 silence

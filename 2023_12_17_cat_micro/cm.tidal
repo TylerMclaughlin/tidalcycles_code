@@ -1,0 +1,77 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/pigments_midi_map.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/breakz.tidal"
+
+d1 $ n "0 0 0 0" # m 1
+
+-- never hits the 5
+d1 $ ncat [(1, n "0 <2!2 5> 4 7"), (1, n "11 9 7 9")] # m 1
+
+-- this works
+d1 $ ncat [(3, n "0 <2!2 5> 4 7"), (1, n "11 9 7 9")] # m 1
+
+-- this also works, unsurprisingly
+
+d1 $ ncat [(1, fast 3 $ n "0 <2!2 5> 4 7"), (1, n "11 9 7 9")] # m 1
+
+d1 $ cat [n "0 <2!2 5> 4 7", n "11 9 7 9"] # m 1
+
+d1 $ fast "1 1.3333 1.5" $ nT "name" 5 (tScale "0 2 4 7 9 11"
+    (ncat [(3, "0 <2!2 5> 4 7"),
+           (1, "11 9 7 9")])) # m 1
+
+do
+  let p1 = (|* amp 0.9) $
+          gas 4 "0.5 0.43 0.33 0.34" $
+          struct "t(9,16)" $
+          takeArp' "asdf" 5 12 ("0 2 4 7 11" |+ 0)
+          16 ((range 0 9 $ sine * tri ) |- 4) # m 1
+      p2 = fast "1 1 1" $ gas 4 "0.3 0.33 0.43 0.41" $ r 0.0005 $
+          struct (inv "t(6,16)") $
+          takeArp' "asdf2" 4 12 "0 2 4 7 11" 
+          16 ((range 0 9 $ sine * tri) |+ 2) # m 2
+      p3 = r 0.001 $ struct (inv "t(12,16)") $
+       takeArp' "asdf3" 5 12 "0 2 4 7 11" 
+       16 ((range 0 9 $ sine * tri) |+ 4) # m 3
+      q1 = gas 4 "0.5 0.43 0.33 0.34" $
+          struct "t(9,16)" $
+          takeArp' "asdf4" 5 12 ("-3 2 4 7 11" |+ 0)
+          16 ((range 0 9 $ sine * tri ) |- 4) # m 1
+      q2 = fast "1 1 2" $ gas 4 "0.3 0.33 0.43 0.41" $ r 0.0005 $
+          struct (inv "t(6,16)") $
+          takeArp' "asdf5" 4 12 "-3 2 4 7 11" 
+          16 ((range 0 9 $ sine * tri) |+ 2) # m 2
+      q3 = r 0.001 $ struct (inv "t(12,16)") $
+       takeArp' "asdf6" 5 12 "-3 2 4 7 11" 
+       16 ((range 0 9 $ sine * tri) |+ 4) # m 3
+      r1 = gas 4 "0.5 0.43 0.33 0.34" $
+          struct "t(9,16)" $
+          takeArp' "asdf7" 5 12 ("-5 2 4 7 10" |+ 0)
+          16 ((range 0 9 $ sine * tri ) |- 4) # m 1
+      r2 = fast "1 1 1" $ gas 4 "0.3 0.33 0.43 0.41" $ r 0.0005 $
+          struct (inv "t(6,16)") $
+          takeArp' "asdf8" 4 12 "-5 2 4 7 10" 
+          16 ((range 0 9 $ sine * tri) |+ 2) # m 2
+      r3 = r 0.001 $ struct (inv "t(12,16)") $
+       takeArp' "asdf9" 3 12 "-5 2 4 7 10" 
+       16 ((range 0 9 $ sine * tri) |+ 4) # m 3
+      s1 = gas 4 "0.5 0.43 0.33 0.34" $
+          struct "t(9,16)" $
+          takeArp' "asdf10" 5 12 ("-5 2 3 7 10" |+ 0)
+          16 ((range 0 9 $ sine * tri ) |- 4) # m 1
+      s2 = fast "1 1 1" $ gas 4 "0.3 0.33 0.43 0.41" $ r 0.0005 $
+          struct (inv "t(6,16)") $
+          takeArp' "asdf11" 4 12 "-5 2 3 7 10" 
+          16 ((range 0 9 $ sine * tri) |+ 2) # m 2
+      s3 = r 0.001 $ struct (inv "t(12,16)") $
+       takeArp' "asdf12" 5 12 "-5 2 3 7 10" 
+       16 ((range 0 9 $ sine * tri) |+ 4) # m 3
+  d1 $ slow 2 $ (|- n 7) $ rizz 8 "0 0.01" $ 
+        ncat [(2, stack [p1, p2, p3]),
+              (2, stack [q1, q2, q3]),
+              (1, stack [r1, r2, r3]),
+              (1, stack [s1, s2, s3])]
+
+

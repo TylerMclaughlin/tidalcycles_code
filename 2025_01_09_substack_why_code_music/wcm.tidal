@@ -1,0 +1,15 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+let egg a b = sqrt $ ( (a + b*(sine*sine/cosine/cosine)) / (1 + sine * sine / cosine / cosine) ) -- egg rolling equations
+    rizz r p = (# nudge (fast r p)) -- same as groove
+
+-- egg rolled amen break, 0 is kick, 1 is snare, 2 is hi-hat.
+d1 $ rizz 1 (range 0 0.01 $ egg 1 4 ) $ (|- n 24) $ n "0 0 1 [2 1] [2 1] [0 0] 1 [2 1]" # sound "midi" # midichan 0
+
+d1 $ (|- n 24) $ rizz 1 (l 0.25 $ range 0 0.03 $ egg 8 1 ) $
+    n "0 0 2 [4 2] [4 2] [0 0] 2 [4 2]" # sound "midi" # midichan 0
+
+
+d1 $ (|- n 24) $ 
+    n "0 0 2 [4 2] [4 2] [0 0] 2 [4 2]" # sound "midi" # midichan 0

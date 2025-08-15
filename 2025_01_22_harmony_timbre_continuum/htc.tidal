@@ -1,0 +1,99 @@
+:{
+   z_edo  twelve_tet_target  edo_alt_option     cents  abs_diff
+0   31.0                  0               0     0.000     0.000
+1   31.0                  3               8   309.677     9.677
+2   31.0                  7              18   696.774     3.226
+3   31.0                 10              26  1006.452     6.452
+4   31.0                 14              36   193.548     6.452
+:}
+
+:script "~/Music/ableton_songs/toolz.tidal"
+
+let e31m9 = "[0,8,18,26, 36]"
+
+setbpm 95 
+
+getbpm
+
+d1 $ (|- n 31) $ stack [
+    (|+ n "<0 2 -2>") $ (|- n 0) $ fast (16/14) $ sus 1 2 $ (|+ n "<0 0 -0>") $ struct (inv "t(9,14)") $ nT "bb" 4 "0 18" # m 5,
+    (|+ n "<0 2 -2>") $ fast (16/14) $ gas 1 "0.6 0.4" $ (|+ n "<0 0 -0>") $ struct "t(9,14)" $ n e31m9 # m 1,
+    (|+ n "<0 1 -1>") $ fast 1 $ gas 1 "0.5 0.2 0.4 0.2" $  struct "t(9,16)" $ (# amp 0.4) $ (|+ n 18) $ n e31m9 # m 2,
+    (|+ n "<0 1 -1>") $ fast (16/18) $  struct "t(9,18)" $ (# amp 0.1) $ (|+ n 31) $ n e31m9 # m 3,
+    (|+ n "<0 1 -1>") $ fast (16/14) $ gas 1 "0.2 0.2" $ struct "t(9,14)" $ (|+ n 49) $ n e31m9 # m 4
+    ] 
+
+
+d1 silence
+
+-- clap hat
+d2 $ r 0.001 $ drumz $ n "2  4  2  4 " # m 7
+
+-- open hat
+d3 $ r 0.0021 $ fastsoft' "<0.85 0.9 0.78>" "1 1 1 [1 <3 4 >]" $ drumz $ gas 8 "0.5 <0.3 0.34 0.31 0.37>" $ rizz 8 "0 0.007" $ (|+ n (range 0 1 $ fast 4 $ perlin)) $ n "[~ 5]*8 " # m 7
+
+getbpm
+
+setbpm 95 
+
+-- ghost notes
+d4 $ r 0.002 $ mask "{f f f <f t> t}%4" $ drumz $ gas 1 0.2 $ rizz 8 "0 0.005" $  n "[~ 7]*8 " # m 7
+
+do
+  unmute 5
+  unmute 4
+  unmute 1
+  unmute 2 
+  unmute 3
+  d11 silence
+  d5 $ drumz $ n "~ [ 0 0 ] ~ ~" # m 8
+  d9 silence
+
+d1 $ mask "[t t] t t [t <t t>]" $ mask "t [f f t t] t t" $ (|- n 31) $ (|+ n 5) $ stack [
+     (|- n 0) $ fast (16/14) $ sus 1 2 $ (|+ n "<0 0 -0>") $ gas 1 "<0.5 0.48 0.52> <0.4 0.45 0.41 0.39>" $ struct (inv "t(9,14)") $ n "0 18" # m 5,
+     fast (16/14) $ gas 1 "0.6 0.4" $ (|+ n "<0 0 -0>") $ struct "t(9,14)" $ n (tScale' 31 e31m9 (slow 2 $ ("[0..3] [0..3]" |+ 1) )) # m 1,
+     fast 1 $ rizz 8 "0 0.02" $ gas 1 "0.5 0.2 0.4 0.2" $  struct "t(9,16)" $ (# amp 0.4) $ (|+ n 18) $ n (tScale' 31 e31m9 (slow 2 $ "0..8")) # m 2,
+     fast (16/18) $ rizz 9 "0 0.02" $ struct "t(9,18)" $ (# amp 0.1) $ (|+ n 31) $ n (tScale' 31 e31m9 (slow 2 $ "0..8")) # m 3,
+     fast (16/14) $ rizz 7 "0 0.02" $ gas 1 "0.2 0.2" $ struct "t(9,14)" $ (|+ n 49) $ n (tScale' 31 e31m9 (slow 2 $ "0..7")) # m "<4 2>"
+    ] 
+
+
+-- anyone who needs 
+-- the definition of 'rizz'
+let rizz r p = (# nudge (fast r p)) 
+
+
+d6 $ (|+ n 5) $ mask "[<t t> f] f"
+    $ rizz 4 "0 0.01" $
+    n "{31 18 <26 31>}%8" # m 9
+
+do
+  mute 5
+  mute 4
+  mute 2 
+  mute 3
+
+unmute 6
+
+
+d11 silence
+
+do
+    unmute 5
+    mute 4
+    mute 2 
+    mute 3
+    mute 1
+    d6 silence
+    d11 $ (|- n 24) $ (|- n "<3 1>") $ fast 2 $ n "0 0 0 0" # m 11
+    d5 $ drumz $ fastsoft' 0.8 "1 [<3 4 2 2 >]  1 1" $
+        slow 1 $ n "0 0 0 <0 0> 0 0 0 0 " # m 12 
+    d9 $ drumz $ fastsoft' 0.8 "1 [<3 2 2.5>]   1 1" $
+        n (r (1/16) $  "0 0 0 0 0 0 0 0 " |+ 5) # m 10 
+    d9 silence
+
+d5 silence
+
+d9 silence
+
+unsolo 6

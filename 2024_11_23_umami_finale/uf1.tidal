@@ -1,0 +1,214 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+d1 $ slow 2 $ sliceDiv 6 8 8 2 $ fastsoft' 0.95 "1 1 1 <2 3 4>" $ gas 1 0.9 $ sus 1 "0.2" $
+  n "3 2 1 0" # m "[2 2 2 [ 1]]"
+
+d2 $ slow 2 $ l 0.25 $ sliceDiv 3 5 8 2 $ fastsoft' 0.95 "1 1 1 <2 3 4>" $ gas 1 0.4 $ sus 1 "0.2" $
+  n "3 2 1 0" # m "[2 2 2 [ 1]]"
+
+
+d2 $ gas 1 0.8 $ n "t*8" # m 2
+
+d2 $ gas 1 0.8 $ sus 1 0.2 $ n "t*8" # m 2
+
+d3 $ rizz 8 "0 0.02" $ gas 1 "<0.3 0.9>" $ mask "t t ~ ~" $ n "[0 1 2 3]*4" # m 1
+
+d2 $  gas 1 0.9 $ sus 1 0.02 $ fast 4 $ n ch # m 4
+
+setbpm 149
+
+d3 $  gas 1 0.6 $ sus 1 0.02 $ struct "[t t t]/2" $ n ch # m 3
+
+d4 $  gas 1 0.6 $ sus 1 0.02 $ struct "t(3,9)" $ n ch # m 3
+
+d2 $ sus 1 0.6 $ gas 4 "1.1 0.4" $ n "{0 2 1 3 2 0 3 1}%6" # m 1
+
+-- wowwww tunnel klang kuentsler
+d1 $ sus 1 0.6 $ gas 4 "0.8" $ n "[0 1 2 3]*4" # m ("1 1 13 1" |+ "<[4 4] 1 [4 4] 2>/2" |+ 1) 
+
+d1 $ (|* amp 0.7) $ rev $ sus 1 0.6 $ gas 4 "0.8" $ n "[0 1 2 3]*4" # m ("[ 13 1 1 1 ~ ~]" |+ "<[4 4] 1 [4 4] 2>/2" |+ 4 |+ 1) 
+
+d2 $ (|* amp 0.4) $ rev $ sus 1 0.6 $ gas 4 "0.8" $ n "[0 1 2 3]*4" # m ("[ 16 4 4 4 ]" |+ 0) 
+
+d3 $  rizz 8 "0 0.021" $ gas 1 "0.8 1!3" $ fast "8 " $ struct "t!4" $
+  nT "luona" 8 "3 2 1 0 3 2 1 0"  # m "<16 13> 4 4 4" 
+
+
+
+setbpm 146
+
+d3 silence
+
+d1 $ slow 4 $ fast 4 $ fastsoft' 0.9 "<1 2 3 4 3 2>" $ (# amp 1.2) $ sus 1 "0.1" $
+  nT "ll" 4 "0 1 2 3" # m 1
+
+d1 $ fast 4 $ slow 2 $ struct "t t t <~ t> " $ gas 1 "0.7 0.5" $ sus 1 "0.04" $
+  nT "ll" 4 "0 1 2 3" # m "<1 2 3>"
+
+d1 $ fast 2 $ slow 2 $ l 0.0625 $ struct "1*16" $ gas 1 "0.7 0.5" $ sus 1 "0.12" $
+  nT "ll" 4 "0 1 2 3" # m "< [1 ] >"
+
+d1 $ gas 1 0.1 $ n "0 " # m 3
+
+-- DJ NOBU SHOT!!
+d1 $ rizz 8 "0 0.02" $ fast 1 $ slow 1 $  struct "~ ~ t ~  ~ ~ ~ t" $ gas 1 "0.7 0.5" $ sus 1 "0.32" $
+  nT "ll" 7 "3 1 2 1 3 1 0" # m "< [2@3 2@5 ] [2@3 2@5] >"
+
+d2 $ rizz 8 "0 0.02" $ fast 1 $ slow 1 $  struct (inv "f f t f  f f f t") $ gas 1 "0.8 0.7" $ sus 1 "0.32" $
+  nT "lr" 7 "3 1 2 1 3 1 0" # m "< [2@3 1@5 ] [1@3 1@5] >"
+
+d3 $ gas 1 0.4 $ l 0.25 $ fast 2 $ struct "~ ~ ~ t" $ n ch # m 3
+
+d2 $ rizz 8 "0 0.01" $ fast 2 $ slow 1 $  struct (inv "f f t f  f f f t") $ gas 1 "0.8 0.7" $ sus 1 "0.32" $
+  nT "lr" 7 (rev "0 1 2 1 3 1 0") # m "< [~@3 1@5 ] [1@3 2@5] >"
+
+d3 $ slow 2  $ rizz 8 "0 0.01" $ fast 2 $ slow 1 $  struct ( "101001000100") $ gas 1 "0.8 0.7" $ sus 1 "0.62" $
+  nT "ll" 7 ( "0 1 2 1 3 1 0") # m "< [~@3 1@5 ] [1@3 2@5] >"
+
+d3 $ slow 1  $ rizz 8 "0 0.01" $ l 0.1 $ fast 1 $ slow 1 $  struct ( "t t t t" ) $ gas 1 "0.8 0.9" $ sus 1 "0.42" $
+  nT "ll" 8 ( "0 1 2 3 0 1 2 1") # m "< [4@3 4@5 ] [4@3 4@5] >"
+
+d4 $ slow 1  $ rizz 8 "0 0.01" $ l 0.1 $ slow 2 $ fast 3 $ slow 1 $  struct ( "t t t t" ) $ gas 1 "0.8 0.9" $ sus 1 "0.12" $
+  nT "ll" 8 ( "0 1 2 3 0 1 2 1") # m "< [1@3 1@5 ] [1@3 1@5] >"
+
+
+d5 $ gas 1 0.5 $ n "[0, 1, 2] [3, 0, 1] [2, 3, 0] [1,2,3]" # m 9 
+
+d2 silence
+
+  d1 silence
+
+d1 $ fast 2 $ fast "<3 4 3 2>/6" $ (# amp 1.2) $ sus 1 "0.3" $
+  nT "ll" 4 "0 1 2 3" # m "<1 3 1 2 1 5>/8" 
+
+d2 $ r 0.0625 $ fast 3 $ fast "<3 4 3 2>/6" $ (# amp 0.9) $ sus 1 "0.3" $
+  nT "lq" 4 "0 1 2 3" # m "<1 3 1 2 1 5>/8" 
+
+d3 $ r 0.125 $ fast 4 $ fast "<3 4 3 2>/6" $ (# amp 0.6) $ sus 1 "0.3" $
+  nT "lq" 4 "0 1 2 3" # m "<1 3 1 2 1 5>/8" 
+
+d2 $ fast 4 $ fast "<3 4 3 2>/6" $ (# amp 1.2) $ sus 1 "0.3" $
+  struct "t " $ nT "ll3" 13 (tScale "0 1 4 6" "0..12" ) # mm "<1>/8" 
+
+  d2 silence
+
+d1 $ gas 1 1.2 $ fast "1 <2 3>" $ struct "t(9,16)" $ n "0 [1,2] 3 2 [1,3] " # m 1
+
+d1 $ gas 1 "[0.1 1.2]/2" $ fast "3 <1 1>" $ struct "t(5,16)" $ n "0 [1,2] 3 2 [1,3] " # m "<2 5>"
+
+
+d1 $ cat [ gas 1 1.2 $ fast "1 <2 3>" $ struct "t(9,16)" $ n "0 [1,2] 3 2 [1,3] " # m 1,
+    gas 1 1.2 $ fast "1 <2 3>" $ struct "t(9,16)" $ n "0 [1,2] 3 2 [1,3] " # m 3,
+    gas 1 1.2 $ fast "1 <2 3>" $ struct "t(9,16)" $ n "0 [1,2] 3 2 [1,3] " # m 1,
+    gas 1 "[0.1 1.2]/2" $ fast "3 <1 1>" $ struct "t(5,16)" $ n "0 [1,2] 3 2 [1,3] " # m "<2 5>"]
+
+d2 $ struct (inv "t(9,16)") $ l 0.25 $ n "0 [1,2] 3 2 [1,3] " # m 2
+
+d2 $ rev $ slow 3 $ fast 2 $ fast 2 $ (|+ ampTake "asdf2"  [0.5, 0.2, 0.7]) $ struct (inv "t(9,16)") $ l 0.25 $ nT "asdf" 4 (rev "0 1 2 3") # m 2
+
+d2 $ rizz 8 "0 0.02" $ gas 1 "<1 0.2 1 0.8>" $ (# legato 0.5) $ struct "t!32" $ n "[0 1 2 3]" # m "[1 3 1 <2 3 2 5>]" 
+
+d2 $ sus 1 0.2 $ gas 1 (slow 4 $ range 0 0.3 sine ) $  gas 1 "1 0.8 1 0.8" $ sus 1 "<2 0.3 2 0.1>" $ struct "t(9,16, [0,2] )" $ n "[0,1,2,3]*8" # m 2
+
+d2 $ slow 2 $ fastsoft' 0.9 "[1!3 <1.5 2 1.5 3>]/4" $ sus 1 0.2 $ fast 2 $ gas 1 (slow 4 $ range 0 0.3 sine ) $  gas 1 "1 0.8 1 0.8" $ sus 1 "<2 0.3 2 0.1>" $ struct "t(9,16, [0,2] )" $ struct "t!4" $ nT "idk" 24  "0!5 1!5 2!5 3!5" # m "<13 14 15 16>" 
+
+let strobe x =  gas 1 1.2 $ sus 1 0.1 $ fast x $ n "[0,1,2,3]" # m 3
+
+let rstrobe x =  gas 1 1.2 $ sus 1 0.1 $ fast x $ n "[0,1,2,3]" # m 1
+
+d2 $ strobe "<6 9 15 27>" 
+
+d2 $ gas 1 0.2 $ strobe "16" 
+
+d2 $ aT "n" 5 ("0.1 0.5 1 0.3 0.1 0.1" |+ 0.2) $ rstrobe "16" 
+
+d2 $ aT "n" 5 ("0.1 0.5 0.1 0.3 0.1 0.1" |+ 0.1) $ sus 1 0.1 $ n (fast 16 ch) # m 11 
+
+
+
+d2 silence
+
+d2 $ gas 1 1.2 $ sus 1 0.1 $ n "[0 1 2 3]!8" # m 1
+
+let ch = "[0,1,2,3]"
+    hm = "{0 1 2 1 2 3}%8"
+    hm1 = "{4 3 2 1 3 2 1}%8"
+    hm2 = "{0 3 2 1 [0 1 2 3]}%8"
+    gs x = gas 1 x . sus 1 x 
+
+setbpm 135
+
+do
+  d1 $ slow 8 $ gas 1 0.4 $ sus 1 0.1 $ stack [ fast 8 $ n hm # m 1,
+                           fast 4 $ n (l 0.2 hm) # m 2]
+
+do
+  d1 $ slow 8 $ gas 1 0.4 $ sus 1 0.1 $ stack [ fast 8 $ n hm # m 2,
+                           fast 4 $ n (l 0.2 hm) # m 2]
+
+
+d2 $ fast 2 $ gas 1 0.3 $ struct "<[t!2] [t!4] [t!2] [t!4]>" $ nT "si" 6 "0 1 2 3 2 1" # m 4
+
+d2 $ fast 2 $ gas 1 0.3 $ struct "<[t!4] [t!2 [t] [t t!3]]>" $ nT "si" 6 (rev "0 1 2 3 2 1") # m 4
+
+d2 $ gas 1 0.5 $ fast "<2!4 4!3 [4 8]>" $ n (segfunc 16 $  range 0 4 $ sine) # m 2
+
+d1 $ gas 1 0.4 $ sus 1 0.2 $ fast 8 $  n ch # m 5
+
+d1 silence
+
+d2 silence
+
+
+
+
+d1 $ gs 0.5  $ n  "[0 1 2 3]" # m 2
+
+d1 $ gs 0.5  $ fast (range 1 4 $ slow 4 $ sine) $ n  "[0 1 2 3]" # m 2
+
+d1 $ fast 16 $ sus 1 0.2 $ gas 1 0.9 $ n ch # m 7
+
+d1 $ gas 1 1.2 $ sus 1 0.2  $ n ch # m 8
+
+d1 $  gs 0.95  $ fastsoft' 0.95 "[1 2 1 [2 3]]/4" $ fast (range 2 8 $ slow 4 $ sine) $ nT "tunnel" 4  (rev "0 1 2 3") # m "<1!15 9>/16" 
+
+d2 $ every 6 (fast 3) $ rev $  sus 1 ("{0.08 0.07 0.11}%16" |- 0.03 ) $ gs 1.02  $ fastsoft' 0.95 "[1 2 1 [2 3]]/4" $ fast (range 2 8 $ slow 4 $ sine) $ nT "tunnel" 4  (rev "3 2 1 2 1 0 2") # m "<4!15 10>/16" 
+
+d3 $ fast 2 $ every 8 (fast 2) $ slow 2 $ rev $  sus 1 ("{0.08 0.07 0.11}%16" |- 0.05) $ gs 0.95  $ fastsoft' 0.95 "[1 2 1 [2 3]]/4" $ fast (range 2 8 $ slow 4 $ sine) $ nT "tunnel" 4  (l 0.25 $ rev "3 2 1 2 1 0 2") # m "<3!15 2>/16" 
+
+d1 $ gs 0.5  $ fastsoft' 0.99 "16!15 1" $ nT "tunnel" 4  "0 1 2 3" # m "<1!15 2>/16" 
+
+d3 $ struct "t(8,16)" $ nT "asdf" 5 "0 1 2 3 4" # m "6 14 "
+
+d2 $ rizz 8 "0 0.015" $ sus 1 0.005 $ struct "t!5 t!11" $ n ch # m "<4 3>" 
+
+d3 $ sus 1 0.001 $ gas 1 1 $ struct "t!4" $ n ch # m "[11 3 7 3]/4" 
+
+d2 $ rizz 8 "0 0.015" $ sus 1 0.005 $ struct "t!5 t!11" $ n ch # m "<4 3>" 
+
+d3 $ sus 1 0.001 $ gas 1 1 $ struct "t!4" $ n ch # m "[11 3 7 3]/4" 
+
+let g11 = gas 1 1
+
+d4 $ sus 1 0.01 $ g11 $ fast 2 $  n ch # m "<8 9>"
+
+d3 $ sus 1 0.01 $ l 0.25 $ g11 $ fast 2 $  n ch # m "<10 11>"
+
+d2 $ sus 1 0.001 $ l 0.25 $ gas 1 0.8  $ fast 2 $  n ch # m "<12 14>*2"
+
+all $ fastsoft' 0.95 "<1 1 1 [1 1 2 4]>"
+
+all $ id 
+
+d2 $ rizz 8 "0 0.021" $ gas 1 1 $ l "0.75" $ sus 1 0.003 $ struct "[t ~ ~ t]*4" $ n ch # m "<1 3>" 
+
+d3 $ rizz 8 "0 0.021" $ gas 1 1.9 $ l "0.75" $ sus 1 1 $ struct (inv "[t t ~ t]*4") $ n  "3 2 1 0" # m "<10>" 
+
+d2 $ rizz 8 "0 0.021" $ gas 1 0.8 $ l "0.75" $ sus 1 0.04 $ struct (inv "[t ~ ~ t]*4") $ nT "b" 4  "3 2 1 0" # m "<1 2>" 
+ 
+d2 silence
+
+setbpm 138
+
+d1 $ gas 1 0.4 $ n "{0 1 2 3 2 0 1 2 3 2}%16" # m "<2!7 6 2!7 10>"
+

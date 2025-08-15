@@ -1,0 +1,72 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+tScale' 
+d1 $  # m 1 
+
+
+d1 $ struct (tl 18 "5 2 5 3 2 3 5") $ nT "sn" 5 "-5 0 3 5 10" # m 1
+
+d2 $ struct (tl 18 (r 0.25 $ "5 2 5 3 2 3 5")) $ nT "sn2" 5 ("-5 0 3 5 10" |+ 7) # m 1
+
+d3 $ struct (tl 18 (r 0.75 $ "5 2 5 3 2 3 5")) $ nT "sn3" 5 ("-5 0 3 5  10 " |+ 2) # m 1
+
+d1 $ struct "t(5,7) t(5,11)" $ n (tScale' 31  "0 3  8 13 18 23 26 "  (slow 4 $ "0..24") ) # m 1
+
+d1 $ n (tScale' 31  "0 3  8 13 18 23 26 "  ("0 6 4 2 0 8 2 [4 3]" |+ "[0 4 -1 3]/4") ) # m 1
+
+d2 $ n (tScale' 31  "0 3  8 13 18 23 26 "  ((rev "0 6 4 2 0 8 2 [4 3]") |+ "[3 2 1 0]/4" |+ 4 ) ) # m 1
+
+d2 $ n (tScale' 31 "0 5 8 13 18 23 26" $ "[<2 1 3 1>, 4, 6, 8]" |+ 0) # m 1
+
+d2 $ n (tScale' 31 "0 5 8 13 18 23 28" $ "0 .. 14" |+ 0) # m 1
+
+do
+ let dtransp = (-6) 
+     s = rizz 5 "0 0.015 0.01"
+ d2 $ s $ struct "t(7, 15)" $ n (tScale' 31 "0 3 6 11 14 17 20 23 28" $ "0 ..14" |+ 0 |+ dtransp) # m 1
+ d3 $ s $ struct "t([13 5],15)" $ n (tScale' 31 "0 3 6 11 14 17 20 23 28" $ "0 ..14" |+ 4 |+ dtransp) # m 1
+ d4 $ s $ struct "t([5 13],15)" $ n (tScale' 31 "0 3 6 11 14 17 20 23 28" $ "0 ..14" |+ 8 |+ dtransp) # m 1
+
+-- pad
+d5 $ n (tScale' 31 "0 3 6 11 14 17 20 23 28" $ "[0,2,4,6,8](3,15)" |+ "<8!2 3!2>" ) # m 3
+
+     
+-- kicc
+d6 $ rizz 5 "0 0.015 0.01" $ drumz $
+    struct "<t([11 3 5],15,[0 2 3]) <t([10 4 6], 15) t([3 11 10 9], 15) >>" $ n "0" # m 2
+
+d7 $ rizz 5 "0 0.015 0.01" $ drumz $
+    struct (inv "<t([11 3 5],15,[0 2 3]) <t([10 4 6], 15) t([3 11 10 9], 15) >>") $ n "4" # m 2
+
+d8 $ r (1/15) $ drumz  $ n "<[~ 3 ~] 3 [ 3 3 3] 3>" # m 2
+
+
+d9 $ n ( tScale' 31 "0 3 6 11 14 17 20 23 28" $
+        (tScale' 9 "0 2 4 6 8"  (segfunc 15 $ range 0 8 $ egg 1 4)) ) # m 4
+
+d10 $ rizz 5 "0 0.007 0.005" $ n ( tScale' 31 "0 3 6 11 14 17 20 23 28" $
+        (tScale' 9 "0 2 4 6 8"  (segfunc 15 $ range 2 10 $ egg 1 4)) ) # m 5
+
+d10 silence
+
+d11 $ r 0.001 $ rizz 5 "0 0.007 0.005" $ n ( tScale' 31 "0 3 6 11 14 17 20 23 28" $
+        (tScale' 9 "0 2 4 6 8" (segfunc 15 $ range (-2) 4 $ egg 4 1)) ) # m 6
+
+-- weird BoC flute 
+-- alt synth and degree transposed
+-- |- 10 -11 -6 -2
+d11 $  rizz 5 "0 0.007 0.005" $ n ( tScale' 31 "0 3 6 11 14 17 20 23 28" $
+        (tScale' 9 ("0 2 4 6 8" |- 10)  (segfunc "<3 15> 3 5 15 30" $ range (-2) 4 $ egg 4 1)) ) # m 7
+
+d11 silence
+
+-- sick bass
+d12 $ r 0.001 $ rizz 5 "0 0.007 0.005" $ r (3/15) $ n ( tScale' 31 "0 3 6 11 14 17 20 23 28" $
+        (tScale' 9 ("0 2 4 6 8" |- 12)  (segfunc 15 $ range (-2) 4 $ egg 4 1)) ) # m 8
+
+
+d10 silence
+
+tScale' 9 "0 2 4 6 8"  "0 1 2 3 4 3 2"
+
+tl 31 "3 5 5 5 5 3 5"

@@ -1,0 +1,8 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+d1 $ drumz $ n "0 0 0 0" # m 2
+
+d2 $ drumz $ r 0.125 $ n ("0 0 0 0" |+ 4) # m 3
+
+
+

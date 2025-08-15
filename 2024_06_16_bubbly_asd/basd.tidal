@@ -1,0 +1,93 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+-- bubbly beat
+-- vary -1 0 1
+d1 $ drumz $ (|* amp (segfunc 16 $ fast 6 $ range 0.4 0.9 $ egg 4 1)) $
+    slow 2 $ 
+    fastsoft' 0.9 "1 <1 2> 1 <2 3 2 3>" $
+    (# amp 0.5) $ (l (segfunc 18 $ fast 4 $ range 0 0.01 $  egg 4 2)) $
+    struct "t(18,34)" $ nT "ls" 18 ("4 2 4 1 4 3 2 4 2 4 2 4 1 3 4 2 4 1" |- 1) # m 1
+
+
+getbpm
+
+setbpm 135
+
+d3 $ drumz $ n "" # m 3
+
+d3 $ drumz $ l 0.001 $ (|* amp (segfunc 17 $ fast 6 $ range 0.4 0.9 $ egg 6 1)) $
+    rizz 17 "0 0.01" $
+    slow 2 $ 
+    -- fastsoft' 0.9 "1 <1 2> 1 <2 3 2 3>" $
+    (# amp 0.5) $ (l (segfunc 18 $ fast 4 $ range 0 0.01 $  egg 4 2)) $
+    n (stack ["0(17,34)", "~!30 [<[0!3 ~][~][0!4][~ 0 ~ ~]>]@4"]) # m 3
+
+-- hats
+d5 $ drumz $ r 0.0008 $ (|* amp (fast 4 $ range 0.3 0.8 $ egg 1 4)) $
+    fastsoft' 0.8 " 1 2 1 <1 2>" $ (# amp 0.5) $
+    (l (segfunc 18 $ fast 4 $ range 0 0.01 $  egg 4 2)) $
+    n "[[[~5]*4]@16 4]" # m 5
+
+-- hats v2
+d5 $ drumz $ r 0.0008 $ (|* amp (fast 4 $ range 0.3 0.8 $ egg 1 4)) $
+    fastsoft' 0.8 " 1 2 1 <1 2>" $ (# amp 0.5) $
+    (l (segfunc 18 $ fast 4 $ range 0 0.01 $  egg 4 2)) $
+    n "[[[<4 ~ 4 ~> 5]*4]@16 4]" # m 5
+
+d5 $ drumz $ r 0.0015 $ (|* amp (fast 4 $ range 0.3 0.8 $ egg 1 4)) $  (# amp 0.5) $ (l (segfunc 18 $ fast 4 $ range 0 0.01 $  egg 4 2)) $ slow 2 $ n "[~ 5 ~ 4]!17" # m 5
+
+let e31 p = tScale' 31 "0 5 8 13 18 " p
+
+-- bass
+d4 $ (|- n 31) $ (|- n 10) $ 
+   (l (segfunc 18 $ fast 4 $ range 0 0.01 $  egg 4 2)) $
+   (# legato "[1.5 2]*17") $
+   (|* amp (segfunc 17 $ fast 1 $ range 0.4 0.98 $ egg 4 1)) $
+   (# amp 0.5) $
+    -- r (1/34) $ slow 4 $
+    --mask "[t t!17]*4" $
+    -- mask (inv "t(17,34)") $
+    struct (stack [ "t(18,34)", "~!31 t!3"]) $
+    --struct "t(34,34)" $
+    n (tScale' 31 " 0 5 8  18 23" ("0..16" |+ "<1  3>/4" )) # m 4 
+
+    n "<23> " # m 4 --  n "0@12  18@5 [<39 [36 39]>]@12 18@5" # m 4
+
+-- melody
+do
+ let mmask = "<t!4 f!4>"
+ d6 $ fastsoft' 0.8 "<1 1 <1.5 1>>" $ mask mmask $
+  (|- n "10") $ rev $ n (tScale' 31 " 0 5 8  18 23" ("0..16" |+ "<1  3>/4" )) # m 6
+ d7 $ fastsoft' 0.82 "<1 1 2>" $ mask (inv mmask) $
+  (|- n "10") $  n (tScale' 31 " 0 5 8 13   23" ("0..16" |+ "<1  >/4" )) # m 6
+
+
+
+d1 $ drumz $ n ("3 1 3 0 0 1 1 1 1 1 1 1 3 1 3 1 3 0" |+ 3) # m 1
+
+-- score 5
+d1 $ drumz $ n "1 3 1 2 1 0 0 1 0 0 0 2 3 0 1 0 3 0" # m 1
+
+d2 $ drumz $ n "0(11,18) " # m 3
+
+
+d10 silence
+
+
+-- bass
+d10 $ l (1/18) $ (|- n 24) $ slow 2 $ sus 1 "1 1.5 2" $
+  struct "[t(6,7) t(6,11) ]" $
+  nT "bazz" 12 "0!3 7!3 4!3 3!3" # m 10
+
+-- kicc
+d11 $ 
+  fastsoft' 0.82 "<1!3 2> <1!3 2> [<1!3 2>]@2" $
+  drumz $ struct "t ~!3 t ~!3 t ~!3 t ~!3 t ~" $ n "0" # m 11
+
+-- drumz 
+d1 $ rizz 9 "0 0.004" $
+   (|* amp (fast "1" "0.6 0.4 0.8")) $
+   gas 9 "0.5 0.3" $
+   (# amp 0.5) $ drumz $ slow 1 $
+   n ("1 0 3 1 0 1 1 0 1 1 1 1 1 1 0 1 1 3" |+
+      "<0!3 3>") # m 1

@@ -1,0 +1,85 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+setbpm 143
+
+
+-- main bass and additive melody
+d1 $ (|- n 0) $
+    rizz 8 "0 <0.01 0.0012 0.009 0.013>" $
+    fastsoft' 0.8 "1 1 <2 [1 2]> 1" $ 
+    sus 1 "[3 1 3 0.5]" $ 
+    gas 4 "0.6 <0.3 0.1> 0.4 0.3" $ 
+    struct "t!16" $ fast "1" $
+    n ("[0,1,2,3]" |+
+       "<[0,1,2,3,4,7,9,10,11] \
+       \ [0,3,7,11,15] \
+       \ [1,3,6,7,10,14]>*2") #
+    m (stack [ fast
+       "<1!3 2>" "<<4 5> 2> 3 1 2",
+       "<1 <4 1>> <1 <4 1>> ~ <~ [~ 1]> " ])
+
+d1 $ (|- n 0) $
+    rizz 8 "0 <0.01 0.0012 0.009 0.013>" $
+    fastsoft' 0.8 "1 1 <2 [1 2]> 1" $ 
+    sus 1 "[3 1 3 0.5]" $ 
+    gas 4 "0.6 <0.3 0.1> 0.4 0.3" $ 
+    struct "t!16" $ fast "1" $
+    n ("[0,1,2,3]") # 
+    m (stack [ fast
+       "<1!3 2>" "<<4 5> 2> 3 1 2",
+       "<1 <4 1>> <1 <4 1>> ~ <~ [~ 1]> " ])
+
+-- bass EQ frequency
+d2 $ cc1 42 (segfunc 128 $ fast 8 $
+     range "35 39" "58 58" $ egg 1 4)
+
+-- all other additive EQ frequency
+d3 $ struct "t!128" $ cc1 43 (segfunc 128 $
+     fast 2 $ ((range 32 "<55 45>" $ egg 1 4) |+
+     (slow 4 $ range 0 20 $ sine)) )
+
+-- pro-R mix
+d4 $ cc1 44 "10 28 8 80 13 12 8 70"
+
+-- pigments bass tune
+d5 $ struct "t!128" $ cc1 45 "<30 32 34 29 >"
+
+-- cowbell verb
+d11 $ struct "t!128" $ cc1 46 "10 28 8 40 13 12 8 90"
+
+-- kicc
+d6 $ drumz $ n "0 0 0 0" # m 16
+
+-- hats
+d7 $ drumz $ r 0.0004 $
+     n "[<~ > 4 5 4]*2" # m 15
+
+d7 silence
+
+
+-- closed hats
+d8 $ drumz $ rizz 8 "0 <0.012 0.0011 0.011 0.014>" $
+    fastsoft' 0.8 "1 1 <2 [1 2]> 1" $ 
+    sus 1 "[3 1 3 0.5]" $ 
+    gas 4 "0.6 <0.3 0.1> 0.4 0.3" $
+    struct "t!16" $ n "6" # m 15
+
+d8 silence
+
+
+-- cowbell
+d9 $ drumz $
+     rizz 8 "0 <0.01 0.0012 0.009 0.013>" $
+     mask "<t [f f t t]>" $ struct "t([9 15], 16)" $
+     n "[1!8 2 ~ 2 ~ 2 <2!3 0> <~!3 0> <[ ~]!3 0> \
+       \[<[3 ] >]!13 2 2 2]/2" # m 14
+
+d1 silence
+
+d9 silence
+
+d10 $ drumz $ r 0.0007 $ n "<7 ~ ~ ~> ~ [~!7 <4 ~>] 2" # m 13
+
+d2 silence
+

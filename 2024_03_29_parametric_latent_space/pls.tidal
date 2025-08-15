@@ -1,0 +1,217 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+
+let fastsoft rate p = fast rate p |* gain (0.96 ** ((fromRational <$> rate) - 1))
+    fastsoft' scale rate p = fast rate p |* gain (scale ** ((fromRational <$> rate) - 1))
+    fastsoft'' scale rate p = fast rate p |* amp (scale ** ((fromRational <$> rate) - 1))
+
+setbpm 123
+
+d1 $ slow 1 $ r 0.0005 $ rizz 4 "0 0.012 0 0.014" $
+    fastsoft (slow "<1 2 4 2>" "1 1 1 <1.25 1.5 1.25 0.5 1.5 1.2 >") $
+    slow 4 $ 
+   (gas 8 "0.5 0.3 0.18 0.13 0.44 0.42 0.15 0.11") $
+    n (segfunc "<64!3 [32 64!3] 64!3 [64!2 72 128]>" (range "<128 <130 150>>" ("<192 188 191 179>"|+ 0) $ tri) |+
+    "[-8 -4 3 8 12]/10") # m 2
+
+d2 $ drumz $ n "0 0 [<[0 0 ] [0(3,8)]>]@2" # m 1
+
+d2 $ drumz $ n "[0 ~ ~ 0]" # m 1
+
+d4 $ drumz $ (# amp (fast "{1 8 12 27}%5" $ range 0.2 0.4 $ sine))
+    $ r 0.001 $ n "[~ 5 ~ 5]*2" # m 1
+
+d3 $ drumz $ gas 1 "0.4" $ n "~!3 [~ 0]" # m 1
+
+
+-- END pls1
+
+all (fastsoft "1!7  2")
+
+all (id)
+
+do
+ hush
+ let rr = (fast 1 $ "<4 3.5 3 2 1.5 2.5 2 5>" ) 
+ --let rr = (fast 1 $ "<4 3.5 3 2 1.5 2.5 2 5>" |/ "[1 2 3 4]/16") 
+ d1 $ r 0.001 $ mask "[t!15 f t!14 f f]/4" $ drumz $ slow rr $
+  fastsoft "1 2 4 8" $ slow rr $
+  struct "t!128" $
+  nTake "kit" [0..127] #
+  m "1 2 1 2 1 2" 
+ d2 $ mask "[t t f t]/2" $  drumz $ slow rr $ fastsoft "1 1 2 4" $ fast rr $
+  struct "t t t t" $ nT "k" 9 "0 1 0 0 1 0 0 1 1" # m 3
+ -- d2 $ drumz $ n "t(3,8) t(3,8,<0 [0,1] 0 [0,2]>)" # m 3
+ d8 $ drumz $ struct (inv "t(3,8) t(3,8)") $ n "[63 61 60 19]/4" # m "1 2"
+ -- d8 $ drumz $ struct (inv "t(3,8) t(3,8)") $ n "63" # m "1"
+ d3 $ drumz $ slow 2 $ struct "~ t" $ nT "sn" 5 "2 3 4 5 6"# m 4
+ d4 $ r 0.0012 $ mask "<[t!5 f 1!2] [t!4 f!4]>" $ fast 4 $ (|+ n "0 12 0 12") $ fastsoft "1 1 2 4" $ slow 4 $
+  n (tScale ("0 2 3 5 7 8 10" |+ 1) ("0 2 4 2 8 5 4 3" |+
+  "[0 4 -2 2]/8" |+ "[0]"  )) # m 6
+ d7 $ r 0.0004 $ mask "[t!15 < t f>]/4" $ (|+ n "0 12") $ fast 4 $ fastsoft "1 1 2 4" $ slow 4 $ 
+  n (tScale ("0 2 3 5 7 8 10" |+ 1) ("0 2 4 ~ 8 ~ 4 ~" |+
+  "[0 4 -2 2]/8" |- "[7]" |+ 5  )) # m 6
+ d8 $ r 0.0014 $ -- (# amp (slow "" $)) $
+     (# legato (slow "<1 2 4 2>" $
+     segfunc 8 (range 0.8 1.1 sine) )) $
+     rizz 8 "0 0.01" $ 
+     n (tScale ("0 2 3 5 7 8 10" |+ 1) ((fast "[1 1 [1 2] [1 <2 1>]]/4" $ "<0 [ 0]> -2 4@2  <0 [~ 0]> -2 4@2") |+ "[0 -2 -2 2]/8")) # m 10  
+
+getbpm
+
+setbpm 123
+
+
+-- hardcore stuffff 
+
+let fm1 p = cc15 55 $ fmap (/48) $ fmap (*128) (p |+ 1)
+    fm2 p = cc15 56 $ fmap (/48) $ fmap (*128) (p |+ 1)
+    fm3 p = cc15 57 $ fmap (/48) $ fmap (*128) (p |+ 1)
+    fm4 p = cc15 58 $ fmap (/48) $ fmap (*128) (p |+ 1)
+    ot1 p = cc15 60 $ fmap (/23) $ fmap (*128) (p |+ 1)
+    ot2 p = cc15 61 $ fmap (/23) $ fmap (*128) (p |+ 1)
+    ot3 p = cc15 62 $ fmap (/23) $ fmap (*128) (p |+ 1)
+    ot4 p = cc15 63 $ fmap (/23) $ fmap (*128) (p |+ 1)
+    alg p = cc15 59 $ fmap (/10) $ fmap (*127) (p |+ 1)
+
+
+all $ fastsoft' "<0.88 0.5 0.9>" "1 1 1 <1 2 1 4>"
+
+
+d1 $ slow "2" $ fast "[1 1 2 4]*8" $ stack [
+            fm1 ("1 2 2 1 " |+ "0 <0 0 0 4>")
+           ,fm2 (" 3 5 5 4" |- "0 5")
+           ,fm3 (" 2 6 3 4" |+ "0 1 0")
+           ,fm4 (" 3 6 5 4" |- "0 5")
+           ,slow 8 $ ot1 (" 4 6 4 7" |+ "0 0" |- 3)
+           ,slow 8 $ ot2 (" 7 3 4 4" |+ "0 0" |- 4)
+           ,ot3 (" 4 4 5 4" |- "0 2")
+           ,ot4 (" 1 2" |+ "0 2")
+           , alg "3" 
+           ]
+
+-- do 
+
+do 
+ let fmp = ("1 2 3 4" |+ 2)
+ d1 $ stack [fm1 (segfunc 16 $ range 1 16 $ sine),
+    fm2 (fmp |* 3), 
+    fm3 (fmp |* 4), 
+    fm4 (fmp |* 5), ot1 "14", ot2 "1", ot3 "3", ot4 "5"]
+
+d2 $ rizz 8 "0 0.016" $ gas 4 "0.6 0.3 0.4 0.2" $ (# legato "4 2 3 8") $ struct "t(<5 3>,8) t(< 3 5>,8)" $
+     fastsoft "[1 1 2 <1 4>]/4" $
+     n 0 # m 15 
+
+
+-- add two zeros at a time
+d3 $ drumz $ n ("0 4 0 4 0 4 0 0 4" |+ "<0 1>/2") # m 6
+
+d3 $ drumz $ n ("0 4 0 4 4 0 4 0 4" |+ "<0 1>/2") # m 6
+
+
+d3 silence
+
+let warped amt p = fast amt $ slow 100 $ p 
+
+d4 $ slow 2 $ n ("0 .. 31" |- 20) # m 3
+
+d5 $ (|- n "0 <8 0>") $ slow 2 $ n ("0 .. 31" |- 20) # m 4
+
+do 
+ d4 silence
+ d5 silence
+
+do
+ d4 $ slow 2 $ n ("0 .. 31" |- 20) # m 3
+ d5 $ (|- n "0 <8 0>") $ slow 2 $ n ("0 .. 31" |- 20) # m 4
+
+
+setbpm 160
+
+let edo31_double_lydian = "0 5 10 15 18 23 28 30 35 40 45 48 53 58"
+
+all $ (|* amp "1 1 1 <1 1 1 0>")
+
+-- drumz
+d3 $  drumz $ n ("0 4 0 4 4 0 4 0 4" |+ "<0 1>/2") # m 6
+
+-- chimes
+d8 $ slow 1 $
+     n (tScale' 31 edo31_double_lydian 
+        ("0 14  4 14 18  6 18  9 18 " |+
+        "[0 1 -1 -2]/8" |+ "[0 1 2 3]/16")) # m 8
+
+-- bass
+d9 $ r 0.002 $ sus 1 ("1 0.5 1 0.5 0.35 0.85 0.485 0.82 0.45" |+ 0.5) $
+     n (tScale' 31 edo31_double_lydian 
+        ("0 14  4 14 18  6 18  9 18 " |+
+        "[0 1 -1 -2]/4" |+ "[0 1 2 3]/16" |+ 2)) # m 9
+
+
+
+d10 $ slow 2 $ n (tScale' 31
+    edo31_double_lydian (("16 ~ 14 ~ 12 ~ 17 10 18"|+ 0)
+    |- "[0 2 0 3]/2"  |- "[0 1 2 3]/8" |- 2) ) # m 10
+
+d11 $ slow 2 $ n (tScale' 31
+    edo31_double_lydian (("16 ~ 14 ~  12 ~ 17 10 18" |+ 2)
+    |- "[0 2 0 3]/2"  |- "[0 1 2 3]/8" |- 2 ) ) # m 10
+
+d12 $ n (tScale' 31
+     edo31_double_lydian ("~ 3 ~ 4 ~ 3 ~ ~ ~" |+
+     "[0 1 2 4]/4" |+ 3 )) # m 11 
+
+d11 silence
+
+d3 $ drumz $ n ("3 0 3 0 3 0 3 3 3" |+ 1) # m 6
+
+all $ fastsoft' "<0.88 0.5 0.9>" "1 1 <3 1 2 1> <1 2 3 4>"
+
+all $ fastsoft' "<0.88 0.5 0.9>" "1 1 <1 1 2 1> <1 2 3 4>"
+
+all $ fastsoft' "<0.88 0.4 0.9>" "1 1 <1 1 2 1> <1 2 1 3>"
+
+all $ id
+
+all $ (|* amp "1 1 1 <1 1 1 0>")
+
+ --d4 $ drumz $ r 0.125 $ fastsoft "1 1 2 2" $ fast rr $ slow 16 $ n ("3 4 5 6  7 4 5 6  10 11 12 13  8 5 3 4" |+ 11) # m 5
+
+
+
+-- midi light reactivity
+
+setbpm 123
+
+-- play with sync param
+d1 $ mask "[t!4 f t!3]*2" $ slow (5/5) $ fastsoft' 0.90 ("1 1 1 <4 5 6 7 8 7 6 5>" |+
+    "[0 1 2 1]/8") $ sus 1 0.25 $ n ("0 0 0 0" |- "<7 >") # m 1
+
+d3 $ (|+ n "<3 5 0 0>") $ mask "[t!4 f t!3]*2" $ slow (5/5) $ r 0.001 $ fastsoft' 0.94 ("1 1 1 <4 5 6 7 8 7 6 5>" |+
+    "[0 1 2 1]/8")  $ n ("[0,3,5,7,8,10]*4" |- "7") # m 2
+
+all (|+ n "0")
+
+all (# gain "[0.5!7 0]/16")
+
+d4 $ r 0.0015 $ drumz $ rizz 4 "0 0.0107" $ n "[~ 5 4 5]*4" # m 3
+
+d5 $ drumz $ r "0.0007" $ n "[~ 3]*2" # m 3
+
+-- n37
+d6 $ sus 1 0.5 $ drumz $ n "0 0 0 0" # m 3
+
+
+
+fastsoft' 0.8 "4 2 2 2" # m 1 
+
+setbpm 120
+
+d1 $ fastsoft' 0.8 "1 1 3"  $
+     n (tScale ("0 2 3 5 7 9 10"|- 2) ("[0 1 2 3  6 ~ [~ 3] [~ 2]]" |- "[3 2 5 1]/4" |- 4)) # m 1
+
+d2 $ fast 7 $ slow 6 $ fast 2 $
+    fastsoft'' 0.8 "4 2 4 <8 3 4 3 >" $
+    n (tScale  ("0 2 3 5 7 9 10" |- 2) ("[3 5 7 9 [~ 5 ] [~ 3] [~ 9] ]" |- "[0 1 2 3]/4" |- 4)) # m 2
+

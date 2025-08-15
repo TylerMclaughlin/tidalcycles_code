@@ -1,0 +1,27 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+-- 'get it together' drake / 'superman' black coffee cover
+
+setbpm 123
+
+-- drumz
+d1 $ drumz $ l 0.5 $ 
+    rizz 4 ("0 -0.01 -0.02 -0.03" |/ 3) $ r 0.5 $ 
+    n "0 1 4 [2, 5]  0 ~ [3,4]  ~ \
+    \  0 ~ 4 [2, 5]   0 ~ [3, 4, <6 ~!3>] ~ " # m 1 
+
+do
+  -- bass
+  d2 $ (|- n 24) $ n "~ ~ [~!3 3] [5 5]" # m 2
+  -- string pads
+  d3 $ (|- n 12) $ l 0.0125 $
+   n "<[-2, 1, 5, 10] [-4, 0, 3, 8]>/4" # m 3
+  -- piano 
+  d4 $ (|- n 0) $
+   n "<[-14 [-2, 1, 5, 8]@3] \
+   \   [[-4, 0, 3, 5, 7]@3 [~ -4]]>/4" # m 5
+
+
+
+
+

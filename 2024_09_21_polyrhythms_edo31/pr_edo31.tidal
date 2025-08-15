@@ -1,0 +1,43 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+:script "~/Music/ableton_songs/pigments_midi_map.tidal"
+
+let edo31h p = tScale' 31 "0 5 10 14 18 22 25 28" p
+    edo31 p = tScale' 31 "0 5 10 13 18 23 28" p
+
+-- chords
+d1 $ l 0.001 $ (|+ n 12) $ mask (slow 16 $ fast 15 $ fast 3 $ slow 2 $  "f t!7 f t!7 f t!7 f t!7") $
+        mask (r 0.16666 "[t@3 [<t t f t> f]]") $ slow 4 $  (# legato "0.5 0.3 0.7 0.3") $ n (edo31 (stack [
+        l 0.125 $ (fast 4 $ "0 5 7 3") |+ "[0@3 1@5 2@3 3@5]",
+        l 0.1 $  (fast 5 $ "0 [2 5 ] 6 3") |+ "[3@5 4@3 4@5 5@3]/4",
+        (fast 6 $ "0 7 6 5") |- 2 |- "[2@7 3 4@7 5]" |+ 3] |- "[2@7 3 4@7 5]")) # m 1
+
+-- kick
+d10 $ slow 16 $ fast 15 $ fast 3 $ slow 2 $ r (0.00) $ drumz $ n "0 0 0 0" # m 10
+
+d10 silence
+
+d9 silence
+
+-- bass
+d9 $ l 0.0005 $ (|+ n 12) $ mask "t t!7 t t!7 f t!7 f t!7" $ struct "t(8, 15)" $ n (edo31 ("0 <[<0 0 0 4> 0] <3 4>> 0 0 " |- (l 0.5 $ "<-6 -7 -8  -1 -2 -3 -4 -5 >/2"))) # m 6
+
+d2 $ l 0.25 $ fast "<4 5 6>/2" $ p_m1 "0..100"
+
+d3 $ l 0.25 $ fast "<6 4 5>/2" $ p_m2 (("0 12 2 27  0 17 65 40" |+ "[0@3 40@3 10@3 80]/10") |/ 2)
+
+d4 $ l 0.25 $ fast "<6 5 4>/2" $ p_m3 "[0 12 2 27  0 17 65 40]*4"
+
+d5 $ l 0.25 $ fast "<6 5 4>/2" $ p_m4 (rev ("[0 12 2 27  0 17 65 40]*2" |* 3))
+
+d6 $ drumz $ rizz 4 "0 0.02" $ fastsoft' 0.8 "1 1 1 < 1!2 1.2>" $ slow 3 $ mask (fast 2 $ l "<0 0.5>" $ "t!5 f t!7 f t!6 f t!7 f t!3 f t!3") $ n "0..63" # m 2
+
+
+d6 $ (|* amp "[0.5 0.42 0.5 0.43]*4") $ fastsoft' 0.8 "<1 [0.6667 0.6667 1 1]>"  $ fast 2 $ slow 4 $ fast 3 $ slow 16 $ fast 15 $
+     drumz $ slow 4 $ n "0..31" # m "<2 3 4 5>*<1 2 >"
+
+setbpm 120
+
+d6 $ fast 2 $ drumz $ slow 4 $ n "0..31" # m "<2 3 4 5>"
+
+getbpm

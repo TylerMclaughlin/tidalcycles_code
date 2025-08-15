@@ -1,0 +1,141 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+do
+ unmute 1
+ unmute 2
+ unmute 3
+ unmute 4
+ unmute 1
+ unmute 2
+ unmute 3
+ unmute 4
+
+setbpm 135
+
+-- buenos aires
+
+let
+    abmu = "[-4, 6, 11, 16]"
+    amin9 = "[-3, 0, 16, 7, 11]"
+    bmu = ("[-4, 6, 11, 16]" |+ 3)
+    cMaj = "[0, 4, 7, 9, 11]"
+    dbmu = ("[-4, 6, 11, 16]" |+ 5)
+    dmin9 = "[2, 5, 7,  9, 12, 16] "
+    fastsoft rate p = fast rate p |* gain (0.91 ** ((fromRational <$> rate) - 1))
+
+
+-- synth chords
+d1 $ rizz 7 "0 0.001" $
+     sus 7 "1 0.5" $
+     gas 7 "0.5 0.3" $ struct "t(<4!3 9>,14,[0,1])" $
+     fast 2 $ ncat [(3, n amin9),(1,n bmu),
+           (3, n cMaj), (1, n dbmu),
+           (3,n dmin9),(1, n dbmu),
+           (3, n cMaj),(1, n bmu),
+           (3, n amin9), (1, n abmu)] # mm "<~ 2  3  >"
+
+
+-- kicc
+d2 $ drumz $
+    rizz 7 "0 0.001" $
+    fast "1!6 <2 [1 4]>" $
+    slow 2 $ n "0!7" # mm 4
+
+-- hihats
+d4 $ rizz 7 "0 0.001" $
+     sus 7 "1 0.5" $
+     gas 1 "0.5 <[0.5 0.46 0.44 0.42 0.4] [0.3]> <0.1 0.15>" $
+     gas 7 "0.5 0.3" $
+     struct "t(<4!3 9>,14,[0,1,2])" $
+     drumz $ nT "hh" 7 ("5 6 5 6 5 6 5" |- 1) # mm 4
+
+-- mute hats
+mute 4
+
+do
+   unmute 2
+   unmute 4
+   d4 $ rizz 7 "0 0.001" $
+        sus 7 "1 0.5" $
+        gas 1 "0.5 <[0.5 0.46 0.44 0.42 0.4] [0.3]> <0.1 0.15>" $
+        gas 7 "0.5 0.3" $
+        struct "t(<4!3 9>,14,[0,1,2])" $
+        drumz $ nT "hh" 7 ("5 6 5 6 5 6 5" |- 1) # mm 4
+   -- bass
+   d3 $ (|- n 12) $ rizz 7 "0 0.001" $
+        sus 7 "1 0.5" $
+        gas 7 "0.5 0.3" $ mask "f t!14" $
+        (|+ nT "b" 3 "0 0 12") $
+        --struct "t(<4!3 9>,14,[0,2])" $
+        struct (fast 2 $ "~ t t t  t t t") $
+        fast 2 $ ncat [(3, n "-3"),(1,n "~"),
+              (3, n "0"), (1, n "~"),
+              (3,n "2"),(1, n "~"),
+              (3, n "0"),(1, n "~"),
+              (3, n "-3"), (1, n "~")] # mm "5"
+
+-- foley drumz
+d6 $ drumz $ r 0.001 $ rizz 7 "0 0.001" $
+     mask "f t!13" $
+     slow 1  $ n (cat [("0..14" |+ 4), ("0 .. 14")]) # mm 6
+
+do
+ mapM unsolo [2,4]
+
+do
+ mapM solo [3,6]
+
+
+do
+  mapM unsolo [3,6]
+  d1 $ rizz 7 "0 0.001" $
+         sus 7 "1 0.5" $
+         gas 7 "0.5 0.3" $ struct "t(<4!3 9>,14,[0,1])" $
+         fast 2 $ ncat [(3, n amin9),(1,n bmu),
+               (3, n cMaj), (1, n dbmu),
+               (3,n dmin9),(1, n dbmu),
+               (3, n cMaj),(1, n bmu),
+               (3, n amin9), (1, n abmu)] # mm "<~ 2  3  >"
+  -- clap
+  d7 $ drumz $ slow 2 $ fast 7 $ n "<~ 3>  " # mm 4
+  -- kicc
+  d2 $ drumz $
+        rizz 7 "0 0.001" $
+        fast "1!6 <2 [1 4]>" $
+        slow 2 $ n "0!7" # mm 4
+
+
+-- pre drop
+
+mute 3
+
+do
+  mute 7
+  mute 4
+  mute 2
+  d1 $ rizz 7 "0 0.001" $
+         sus 7 "1 0.5" $
+         gas 7 "0.5 0.3" $ struct "t(<4!3 9>,14,[0,1])" $
+         fast 2 $ ncat [(3, n amin9),(1,n bmu),
+               (3, n cMaj), (1, n dbmu),
+               (3,n dmin9),(1, n dbmu),
+               (3, n cMaj),(1, n bmu),
+               (3, n amin9), (1, n abmu)] # mm "<1 2  3  >"
+
+do
+  all $ fastsoft "1 1 1 1 1 <1 2>"
+  unmute 7
+  unmute 4
+  unmute 2
+  unmute 3
+  d9 $ rizz 7 "0 0.001" $
+         sus 7 "1 0.5" $
+         gas 7 "0.5 0.3" $ struct "t(<4!3 9>,14,[0,1])" $
+         fast 2 $ ncat [(3, n amin9),(1,n bmu),
+               (3, n cMaj), (1, n dbmu),
+               (3,n dmin9),(1, n dbmu),
+               (3, n cMaj),(1, n bmu),
+               (3, n amin9), (1, n abmu)] # mm "[[<1 2  3  >], < ~ 2 3 2>]"
+
+-- end buenos aires
+

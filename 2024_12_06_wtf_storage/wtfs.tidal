@@ -1,0 +1,80 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+setbpm 135
+
+do
+    -- custom variables
+    let grr = fast 8 . (whenmod 2 1 $
+             r (segfunc 16 $ range "0.02" "0.19" $
+                fast 1 $ egg 1 4)) . 
+             (whenmod 2 0 $
+             r (segfunc 16 $ range "-0.01" "-0.10" $
+                fast 2 $ egg 1 4)) . slow 8 
+        ampp = (|* amp (slow 2 $ range 0.4 0.9 $ egg 1 5))
+        amp2 = (|* amp (range 0.5 0.9 $ egg 4 1))
+        amp3 = (|* amp (slow 4 $ range 0.8 1.0 $ egg 4 1))
+        sc1 = "0 6 13 16 23 29 39"
+    -- kicc
+    d1 $ (|+ n "[0, 1]") $ grr $ ampp $
+         drumz $ (# amp "<0.4!3 0.2> ") $
+         cat [n "0 [<~ ~> [~ 0]]",
+              n "[~ [~  0]] [~ [0 ~]]",
+              n "0 [<~ ~> [~ ~]]",
+              n "[~ [0  [0 ~] ]] [[0 0] [~ ~]]"] # m "[1,16]"
+    -- kicc ghost notes
+    d5 $ grr $ ampp $ drumz $ (# amp 0.125) $
+        cat [n "12 [~ [~ 12]]",
+             n "[~ [<~ 1> 12]] [~ [12 1]]"] # m 1
+    -- snare
+    d2 $ r ("0.0005" |* "<1.01 0.93 1.2 0.8>") $ 
+        grr $ amp3 $ (# amp 0.4) $ drumz $ n "~ 2" # m 1
+    -- main hihat
+    d3 $ r 0.001 $ fastsoft' 0.8 "1!4 2 1!4 3 1!4 2 1!4 3" $
+        amp2 $ (# amp 0.7) $ grr $ mask "t [f t t t]" $
+        mask "[[f t] [t [t f]] [t [t f]] [t [f t]]]/2" $
+        drumz $  n ("4!16" |+ "1  0 1 0 ") # m 1 
+    -- hihat ghost notes
+    d4 $ r 0.001 $ grr $ amp2 $ (# amp 0.1) $
+        mask (inv "[[t t] [t [t f]] [t [t  f]] [t [f t]]]/2") $
+        drumz $ n "4!16" # m 1 
+    -- crash/ verby snare and dub hats
+    d6 $ grr $ amp2 $ drumz $
+        (# amp "<0.8!2 [0.8 0.65]*8 0.8>") $
+        n "<3 ~ [6([3 5],8,1) ~] ~>" # m 1
+    -- perc
+    d7 $ grr $ amp2 $  drumz $ n "[~ 7 ~ ~]*2" # m 1
+    -- main mel
+    d8 $ (|- n 39) $ (|+ n 21) $  grr $
+        mask "t [f t t t]" $
+        (|* amp 1.1) $ amp2 $ (|+ n "<0  16 6>") $
+        fastsoft' 0.9 "[<1 4> 1 2 1]" $ sus 1 "1!3 2" $
+        (# amp 0.5) $
+        n (tScale' 39 "0 6 13 16"
+        ("1 0 3 2 4 5 6 7" |-  "<0 2 0> ")) # m 2 
+    -- counter mel
+    d9 $ (|- n 39) $ (|+ n 21) $ grr $ amp2 $
+        (|+ n "<0  16 6>") $
+        fastsoft' 0.9 "[<1 4 1 4 1> 1 2 1]" $
+        (# amp 0.2) $ r 0.125 $
+        n (tScale' 39 "0 6 13 16" ("0 1 2 3 4 5 6 7"
+        |+ "<0 1 2 3>")) # m 2 
+    -- bass
+    d10 $ grr $ (|+ n (21 - 39)) $ sus 8 "1.5" $
+        (|+ n "<0  16 6>") $ 
+        (# amp "0.5 [0.4 0.2] 0.5 0.4 0.5 0.5 0.6 0.6") $
+        struct "~ ~ t t  ~ ~  t t  t ~ t ~  <~ ~ t> ~ t ~  " $ 
+        cat [ nT "bass3" 5 (tScale' 39 sc1 ("7 5 4 3 2")),
+              nT "bass3" 5 (tScale' 39 sc1 ("4 3 5 2 7")),
+              nT "bass3" 6 (tScale' 39 sc1 ("8 7 5 4 3 2"))
+        ] # m 3 
+    -- 8 bit arp
+    d11 $ grr $ ampp $ mask "f f f [<f t f> t t t]" $
+        (|+ n "[0 39]*8") $ (|+ n 21) $ (|- n 39) $
+        (|+ n "<0  16 6>") $
+        fastsoft' 0.99 "<1 [1 2 ] 1 [1 3 3] >" $
+        (# amp 0.3) $ n (tScale' 39 "0 6 13 16 23 29 39"
+        (segfunc 16 $ range 2 "<5 9 > " $
+        fast (rev "[7 6 5 4 3 2 1]*2") $ sine)  ) # m 4
+    -- gate for arp
+    d12 $ grr $ drumz $ n "< ~ ~ 0 ~  0 > ~ ~ 0" # m 7
+

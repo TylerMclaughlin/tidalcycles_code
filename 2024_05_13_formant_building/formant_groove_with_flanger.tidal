@@ -1,0 +1,22 @@
+
+do
+ let dor p = tScale "0 2 4 6 7 9 11" p
+     myS p = struct "t(<9 11>,16)" p 
+     aTpat = ("0.5 0.1 0.1 0.2  0.5 0.1 0.3 0.1")
+     fp = "[1 1 1 [2 1 2 1]]/8"
+     fff = fast fp 
+     transp = (|+ n ("[0 7 12 7]/4" |- 2)) 
+ d1 $ fastsoft' 0.7 fp $ aT "v1" 8 aTpat $ transp $  sus 4 "1 1.2 3 0.5" $ myS $ nT "root1" 8 ( dor ("0 2 4 6" |- 7)) # m 1
+ d2 $ fastsoft' 0.7 fp $ aT "v2" 8 aTpat $  transp $ sus 4 "1.1 1.2 3 1.5" $ myS $ nT "mid1" 8 ( dor "2 4 5 6") # m 1
+ d3 $ fastsoft' 0.7 fp $ aT "v3" 8 aTpat $  transp $ sus 4 "1.09 1.23 3.1 1.4" $ myS $ nT "high1" 8 ( dor ("2 4 5 6" |+ 3)) # m 1
+ -- d4 $ fff  $ sus 1 ("<0.2 0.4 0.6 0.8>" |+ 1.1) $ l "0.002" $ myS $ nT "mid" 8 ("0 3 2 3" |+ 7) # m 2
+ d4 $ fff  $ sus 1 ("<0.2 0.4 0.6 0.8>" |+ 1.1) $ l "0.002" $ myS $ nT "mid" 8 ("0 1 2 " |+ 1) # m 2
+ d5 $ transp $ (|+ n ("<0 2>" |- 7) ) $ myS $ nT "b" 8 "0 0 7 0  0  0 7 0" # m 4
+
+ d6 $ drumz $ struct "<[t!4] <t(9,16) t(11,16) t(9,16)>>" $ n "0" # m 3 
+
+
+d7 $ drumz $ n "~ 2 ~ 2" # m 3 
+
+d8 $ fastsoft' 0.9 "<[1 2 2 2] <2 1 2 2>>" $ drumz $ n "4!8" # m 3 
+

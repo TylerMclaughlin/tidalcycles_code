@@ -1,0 +1,21 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+let edo31 p = tScale' 31 "0 5 10 13 18 23 28" p
+
+d1 $ rizz 10 "0 <0.01 0.009>" $
+     aT "asdf" 8 "0.9 0.2 0.32 0.1 0.9 0.18 0.31 0.14" $
+     (# legato (segfunc 16 $ fast "4 3 17 9" $
+     range 2.5 1 $ sine)) $
+     struct "t(15,20)" $
+     n (edo31 (segfunc "<18 19 18 17>/4" $
+     range "[0..17]/4" "[17..0]/4" $
+     fast 4 $ (sine |* "<1 1.2 1 1.1>" )  )) # m 1
+
+-- chords
+d2 $ rizz 10 "0 <0.01 0.009>" $
+     sus 5 "2 1 2 0.5 " $
+     struct (inv "t(15,20)") $
+     n (edo31 ("[0,-5,4,13,8]" |+ "<1 2 <1 3> 0>/2")) # m 3
+
+
+getbpm

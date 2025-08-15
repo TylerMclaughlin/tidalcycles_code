@@ -1,0 +1,24 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+let e35d p = (tScale' 35 "0 6 11 14 21 26 29" p)
+
+d1 $ mask "[f t!4]*6" $ (|- n 2) $ (|- n 35) $ (|+ n "<0  14 -7 7 -14>") $ fastsoft' 0.8 "1 1  1 1" $ fast 2 $ struct "t(14,24)" $ nT "eee" 8 (e35d ("0 1 2 3 4 5 6 7 6 5 4 3 2 1" |* 2 |+ 4)) # m 1
+
+setbpm 100 -- 150 bpm
+
+d2 $ drumz $  n "0 0 0 0 0 0" # m 2
+
+d2 silence
+
+d6 $ drumz $ (|* amp (range 0.7 1 $ slow 5 $ sine)) $ (# amp 0.5)
+    $ r (1/12) $ r 0.0005 $ n "4 4 4 4 4 4" # m 2
+
+d3 $ drumz $ r (1/12) $ l 0.001 $ n "0 0 0 0 0 0" # m 2
+
+d3 silence
+
+d3 $ mask "{f t}%5" $ drumz $ r 0.001 $ rizz 12 "0 0.01" $ gas 6 "0.5 0.3 0.4 0.3" $ n "0..23" # m 3
+
+d4 $ mask "{t f}%5" $ drumz $ r 0.0005 $ rizz 12 "0 0.01" $ gas 6 "0.51 0.29 0.41 0.32" $ n "0..23" # m 4
+
+d7 $ drumz $ r 0.002 $ n "~ 3 ~ 3 ~ 3" # m 2

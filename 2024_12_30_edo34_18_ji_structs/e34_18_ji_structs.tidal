@@ -1,0 +1,68 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+let e34p p  = tScale' 34 "0 6 11  20 25 " p
+    e34 p  = tScale' 34 "0 6 11 14 20 25 31" p
+    rizzz = rizz 9 "<0!6 -0.0002 -0.00025 -0.00029> <0.008!7 0.01 0.014>" 
+
+
+-- verse lead
+d1 $ rizzz $ (|- n 34) $ (|+ n 7) $ struct (cat [ rev "t@2 t@3 t@4 [t!3]@4 t@5 ","t@2 t@3 t@3 <t@5 [[t!2] [t!3]]@5> t@5 "])  $
+       n (e34p ("<[0.. 8]!2 [3 4 5 2 3 4 3 2 1] [0.. 8]>"  |+ "<0 -2 3 -1>")) # m 1 
+
+-- main lead!
+d2 $ rizzz $ (|+ n 7) $ sus 1 "[[0.7 0.4 0.7 [0.4 [0.4 0.8]]  <3.5>]@5 2]/2"  $ sliceDiv 14 18 18 7 $ struct (cat [  "t@2 t@3 t@4 t@4 t@5 ",rev "t@2 t@3 t@3 t@5 t@5 "])  $ n (e34 ("0 5 [4 3 ] 2 1  <2 2 5!3 > 0 -2 ~ ~" |+ 4 |+ "<-3 -2 3 2>")) # m "[[2!4 8]@5 2]/2" 
+
+d2 silence
+
+d3 $  drumz $ (|* amp (range 0.8 1.2 $ sine)) $ (# amp 0.5) $ struct "t([9 13],18)" $ nT "b" 22 ("0 3 0 1 4 3 0 2" |+ 2) # m 3 
+
+
+-- hats foley rhythms
+d4 $ rizz 9 "<0!6 -0.0002 -0.00025 -0.00029> <0.008!7 0.01 0.014>" $ drumz $ struct (inv "t([<9 5> 13],18)") $ nT "b2" 8 ("0 3 0 1 0 3 0 2" |+ 2) # m "4" 
+
+-- clap
+d5 $ drumz $ n "<~ 0 ~ 1> ~!17" # m 5
+
+-- kick
+-- d9 $ rizzz $ drumz $ n ("0@4 0@4 0@3 0@3 0@4" |+ 2) # m 9
+d9 $ rizzz $ (|* amp "1@8 0.8@3 0.85@3 1@4" ) $ (# amp 0.5) $ drumz $ n ("0@4 0@4 0@3 0@3 0@4" |+ 2) # m 9
+
+-- bass A
+-- vox bass
+d10 $ (|+ n 7) $ rizzz $ struct "~ t@3 ~ t@3 t@3 t@3 t@3 ~" $ n (e34 "<5 <4 2> 3 <4 0>>") # m 10
+
+-- bass B
+-- ehh on velocities
+d10 $ (|+ n 7) $ r 0.0005 $ rizzz $ (# amp "0 0.3 0.5 0.3   0 0.3 0.5 0.3  0 0.3 0.5  0.3 0.25 0.3  0 0.3 0.5 0.3") $ struct "~ t t t  ~ t t t ~ t t ~ t t ~ t t t" $ n (e34 "<5 <4 2> 3 <4 0>>") # m 12
+
+-- good velocities
+d10 $ (|+ n 7) $ r 0.0005 $ rizzz $ (# amp "0 0.5 0.3 0.5   0 0.3 0.5 0.3  0 0.4 0.3  0.5 0.3 0.3  0 0.3 0.5 0.3") $ struct "~ t t t  ~ t t t ~ t t ~ t t ~ t t t" $ n (e34 "<5 <4 2> 3 <4 0>>") # m 12
+
+-- vox bass
+d10 $ (|+ n 7) $ r 0.0005 $ rizzz $ (# amp "0 0.5 0.3 0.5   0 0.3 0.5 0.3  0 0.4 0.3  0.0 0.3 0.3  0 0.3 0.5 0.3") $ struct "~ t t t  ~ t t t ~ t t ~ t t ~ t t t" $ n (e34 "<5 <4 2> 3 <4 0>>") # m 10
+
+-- bass C
+
+d10 $ (|+ n 7) $ r 0.0005 $ rizzz $ struct "t@4 t@4 t@3 t@3 t@4" $ n (e34 "<5 <4 2> 3 <4 0>>") # m 12
+
+getbpm
+
+
+d8 $ rizz 9 "<0!6 -0.0002 -0.00025 -0.00029> <0.008!7 0.01 0.014>" $ struct (inv "t([<9 5> 13],18)") $ n "0" # m "9" 
+
+d11 $ drumz $ n "[<7 ~> ~ 6 ~  4 ~ 6 ~    ~ 4 5 6 4 5 6  3 4  6  ]" # m 11 
+
+t@4 t@4 t@5 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@3 t@5 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@4 t@4 t@5
+t@2 t@3 t@3 t@5 t@5
+t@2 t@2 t@4 t@5 t@5
+t@2 t@2 t@4 t@5 t@5
+t@2 t@2 t@3 t@3 t@4 t@4

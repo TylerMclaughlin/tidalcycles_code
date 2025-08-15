@@ -1,0 +1,45 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+:script "~/Music/ableton_songs/pigments_midi_map.tidal"
+
+let phr = tScale' 53 "0 4 13 22 31 35 44"
+
+d1 $ stack [ p_f1c (segfunc 34 $ range 90 118 $ sine * sine),
+             p_s1 (segfunc 34 $ range 90 118 $ sine * sine),
+     n (phr "0..17" ) ] # m 1
+
+d1 $ (|- n 12) $ stack [ cc1 "{26 17 16 18 28}%34" (segfunc 34 $ range 100 120 $ sine * sine),
+             p_s2 (segfunc 34 $ range 90 118 $ sine * sine),
+             cc1 "{19 55 58}%34" (segfunc 34 $ range 70 120 $ sine * sine),
+     slow 8 $ n (phr ((segfunc 34 $ fast 4 $ range 0 4 $ (sine + 0) * (fast 3 sine))  |+ "<2@3 5 -2@3 5>" |- 2) ), 
+     slow 4 $ n (phr ((segfunc 34 $ fast 3 $ range 0 4 $ (sine + 1) * (fast 3 sine))  |+ "<2@3 5 -2@3 5>" |- 2) ) ] # m "[1 2]*8"
+
+-- synths
+d1 $ (|- n "53") $ sus 6 "<1@5 2> <0.2 0.2 0.4>" $
+    (rizz 6 "0 0.01") $
+    (|* amp (segfunc 18 $ fast 4 $
+    range 0.8 1.2 $ sine)) $ stack [
+    (# amp "0.44 0.29 0.5 0.2  0.1 0.5") $
+        n (phr ("[<[0 [5 -1]] [-1 0 1 0]>]@2 \
+        \ 3 [4 3 2] [1 0 1 2] ~" |+ "<0 2 4 6>"
+        |+ "<0@3 -2>/16" |- "<0 2>/8")) # m 1,
+    (# amp "0.5 0.31 0.5 0.2  0.1 0.5") $
+         n (phr ("[<[~ 0 [~ 2 ~ 1]] [-1 0 1 0]>]@2 \
+          \[~ 4 3 2] [5 ~ ~ ] [~] [3 2 1]" |+
+          "<0 2 4 6>" |+ "<0@3 -2>/16" |+
+          "<2 2 2 4>/4")) # m 3]
+
+-- kicc
+d2 $ drumz $ (# amp "0.5!2 0.3 0.5!2 0.3") $
+   n "0 0 0(3,8) 0 0 0(3,8)" # m 4
+
+d3 $ sus 1 "0.2" $ mask "f t f [<[t f] [t [t f]]>]@2 f" $ n (phr (segfunc 18 $ range 0 8 $ fast 2 $ sine)) # m 6
+
+-- hats
+d4 $ l 0.005 $ rizz 12 "0 0.01" $ drumz $ (# amp "0.5!2 <0.3 0.28 0.29 0.3 0.27> 0.5!2 <0.3 0.28>") $
+        gas 6 "0.5 0.1 <0.4 0.5 0.45> 0.5" $
+        n "[~ <~!2 4 ~!4 4> 5 4]*6" # m 5
+
+all $ degradeBy 0.0
+
+setbpm 130

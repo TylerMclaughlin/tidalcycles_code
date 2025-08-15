@@ -1,0 +1,6 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+d1 $ (|- n 24) $ n " 0 0 0 0" # m 1
+
+
+d2 $ n "0 [2 7 11]" # m 2

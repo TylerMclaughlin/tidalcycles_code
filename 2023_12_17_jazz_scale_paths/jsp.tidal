@@ -1,0 +1,50 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/pigments_midi_map.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/breakz.tidal"
+
+
+0_M,5_M,5_mm,3_M,10_M,7_hm,7_mm,7_M,0_M,
+
+
+d1 $ rizz 8 "0 0.01" $ struct "[t(<9 [<5 11> 7]>,14)]@14 t t" $ fast 2 $ cat [
+    n (major 0 triad),
+    n (major 5 triad),
+    n (melminor 5 triad),
+    n (major 3 triad),
+    n (major (-2) triad),
+    n (hmajor (-5) ("[2,7,11]" |- 0 )),
+    n (melminor (-5) ("[2,7, 11]")),
+    n (major (-5) ("[2,7, 11, 13]" |+ 1))
+    ] # m 1
+
+("0 2 3 4" |+ 3)
+
+fmap (`mod` 12) ("0 2 3 4" |+ 12)
+
+
+
+d2 $ rizz 8 "0 0.01" $ struct "[t(<9 [<5 11> 7]>,14)]@14 t t" $ fast 2 $
+  n "<0 5 5 3 -2 -5 -5 -5 >"# m 2
+
+d2 $ rizz 8 "0 0.01" $ struct "[t(<9 [<5 11> 7]>,16)]@16" $ fast 2 $
+  n "<0 5 5 3 -2 -5 -5 -5 >"# m 2
+
+let major s p = tScale ("0 2 4 5 7 9 11" |+ s) p
+    melminor s p = tScale ("0 2 3 5 7 9 11"|+ s) p
+    hminor s p = tScale ("0 2 3 5 7 8 11"|+ s) p
+    hmajor s p = tScale ("0 2 4 5 7 8 11"|+ s) p
+    seventh = "[0, 4, 9]"
+    triad = "[0, 2, 4, 6]"
+
+    hmajor s p = tScale ("0 2 4 5 7 8 11"|+ s) p
+
+
+let major shift p = toScale (sort $ (`mod` 12) <$> (+shift) <$> [0,2,4,5,7,9,11]) p 
+    mminor shift p = toScale (sort $ (`mod` 12) <$> (+shift) <$> [0,2,3,5,7,9,11]) p 
+    hmajor shift p = toScale (sort $ (`mod` 12) <$> (+shift) <$> [0,2,4,5,7,8,11]) p 
+    hminor shift p = toScale (sort $ (`mod` 12) <$> (+shift) <$> [0,2,3,5,7,8,11]) p 
+
+major 5 "0 1 2 3 4 5 6"
+

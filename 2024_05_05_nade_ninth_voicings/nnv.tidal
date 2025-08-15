@@ -1,0 +1,15 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+do
+ let cmajor p = (tScale "0 2 3 5 7 9 10" p)
+     dpat = ( "<0 1 2 3 2 1>" |+ "2")
+ d1 $ (|+ nT "oct" 2 "0 12 ") $ n  (cmajor $ "0 5 <10 [10 12 10 ~ ]>" |- dpat ) # m 1 
+ d2 $ (|+ nT "oct2" 2 "0 12 ") $ n  (cmajor $ "0 <4 [4 9]> <9 ~> 4" |- dpat |- 2) # m 2 
+ d3 $ drumz $ n "0 0 [0 2]" # m 3
+ d4 $ drumz $ n "{4 3 2}%4" # m 3
+ d5 $ drumz $ mask "f t!2 f" $ (|- amp 0.25) $ fastsoft'' 0.60 "2 3 2 [2 4]" $ struct "t!4 t!3" $ nT "h" 3 "4 6 7" # m 3
+ d6 $ drumz $ n "[0 [0,3] 0 [0,3] 0 [0,3]]/2" # m 4
+ d7 $ drumz $ mask "[t!5 f]/5" $  mask "[t!7 f]/4" $ fastsoft' 0.8 "4 2 4 3" $ (|* amp (range 0.8 1.1 $ fast "2 7 6 9" sine)) $ (# amp 0.4) $  n ("[6 6 7 6]" |- "<0 1 2 1>") # m 4
+
+
+ getbpm

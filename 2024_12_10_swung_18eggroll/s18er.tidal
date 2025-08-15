@@ -1,0 +1,48 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+let e31 = tScale' 31 "0 5 10 13 18 23 28"
+
+d1 $ rizz 1 (range 0 0.02 $ egg 1 4) $ struct "t(9, 18, [1,2])" $
+     n (e31 ((segfunc 18 $ fast "3 4 5 6 5 4" $ range "<4 <3 >>" "7 16"  $ egg 1 4 ) |+ 6) ) # m 1
+
+d2 $ (|- n 20) $ fast 9 $ whenmod 2 1 ( rizz  1 ((range 0 0.02 $ egg 1 4) |* 9) ) $ slow 9 $
+   struct "t(9, 18, [0 2 0 2])" $
+   n (e31 ((segfunc 19 $ fast 8 $ range (-4) 8 $ egg 1 4) |+ 0))  # m 3
+
+d2 $ (|- n 20) $ fast 18 $
+     whenmod 2 1 ( rizz 1  ((range 0 0.01 $ egg 1 4) |* 18) ) $
+     whenmod 2 0 ( rizz 1  ((range 0 (-0.005) $ egg 1 4) |* 18) ) $
+     slow 18 $
+   struct "t(13, 18, [0 2 0 2])" $
+   n (e31 ("0 .. 9"))  # m 4
+
+d2 $ (|- n 20) $ rizz 9 "0 0.01" $ 
+   struct "t(11, 18, [0 0 0 0])" $
+   n (e31 ("0 .. 9"))  # m 4
+
+d1 $ drumz $ struct "t([<4 9 > 9 5 13],1 8)" $ n "0" # m 1
+
+let reg =  (range 0 0.08 $ egg 9 1)
+
+do
+  d1 $ mask "t!15 t!3"  $ drumz $  rizz 1 (fast "<1 2 4 8>*2" $ range (0.0001) "0.01" sine) $
+        (# amp (fast "<1 2 4 6>*2" $ range (0.0001) 1 $ sine)) $ 
+        struct "t([11 < 13>], 18, <0 [1 2] 0 [0, 3]>)" $ nT "perc" 8 "7 5 6 5 " # m 1
+  -- kicc
+  d2 $ mask "t!16 t!2" $ drumz $ rizz 1 (fast "<1 2 4 8>*2" $ range (0.0001) 0.01 sine) $
+            (# amp "0.6 <0.4 0.35 0.4 0.3>") $ n "0([3 <7 9 7 11>], 18)" # m 1
+  -- bongo
+  d3 $ mask "t!15 [<f t>]@3" $ drumz $ rizz 1 (fast "<1 2 4 8>*2" $ range (0.0001) 0.01 sine) $
+            struct "t(11, 18)" $ nT "bongo" 11 "0 1 2 3 4 5 6 7" # m 2
+  d4 $ (|+ n 0) $ mask "[t!15 f!3]/2" $ rizz 1 (fast "<1 2 4 8>*2" $ range (0.0001) 0.01 sine) $
+            (|* legato "<1 2 3 4>") $ sus 9 "2 <0.4 0.5 0.7>" $ (# amp "[0.6@3 0.7@5 0.4@5 0.2@3 0.15@2]/4") $
+             struct "[t(<25 23 25 19  25 23 25 17> , 36, <0 1 1 2>)]/2" $
+            n (e31 ((segfunc 18 $ fast "<2 3 <4 1> 3>" $ range (-2) 8 $ sine ) |+ "[1@3 2@5 -2@5 -4@3 -5@2]/4" )) # m "<[4, 5] [[4,5] 5]>/2"
+  --d5 $ n (e31 "") # m "6 5" 
+
+      d1 $ drumz $ rizz 1 reg $ (|* amp reg) $ (# amp 0.5) $
+       struct "t t t t " $ n 5 # m 1
+
+getbpm
+
+setbpm 130

@@ -1,0 +1,69 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+setbpm 130
+
+d1 $ r 0.002 $ drumz $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    (|* amp (range 0.9 1.15 $ l 0.5 $ egg 2 5)) $
+    (|- amp "0.01 0.1 0.01") $
+    (# amp 0.5) $
+    struct "t(<9 7 9 5>,16,[0 3])" $ n "7" # m 1
+
+d2 $ r 0.002 $ drumz $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    (|* amp (range 0.8 1.0 $ r 0.5 $ egg 2 5)) $
+    (|- amp "0.10 0.01 0.10") $
+    (# amp 0.5) $
+    struct (inv "t(<9 7 9 5>,16, [0 3])") $ n "6" # m 1
+
+d8 $ r 0.001 $ drumz $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    (|* amp  (range 0.8 1.2 $ slow 1 $ egg 1 4)) $
+    (# amp 0.5) $
+    struct "[t t t t t ~ ~ t t t t t t ~ ~ t t t t t  t t t t  t t t t t ~ ~ ~ ]/2" $ n "5" # m 1
+
+-- kicc
+d3 $ drumz $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    mask "t [f t!7]" $ struct "t(<3 5>,8)" $ n 0 # m 1
+
+d6 $ drumz $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+       struct "~ <t [t,t]>" $ nT "snare" 3 "3 3 4" # m 1
+
+d4 $ r 0.003 $ (|+ n "[0 0 0 3@5 -2@3 6@5]/8") $
+   rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $ struct "[t@4 ~@3 t@5 ~@5 t@3]/4" $ n ( tScale' 31 "0 8 26 36 49" "[0,1,2,3,4]" ) # m 2
+
+d5 $ (|- n 31) $ r 0.004 $ (|+ n "[0@7 3 -2@7 6]/8") $
+    rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $ struct "t(9,16)" $
+    (|+ amp (range (-0.1) 0.2 $ egg 1 5)) $
+    (# amp 0.5) $
+    (# legato "[1 0.5 0.25 1.25]/2") $
+    fast "[4 2 1 1]/2" $
+    n ( tScale' 31 "0 8 26 36 49" (segfunc 17 $ range "0 " "<2 4>" $ egg 4 1) ) # m 3
+
+-- gate
+d9 $ r 0.0015 $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    (# legato "<[2 [4 2]] <1 1.5> >") $
+     mask "t [f t!6 <f t>]" $
+     struct "t(11,16, [3])" $ n "0" # m 4
+
+-- to do:  apply to bass
+d1 $ (|- n 31) $ (|+ n "[0@7 3 -2@7 6]/8") $
+    r 0.0029 $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    (|+ amp (range (-0.1) 0.32 $ egg 1 4)) $
+    (# amp 0.5) $
+    (# legato "<2 [4 2] 1>") $
+    -- (# legato (range 3 2 $ egg 1 4)) $
+    mask "t [f t!6 <f t>]" $ struct "t(11,16, [4])" $ n "0" # m 5
+
+-- sc 
+d11 $ l 0.002 $ rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    mask "t [f t!7]" $ struct "t(<3 5>,8)" $ n 1 # m 4
+
+-- sc to tom
+d11 $ r 0.002 $  rizz 1 (range 0 0.03 $ slow 1 $ egg 1 4) $
+    (|* amp (range 0.9 1.15 $ l 0.5 $ egg 2 5)) $
+    (|- amp "0.01 0.1 0.01") $
+    (# amp 0.5) $
+    struct "t(<9 7 9 5>,16,[0 3])" $ n "1" # m 4
+
+
+d1 silence
+
+d10 silence

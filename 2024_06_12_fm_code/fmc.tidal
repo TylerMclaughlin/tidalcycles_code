@@ -1,0 +1,44 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+let fm1 p = cc15 55 $ fmap (/48) $ fmap (*128) p
+    fm2 p = cc15 56 $ fmap (/48) $ fmap (*128) p
+    fm3 p = cc15 57 $ fmap (/48) $ fmap (*128) p
+    fm4 p = cc15 58 $ fmap (/48) $ fmap (*128) p
+    alg p = cc15 59 $ fmap (/10) $ fmap (*127) p
+
+let fw1 p = cc15 60 $ fmap (/23) $ fmap (*128) p
+    fw2 p = cc15 61 $ fmap (/23) $ fmap (*128) p
+    fw3 p = cc15 62 $ fmap (/23) $ fmap (*128) p
+    fw4 p = cc15 63 $ fmap (/23) $ fmap (*128) p
+
+
+
+d4 $ alg "[0..7]/8"
+
+let fmm p1 p2 p3 p4 = stack [fm1 p1, fm2 p2, fm3 p3, fm4 p4]
+
+let fwm p1 p2 p3 p4 = stack [fw1 p1, fw2 p2, fw3 p3, fw4 p4]
+
+d1 $ fast 1 $ fmm "7 2 <4 0> 2" "3 4 " "5 7 2 3" "2 5 2 3"
+
+d1 $ fast 1 $ fmm "1 5 1 5" "3 5 3" "3 8 7" "7 "
+
+d3 $ fwm "8 " "5" "8" "13"
+
+d3 $ fwm "9 " "3" "10" "3"
+
+d2 $ (|- n 24) $ slow 2 $ fastsoft' 0.95 "{1 2 1 3 [1 2]}%4" $
+    struct "t(19,26) [t!3]" $
+    nT "asdf" 10 "0 [7 12] 12 7 0 12 0" # m 1
+
+d1 $ cc1 26 "1..128" 
+
+d1 $ n "" # m 1
+
+
+d1 $ fmm "0 7" "0 7" "0 7" " 0 7"
+
+d2 $ fastsoft' 0.8 "1 1 1 2" $ bite 4 "[0 1 2 {3 4 5}%2 ]" $ struct "010110101101010111000" $
+    n (tScale "0 2 3 5 7 9 10" ("0 4 2 4 2" |- "-4 3 6 10" )) # m 1
+
+d3 $ fwm "2 3 [4 5]" "[1 2] 3 4 5" "0 7 7 14" "2 3 [2 3]"

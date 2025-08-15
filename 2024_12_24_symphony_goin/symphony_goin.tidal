@@ -1,0 +1,95 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+setbpm 155
+
+
+
+
+
+
+-- guitar riffs
+let r1a = gas 1 ("7 3 7 7 3 7 7 3" |/ 10) $
+        n "16 4  2 11 -1 2    16 4 " 
+    r1b = gas 1  ("7 3 7 3  7 7 3 7" |/ 10) $
+        n "18 4  14 -1 6 18 4 6" 
+    r1c = gas 1 ("7 4 7 4  7 7 4 7" |/ 10) $
+        n "21 4  16 -1 7   21 4 7" 
+    r1d = gas 1 ("[{7 3 7}%14]@14 7 3"  |/10) $ 
+        n "[{16 4 9   11 -1 4}%14]@14 16 4"
+    r1e = gas 1 ("[{7 3 7}%14]@14 7 3"  |/10) $
+        n  "{14 4 11   9 -1 6}%16"
+    r1f = gas 1 ("{3 7  7}%16" |/10) $
+        n  "{ -1 6   14 4 11   9}%16"
+    r1c2 = gas 1 "[0.7 0.4 0.7]*2" $ 
+        n "[21 4 7  16  -1 7] " 
+
+
+-- guitar part 1
+d1 $ (|+ n 12) $ sus 1 2 $
+    struct "t(8, 16) t(8, 16)" $
+    fast 2 $
+    ncat [(4, r1a),
+          (2, (|+ amp 0.3) $ r1b),
+          (2, (|+ amp 0.3) $ r1c)] # m 8  
+
+-- bass
+d3 $ (|- n 24) $
+    ncat [(4, b1a),
+          (2, b1b),
+          (2, b1c )] # m 9
+
+-- drumz
+do
+ d6 $ drumz $ slow 8 $  n 7 # m 1
+ d4 $ r 0.0005 $ rizz 8 "0 0.005" $
+     drumz $ fast 2 $
+     n "0 ~ ~ 0 [2,3] ~ 0 ~ " # m 1
+ d5 $ r 0.001 $ drumz $
+     n ("5 5 5 5" |- "[1, 0]") # m 1
+
+d6 silence
+
+-- guitar part 2
+d1 $ (|+ n 12) $ sus 1 2 $
+    struct "t(8, 16) t(8, 16)" $ fast 2 $
+     ncat [(4, slow 2 $ r1d),
+           (2, slow 2 $ r1e),
+           (2, slow 2 $ r1f)] # m 8  
+
+
+-- guitar part 3
+do
+ -- once $ drumz $ n 7 # m 1
+ d1 $ (|+ n 12) $ fast 2 $
+     ncat [(4, r1a),
+           (2, (|+ amp 0.3) $ r1b),
+           (2, (|+ amp 0.3) $ r1c2)] # m 8  
+
+do
+ -- shh drums
+  d4 silence
+  d5 silence
+
+
+let b1a = struct "[t@2  ~ t]*2" $ n "<0 0 4 7>" 
+    b1b = (# amp 0.2) $ n "[0@3 2@3 4@2]*2" 
+    b1c = struct "[t@2  ~ ~]*2" $ n "< 4 7>" 
+
+
+
+
+
+
+
+
+
+
+-- old
+d1 $ (|+ n 12) $ fast 2 $ gas 1 "0.7 0.4 0.7 0.7 0.4 0.7 0.7" $
+       n "16 4  2 11 -1 2    16 4 " # m 8
+
+d1 $ (|+ n 12) $ fast 2 $ gas 1  "0.7 0.4 0.7 0.4  0.7 0.7 0.4 0.7" $
+     n "18 4  14 -1 6 18 4 6" # m 8
+
+d1 $ (|+ n 12) $ fast 2 $ gas 1 "0.7 0.4 0.7 0.4  0.7 0.7 0.4 0.7" $
+    n "21 4  16 -1 7   21 4 7" # m 8

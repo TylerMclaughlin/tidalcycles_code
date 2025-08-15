@@ -1,0 +1,124 @@
+-- r_tyler here ^^  
+
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/pigments_midi_map.tidal"
+
+
+-- solo synths
+do mapM solo [1, 4, 5, 6, 12]
+
+do mapM unsolo [1, 4, 5, 6, 12]
+
+-- say no to imperialism 
+
+-- say no to 12 notes 
+
+-- say no to 16 beats
+
+
+-- synth melody in 28 EDO, 18 beats per measure
+d1 $ (|+ n "[8]/9") $ (# legato (fast "<1 2 3 4>" $ range 0.45 1.5  sine)) $
+       struct "~ t ~ t ~ t  ~ t t"  $
+      nT "notes" 5 (tScale "0 4 8 10 15" "0 4 3 2 1 0 7 -1 2 3 4 1") # m 1
+
+-- melodic synth arpeggio
+d12 $ (|+ n "0 28 56 84") $ fast 4 $ n "0 5 8 12 35 23 19" # m 3
+
+-- synth volume automation
+d4 $ p_vol (segfunc 128 $ fast 4 $ range 90 100 $ sine) 
+
+let sinefx freq range_lo range_hi = segfunc 128 $ fast freq $ range range_lo range_hi $ sine 
+
+-- synth macro automation
+d5 $ ncat [(0, p_m1 (sinefx 5 80 90) ), 
+           (2, p_m4 (sinefx 5 90 110))]
+
+-- synth filter and envelope automation
+d6 $ stack [p_f1c "45 .. 75",
+            p_f2c "[85 .. 55]/2",
+            p_a "35 .. 16",
+            p_r "<34 10 17 23>"]
+
+let synth_trackz = [1, 4, 5, 6, 12]
+
+-- solo synths 
+do mapM solo synth_trackz 
+
+-- bring back drumz
+do mapM unsolo synth_trackz 
+
+
+-- kicc drumz
+d7 $ drumz $ slow 2 $ (|+ n "0@4 1 0@3 1") $
+     gas 1 "0.5@4 0.3 0.5@3 [0.2 0.24 0.27]" $
+     fast "1 1 1 1 2 1 1 1 3" $ n "0!9" # m 2
+
+
+
+-- tom and hat
+d8 $ drumz $ fast 9 $ l "0.0001" $
+     gas 1 (l "[0.2 0.5 0.6]/4" $ fast "4 5 2 3" $
+     range 0.43 0.55 $ sine) $ slow 2 $ n "[<5 ~> 6]" # m 2
+
+
+-- hats
+d9 $ drumz $ rizz 9 "0 0.01" $ (|* amp (fast 4.5 "1 0.8 1 0.77")) $
+    gas 1 (fast "2 56 2 19" $ range 0.4 0.6 $ sine) $
+    fast 9 $ slow 2 $ n "4 4" # m 2
+
+
+-- stray hat and crash impact
+d10 $ drumz $ n "<3 5 5 5 5  3 5 5 5>" # m 2
+
+
+-- clap / snare
+d11 $ drumz $ slow 4 $ l "0.001" $ fast 9 $ n "~ 2" # m 2
+
+unsolo 11
+
+-- decolonize people 
+
+-- decolonize music
+
+d1 $ drumz $ struct "t@3!5 t" $ n "0" # m 1
+
+
+
+
+
+
+
+
+d3 $ (# aT "vel" 5 "0.1 0.5 0.6 0.7") $ n "0 1 7 10 12 7 10" # m 1
+
+
+d1 silence
+
+d2 $ 
+
+-- 7 16 17 18 19
+-- 71 .. 77
+-- 79 .. 83 
+-- 85 91 93
+
+d2 $ cc1 "71..77" (fast 8 "0")
+
+d1 $ (# amp (fast "1 2 3 4" $ range 0.25 0.76 $ sine)) $
+    (# legato (fast "{2 3 4 6 5}%18" $ range 0.25 1.5 $ sine)) $
+       struct "t(<13 10 13 10>*4, 18)" $
+       nT "notes" 9 (tScale "0 1 5 10" "0 4 3 2 1 0 7 -1 2 3 4 1") # m 1
+-- 
+
+d3 $ aT "vel2" 5 "0.4 0.5 0.6 0.7" $ n "0 1 7 10 12 7 10" # m 1
+
+d3 silence
+
+-- 
+d3 $ sT "s" 8 ("0.1 0.3 0.4 0.5  0.6 0.7 0.8 0.9" |* "1.2") $
+    aT "vel" 4 ("0.1 0.5 0.1 0.7" |* 0.8) $
+    fast 2 $ n "0 3 7 10 14" # m 1
+
+d7 $ drumz $ slow 2 $ (|+ n "0 1 ") $
+     gas 1 "0.5@4 0.3 0.5@3 [0.2 0.24 0.27]" $
+     fast "3" $ n "0!9" # m 2

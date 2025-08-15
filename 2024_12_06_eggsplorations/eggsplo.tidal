@@ -1,0 +1,32 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+setbpm 135
+
+let e28mp p = tScale' 28 "0 5 9 16 21 " p
+    e28o p = tScale' 28 "0 6 11 17 22 " p
+
+do
+  let tp = (|+ n "<0 8 16 24>")
+      rp = rizz 4 "0 0.01 0.015"
+  -- arp 1 oneirotonic
+  d1 $ (|+ n 28) $ rizz 8 "0 0.01" $ mask "t [t f] [t f] f" $ n (e28o ("{0.. 7}%4" |- "<0 5 9 16>")) # m 2
+  -- arp 2 major pentatonic 
+  d2 $ (|+ n 6) $ rizz 4 "0 0.01 0.015" $ mask "t [t f] [t f] t" $ n (e28mp ("{0.. 11}%6" |+ "<0 6 11 17>" )) # m 3
+  -- kicc
+  d3 $ tp $ drumz $ rp $ (# amp "<0.5 0.2> 0.5!2 0.2") $  n ("<0 [0 0 0]> 0 0 [ 0 0 0]" |+ "[0,1]") # m 1
+  -- snare
+  d6 $ tp $ drumz $ n ("~ 2 ~ 3" |+ "0") # m 1
+  -- snare ghost notes
+  d6 $ r 0.001 $ tp $ drumz $ rp $ n ("~ [[~ 2] [~ 2]] ~ 3" |+ "0") # m 1
+  -- hihats? 
+  d4 $ r 0.001 $ tp $ drumz $ (# amp (segfunc 12 $ range 0.4 0.54 $ egg 1 3)) $ rizz 4 "0 0.01 0.015" $ n "{[5 6] 4 [5 6] 5 4 5 4 4}%6" # m 1
+  -- ghostier hihats 
+  d5 $ r 0.001 $ tp $ drumz $ (# amp "{0.4 0.42 0.3 0.31 0.38 0.27}%5") $
+      rizz 4 "0 0.01 0.015" $ n "{~ [ ~ 4] ~ [~ 4] ~ [~ 4] ~ ~}%6" # m 1
+  -- noise gate for bass
+  d9 $ drumz $ n "0 [0 1] [0 1] 0" # m 9
+  -- bass
+  d11 $ (|- n 28) $ (|+ n 9) $ rp $ sus 1 "3"  $ struct "<[~ t t] ~> [~ t] [~ t] ~" $ nT "b" 6 (e28mp "0 2 0 0 2 2") # m 11 
+  -- concatenative breaks
+  d7 $  drumz $ sliceDiv 14 16 16 3 $ slow 4 $ n "0..63" # m "<4 5 6 5>*4" 
+  d13 $ drumz $ r 2 $ n "<7 ~ 7 ~ [7 7 7] [7 7 7 ]>" # m 13

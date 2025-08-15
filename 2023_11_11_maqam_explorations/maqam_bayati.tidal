@@ -1,0 +1,37 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/pigments_midi_map.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/arabic_maqam.tidal"
+
+
+d1 $ (|- n 24) $ 
+   n (tScale' 24 "0 3 6 10 14 17 20"
+   ("0 1 2 3 4 5 6 7 8 9" |+|
+   "[<0!3 [0 5 0]> <5 [0 5] 5 [5 0]>]*5" |+
+   "[0 2 -2 4]/8")  ) # m "<[[2 1]*5]!3 [[1 2]*5] >" 
+
+d2 $ drumz $ n "0 ~ ~ 3 ~ 0 0 3 ~ ~" # m 3
+
+d3 $ drumz $ r 0.004 $ rizz 5 "0 0.012" $
+     gas 2 "0.5 0.3 0.4 0.33 0.42" $ struct "t!10" $
+     nT "hh" 3 "5 6 7 " # m 3
+
+d4 $ mask "t!9 <f t>" $ drumz $ r 0.5 $ n "[1!5, 2!5]" # m 3
+
+d6 $ drumz $ rizz 5 "0 0.007" $ 4 0.001 $
+     fast 5 $ n "~ <3!2 ~ 3!3 ~>" # m 3
+
+d7 $ drumz $ mask (slow "<1 2 4 2>" $ "{~ t}%5") $
+     rizz 10 "0 0.001" $
+     gas 2 ("3 1!15" |* 0.10) $ n "7!20" # m 3
+
+d6 silence
+
+
+
+
+
+d1 $ (|- n 48) $ slow "4 2 2 4 2 4 2" $ n (tScale' 24 "0 3 6 10 14 17 20 " (segfunc 34 $
+l ("1 4 6 2" |/ 34) $
+ fast "[1 3 7 8]/5" $ range 0 7 $ sine)) # m "1 2 1 2" 

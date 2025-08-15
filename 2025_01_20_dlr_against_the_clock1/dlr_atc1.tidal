@@ -1,0 +1,4 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+let db p = select p []

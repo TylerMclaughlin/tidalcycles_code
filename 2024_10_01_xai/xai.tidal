@@ -1,0 +1,322 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+:script "~/Music/ableton_songs/drum_beats_500.tidal"
+
+setbpm 128
+
+let b16mask = mask "[f t t t]*4"
+    b8mask = mask "[f f t t]*4"
+    md = mute 1
+    umd = unmute 1
+    cmaj tp p = tScale ("0 2 4 5 7 9 11" |+ tp) p 
+
+d1 $ cat [ht27, ht27, ht27, fp28] # mmm 8
+
+-- diabolical
+-- 4 am kit
+--  D D double harmonic minor 
+do
+  hush
+  d1 $ cat [ff37, ff38, ff37, ht28] # mmm 6
+   -- 4 am kit
+
+d1 $ cat [gr28, gr28, gr23, gr24] # mmm 6
+
+d2 $ cat [gr28, gr28, gr23, gr24] # mmm 6
+
+d1 $ cat [ff28, ff28, ff23, ff24] # mmm 6
+
+
+-- wow
+-- A maj 
+d1 $ cat [ff01, ff01, ff02, ff28] # mmm 7
+
+-- C maj 
+d2 $ cat [ff27, fp29] # mmm 2
+
+let md = mute 1
+    umd = unmute 1
+
+md
+
+do
+ umd
+ d3 $ (|- n "<0 3>") $ n "[0,4,7,9,11](3,8,[2,0])" # m 1
+
+d3 silence
+
+--- E ak mmm 8 
+d1 $ gr43 # mmm 8
+
+d2 $ cat [fp27, fp29] # mmm 8
+
+d1 $ ff19 # mmm 8
+
+-- E mmm 9 
+d1 $ gr43 # mmm 9
+
+d2 $ r 0.001 $ mp77 # mmm "8 6"
+
+-- B source, mmm 10 Abmin/dor
+d2 $ ff80 # mmm 10 
+
+d2 $ ff70 # mmm 10 
+
+do
+ d1 $ ff43 # mmm 10 
+ d2 $ ep02 # mmm 10 
+
+-- C# 808 mmm 11
+d1 $ ff08 # mmm 11
+
+do
+ d1 $ ff58 # mmm 11
+ d2 $ ff61 # mmm 10 
+
+d2 $ ff53 # mmm 11 
+
+
+-- C# major
+d1 $ ff08 # mmm 11
+
+d2 $ ff53 # mmm 11 
+
+-- C# major
+d3 $ n ( cmaj 1  (fast 2 $ "4 5 9" |- "<0 2 3 5>" |+ "<7 0>/4"))  # m 1
+
+--- alt
+d4 $ n ( cmaj 1  (fast 2 $ "~ -3 2 ~" |- "<0 2 3 5>" ))  # m 2
+
+d4 $ n ( cmaj 1  (fast 2 $ "2 4 ~ ~" |- "<0 2 3 5>" ))  # m 2
+
+do
+ d4 $ (# legato "[0.7!3 <1.25!2 1.75!2>]*2") $ n ( cmaj 1  (fast 2 $ "~ -3 2 8" |- "<0 2 3 5>" ))  # m 2
+ d2 $ ff54 # mmm 11 
+
+do
+ d4 $ sus "<1 4>" "1 0.25 0.5 0.25" $
+    n ( cmaj 1  (fast 2 $ "2 4 ~ -3" |- "<0 2 3 5>" ))  # m 2
+ d2 $ ff55 # mmm 11 
+
+
+unsolo 4
+
+-- G# swan mmm 12 f aeolian / dorian
+d1 $ ncat [(7, gr26 # mmm 12), (1, ht08 # mmm 13)] 
+
+do
+ d3 silence
+ d2 $ ff58 # mmm 11 
+
+d4 silence
+
+do
+  d1 $ ncat [(7, gr26 # mmm 12),(1, ht07 # mmm 13)] 
+  d3 $ n (cmaj 3 ("0 4 8 4 9 8 4 8" |- "<0 2 4 3>")) # m 3
+ 
+do
+  d1 $ ncat [(3, gr26 # mmm 12),(1, ht07 # mmm 13)] 
+  d3 $ n (cmaj 3 ("0 4 8 4 9 8 4 8" |- "<0 2 4 3>")) # m 3 -- CHANGE 
+  d4 $ n (cmaj 3 ("[0 4 7 [8 <9 ~>]]/2" |- "<0 2 4 3>" |+ 2)) # m 5 
+
+d2 $ fp22 # mmm 13
+
+
+-- Yaki mmm 15 Bb mix
+do
+ d3 silence
+ d4 silence
+
+do
+ d1 silence
+ d3 $ n (tScale "7 8 11 12 14 15 17" (( "<0 5> 1 2 3 4")
+         |+ "<0 1>/2")) # m 5
+  
+do
+  d2 silence
+  d4 silence
+  d3 $ struct "t(9,16)" $ n (tScale "7 8 11 12 14 15 17" (( "<0 5> 1 2 3 4")
+         |+ "<0 1>/2")) # m 5
+
+-- D spirit mmm14  G phrygian harmonic
+d3 $ ff64 # mmm 14 
+
+do
+  d3 $ struct "t(9,16)" $ n (tScale "7 8 11 12 14 15 17" (( "<0 5> 1 2 3 4")
+         |+ "<0 1>/2")) # m 5
+  d1 $ ncat[(3, ff61), (1, ff60)] # mmm 15
+  d2 $ cat [ff64, ff62, ff64, ff63] # mmm 14 
+
+d1 $ ff63 # mmm 15
+
+do
+ d3 $ struct "t(3,8) t(3,8, [3, 4])" $ cat [
+      nT "mel" 4 "-4 0 2 7",
+      nT "mel" 4 "-4 0 2 7",
+      nT "mel" 4 "-2 2 5 7",
+      nT "mel" 4 "-2 2 5 7",
+      nT "mel" 4 "-4 0 2 7",
+      nT "mel" 4 "-2 2 5 7"] # m 1 --CHANGE
+ d2 $ cat [ff64, ff62, ff64, ff63] # mmm 15 
+
+d3 silence
+
+d1 $ (|+ n 0) $ cat [ff48, ff48, ff39, ff43] # m 15
+
+-- Eb Product mmm 16 C Harm minor
+d2 $ cat [ff64, ff62, ff64, ff63] # mmm 16 
+
+d3 $ n (tScale "0 2 3 5 7 8 11" ("<[0,2,4]!5 [1, 2, 4]!3>")  ) # m 1
+
+do
+ d1 silence 
+ d2 silence 
+ d3 $ n (tScale "0 2 3 5 7 8 11" ("<[0,2,5] [0, 3, 5] [0,2,4] <~ [7,9,11] >>")  ) # m 1
+ d4 $ n (tScale "0 2 3 5 7 8 11" "<<~ 8> ~ <~ 8> <[4 7 9 ] [8 7 4] >>" ) # m 1 -- CHANGE me
+
+d2 $ cat [ff64, ff62, ff64, ff63] # mmm 16 
+
+d1 $ (|+ n 0) $ cat [ff41, ff42, ff31, ff42] # m 16
+
+-- Eb vibrance mmmm 1 Eb ionian
+do
+ d1 $ ff77 # mmmm 1
+ d2 $ fp18  # mmmm 1
+
+
+d4 silence
+
+-- go back to C major
+d3 $ struct "t(13,16)" $ nT "c" 5 "0 7 9 11 14" # m 1
+
+d3 $ ncat [ (2,struct "t(13,16)" $
+              nT "c" 5 "0 7 9 11 14"),
+            (2, struct "t(13, 16)" $
+              nT "c" 5 "2 5 9 12 16")] # m 1
+
+-- back to C major! 909 mmm 1
+do
+ d1 $ cat [ff08, ff10] # mmm 1
+ d2 silence
+
+d1 silence
+
+-- Eb/Bb feel mmmm 2 C aeolian/dorian
+do
+ d1 $ ff77 # mmmm 2
+ -- d2 $ fp18  # mmmm 2
+
+d3 silence
+
+d2 $ mp17 # mmmm 2
+
+d4 silence
+
+getnow 16
+
+-- c minor
+do
+ d2 $ r 0.001 $  fp18  # mmmm 2
+ d3 $ (|- n 0) $ ncat [ (2,  struct "t(13,16)" $
+              nT "c" 5 "0 5 7 10 14"),
+               (2,  (|- n 7) $ struct "t(13,16)" $
+              nT "c" 5 "0 5 7 10 14")] # m 1
+
+do
+ d1 $ ff74 # mmmm 2
+ d2 $ fp14  # mmmm 2
+
+-- plus 2, then drop to 1
+d2 $ (|+ n 0) fp18  # mmmm 2
+
+d2 $ mp19 # mmm 2
+
+-- Bb quark mmmm 3 Bb major / augmented
+d1 $ ff59 # mmmm 3
+
+do
+ d2 $ cat [mp19, mp19, mp19, fp24] # mmmm 2
+ d3 $ (|- n 0) $ ncat [ (2,  struct "t(13,16)" $
+              nT "c" 5 "0 5 7 10 14"),
+               (2,  (|- n 7) $ struct "t(13,16)" $
+              nT "c" 5 "0 5 7 10 14")] # m 6
+
+d3 $ (+| n "[[0@19 ~] [0@19 ~] [0@19 ~] [~ <4 4(3,8)>  -4 ~]]/4") $ n "[-2, 2, 5, 7, 9]" # m 6
+
+-- variation
+do
+ d1 $ cat [ff51, ff51, ff51,  ff47] # mmmm 3
+ d2 $ cat [mp24, mp24, mp24, fp23] # mmmm 2
+
+d1 $ (|+ n 0) $ cat [ff48, ff48, ff39, ff43] # mmm 15
+
+d1 $ (|+ n 0) $ cat [ff65, ff68, ff65, ff33] # mmm 15
+
+-- Bb quark mmmm 3 Bb major / augmented
+d1 $ ff59 # mmmm 3
+
+do
+ d2 $ cat [mp19, mp19, mp19, fp24] # mmmm 2
+ d3 $ (|- n 0) $ (# amp 0.6) $ (# legato " 2") $ ncat [ (2,  struct "t(13,16)" $
+              nT "c" 5 "0 5 7 10 14"),
+               (2,  (|- n 7) $ struct "t(13,16)" $
+              nT "c" 5 "0 5 7 10 14")] # m 6
+
+d4 silence
+
+d1 $ drumz $  (# amp 0.7) $ fast 2 $ n "0 12 [0,2] 12 " # m 1
+
+d2 $ fastsoft' 0.82 "1.666667" $ (# amp 0.1) $ drumz $ fast 2 $ n "2!4" # m 1
+
+d2 silence
+
+getbpm
+
+d2 $ mb "-0.1" 0.1 sine # m 1 
+
+d2 silence
+
+d2 $ ff82 # m 1
+
+let b16mask = mask "[f t t t]*4"
+let b8mask = mask "[f f t t]*4"
+
+let fs fastx slowy p = fast fastx $ slow slowy $ p
+
+
+d2 $ b8mask $ n (tScale ("0 2 4 5 7 9 11" |+ 1 ) ((fs 4 5 $ fast "<2 4>/2" "0 4 [1 0] 2") |+ "[0 2 4 2]/4")) # m 2
+
+d3 $  (|- n 12) $ b16mask $ n (tScale ("0 2 4 5 7 9 11" |+ 1 ) ((fs 4 5 $ fast 2 "0 [3 4] [<1!4 -1!4> 0] 2") |+ "[0 2 4 2]/4" |- 2)) # m 3
+
+d3 $ fs 15 16 $ (|- n 12) $ b16mask $ n (tScale ("0 2 4 5 7 9 11" |+ 1 ) ((fast 2 "0 [3 4] [<1!4 -1!4> 0] 2") |+ "[0 2 4 2]/4")) # m 3
+
+getbpm
+
+d4 $  b16mask $ n (tScale ("0 2 4 5 7 9 11" |+ 1 ) ((fs 4 5 $ fast 2 "0 [3 4] [<1!4 -1!4> 0] 2") |+ "[4 2 4 6]/4" |+ 2)) # m 4
+
+d1 $ cat [gr08, gr09, gr10, gr09] # m 1
+
+d1 $ cat [ff08, ff09, ff10, ff09] # m 1
+
+do
+ d5 $ rizz 8 "0 0.015" $ b16mask $ sus 2 "[1!3 2]" $ gas 2 "0.5!3 0.8" $ n (tScale ("0 2 4  7 9 11" |+ 1) (( "[0 [1 <4 2>] 4 [3 5] ]*2") |+ "<0 1 2 3>" |- "<0 2 4 6>/2")) # m 4
+ d1 $ cat [gr08, gr09, gr10, gr09] # m 1
+ d6 silence
+
+do
+ d5 $ b16mask $ sus 2 "[1!3 2]" $ gas 2 "0.5!3 0.8" $ n (tScale ("0 2 4  7 9 11" |+ 1) ("[0 [1 <4 ~>] 4 [3 ~] ]*2" |+ "<0 1 2 3>" |- "<0 2 4 6>/2")) # m 4
+ d6 $ (|+ n 12) $ b16mask $ n (tScale ("0 2 4  7 9 11" |+ 1) ("[0 [1 <4 2>] [~ 5] [3 ~] ]*2" |+ "<0 1 2 3>" |- "<0 2 4 6>/2" |+ 2)) # m 4
+ d1 $ cat [ff08, ff09, ff10, ff09] # m 1
+
+do
+ d5 $ b16mask $ sus 2 "[1!3 2]" $ gas 2 "0.5!3 0.8" $ n (tScale ("0 2 4  7 9 11" |+ 1) ("[0 [1 <4 ~>] 4 [3 ~] ]*2" |+ "<0 1 2 3>" |- "<0 2 4 6>/2")) # m 4
+ d6 $ (|+ n 12) $ b16mask $ n (tScale ("0 2 4  7 9 11" |+ 1) ("[0 [1 <4 2>] [~ 5] [3 ~] ]*2" |+ "<0 1 2 3>" |- "<0 2 4 6>/2" |+ 2)) # m 4
+ d1 $ cat [ff18, ff19, ff18, ff09] # m 1
+
+d7 $ (|- n 12) $ gas 4 ("0.5 0.4 0.3 0.2" |* 0.5) $ struct "~ t t t t t t ~  ~ ~ ~ t t t t" $ nT "asdf" 5 (tScale ("0 2 4  7 9 11" |+ 1) "0 4 8 8 10") # m 3
+
+d7 $ rizz 8 "0 0.01" $  sus 2 "[1!3 2]" $ gas 2 "0.5!3 0.8" $ 
+ (|- n 12) $ gas 4 ("0.5 0.4 0.3 0.2" |* 0.5) $ struct "~ t t t t t t ~  ~ ~ ~ t t t t" $ n (tScale ("0 2 4  7 9 11" |+ 1) ("{0 4 8 10 8}%14 [10 8]@2" |+ "<0 2 4 6>")) # m 3
+
+d7 silence

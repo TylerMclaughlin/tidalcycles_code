@@ -1,0 +1,30 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+setbpm (212 / 5 * 4 )
+
+
+do
+ let masq2 = "[t [f t t t t]]/2" 
+     masq = "[f t t t t]" 
+     asdf = "t t f t t t f t t f t t t f t t t f f f" 
+     rizzler = rizz 10 ("0 <0.01 0.01 0.01 0.02 0.03>" |+ 0.001)
+     melshift p = (l 0.2) p 
+ d1 $ drumz $ rizzler $ mask (masq) $  n "0 [ <0 ~> 0] 0 0 0" # m 1
+ d2 $ r 0.0012 $ drumz $ rizzler $ n "[3 3]/2" # m 1
+ d3 $ drumz $ rizzler $ fastsoft' 0.95 "1 <1 1 [1.25 1]> 1 <1!3 1.25> <1 1.25>" $
+     mask masq $ n ("[5 6 5 6 5]*2" |- 1) # m 1
+ d4 $ (|+ n 12) $ rizzler $ melshift $  mask "t!15 [<f t>]!2 t!3" $ struct asdf $
+      ncat [ (1, nT "yaa" 9 (tScale "0 1 5 7 10" ("3..9" |- 3)) ),  
+              (0.5, nT "yaa" 9 (tScale "0 1 5 7 10" ("3..9" |- 4)) ),  
+              (0.5, nT "yaa" 9 (tScale "0 1 5 7 10" ("2..5" |- 4) )),
+              (1, nT "yaa" 9 (tScale "0 1 5 7 " ("0..9" |- 3)) ),  
+              (0.5, nT "yaa" 9 (tScale "0 1 5 7 10" ("3..9" |- 2)) ),  
+              (0.5, nT "yaa" 9 (tScale "0 1 5 7 10 " ("2..4" |- 4)) )  
+              ] # m 5
+ d5 $ (|- n 12) $ (|+ nT "oct" 6 "0 12 0 0 12 0") $
+    (|* legato (fast 1 "1.1..0.6")) $ 
+    (|* legato (fast 20 "1.1 0.6")) $
+     sus 10 "1 0.5" $
+         rizzler $ melshift $ (# amp "0.5!15 0.3") $ struct (stack [(inv asdf), "~@15 t!5"]) $ l "0 -0.25" $ slow 8 $ n "-2 5 8 3 1 5 -4 3" # m 2
+ d8 $ drumz $ n "0 1 0 2 3" # m 8

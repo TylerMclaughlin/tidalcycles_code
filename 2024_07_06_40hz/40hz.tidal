@@ -1,0 +1,49 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+
+setbpm 120
+
+d1 $ (|+ n "[0]") $ n "[6 6 6 6]*20" # m 1
+
+
+-- nice melody with harmonics -- 
+
+mel1
+547
+719
+664
+576
+489
+719
+440
+
+720
+489
+576
+664
+730
+541
+316
+
+
+d1 $ cc1 19 "0..128"
+
+
+35/6 Eb
+40 G
+43 Bb
+45 Db (7)
+48 Eb
+52
+54 A eleventh
+56 Bb fifth
+57 B minor 13th
+61 Eb
+
+
+d1 $ cc1 19 (fast 1  ("40 43 45 48 50 52 54 56 58 60 " |+ 0) )
+
+d1 $ cc1 19 "48 50 52 54 56 57 58 59 60" 
+
+d1 $ fast "[1 2 2 1 2 2]/3" $ cc1 19 "[40 58 61]" 
+

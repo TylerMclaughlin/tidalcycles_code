@@ -1,0 +1,16 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+d1 $ rizz 9 "0 0.01" $ r (slow 16 $ fast 18 $ "0.25 0 0.25 0")  $ fastsoft' 0.8  "1 <1 2 1.5 2>" $  sus 1 "[0.8 0.2 0.5]*6" $ gas 1 (fast "2 3 7" $ range 0.3 0.6 $ sine) $ struct "t(13, 18, 1)" $ nT "hh" 6 ("4 6 9 11 7 8" |- 1) # m "[1 2 3 4]*2"
+
+d2 $ struct "t!6 ~ ~ t!9  ~" $ n "[0,2,<4 9 [10 11] 6>]" # m 5
+
+d3 $ drumz $ slow 16 $ fast 18 $ n "0 0 0 0" # m 7
+
+d3 silence
+
+
+d3 $  struct "~ t t t  t t" $ n "<-4 -5 -6 -7 -8 -9>" # m 5 
+
+d3 $ drumz $ struct "t [t t t] t <t ~>  t t" $ n "0" # m 7
+
+d4 $ drumz $ degradeBy 0.8 $ slow 16 $ fast 18 $ gas 1 "0.05" $ r (0.125) $ n "0 0 0 0" # m 7

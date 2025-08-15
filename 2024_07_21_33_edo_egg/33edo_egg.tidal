@@ -1,0 +1,17 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+
+let oneiro34 p = (tScale' 34 "0 5 8 13 18 21 26 29 " p)
+
+d1 $ (|+ n 13) $ slow 2 $ struct "t(27,31)" $ nT "a" 20 (oneiro34 ("0 1 2 3 4 5 4 3 2 1 " |- 5)) # m 1
+
+d2 $ l 0.001 $ (|+ n 34) $ (|+ n 13) $ slow 2 $ struct "t(27,34)" $ nT "b" 20 (oneiro34 ("0 1 3 4 5 6 5 4 3 1 " |- 3)) # m 3
+
+d4 $ drumz $ fast 2 $ struct "t(4, <30 28>/2)" $ n "0 5 [0,2] 5" # m 5
+
+d5 $ drumz $  struct "t(8, <30 28>/2)" $ n "0" # m 6
+
+d6 $ drumz $  l (1/16) $ struct "t(8, <30 28>/2)" $ n "1" # m 6
+
+-- bass
+d3 $ (|+ n 13) $ slow 2 $ struct "t(27,33)" $ n (oneiro34 (fast "<6 3 3 3>" $ "0 1 3 4 5 6 5 4 3 1 " |- 6)) # m 2

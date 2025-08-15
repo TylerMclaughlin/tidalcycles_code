@@ -1,0 +1,29 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+setbpm 132
+
+let e43  = tScale' 43 "0 7 14 18 25 32 39" 
+
+let e43ly  = tScale' 43 "0 7 14 20 25 32 39" 
+
+let e43lym  = tScale' 43 "0 7 14 20 25 32 " 
+
+d1 $ n (e43ly ("[0,2,-3,6](11,18)" |+ "0 [3 5] 4 [2 1]" |+ "[0 3 ]/4")) # m 1
+
+d1 $ (|+ nT "tp" 3 "0 0 43 43") $ sus 1 "3 1.5!14" $
+   struct "1101 0001 0111 0100 10" $
+   n (e43 ("[0]" |+ "0 2 4 5 4 5" |+ "[0@3 -2 ]/4")) # m 1
+
+d2 $ struct "t(13,18,2)" $ nT "bass" 6 (e43lym "-5 0 2 4 5 6") # m 3
+
+-- bongos
+d3 $ drumz $ struct "t(13,18,2)" $ nT "bongos" 26 ( "0 1 2 3 0 1  ") # m 4
+
+d4 $ drumz $ slow 2 $  struct "t(11, 18, 3)" $ n "0" # m 5
+
+
+d5 $ n (e43lym ("[[0,2,6] [0, 3, 6] [-1, 3, 6] [[-1,3, 4] [-1, 3, 5]]]/4" |+ 2)) # m 6
+
+d7 $ drumz $ fast 1 $ sus 1 "0.2" $ struct "t!3 [t]@3 t!3 t!3 t!3 t!3" $ n "0" # m 7
+
+d8 $ struct "t(11,18)" $ n (e43ly (segfunc 18 $ range "0 " "<1@4 <[1 5] > >" $ egg 1 4)) # m 8

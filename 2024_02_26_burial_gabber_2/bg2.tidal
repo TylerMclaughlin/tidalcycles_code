@@ -1,0 +1,32 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+setbpm 135
+
+-- kick and clap
+d1 $ drumz $ rizz 1 (range (0.02) 0 $ egg 1 6) $
+     gas 1 (range (0.58) 0.42 $  egg 1 6)) $
+     (# amp 0.5) $ 
+       n "[0 ~ 0 ~] 3 [0 ~ ~ 3] ~" # m 1
+
+-- hi hats
+d2 $ drumz $ rizz 4 "0 -0.01" $ l 0.002 $
+     rizz 1 (range (0.02) 0 $ ( egg 1 6)) $
+     gas 1 (range (0.48) 0.6 $ ( egg 1 6)) $
+     (# amp 0.5) $ 
+       n "~ 6 7 7  ~ 6 7 7  ~ 6 7 ~  6 6 7 7" # m 1
+
+-- minor 11th chord
+d3 $ (|- n 2) $ n "[0, 3, 5, <10>, 14, 19]/4" # m 2
+
+-- gabber square wav kick
+d4 $ drumz $ r 0.0017 $
+     rizz 1 (range (0.02) 0 $ (r 0.0 $ egg 1 6)) $
+     (# amp " 0.5 <0.5 0.4>") $
+     n "~ [0 ] <~ [~@3 ~] > < [<0 ~ >] [0 0 ~ ~]>" # m 3
+
+-- melody
+d5 $ (|+ n 36) $ (|- n "[5,0]") $ 
+   r 0.003 $
+   rizz 1 (range (0.02) 0 $ (r 0.0 $ egg 1 6)) $
+   (# legato "2 0.8 0.3") $ (gas 1 "[0.5!3 0.38]/4") $ struct "[t(3,8) t(3,8) t(3,8) [t!3 ~]  [t!3 ~] [t!3 ~]]/6"  $
+    nT "lead4" 36 "0 0 1 1 0 0 3 3 1 1 0 0 -2 -2 0 0 1 1   0 0 -4 -4 -7 -7 -2 -2 -5 -5 -9 -9  -4 -4 -7 -7 1 1" # m 4 

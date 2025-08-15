@@ -1,0 +1,104 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+:script "/Users/r_tyler/Music/ableton_songs/breakz.tidal"
+
+b_amp
+
+setcps(180/120/2)
+
+d1 $ timeLoop' 0.5 0.25 $ struct "t(9,16) " $ nT "asdf" 5 "0 2 3 4 5 " # m 17
+
+d1 $ timeLoop' 0.5 0.25 $ struct "t(9,16) " $ nT "asdf" 5 "0 2 3 4 5 " # m 17
+
+d1 $ timeLoop'' (1/8) "0.0" $ n "0 2 3 5 7 9 10" # m 1
+
+d1 $  n "0 2 3 5 7 9 10" # m 1
+
+d1 $ un1 $ n "0  2 3 5 7 9 10 12" # m 1
+
+d1 silence
+
+d2 silence
+
+d2 $ timeLoop'' (2/8) "<0.5>" $ n "0 2 3 5 7 9 10" # m 1
+
+d3 $ timeLoop'' (3/8) "[0.5 0.7]/4" $ n "0 2 3 5 7 9 10" # m 1
+
+let timeLoop' n o f = timeLoop n $ (o <~) f
+    sliceDiv3 posL num subdivWhat subdivBy s p = within' ((posL/subdivWhat), (posL + num)/subdivWhat) (_fast subdivBy . _slow (num) . (|* amp ((s**(-1/2))/s/2) )) p
+    timeLoop'' n o f = ( o ~>) $ timeLoop n $ (o <~) $ f
+    un1 = mask "f@1s t" -- one semiquaver
+    setbpm bpm = setcps (bpm/120/2)
+    getbpm = do
+                 currentcps <- streamGetcps tidal
+                 return (currentcps*60*4)
+    getnow n = do
+                 x <- streamGetnow tidal
+                 return (Data.Fixed.mod' x n)
+
+getnow 16 
+
+getbpm
+
+getnow 16
+
+setbpm 150
+
+d1 $ mask (inv "t@4 f@12") $ 
+       --timeLoop' 1.75 "[2 0.325 0.125]/4" $ 
+       ("[0@3 0.5 0.75]/5" <~) $ (0.25 <~) $ rizz 4 "0 0.01 0.001 0.011" $
+       timeLoop'' 4.5 3.0 $ rev $ (|+ n "[0 3 1]/6") $ (|+ n "[ 9 18@3 11 17]/3") $ drumz $ slow 4 $ n "0 1 2 3 4 3 0 1 5 6 4 0 6 7 8 8 0 1 2 3 4 3 0 1 5 6 4 0 6 7 8 8 0 1 2 3 4 3 0 1 5 6 4 0 6 7 8 8 0 1 2 3 4 3 0 1 5 6 4 0 6 7 8 8"
+       # amp "0.5105 0.744 0.4658 0.9802 0.5111 0.9151 0.8843 0.8851 0.717 0.6441 1.0 0.8858 0.7439 0.8667 0.7318 0.5689 0.9713 0.4668 0.9802 0.9151 0.8843 0.744 0.8852 0.7172 0.6443 1.0 0.8858 0.7439 0.8667 0.7319 0.5691 0.9713 0.4656 0.9802 0.5091 0.9151 0.8843 0.744 0.8851 0.717 0.6441 1.0 0.8858 0.7439 0.8667 0.7318 0.5689 0.9713 0.4662 0.9802 0.5102 0.9151 0.8843 0.744 0.8852 0.7172 0.6443 1.0 0.8858 0.7439 0.8667 0.7319 0.5689 0.9713"#
+       m "1 4"
+
+
+d2 $ drumz $ (# amp "0.5@3 0.3") $ n "0 0 0 [0 0]" # m 2
+
+d4 $ drumz $ (0.125 ~>) $ (# amp "0.5@3 0.02") $ n ("6 6 6 [6 6]" |- 0) # m 2
+
+d3 $
+    (|- n 31) $
+    mask "t@4 f@12" $ (|- n 4) $ (|+ n (ncat [(2.25,"0"), (0.25, "1..17"),
+                  (2.25,"18"), (0.25,"17 .. 1")] )) $
+                  n (tScale "0 5 10  18 23 28" (segfunc 32 $ range (-4) 11 $ sine) ) # m 3
+
+let sliceDiv2 posL num subdivWhat subdivBy p = within' ((posL/subdivWhat), (posL + num)/subdivWhat) (fast subdivBy . _slow (num)) p
+
+let sliceDiv3 posL num subdivWhat subdivBy s p = within' ((posL/subdivWhat), (posL + num)/subdivWhat) (_fast subdivBy . _slow (num) . (|* amp ((s**(-1/2))/s/2) )) p
+
+let sliceDiv2 posL num subdivWhat subdivBy p = within' ((posL/subdivWhat), (posL + num)/subdivWhat) (fast subdivBy . _slow (num)) p
+
+0.5*(0.3/0.7)**(1/2)
+
+
+d1 $ sliceDiv3 0 2 8 8 (8/3) $ (# amp 0.5) $ n "0 1 2 3 " # m 1 
+
+d1 $ sliceDiv2 0 4 8 8 $ n "0 1 2 3 " # m 1
+
+d1 $ sliceDiv 0 2 8 4 $ n "0 1 2 3 " # m 1
+
+getnow 1
+
+d1 $ (|+ n "9 18") $ rizz 4 "0 0.008 0.001 0.009" $
+   slow 2 $ sliceDiv3 7 2 16 7 (3/8) $ fast 2 $ b_amp "[13 18 17 18]/4" $ slow 4 $ dbreakz9 "[0 1 3 8]/1" 
+   # m 1
+
+d2 $ (|+ n "8 <0 16>") $ rizz 4 "0 0.006 0.001 0.007" $ 
+   slow 2 $  sliceDiv3 7 2 16 4 (7/8) $ fast 2 $ b_amp "[13 18 17 18]/4" $ slow 4 $ dbreakz9 "[2 1 4 8 5 7 11]/7" 
+   # m 1
+
+d1 $ drumz $ (0.128 <~) $ n "0 0 0 <0 0!3>" # m 2
+
+d3 $ drumz $  n ("0 0 0 0" |+ 7) # m 2
+
+
+
+d2 $ 
+
+d2 $ un1 $ (|- n 1) $ rizz 4 "0 0.014 0.001 0.016" $ slow 4 $ b_amp "10" $ dbreakz9 "<4 7 7 8 12 0 2 4>*2" # m 5
+
+d2 $ un1 $ (|+ n 1) $ rizz 4 "0 0.014 0.001 0.016" $ slow 4 $ b_amp "1" $ dbreakz9 "6" # m 1
+
+d1 silence
+
+setbpm 122

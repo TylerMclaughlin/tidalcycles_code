@@ -1,0 +1,17 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+setbpm 130
+
+d1 $ drumz $ mask "[f t!10]*3" $ n ("0..35" |+ "<0 12 24 36>") # m 1
+
+d2 $ drumz $ mask "[f t!10]*3" $ n ("0..17" |+ "<18 34 48 56>") # m 2
+
+d3 $ drumz $ mask "[f t!10]*3" $ n ("0..22" |+ "<0 10 20 30>") # m 3
+
+d4 $ (|- n 24) $ n (tScale "0 2 4 6 7 9 11" ("0 11 16" |+ "<0 2 4 6>")) # m 4
+
+d5 $ gas 1 "0.2" $ n (tScale "0 2 4 6 7 9 11" ("<7 6 5 <4 6>>")) # m 4
+
+d4 $ n (tScale "0 2 4 6 7 9 11" ("0 11 16" |+ "<0 2 4 6>")) # m 4
+
+d6 $ drumz $ mask "[f t!5]!3" $ slow 4 $ n (r 0.22 "0..63") # m 5

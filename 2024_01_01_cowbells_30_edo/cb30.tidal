@@ -1,0 +1,26 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+
+let squid e r func p = fast r $ every e (func) $ slow r $ p
+    naut e r func p = fast r $ every e (func) $ slow r $ p
+
+
+
+d1 $ (|- n 8) $ 
+    gas 4 "0.4 0.3 0.5 0.51" $
+     rizz 8 "0 0.002 0.005 0.002" $ 
+     sus 4 "1 0.8 2 1" $
+     slow 0.5 $ every 3 (fast 2 . (|* amp 0.7)) $ fast 0.5 $
+     (# amp 0.5) $
+     struct "t(<9 5 11>, 16)" $
+     n (tScale' 30 "0 5 10 13 17 22 27 " 
+         (slow 2 $ (segfunc "8 <16 32 17 19>" $  
+          (slow 4 $
+          (every 3 (fast 4) $ fast 4  $ fast 2 $ range 0 2 $ egg 1 2) - 
+          (range (-2) (-5) $ egg 9 1) |+ "[0 1 2 3]/16")))) # m 1
+
+
+d2 $ sus "[2 4]/4" "1 2 3 4" $
+  n (tScale' 30 "0 5 10 13 17 22 27 " ("[0 [2 <7 10>] 4 [6 <2 7>] ]" |+| ( fast 2 "[0 1 2 3]") |+ "[0 3 5 4]/8")) # m 2
+
+d3 $ n (tScale' 30 "0 5 10 13 17 22 27 " "0 ..  14") # m 3

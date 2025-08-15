@@ -1,0 +1,10 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+let e31 p = tScale' 31 "0 5 10 13 18 23 28" p
+
+d1 $ (|+ n 0) $ n (e31 ((segfunc 16 $ range 0 9 $ sine)  |+ "<0 2 -2 5>")) # m 1
+
+d1 $ (|+ n 0) $ struct "t(13,21)" n (e31 ((segfunc 21 $ range (-1) 4 $ egg 1 4)  |+ "<0 2 -2 1>")) # m 1
+
+d1 $ n (e31 ("[-7, -1, 0, 2, 4, 15, 10] ~  " |- 2)) # m 1

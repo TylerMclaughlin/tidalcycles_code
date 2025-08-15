@@ -1,0 +1,28 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+
+-- [13.0, 18.0, 23.0, 26.0, 0.0, 5.0, 10.0]
+
+d1 $ n (tScale' 31 "0 5 10 13 18 23 26" ("0..24"))  # m 1
+
+d1 $ slow 5 $ slow (range (1/16) (15/16) sine) $ n ("0..128")  # m (slow "<3 2 5 4 8 7>" $ irand [2,3, 7, 7]) 
+
+d1 $ slow 5 $ slow (range (1/16) (15/16) sine) $ n ("0..128")  # m 1 
+
+d1 $ slow 5 $ slow (range (1/16) (15/16) sine) $ n ("0..128")  # m ( irand [2,3]) 
+
+-- broken
+d2 $ (# m "<~ <2 3>>*2" ) $ slow 5 $ slow (range (1/16) (15/16) sine) $ n ("0..64" )  
+
+-- nice chord
+d3 $  fast 2 $ fastsoft' 0.92 (range (1/16) (15/16) sine) $ n (tScale' 31 "0 5 10 13 18 23 26" ("[ -3, 0,<2 1 1 1>,6,<8 8 7 7>,10]" |- "<3>"))  # m "<4 ~>"
+
+
+d3 $ fastsoft' 0.92 (range (1/16) (15/16) sine) $ n (tScale' 31 "0 5 10 13 18 23 26" ("0..24"))  # m (slow "<3 2 5 4 8 7>" $ irand [2,3, 7, 7]) 
+
+
+-- ehhh
+d2 $ fastsoft' 0.92 (range (1/16) (15/16) sine) $ n (tScale' 31 "0 5 10 13 18 23 26" ("0..24"))  # m 2
+
+-- bass
+d9 $ fast 2 $ fast 4 $ fastsoft' 0.8 "{1 2 4 1 4 6}%8" $ slow 4 $ struct "t!4" $ nT "bass" 6 ("2 7 2 16" |- 5) # m 9

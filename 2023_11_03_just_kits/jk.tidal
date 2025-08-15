@@ -1,0 +1,105 @@
+:script "/Users/r_tyler/Music/ableton_songs/toolz.tidal"
+
+setbpm 126
+
+-- synths, pitched drum sounds
+d1 $ r ("{8 11 -8 14 9 -8}%4" |* 0.0006) $
+     rizz 8 "0 0.014" $
+     (|+ n 2) $ (|* amp (fast "3 2 4 5" $
+     range 0.9 1.1 $ sine )) $
+     mask "t(< 15 >,<17 14>)" $
+     gas 4 "0.6 0.3 0.4 0.3" $
+     (|- n "[0 7 2 5]/4") $
+     n (tScale "0 3 7 10 14 17"
+       ((segfunc 32 (range "[1 -1 2 -2]/5" "<12 14>" $
+     fast "[2 [2 3] 2 [2 1 2 4]]/4" $
+     cat [sine, cosine]) ) |- "[0 1 3 2]/8")) # m 2
+
+d8 $ slow 2 $ cc15 42 "<127 0> 0"
+
+-- kicc
+d2 $ drumz $
+     rizz 8 "0 0.014" $
+     mask "t t t <f t> f <f t> t f" $
+     gas 1 "0.5 [0.4 0.37@3]" $
+     n "0(3,8) 0(5,8, <3 0 1 2>)" # m 1
+
+-- hats
+d3 $ drumz $ rizz 8 "0 0.014" $
+     r 0.001 $
+     gas 1 "0.35 [0.4 0.44 0.45 0.45]" $
+     struct (inv "t(3,8) t(<3 5>,8, <3 0 1 2>)") $
+     nT "hh" 2 "2 4" # m 1
+
+-- clap
+d4 $ drumz $
+    r ("6 5 7 4 3" |* 0.0004) $
+    (# amp (fast "{1 0.37 5 19}%9" $
+       range 0.4 0.6 $ sine) ) $
+    n "~ 5 ~ 5" # m 1
+
+-- drum fill
+d5 $ drumz $ rizz 8 "0 0.014" $
+   (|* amp 0.8) $
+    gas 2 "0.4 0.45 0.52 0.52" $
+    (|+ n "<0 <0 1>>") $
+    n "~ <[2!2 ~@2 2!2 ~@2] [1 1 1@2]>" # m 1
+
+-- bass
+d6 $ r 0.0014 $ rizz 8 "0 0.014" $
+    (|* legato (fast "3 5 8 4" $
+        range 0.8 1.2 $ sine)) $
+    (|* amp (fast "2 3 7 6" $
+        range 0.42 0.55 $ sine)) $
+    (|* amp "[1.1 0.8 1.08 0.8]*4") $
+    sus 8 "1 0.75" $
+    (|+ n 2) $ (|- n "[0 7 2 5]/4") $
+    struct "t(<13 [15 13] 13 [13 15]>,16)" $
+    n (tScale "0 7 10 12 14 17"
+       ("0 <1 3> 2 <3 1 1> 4 -1 <2 3 2 1> 2 3 2 1" |+
+       "0 [<1 [1 2] 1 <3 3>>]")) # m 3 
+
+-- 909 hats
+d7 $ drumz $ 
+   r 0.0012 $
+   r ("3 4 5 6 2 5 4 3 2" |* 0.0004) $
+   mask (slow 4 $ "f f <f t> <t [f t]>") $
+   (# amp (fast "{7 4 3 2 4}%4" $ range 0.4 0.54 $ sine)) $
+   n "[~ 4  ]*4"# m 5
+
+do
+  mute 5
+  mute 3
+  mute 2
+  mute 7
+  mute 8
+
+mute 4
+
+solo 1
+
+do
+  unsolo 1
+  unmute 1
+  unmute 2
+  unmute 3
+  unmute 4
+  unmute 5
+  unmute 7
+  unmute 8
+
+
+
+
+
+d1 $ drumz $ n "0 1 0 8 37 0 38 7 21 5" # m 1
+
+d1 $ rizz 8 "0 0.01" $
+     gas 4 "0.5 0.3 0.4 0.3" $
+     drumz $ (|+ n "[0 4]/4") $ n (segfunc "16@3 <24 32 18 36>" (range (-10) 30 $ sine)) # m 1
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+do
+ resetCycles
+ d1 $ sus 1 "0.88" $ (|* n 0) $ (|- n 60) $ n "[0..128]*(3,8)" # m 1
+
+
+d1 $ (|- n 60) $ (|* n 3) $ n ("0..53" |* 1 ) # m 1
+
+d1 $ n 

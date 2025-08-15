@@ -1,0 +1,46 @@
+:script "~/Music/ableton_songs/toolz.tidal"
+
+setbpm (129 * 16 / 18)
+
+let main_rizz = rizz 9 "<0  0 -0.005 > <<0.02 0.023> 0.01 0.014 >"
+
+let main_rizz2 = rizz 9 ("<0  0 -0.005 > <<0.02 0.023> 0.01 0.014 >" |* 0.8)
+
+d1 $ drumz $ main_rizz $  mask (inv "t([0 <4 9 4 11>],18)") $ n "0(5, 18)"  # m 1
+
+d2 $ drumz $ main_rizz $ mask (inv "t([0 <4 9 4 11>],18)") $ n "1(7, 18, 1)"  # m 1
+
+-- snare
+d3 $ r 0.0008 $ drumz $ main_rizz2 $ gas 3 "0.6 0.4 0.5 0.4 0.3" $ struct "t(<4 9 4 11>,18)" $
+    n "~ <[2 3] [3 4 3 4] <[4 5] 4!6> [5 2 5]>" # m 2
+
+d4 $ drumz $ main_rizz $ gas 9 "0.7 0.4" $
+     n "4 2 3 2  5 2 4 3 2  4 3 2 3  5 4 2 3 2" # m 3
+
+-- bongo
+d5 $ r 0.001 $ drumz $ main_rizz $ gas 3 "0.6 0.4 0.5 0.4 0.3"  $ struct (inv "t(5,18)") $ nT "bongo" 5 "0 1 2 3 4" # m 4
+
+-- perc
+d6 $ r 0.001 $ drumz $ main_rizz $ gas 3 "0.6 0.4 0.5 0.4 0.3" $ struct (inv "t(7,18, 1)") $ nT "perc" 7 "0 1 2 3 4" # m 5
+
+let e31penta = tScale' 31 ("0 5 8  18 23 " |- 5)
+
+-- bass kinda
+d7 $ r 0.0007 $ main_rizz $ gas 3 "0.6 0.4 0.5 0.4 0.3"  $ ncat [ (4, struct (inv "t(7,18,1)") $ nT "bass" 7 (e31penta "1 5 0 1 3 0 4") ),
+                                                        (2, struct (inv "t(5,18)") $ nT "chords" 5 (e31penta "[0, 2, 4, 6, 8]") )] # m 6
+
+d8 $ main_rizz $ gas 3 "0.6 0.4 0.5 0.4 0.3"  $ mask "t(7,18,1)" $ struct (inv "t(5,18)") $ n (e31penta ("[0 2 5 8 10]" |+ "[0 -1 1]*6" |+ "<-2 2 2 0>" )) # m 7
+
+let e31full = tScale' 31 ("0 5 8 13 18 23 28" |- 5)
+
+-- piano chords
+d9 $ main_rizz $ mask (inv "t([0 <4 9 4 11>],18)") $ gas 3 "0.6 0.4 0.5 0.4 0.3"  $ sus 6 "2 <0.5 1> 0.3" $ mask "t(7,18,1)" $ n (e31full ("[0,2,4,6]!18" |- "< 6 6>")) # m 8
+
+d9 $ main_rizz $ mask (inv "t([0 <4 9 4 11>],18)") $ gas 3 "0.6 0.4 0.5 0.4 0.3"  $ sus 6 "2 <0.5 1> 0.3" $ mask "t(7,18,1)" $ n (e31full ("[2,4,6]!18" |- "< 6 6>")) # m 8
+
+-- lead copying bass
+d10 $ main_rizz $ gas 3 "0.6 0.4 0.5 0.4 0.3"  $ ncat [ (4, struct (inv "t(7,18,1)") $ nT "bass" 7 (e31penta "1 5 0 1 3 0 4") ),
+                                                        (2, struct (inv "t(5,18)") $ nT "chords" 5 (e31penta "[0, 2, 4, 6, 8]") )] # m 9 
+
+
+d11 $ (|- n 31) $ mask (cat ["t!16 f f", "f t!13 f f", "f@3 t!13"]) $ n (e31full (segfunc 18 $ range 0 13 ((egg "<1!2 4!2>" "<3 4!2 3>") * (fast 2 $ sine)))) # m 10
